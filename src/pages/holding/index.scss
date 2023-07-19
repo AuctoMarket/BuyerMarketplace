@@ -1,0 +1,50 @@
+.holding-page {
+  .top {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 70px);
+    background-color: #ffffff;
+    color: #0d7093;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      img {
+        height: 191px;
+      }
+    }
+
+    .text {
+      width: 1137px;
+      text-align: center;
+      font-family: THICCCBOI;
+      font-size: 50px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin-top: 42px;
+    }
+  }
+}
+
+@media (max-width: 390px) {
+  .holding-page {
+    .top {
+      height: calc(100% - 102px);
+
+      .logo {
+        img {
+          height: 75px;
+        }
+      }
+
+      .text {
+        width: 300px;
+        font-size: 32px;
+        margin-top: 15px;
+      }
+    }
+  }
+}
