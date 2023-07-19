@@ -1,14 +1,22 @@
 {
   "name": "BuyerMarketplace",
   "version": "0.0.0",
+  "description": "React application for the Buyer Marketplace",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "prepare": "npx husky install",
+    "dev": "react-scripts start",
+    "test": "react-scripts test --watchAll=false",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npx serve -s build",
+    "format": "prettier --write --ignore-path .gitignore .",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "clean": "npx rimraf build"
   },
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "@commitlint/config-conventional": "17.6.6",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "13.5.0",
@@ -16,17 +24,15 @@
     "@types/node": "16.18.38",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
+    "prettier": "3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-router-dom": "6.14.2",
     "react-scripts": "5.0.1",
+    "sass": "1.63.6",
+    "source-map-explorer": "2.5.3",
     "typescript": "4.9.5",
     "web-vitals": "2.1.4"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -39,5 +45,26 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 80
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,md,yml}": "npm run format",
+    "*.{js,jsx,ts,tsx}": "npm run lint"
   }
 }
