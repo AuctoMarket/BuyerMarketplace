@@ -1,12 +1,35 @@
-# Getting Started with Create React App
+# BuyerMarketplace
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React application for the Aucto Marketplace.
 
-## Available Scripts
+## Techstack
 
-In the project directory, you can run:
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [Sass](https://sass-lang.com/)
+- [Jest](https://jestjs.io/)
+- And other toolings for development: [pretter](https://prettier.io/), [eslint](https://eslint.org/), [commitlint](https://commitlint.js.org/), [husky](https://typicode.github.io/husky/#/), [lint-staged](https://github.com/okonet/lint-staged)
 
-### `npm start`
+## Pre-requisites
+
+In order to run this project, you need to have the following installed:
+
+- [Node.js](https://nodejs.org/en/download)
+- [npm](https://www.npmjs.com/get-npm)
+
+Or you can use [nvm](https://github.com/nvm-sh/nvm) to install both.
+
+## Installation
+
+In the root dir, run the following command to install dependencies:
+
+```sh
+npm install
+```
+
+## Development
+
+### `npm run dev`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,10 +37,28 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `npm run test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run format`
+
+Formats the code using [Prettier](https://prettier.io/).
+
+### `npm run lint`
+
+Lints the code using [ESLint](https://eslint.org/).
+
+### `npm run analyze`
+
+Analyzes the bundle size using [source-map-explorer](https://www.npmjs.com/package/source-map-explorer).
+
+### `npm run clean`
+
+Cleans the build folder using [rimraf](https://www.npmjs.com/package/rimraf).
+
+## Deployment
 
 ### `npm run build`
 
@@ -29,18 +70,17 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `npm run start`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Runs the app in the production mode using `serve` package.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contributing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Please make sure to update tests as appropriate.
 
-## Learn More
+## Authors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+AuctoMarket
