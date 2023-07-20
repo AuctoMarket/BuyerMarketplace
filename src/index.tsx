@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 import './index.scss';
 import App from './App';
 import HoldingPage from './pages/holding';
 import reportWebVitals from './reportWebVitals';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/product',
     element: <App />,

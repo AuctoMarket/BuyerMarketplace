@@ -2,6 +2,7 @@ import React from 'react';
 
 import './index.scss';
 import LogoHorizontalFullColor from '../../components/Logo/Horizontal/FullColor';
+import LogoVerticalFullColor from '../../components/Logo/Vertical/FullColor';
 import Footer from '../../components/Footer';
 
 function HoldingPage() {
@@ -10,10 +11,11 @@ function HoldingPage() {
       <div className="top">
         <div className="logo">
           <LogoHorizontalFullColor />
+          <LogoVerticalFullColor />
         </div>
         <div className="text">
-          Thank you for your interest, we are currently making some changes and
-          will be back shortly!
+          <div className="text-1">Collectible Marketplace</div>
+          <div className="text-2">Launching in late 2023</div>
         </div>
       </div>
 
