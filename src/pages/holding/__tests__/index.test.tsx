@@ -5,8 +5,8 @@ import HoldingPage from '..';
 
 test('renders HoldingPage', () => {
   render(<HoldingPage />);
-  const text = screen.getByText(
-    'Thank you for your interest, we are currently making some changes and will be back shortly!',
-  );
-  expect(text).toBeInTheDocument();
+  const text1 = screen.getByText('Collectible Marketplace');
+  const text2 = screen.getByText('Launching in late 2023');
+  expect(text1).toBeInTheDocument();
+  expect(text2).toBeInTheDocument();
 });

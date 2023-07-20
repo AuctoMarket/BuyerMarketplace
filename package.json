@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "React application for the Buyer Marketplace",
   "private": true,
+  "homepage": ".",
   "scripts": {
     "prepare": "npx husky install",
     "dev": "react-scripts start",
@@ -12,7 +13,9 @@
     "format": "prettier --write --ignore-path .gitignore .",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "clean": "npx rimraf build"
+    "clean": "npx rimraf build",
+    "predeploy": "npm run build",
+    "deploy": "npx gh-pages -b AUCTO/Holding -d build"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
