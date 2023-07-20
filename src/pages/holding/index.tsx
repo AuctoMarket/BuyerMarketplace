@@ -12,8 +12,8 @@ function HoldingPage() {
           <LogoHorizontalFullColor />
         </div>
         <div className="text">
-          Thank you for your interest, we are currently making some changes and
-          will be back shortly!
+          <div className="text-1">Collectible Marketplace</div>
+          <div className="text-2">Launching in late 2023</div>
         </div>
       </div>
 

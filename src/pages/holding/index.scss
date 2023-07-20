@@ -4,7 +4,7 @@
     width: 100%;
     height: calc(100% - 70px);
     background-color: #ffffff;
-    color: #0d7093;
+    color: #000000;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,7 +12,7 @@
 
     .logo {
       img {
-        height: 191px;
+        height: 210px;
       }
     }
 
@@ -20,11 +20,21 @@
       width: 1137px;
       text-align: center;
       font-family: THICCCBOI;
-      font-size: 50px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      margin-top: 42px;
+      margin-top: 40px;
+
+      .text-1 {
+        font-size: 80px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+      }
+
+      .text-2 {
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
     }
   }
 }
@@ -42,8 +52,15 @@
 
       .text {
         width: 300px;
-        font-size: 32px;
         margin-top: 15px;
+
+        .text-1 {
+          font-size: 45px;
+        }
+
+        .text-2 {
+          font-size: 24px;
+        }
       }
     }
   }
