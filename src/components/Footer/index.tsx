@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 
-import './index.scss';
-import LogoHorizontalWhite from '../../components/Logo/Horizontal/White';
+import styles from './index.module.scss';
+import Logo from '../../components/Logo';
 
-function Footer() {
+interface Props extends ComponentProps<'div'> {}
+
+function Footer({ className, ...rest }: Props) {
   return (
-    <div className="footer">
-      <div className="logo">
-        <LogoHorizontalWhite />
+    <div className={`${styles['footer']} ${className}`} {...rest}>
+      <div className={styles['logo']}>
+        <Logo type="horizontal" theme="white" />
       </div>
-      <div className="text">Copyright © 2023 Aucto. All rights reserved</div>
+      <div className={styles['text']}>
+        Copyright © 2023 Aucto. All rights reserved
+      </div>
     </div>
   );
 }

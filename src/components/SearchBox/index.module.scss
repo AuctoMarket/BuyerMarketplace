@@ -1,0 +1,16 @@
+.search-box {
+  @apply relative;
+  height: 33px;
+}
+
+.icon {
+  @apply absolute;
+  top: 9px;
+  left: 12px;
+  height: 15px;
+}
+
+.input {
+  @apply w-full;
+  padding-left: 38px !important;
+}

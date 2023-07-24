@@ -1,0 +1,7 @@
+.dropdown {
+  @apply relative;
+}
+
+.list {
+  @apply absolute top-0 right-0 bg-black text-white p-8 border-t-4 border-solid border-aucto;
+}
