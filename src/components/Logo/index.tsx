@@ -11,7 +11,7 @@ function Logo({ className, type, theme, ...rest }: Props) {
   return (
     <Image
       className={className}
-      src={`/images/logo/${type}/${theme}.png`}
+      src={`/images/logo/${type}/${theme}.svg`}
       alt={`logo-${type}-${theme}`}
       {...rest}
     />
