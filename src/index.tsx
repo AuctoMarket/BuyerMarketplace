@@ -1,26 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 import './index.scss';
 import App from './App';
-import HoldingPage from './pages/holding';
 import reportWebVitals from './reportWebVitals';
-
-const router = createHashRouter([
-  {
-    path: '/product',
-    element: <App />,
-  },
-  {
-    path: '/',
-    element: <HoldingPage />,
-  },
-]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>,
 );
 
