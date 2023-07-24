@@ -6,24 +6,33 @@ import MoreFromSeller from '..';
 test('renders MoreFromSeller', () => {
   render(
     <MoreFromSeller
-      data={[
-        {
-          image: 'test',
-          title: 'test',
-          sellerInfo: {
-            name: 'test',
-            avatar: 'test',
-            isVerified: true,
-            numReviews: 1,
+      data={{
+        products: [
+          {
+            image: 'test',
+            title: 'test',
+            sellerInfo: {
+              name: 'test',
+              avatar: 'test',
+              isVerified: true,
+              numReviews: 1,
+            },
+            purchase: {
+              currentBid: 1,
+              numBids: 1,
+              buyNowPrice: 1,
+            },
+            postedDate: 'test',
           },
-          purchase: {
-            currentBid: 1,
-            numBids: 1,
-            buyNowPrice: 1,
-          },
-          postedDate: 'test',
+        ],
+        sellerInfo: {
+          id: '1',
+          name: 'Seller name',
+          avatar: '/images/icon/color.svg',
+          isVerified: true,
+          numReviews: 74,
         },
-      ]}
+      }}
       role="test"
     />,
   );
