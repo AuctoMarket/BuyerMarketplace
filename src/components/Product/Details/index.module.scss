@@ -1,0 +1,39 @@
+.product-details {
+}
+
+.condition {
+  @apply flex flex-row items-center;
+
+  .label {
+    @apply font-normal;
+    font-size: 24px;
+  }
+
+  .rating {
+    @apply ml-2;
+  }
+}
+
+.description {
+  @apply mt-2 font-light;
+  font-size: 18px;
+}
+
+@media (max-width: 820px) {
+  .condition {
+    .label {
+      font-size: 16px;
+    }
+
+    .rating {
+      > li {
+        width: 18px;
+      }
+    }
+  }
+
+  .description {
+    @apply mt-1;
+    font-size: 14px;
+  }
+}
