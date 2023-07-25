@@ -10,7 +10,7 @@ test('renders SellerInfo', () => {
         avatar: 'test',
         name: 'test',
         isVerified: true,
-        numReviews: 1,
+        numFollowers: 1,
       }}
       role="test"
     />,
