@@ -19,10 +19,10 @@ function Header({ className, ...rest }: Props) {
             className={styles['dropdown']}
             items={[
               'Search',
-              'Browse',
+              'Marketplace',
               'About',
-              'Become Seller',
-              'Bid',
+              'My Bids',
+              'My Orders',
               'Contact',
             ]}
           >
@@ -40,12 +40,10 @@ function Header({ className, ...rest }: Props) {
         className={styles['navbar-right']}
         items={[
           <Icon name="shopping-cart" />,
-          <Icon name="heart" />,
-          <Icon name="email" />,
           <Icon name="user" />,
           <Dropdown
             className={styles['dropdown']}
-            items={['Browse', 'About', 'Become Seller', 'Bid', 'Contact']}
+            items={['Marketplace', 'About', 'My Bids', 'My Orders', 'Contact']}
           >
             <Icon name="menu" />
           </Dropdown>,
@@ -53,7 +51,7 @@ function Header({ className, ...rest }: Props) {
       />
       <List
         className={styles['navbar-right-mobile']}
-        items={[<Icon name="shopping-cart" />, <Icon name="email" />]}
+        items={[<Icon name="shopping-cart" />, <Icon name="user" />]}
       />
     </div>
   );
