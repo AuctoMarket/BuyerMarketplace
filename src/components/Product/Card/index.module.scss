@@ -33,6 +33,12 @@
 }
 
 .content {
+  @apply relative;
+
+  .pre-order {
+    @apply absolute left-3 top-3 p-1 text-white bg-aucto text-base;
+  }
+
   .product-image {
     @apply w-full;
   }
@@ -84,6 +90,13 @@
           font-size: 6px;
         }
       }
+    }
+  }
+
+  .content {
+    .pre-order {
+      @apply absolute left-1 top-1 leading-none;
+      font-size: 8px;
     }
   }
 

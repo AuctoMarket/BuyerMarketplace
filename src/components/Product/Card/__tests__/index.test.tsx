@@ -7,6 +7,8 @@ test('renders Card', () => {
   render(
     <Card
       data={{
+        id: '1',
+        type: 'normal',
         image: 'test',
         title: 'test',
         sellerInfo: {
