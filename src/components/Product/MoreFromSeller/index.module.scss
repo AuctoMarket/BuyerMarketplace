@@ -34,7 +34,8 @@
     @apply flex-nowrap gap-3;
 
     > li {
-      @apply flex-none w-1/3;
+      @apply flex-none;
+      width: calc(100% / 3 - 0.75rem * 2 / 3);
     }
   }
 }
