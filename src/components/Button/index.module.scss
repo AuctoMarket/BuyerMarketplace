@@ -7,7 +7,7 @@
   @apply border border-solid border-black;
 
   &:hover {
-    @apply text-white bg-black;
+    @apply border-0 text-white bg-aucto;
   }
 }
 
