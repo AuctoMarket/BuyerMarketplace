@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: [
+    'src/**/*.{scss,tsx}',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  ],
   theme: {
     extend: {
       colors: {
@@ -15,5 +18,5 @@ module.exports = {
       thicboi: ['THICCCBOI'],
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };

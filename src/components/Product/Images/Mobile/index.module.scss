@@ -1,0 +1,29 @@
+.container {
+  @apply relative;
+  height: 390px;
+
+  > div:nth-of-type(2) {
+    > div:first-of-type {
+      @apply rounded-none;
+    }
+
+    > div:nth-of-type(3),
+    > div:nth-of-type(4) {
+      @apply hidden;
+    }
+  }
+}
+
+.gradient {
+  @apply absolute top-0 left-0 w-full z-10;
+  height: 92px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.45) 35.94%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  .pre-order {
+    @apply absolute left-4 top-4 text-lg text-white bg-aucto font-bold font-thicboi px-4;
+  }
+}
