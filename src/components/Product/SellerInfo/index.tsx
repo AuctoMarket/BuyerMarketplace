@@ -8,13 +8,13 @@ interface Props extends ComponentProps<'div'> {
     avatar: string;
     name: string;
     isVerified: boolean;
-    numReviews: number;
+    numFollowers: number;
   };
 }
 
 function ProductSellerInfo({
   className,
-  data: { avatar, name, isVerified, numReviews },
+  data: { avatar, name, isVerified, numFollowers },
   ...rest
 }: Props) {
   return (
@@ -29,7 +29,7 @@ function ProductSellerInfo({
           {isVerified && <Verified />}
         </div>
 
-        <div className={styles['reviews']}>{numReviews} Reviews</div>
+        <div className={styles['followers']}>{numFollowers} Followers</div>
       </div>
     </div>
   );

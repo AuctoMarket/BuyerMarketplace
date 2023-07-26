@@ -15,7 +15,7 @@ test('renders MoreFromSeller', () => {
               name: 'test',
               avatar: 'test',
               isVerified: true,
-              numReviews: 1,
+              numFollowers: 1,
             },
             purchase: {
               currentBid: 1,
@@ -30,7 +30,7 @@ test('renders MoreFromSeller', () => {
           name: 'Seller name',
           avatar: '/images/icon/color.svg',
           isVerified: true,
-          numReviews: 74,
+          numFollowers: 74,
         },
       }}
       role="test"

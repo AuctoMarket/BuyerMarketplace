@@ -14,7 +14,7 @@ interface Props extends ComponentProps<'div'> {
         name: string;
         avatar: string;
         isVerified: boolean;
-        numReviews: number;
+        numFollowers: number;
       };
       purchase: {
         currentBid: number;

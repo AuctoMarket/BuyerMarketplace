@@ -15,7 +15,7 @@ test('renders Recommended', () => {
               name: 'test',
               avatar: 'test',
               isVerified: true,
-              numReviews: 1,
+              numFollowers: 1,
             },
             purchase: {
               currentBid: 1,
