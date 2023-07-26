@@ -8,6 +8,8 @@ import Button from '../../Button';
 interface Props extends ComponentProps<'div'> {
   data: {
     products: {
+      id: string;
+      type: string;
       image: string;
       title: string;
       sellerInfo: {

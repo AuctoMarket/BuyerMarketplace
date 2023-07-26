@@ -7,6 +7,8 @@ import Card from '../Card';
 interface Props extends ComponentProps<'div'> {
   data: {
     products: {
+      id: string;
+      type: string;
       image: string;
       title: string;
       sellerInfo: {

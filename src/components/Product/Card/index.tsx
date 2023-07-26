@@ -8,6 +8,8 @@ import ProductPrice from '../Price';
 
 interface Props extends ComponentProps<'div'> {
   data: {
+    id: string;
+    type: string;
     image: string;
     title: string;
     sellerInfo: {
@@ -35,6 +37,9 @@ function ProductCard({ className, data, ...rest }: Props) {
         />
       </div>
       <div className={styles['content']}>
+        {data.type === 'pre-order' && (
+          <div className={styles['pre-order']}>Pre-Order</div>
+        )}
         <img
           className={styles['product-image']}
           src={data.image}

@@ -9,6 +9,8 @@ test('renders Recommended', () => {
       data={{
         products: [
           {
+            id: '1',
+            type: 'normal',
             image: 'test',
             title: 'test',
             sellerInfo: {
