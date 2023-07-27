@@ -7,6 +7,8 @@ React application for the Aucto Marketplace.
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
 - [Sass](https://sass-lang.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Flowbite](https://flowbite.com/)
 - [Jest](https://jestjs.io/)
 - And other toolings for development: [pretter](https://prettier.io/), [eslint](https://eslint.org/), [commitlint](https://commitlint.js.org/), [husky](https://typicode.github.io/husky/#/), [lint-staged](https://github.com/okonet/lint-staged)
 
