@@ -1,15 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import Purchase from '..';
+import Bid from '..';
 
-test('renders Purchase', () => {
+test('renders Bid', () => {
   render(
-    <Purchase
+    <Bid
       data={{
         currentBid: 1,
         numBids: 1,
-        buyNowPrice: 1,
       }}
       role="test"
     />,
