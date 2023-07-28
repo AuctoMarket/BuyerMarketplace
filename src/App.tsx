@@ -1,10 +1,15 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import ProductPage from './pages/product';
 import HoldingPage from './pages/holding';
 import Popup, { PopupContext } from './components/Popup';
 
 const router = createBrowserRouter([
+  {
+    path: '/products/:id',
+    element: <ProductPage />,
+  },
   {
     path: '/',
     element: <HoldingPage />,

@@ -5,20 +5,22 @@ import styles from './index.module.scss';
 
 interface Props extends ComponentProps<'div'> {
   data: {
+    type: string;
     images: string[];
-    isPreOrder?: boolean;
   };
 }
 
 function ProductImagesMobile({
   className,
-  data: { images, isPreOrder = false },
+  data: { images, type },
   ...rest
 }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['gradient']}>
-        {isPreOrder && <span className={styles['pre-order']}>Pre-Order</span>}
+        {type === 'pre-order' && (
+          <span className={styles['pre-order']}>Pre-Order</span>
+        )}
       </div>
 
       <Carousel slide={false}>
