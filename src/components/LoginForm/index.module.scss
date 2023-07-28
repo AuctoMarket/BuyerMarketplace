@@ -1,0 +1,55 @@
+.inputGroup {
+  @apply mb-4;
+
+  label {
+    @apply block mb-4;
+  }
+
+  input {
+    @apply w-56 py-2 px-12 border border-gray-300 rounded text-center text-sm;
+
+    ::placeholder {
+      @apply text-center text-xs;
+    }
+  }
+}
+
+.login-title {
+  @apply text-4xl text-center my-4;
+}
+
+.links {
+  @apply flex flex-col items-center my-3;
+
+  a {
+    @apply mb-3 no-underline text-black;
+  }
+}
+
+.btnGroup {
+  @apply flex justify-center mt-5;
+
+  button {
+    @apply px-4 py-2 rounded cursor-pointer;
+  }
+}
+
+.loginBtn {
+  @apply bg-black text-white mr-1 w-40;
+}
+
+.error {
+  @apply text-red-500 mb-3;
+}
+
+.passwordInput {
+  @apply relative flex;
+
+  input {
+    @apply flex-1 pr-10;
+  }
+}
+
+.visibilityIcon {
+  @apply absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-2xl;
+}
