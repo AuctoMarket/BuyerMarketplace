@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from './index.module.scss';
 
 interface LoginFormProps {
-  onLogin: (email: string, password: string) => void;
+  onLogin?: (email: string, password: string) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
@@ -57,7 +57,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     }
 
     // Call the onLogin prop to handle the login action
-    onLogin(email, password);
+    if (onLogin) {
+      onLogin(email, password);
+    }
   };
 
   const togglePasswordVisibility = () => {
