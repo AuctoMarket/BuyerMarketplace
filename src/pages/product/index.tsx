@@ -54,8 +54,6 @@ function ProductDetailsPage() {
     }
   };
 
-  console.log('current product', current);
-
   return (
     <Layout>
       {current && (

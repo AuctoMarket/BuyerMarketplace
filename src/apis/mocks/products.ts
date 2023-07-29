@@ -8,17 +8,17 @@ const sampleNormalProduct = {
   id: '1',
   type: ProductType.Normal,
   images: [
-    '/images/sample/product-1-image-0.png',
-    '/images/sample/product-1-image-1.png',
-    '/images/sample/product-1-image-2.png',
-    '/images/sample/product-1-image-3.png',
-    '/images/sample/product-1-image-3.png',
+    '/images/product/product-1-image-0.png',
+    '/images/product/product-1-image-1.png',
+    '/images/product/product-1-image-2.png',
+    '/images/product/product-1-image-3.png',
+    '/images/product/product-1-image-3.png',
   ],
   title: 'Pikachu HOLO RARE SM98 Black Star Promo 2017',
   sellerInfo: {
     id: '1',
     name: 'Seller name',
-    avatar: '/images/icon/color.svg',
+    avatar: '/images/logo/color.svg',
     isVerified: true,
     numFollowers: 74,
   },
@@ -46,7 +46,7 @@ const sampleProductsList = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5].map((i) => ({
     generateRandomIntegerNumberFromRange(0, 2)
   ],
   title: 'Charizard EX',
-  images: [`/images/sample/product-${i}-image-0.png`].concat(
+  images: [`/images/product/product-${i}-image-0.png`].concat(
     sampleNormalProduct.images.slice(1),
   ),
 }));

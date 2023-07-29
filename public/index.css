@@ -2,78 +2,78 @@
   font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
-  src: url(./fonts/Lato/Lato-Light.ttf) format('truetype');
+  src: url(/fonts/Lato/Lato-Light.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: url(./fonts/Lato/Lato-Regular.ttf) format('truetype');
+  src: url(/fonts/Lato/Lato-Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 600;
-  src: url(./fonts/Lato/Lato-SemiBold.ttf) format('truetype');
+  src: url(/fonts/Lato/Lato-SemiBold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 700;
-  src: url(./fonts/Lato/Lato-Bold.ttf) format('truetype');
+  src: url(/fonts/Lato/Lato-Bold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 900;
-  src: url(./fonts/Lato/Lato-Black.ttf) format('truetype');
+  src: url(/fonts/Lato/Lato-Black.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'THICCCBOI';
   font-style: normal;
   font-weight: 100;
-  src: url(./fonts/THICCCBOI/THICCCBOI-Thin.ttf) format('truetype');
+  src: url(/fonts/THICCCBOI/THICCCBOI-Thin.ttf) format('truetype');
 }
 @font-face {
   font-family: 'THICCCBOI';
   font-style: normal;
   font-weight: 300;
-  src: url(./fonts/THICCCBOI/THICCCBOI-Light.ttf) format('truetype');
+  src: url(/fonts/THICCCBOI/THICCCBOI-Light.ttf) format('truetype');
 }
 @font-face {
   font-family: 'THICCCBOI';
   font-style: normal;
   font-weight: 400;
-  src: url(./fonts/THICCCBOI/THICCCBOI-Regular.ttf) format('truetype');
+  src: url(/fonts/THICCCBOI/THICCCBOI-Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'THICCCBOI';
   font-style: normal;
   font-weight: 500;
-  src: url(./fonts/THICCCBOI/THICCCBOI-Medium.ttf) format('truetype');
+  src: url(/fonts/THICCCBOI/THICCCBOI-Medium.ttf) format('truetype');
 }
 @font-face {
   font-family: 'THICCCBOI';
   font-style: normal;
   font-weight: 600;
-  src: url(./fonts/THICCCBOI/THICCCBOI-SemiBold.ttf) format('truetype');
+  src: url(/fonts/THICCCBOI/THICCCBOI-SemiBold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'THICCCBOI';
   font-style: normal;
   font-weight: 700;
-  src: url(./fonts/THICCCBOI/THICCCBOI-Bold.ttf) format('truetype');
+  src: url(/fonts/THICCCBOI/THICCCBOI-Bold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'THICCCBOI';
   font-style: normal;
   font-weight: 800;
-  src: url(./fonts/THICCCBOI/THICCCBOI-ExtraBold.ttf) format('truetype');
+  src: url(/fonts/THICCCBOI/THICCCBOI-ExtraBold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'THICCCBOI';
   font-style: normal;
   font-weight: 900;
-  src: url(./fonts/THICCCBOI/THICCCBOI-Black.ttf) format('truetype');
+  src: url(/fonts/THICCCBOI/THICCCBOI-Black.ttf) format('truetype');
 }
