@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    'src/**/*.{scss,tsx}',
-    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+    'node_modules/daisyui/dist/**/*.js',
+    'node_modules/react-daisyui/dist/**/*.js',
   ],
   theme: {
     extend: {
@@ -18,5 +18,12 @@ module.exports = {
       thicboi: ['THICCCBOI'],
     },
   },
-  plugins: [require('flowbite/plugin')],
+  plugins: [require('daisyui')],
+  daisyui: {
+    base: false,
+    themes: [],
+    styled: false,
+    utils: false,
+    logs: false,
+  },
 };

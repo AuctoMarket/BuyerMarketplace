@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import { Carousel } from 'flowbite-react';
+import { Carousel } from 'react-daisyui';
 
 import styles from './index.module.scss';
 
@@ -23,9 +23,9 @@ function ProductImagesMobile({
         )}
       </div>
 
-      <Carousel slide={false}>
+      <Carousel display="numbered" snap="center">
         {images.map((image, index) => (
-          <img key={index} src={image} alt={`${index}`} />
+          <Carousel.Item key={index} src={image} alt={`${index}`} />
         ))}
       </Carousel>
     </div>
