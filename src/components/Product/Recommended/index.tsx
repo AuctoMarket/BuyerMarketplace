@@ -1,4 +1,5 @@
 import React, { ComponentProps } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import List from '../../List';
@@ -10,7 +11,7 @@ interface Props extends ComponentProps<'div'> {
     products: {
       id: string;
       type: string;
-      image: string;
+      images: string[];
       title: string;
       sellerInfo: {
         name: string;
@@ -48,8 +49,10 @@ export function ProductRecommended({
       <div className={styles['list-container']}>
         <List
           className={styles['list']}
-          items={data.products.map((item, index) => (
-            <Card data={item} key={index} />
+          items={data.products.map((product, index) => (
+            <Link to={`/products/${product.id}`}>
+              <Card data={product} key={index} />
+            </Link>
           ))}
         />
       </div>

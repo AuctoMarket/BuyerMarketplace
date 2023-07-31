@@ -1,29 +1,31 @@
 import React, { ComponentProps } from 'react';
-import { Carousel } from 'flowbite-react';
+import { Carousel } from 'react-daisyui';
 
 import styles from './index.module.scss';
 
 interface Props extends ComponentProps<'div'> {
   data: {
+    type: string;
     images: string[];
-    isPreOrder?: boolean;
   };
 }
 
 function ProductImagesMobile({
   className,
-  data: { images, isPreOrder = false },
+  data: { images, type },
   ...rest
 }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['gradient']}>
-        {isPreOrder && <span className={styles['pre-order']}>Pre-Order</span>}
+        {type === 'pre-order' && (
+          <span className={styles['pre-order']}>Pre-Order</span>
+        )}
       </div>
 
-      <Carousel slide={false}>
+      <Carousel display="numbered" snap="center">
         {images.map((image, index) => (
-          <img key={index} src={image} alt={`${index}`} />
+          <Carousel.Item key={index} src={image} alt={`${index}`} />
         ))}
       </Carousel>
     </div>

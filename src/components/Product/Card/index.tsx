@@ -10,7 +10,7 @@ interface Props extends ComponentProps<'div'> {
   data: {
     id: string;
     type: string;
-    image: string;
+    images: string[];
     title: string;
     sellerInfo: {
       name: string;
@@ -42,7 +42,7 @@ function ProductCard({ className, data, ...rest }: Props) {
         )}
         <img
           className={styles['product-image']}
-          src={data.image}
+          src={data.images[0]}
           alt={data.title}
         />
       </div>

@@ -10,7 +10,7 @@ function Icon({ className, name, ...rest }: Props) {
   return (
     <Image
       className={className}
-      src={`/images/${name}.svg`}
+      src={`/images/icon/${name}.svg`}
       alt={name}
       {...rest}
     />

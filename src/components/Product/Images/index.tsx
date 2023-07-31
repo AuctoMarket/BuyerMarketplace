@@ -1,20 +1,20 @@
-import React, { ComponentProps } from 'react';
+import React, { ComponentProps, useEffect } from 'react';
 
 import styles from './index.module.scss';
 
 interface Props extends ComponentProps<'div'> {
   data: {
+    type: string;
     images: string[];
-    isPreOrder?: boolean;
   };
 }
 
-function ProductImages({
-  className,
-  data: { images, isPreOrder = false },
-  ...rest
-}: Props) {
-  const [selected, setSelected] = React.useState(images[0]);
+function ProductImages({ className, data: { type, images }, ...rest }: Props) {
+  const [selected, setSelected] = React.useState<string>();
+
+  useEffect(() => {
+    setSelected(images[0]);
+  }, [images]);
 
   const handleSelect = (image: string) => {
     setSelected(image);
@@ -24,7 +24,9 @@ function ProductImages({
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['selected-container']}>
         <div className={styles['gradient']}>
-          {isPreOrder && <span className={styles['pre-order']}>Pre-Order</span>}
+          {type === 'pre-order' && (
+            <span className={styles['pre-order']}>Pre-Order</span>
+          )}
         </div>
 
         <img className={styles['image']} src={selected} alt="product" />

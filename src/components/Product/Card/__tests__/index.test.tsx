@@ -9,7 +9,7 @@ test('renders Card', () => {
       data={{
         id: '1',
         type: 'normal',
-        image: 'test',
+        images: ['test'],
         title: 'test',
         sellerInfo: {
           name: 'test',

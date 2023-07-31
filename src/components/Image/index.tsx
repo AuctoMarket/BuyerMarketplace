@@ -5,12 +5,7 @@ interface Props extends ComponentProps<'img'> {
 }
 
 const Image = ({ className, src, alt, ...rest }: Props) => (
-  <img
-    className={className}
-    src={`${process.env.PUBLIC_URL}${src}`}
-    alt={alt}
-    {...rest}
-  />
+  <img className={className} src={src} alt={alt} {...rest} />
 );
 
 export default Image;
