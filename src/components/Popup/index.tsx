@@ -1,18 +1,14 @@
-// src/components/Popup/index.tsx
 import React, { createContext } from 'react';
+
 import styles from './index.module.scss';
 
 interface PopupContextProps {
   popupOpen?: boolean;
   popupContent?: React.ReactNode;
-  togglePopup: (isPopupOpen: boolean, popupContent?: React.ReactNode) => void;
+  togglePopup?: (popupOpen: boolean, popupContent?: React.ReactNode) => void;
 }
 
-const PopupContext = createContext<PopupContextProps>({
-  popupOpen: false,
-  popupContent: null,
-  togglePopup: () => {},
-});
+const PopupContext = createContext<PopupContextProps>({});
 
 function Popup() {
   const { popupOpen, togglePopup, popupContent } =
@@ -22,11 +18,17 @@ function Popup() {
     return null;
   }
 
+  const handleClick = () => {
+    if (togglePopup) {
+      togglePopup(false);
+    }
+  };
+
   return (
-    <div className={styles.popupContainer}>
+    <div role="dialog" className={styles.popupContainer}>
       <div className={styles.popupContent}>
         {popupContent}
-        <button className={styles.closeBtn} onClick={() => togglePopup(false)}>
+        <button className={styles.closeBtn} onClick={handleClick}>
           &times;
         </button>
       </div>

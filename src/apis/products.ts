@@ -1,4 +1,4 @@
-import { sampleProductsList } from './mocks/products';
+import { sampleProductsList } from './__mocks__/products';
 
 const getProductById = (id: string) => {
   return sampleProductsList.find((product) => product.id === id);
