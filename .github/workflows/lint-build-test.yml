@@ -1,0 +1,32 @@
+name: lint-build-test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
+      - run: npm run test:cov
+      - uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage
