@@ -3,16 +3,22 @@
   "version": "0.0.0",
   "description": "React application for the Buyer Marketplace",
   "private": true,
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "prepare": "npx husky install",
     "dev": "react-scripts start",
     "test": "react-scripts test --watchAll=false",
+    "test:cov": "npm run test -- --coverage",
     "build": "react-scripts build",
     "start": "npx serve -s build",
-    "format": "prettier --write --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore .",
+    "format:check": "npm run format -- --check",
+    "format:write": "npm run format -- --write",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "clean": "npx rimraf build",
+    "clean": "npx rimraf build coverage",
     "predeploy": "npm run build",
     "deploy": "npx gh-pages -b AUCTO/Holding -d build"
   },
@@ -68,7 +74,7 @@
     ]
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,md,yml}": "npm run format",
+    "*.{js,jsx,ts,tsx,json,md,yml}": "npm run format:write",
     "*.{js,jsx,ts,tsx}": "npm run lint"
   }
 }
