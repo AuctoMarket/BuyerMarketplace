@@ -1,0 +1,53 @@
+.inputGroup {
+    @apply mb-5;
+  
+    label {
+      @apply block mb-4;
+    }
+  
+    input {
+      @apply w-72 py-2 px-12 border border-gray-300 rounded text-center text-sm;
+  
+      ::placeholder {
+        @apply text-center text-xs;
+      }
+    }
+  }
+  
+  .signup-title {
+    @apply text-4xl text-center my-4 py-4;
+  }
+  
+  .links {
+    @apply flex flex-col items-center my-3;
+  
+    a {
+      @apply mb-3 no-underline text-black;
+      text-decoration: underline;
+    }
+  }
+  
+  .btnGroup {
+    @apply flex justify-center mt-5;
+  
+    button {
+      @apply px-4 py-2 rounded cursor-pointer;
+    }
+  }
+  
+  .signupBtn {
+    @apply bg-black text-white mr-1 w-40;
+  }
+  
+  .error {
+    @apply text-red-500 mb-3;
+  }
+  
+  .passwordInput {
+    @apply relative flex;
+  
+    input {
+      @apply flex-1 pr-10;
+    }
+  }
+  

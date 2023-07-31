@@ -1,18 +1,17 @@
-// src/components/LoginForm/index.tsx
 import React, { useState, useContext } from 'react';
-import styles from './index.module.scss';
+import styles from './index.module.scss'; // You can create the CSS module file for SignupForm
 import { PopupContext } from '../Popup'; // Import the PopupContext
-import SignupForm from '../SignupForm';
+import LoginForm from '../LoginForm';
 
-interface LoginFormProps {
-  onLogin?: (email: string, password: string) => void;
+interface SignupFormProps {
+  onSignup?: (email: string, password: string) => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const { togglePopup } = useContext(PopupContext); // Use the PopupContext
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +21,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+    setError(''); // Clear any previous error message when user starts typing
+  };
+
+  const handleConfirmPasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setConfirmPassword(event.target.value);
     setError(''); // Clear any previous error message when user starts typing
   };
 
@@ -38,9 +44,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     return passwordRegex.test(password);
   };
 
-  const handleLogin = () => {
+  const handleSignup = () => {
     // Perform input validation
-    if (!email.trim() || !password.trim()) {
+    if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
       setError('Please fill in all fields.');
       return;
     }
@@ -59,26 +65,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       return;
     }
 
-    // Call the onLogin prop to handle the login action
-    if (onLogin) {
-      onLogin(email, password);
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
+    // Call the onSignup prop to handle the signup action
+    if (onSignup) {
+      onSignup(email, password);
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
-
-  const handleSignupClick = () => {
-    togglePopup(true, <SignupForm />);
+  const handleLoginClick = () => {
+    togglePopup(true, <LoginForm />);
   };
 
   return (
     <>
-      <div className={styles['login-title']}>Login</div>
+      <div className={styles['signup-title']}>Sign Up</div>
       {error && <div className={styles.error}>{error}</div>}
       <div className={styles.inputGroup}>
-        {/* <label htmlFor="email">Email:</label> */}
         <input
           type="text"
           id="email"
@@ -88,37 +95,36 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         />
       </div>
       <div className={styles.inputGroup}>
-        {/* <label htmlFor="password">Password:</label> */}
-        <div className={styles.passwordInput}>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
-          <span
-            className={styles.visibilityIcon}
-            onClick={togglePasswordVisibility}
-          >
-            {showPassword ? '🙈' : '👁️'}
-          </span>
-        </div>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={handlePasswordChange}
+          placeholder="Password"
+        />
+      </div>
+      <div className={styles.inputGroup}>
+        <input
+          type="password"
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+          placeholder="Confirm Password"
+        />
       </div>
       <div className={styles.links}>
-        <a href="#">Forgot your password?</a>
-        {/* Use the handleSignupClick function to open the signup form in a popup */}
-        <a href="#" onClick={handleSignupClick}>
-          Not a user? Sign up here!
+        {/* Use the onLoginClick prop to handle the "Login here" link click */}
+        <a href="#" onClick={handleLoginClick}>
+          Already have an account? Login here!
         </a>
       </div>
       <div className={styles.btnGroup}>
-        <button className={styles.loginBtn} onClick={handleLogin}>
-          LOGIN
+        <button className={styles.signupBtn} onClick={handleSignup}>
+          SIGN UP
         </button>
       </div>
     </>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

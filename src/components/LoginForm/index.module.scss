@@ -1,12 +1,12 @@
 .inputGroup {
-  @apply mb-4;
+  @apply mb-5;
 
   label {
     @apply block mb-4;
   }
 
   input {
-    @apply w-56 py-2 px-12 border border-gray-300 rounded text-center text-sm;
+    @apply w-72 py-2 px-12 border border-gray-300 rounded text-center text-sm;
 
     ::placeholder {
       @apply text-center text-xs;
@@ -15,7 +15,7 @@
 }
 
 .login-title {
-  @apply text-4xl text-center my-4;
+  @apply text-4xl text-center my-4 py-4;
 }
 
 .links {
@@ -23,6 +23,7 @@
 
   a {
     @apply mb-3 no-underline text-black;
+    text-decoration: underline;
   }
 }
 
