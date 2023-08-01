@@ -17,8 +17,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [popupContent, setPopupContent] = React.useState<React.ReactNode>(null);
   const [popupOpen, setPopupOpen] = React.useState<boolean>(false);
+  const [popupContent, setPopupContent] = React.useState<React.ReactNode>(null);
   const togglePopup = (
     isPopupOpen: boolean,
     popupContent?: React.ReactNode,

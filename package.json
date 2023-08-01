@@ -44,6 +44,26 @@
     "typescript": "4.9.5",
     "web-vitals": "2.1.4"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/apis/**/*",
+      "!src/pages/**/*",
+      "!src/App.tsx",
+      "!src/index.tsx",
+      "!src/react-app-env.d.ts",
+      "!src/reportWebVitals.ts",
+      "!src/setupTests.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 60,
+        "functions": 60,
+        "lines": 60,
+        "statements": 60
+      }
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",

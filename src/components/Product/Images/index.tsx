@@ -29,7 +29,7 @@ function ProductImages({ className, data: { type, images }, ...rest }: Props) {
           )}
         </div>
 
-        <img className={styles['image']} src={selected} alt="product" />
+        <img className={styles['image']} src={selected} alt="selected" />
 
         <div className={styles['thumbnails-list-container']}>
           {images.map((image, index) => (
@@ -39,8 +39,13 @@ function ProductImages({ className, data: { type, images }, ...rest }: Props) {
                 image === selected ? styles['selected'] : ''
               }`}
               onClick={() => handleSelect(image)}
+              role="navigation"
             >
-              <img className={styles['thumbnail']} src={image} alt="product" />
+              <img
+                className={styles['thumbnail']}
+                src={image}
+                alt={`view-${index}`}
+              />
             </div>
           ))}
         </div>
