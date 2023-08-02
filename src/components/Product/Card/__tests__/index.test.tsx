@@ -2,25 +2,23 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import Card from '..';
+import { ProductType, Product } from '../../../../types/product.type';
 
 describe('Card', () => {
-  const data = {
+  const data: Product = {
     id: '1',
-    type: 'normal',
-    images: ['test'],
+    type: ProductType.Bid,
     title: 'test',
-    sellerInfo: {
-      name: 'test',
-      avatar: 'test',
-      isVerified: true,
-      numFollowers: 1,
+    condition: 4,
+    description: 'test',
+    images: ['test'],
+    seller: {
+      id: '1',
     },
-    purchase: {
-      currentBid: 1,
-      numBids: 1,
-      buyNowPrice: 1,
-    },
-    postedDate: 'test',
+    bidPrice: 1,
+    numBids: 1,
+    price: 1,
+    postedDate: new Date(),
   };
 
   test('renders Card', async () => {
@@ -31,7 +29,19 @@ describe('Card', () => {
   });
 
   test('renders Card pre-order', async () => {
-    render(<Card data={{ ...data, type: 'pre-order' }} role="card" />);
+    render(<Card data={{ ...data, type: ProductType.PreOrder }} role="card" />);
+
+    const card = await screen.findByRole('card');
+    expect(card).toBeInTheDocument();
+  });
+
+  test('renders Card without images & bidPrice', async () => {
+    render(
+      <Card
+        data={{ ...data, images: undefined, bidPrice: undefined }}
+        role="card"
+      />,
+    );
 
     const card = await screen.findByRole('card');
     expect(card).toBeInTheDocument();

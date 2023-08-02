@@ -5,59 +5,42 @@ import ProductSellerInfo from '../SellerInfo';
 import ProductTitle from '../Title';
 import ProductPostedDate from '../PostedDate';
 import ProductPrice from '../Price';
+import { ProductType, Product } from '../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: {
-    id: string;
-    type: string;
-    images: string[];
-    title: string;
-    sellerInfo: {
-      name: string;
-      avatar: string;
-      isVerified: boolean;
-      numFollowers: number;
-    };
-    purchase: {
-      currentBid: number;
-      numBids: number;
-      buyNowPrice: number;
-    };
-    postedDate: string;
-  };
+  data: Product;
 }
 
-function ProductCard({ className, data, ...rest }: Props) {
+function ProductCard({
+  className,
+  data: { seller, images = [], title, postedDate, type, bidPrice = 0, price },
+  ...rest
+}: Props) {
   return (
     <div className={`${styles['product-card']} ${className}`} {...rest}>
       <div className={styles['header']}>
         <ProductSellerInfo
           className={styles['product-seller-info']}
-          data={data.sellerInfo}
+          data={seller}
         />
       </div>
       <div className={styles['content']}>
-        {data.type === 'pre-order' && (
+        {type === ProductType.PreOrder && (
           <div className={styles['pre-order']}>Pre-Order</div>
         )}
-        <img
-          className={styles['product-image']}
-          src={data.images[0]}
-          alt={data.title}
-        />
+        <img className={styles['product-image']} src={images[0]} alt={title} />
       </div>
       <div className={styles['footer']}>
-        <ProductTitle
-          className={styles['product-title']}
-          data={{ title: data.title }}
-        />
+        <ProductTitle className={styles['product-title']} data={{ title }} />
         <ProductPostedDate
           className={styles['product-posted-date']}
-          data={{ postedDate: data.postedDate }}
+          data={{ postedDate }}
         />
         <ProductPrice
           className={styles['product-price']}
-          data={{ price: data.purchase.currentBid }}
+          data={{
+            price: type === ProductType.Bid ? bidPrice : price,
+          }}
         />
       </div>
     </div>

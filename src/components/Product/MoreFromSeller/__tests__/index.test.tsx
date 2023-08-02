@@ -3,45 +3,44 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import MoreFromSeller from '..';
+import { ProductType, Product } from '../../../../types/product.type';
 
-test('renders MoreFromSeller', () => {
-  render(
-    <BrowserRouter>
-      <MoreFromSeller
-        data={{
-          products: [
-            {
-              id: '1',
-              type: 'normal',
-              images: ['test'],
-              title: 'test',
-              sellerInfo: {
-                name: 'test',
-                avatar: 'test',
-                isVerified: true,
-                numFollowers: 1,
-              },
-              purchase: {
-                currentBid: 1,
-                numBids: 1,
-                buyNowPrice: 1,
-              },
-              postedDate: 'test',
-            },
-          ],
-          sellerInfo: {
-            id: '1',
-            name: 'Seller name',
-            avatar: '/images/icon/color.svg',
-            isVerified: true,
-            numFollowers: 74,
-          },
-        }}
-        role="test"
-      />
-      ,
-    </BrowserRouter>,
-  );
-  const text = screen.getByRole('test');
-  expect(text).toBeInTheDocument();
+import type { Seller } from '../../../../types/seller.type';
+
+describe('MoreFromSeller', () => {
+  const data: {
+    products: Product[];
+    seller: Seller;
+  } = {
+    products: [
+      {
+        id: '1',
+        type: ProductType.Bid,
+        images: ['test'],
+        title: 'test',
+        condition: 4,
+        description: 'test',
+        seller: {
+          id: '1',
+        },
+        bidPrice: 1,
+        numBids: 1,
+        price: 1,
+        postedDate: new Date(),
+      },
+    ],
+    seller: {
+      id: '1',
+    },
+  };
+
+  test('renders MoreFromSeller', () => {
+    render(
+      <BrowserRouter>
+        <MoreFromSeller data={data} role="test" />,
+      </BrowserRouter>,
+    );
+    const text = screen.getByRole('test');
+    expect(text).toBeInTheDocument();
+  });
 });

@@ -49,6 +49,7 @@
       "src/**/*.{ts,tsx}",
       "!src/apis/**/*",
       "!src/pages/**/*",
+      "!src/types/**/*",
       "!src/App.tsx",
       "!src/index.tsx",
       "!src/react-app-env.d.ts",

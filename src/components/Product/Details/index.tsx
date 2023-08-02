@@ -4,11 +4,10 @@ import styles from './index.module.scss';
 import Rating from '../../Rating';
 import ReadMore from '../../ReadMore';
 
+import type { Product } from '../../../types/product.type';
+
 interface Props extends ComponentProps<'div'> {
-  data: {
-    condition: number;
-    description: string;
-  };
+  data: Pick<Product, 'condition' | 'description'>;
 }
 
 function ProductDetails({

@@ -4,13 +4,15 @@ import styles from './index.module.scss';
 import Button from '../../../Button';
 import ProductPrice from '../../Price';
 
+import type { Product } from '../../../../types/product.type';
+
 interface Props extends ComponentProps<'div'> {
-  data: { currentBid: number; numBids: number };
+  data: Pick<Product, 'bidPrice' | 'numBids'>;
 }
 
 function ProductPurchaseBid({
   className,
-  data: { currentBid, numBids },
+  data: { bidPrice = 0, numBids = 0 },
   ...rest
 }: Props) {
   return (
@@ -20,7 +22,7 @@ function ProductPurchaseBid({
           <label className={styles['label']}>Current Bid:</label>
           <ProductPrice
             className={styles['price']}
-            data={{ price: currentBid }}
+            data={{ price: bidPrice }}
           />
         </div>
         <div className={styles['col-2']}>
