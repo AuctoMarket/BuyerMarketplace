@@ -14,7 +14,7 @@ import ProductDetails from '../../components/Product/Details';
 import ProductPostedDate from '../../components/Product/PostedDate';
 import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
 import ProductRecommended from '../../components/Product/Recommended';
-import productsApi from '../../apis/products';
+import productsApi from '../../apis/products.api';
 import { ProductType, Product } from '../../types/product.type';
 
 function isMobile() {
@@ -36,11 +36,12 @@ function ProductDetailsPage() {
   useEffect(() => {
     const currentProduct = productsApi.getProductById(id as string);
     if (currentProduct) {
-      const moreFromSellerProducts = productsApi.getMoreFromSellerProducts(
-        currentProduct.seller.id,
-      );
-      const recommendedProducts = productsApi.getRecommendedProducts(
-        isMobile() ? 3 : 5,
+      const moreFromSellerProducts = productsApi.listProducts({
+        sellerId: currentProduct.seller.id,
+      });
+      const recommendedProducts = productsApi.listProducts(
+        {},
+        { limit: isMobile() ? 3 : 5 },
       );
 
       setCurrent(currentProduct);
@@ -53,8 +54,9 @@ function ProductDetailsPage() {
 
   const handleShowMoreRecommended = () => {
     if (isShowMoreRecommended) {
-      const recommendedProducts = productsApi.getRecommendedProducts(
-        isMobile() ? 6 : 10,
+      const recommendedProducts = productsApi.listProducts(
+        {},
+        { limit: isMobile() ? 6 : 10 },
       );
 
       setRecommended([...recommended, ...recommendedProducts]);
