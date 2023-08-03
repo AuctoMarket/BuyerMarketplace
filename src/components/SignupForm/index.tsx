@@ -78,7 +78,9 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
   };
 
   const handleLoginClick = () => {
-    togglePopup(true, <LoginForm />);
+    if (togglePopup) {
+      togglePopup(true, <LoginForm />);
+    }
   };
 
   return (
