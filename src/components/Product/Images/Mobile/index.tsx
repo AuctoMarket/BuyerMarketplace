@@ -10,7 +10,7 @@ interface Props extends ComponentProps<'div'> {
 
 function ProductImagesMobile({
   className,
-  data: { images = [], type },
+  data: { images = ['/images/no-photo.png'], type },
   ...rest
 }: Props) {
   return (

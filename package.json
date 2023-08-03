@@ -32,6 +32,7 @@
     "@types/node": "16.18.38",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
+    "axios": "1.4.0",
     "prettier": "3.0.0",
     "react": "18.2.0",
     "react-daisyui": "4.0.1",
@@ -40,6 +41,7 @@
     "react-scripts": "5.0.1",
     "sass": "1.63.6",
     "source-map-explorer": "2.5.3",
+    "swr": "2.2.0",
     "tailwindcss": "3.3.3",
     "typescript": "4.9.5",
     "web-vitals": "2.1.4"
@@ -47,7 +49,7 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
-      "!src/apis/**/*",
+      "!src/hooks/**/*",
       "!src/pages/**/*",
       "!src/types/**/*",
       "!src/App.tsx",

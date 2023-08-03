@@ -11,7 +11,12 @@ interface Props extends ComponentProps<'div'> {
 
 function ProductSellerInfo({
   className,
-  data: { avatar, name = 'No name', isVerified, numFollowers = 0 },
+  data: {
+    avatar = '/images/no-photo.png',
+    name = 'No name',
+    isVerified,
+    numFollowers = 0,
+  },
   ...rest
 }: Props) {
   return (

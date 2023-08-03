@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import styles from './index.module.scss';
@@ -14,8 +14,11 @@ import ProductDetails from '../../components/Product/Details';
 import ProductPostedDate from '../../components/Product/PostedDate';
 import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
 import ProductRecommended from '../../components/Product/Recommended';
-import productsApi from '../../apis/products.api';
-import { ProductType, Product } from '../../types/product.type';
+import useProduct from '../../hooks/useProduct';
+import useSeller from '../../hooks/useSeller';
+import useProductsList from '../../hooks/useProductsList';
+import { ProductType } from '../../types/product.type';
+import { Seller } from '../../types/seller.type';
 
 function isMobile() {
   return window.innerWidth <= 820;
@@ -23,43 +26,21 @@ function isMobile() {
 
 function ProductDetailsPage() {
   const navigate = useNavigate();
+  const [limit, setLimit] = useState<number>(isMobile() ? 3 : 5);
+
   const { id } = useParams<{ id: string }>();
-  if (!id) {
-    navigate('/');
-  }
-
-  const [current, setCurrent] = React.useState<Product>();
-  const [moreFromSeller, setMoreFromSeller] = React.useState<Product[]>([]);
-  const [recommended, setRecommended] = React.useState<Product[]>([]);
-  const isShowMoreRecommended = recommended.length < (isMobile() ? 9 : 15);
-
-  useEffect(() => {
-    const currentProduct = productsApi.getProductById(id as string);
-    if (currentProduct) {
-      const moreFromSellerProducts = productsApi.listProducts({
-        sellerId: currentProduct.seller.id,
-      });
-      const recommendedProducts = productsApi.listProducts(
-        {},
-        { limit: isMobile() ? 3 : 5 },
-      );
-
-      setCurrent(currentProduct);
-      setMoreFromSeller(moreFromSellerProducts);
-      setRecommended(recommendedProducts);
-    } else {
-      setCurrent(currentProduct);
-    }
-  }, [id]);
+  const { product } = useProduct(id as string);
+  const { seller } = useSeller(product?.sellerId as string);
+  const { productsList: moreFromSeller } = useProductsList({
+    sellerId: seller?.id,
+  });
+  const { productsList: recommended } = useProductsList({}, { limit });
+  const isShowMoreRecommended =
+    recommended && recommended.length < (isMobile() ? 9 : 15);
 
   const handleShowMoreRecommended = () => {
     if (isShowMoreRecommended) {
-      const recommendedProducts = productsApi.listProducts(
-        {},
-        { limit: isMobile() ? 6 : 10 },
-      );
-
-      setRecommended([...recommended, ...recommendedProducts]);
+      setLimit(isMobile() ? 6 : 10);
     } else {
       navigate('/recommendations');
     }
@@ -67,69 +48,69 @@ function ProductDetailsPage() {
 
   return (
     <Layout>
-      {current && (
+      {product && (
         <div className={styles['product-details-page']}>
-          <div className={styles['current-product']}>
+          <div className={styles['product']}>
             {isMobile() ? (
               <ProductImagesMobile
                 className={styles['product-images']}
                 data={{
-                  type: current.type,
-                  images: current.images,
+                  type: product.type,
+                  images: product.images,
                 }}
               />
             ) : (
               <ProductImages
                 className={styles['product-images']}
                 data={{
-                  type: current.type,
-                  images: current.images,
+                  type: product.type,
+                  images: product.images,
                 }}
               />
             )}
 
             <div className={styles['product-details']}>
-              <ProductTitle data={{ title: current.title }} />
+              <ProductTitle data={{ title: product.title }} />
 
               <div>
-                <ProductSellerInfo data={current.seller} />
+                {seller && <ProductSellerInfo data={seller} />}
 
-                <ProductPostedDate data={{ postedDate: current.postedDate }} />
+                <ProductPostedDate data={{ postedDate: product.postedDate }} />
               </div>
 
-              {current.type === ProductType.Bid ? (
+              {product.type === ProductType.Bid ? (
                 <ProductPurchaseBid
                   data={{
-                    bidPrice: current.bidPrice,
-                    numBids: current.numBids,
+                    bidPrice: product.bidPrice,
+                    numBids: product.numBids,
                   }}
                 />
-              ) : current.type === ProductType.BuyNow ? (
-                <ProductPurchaseBuy data={{ price: current.price }} />
+              ) : product.type === ProductType.BuyNow ? (
+                <ProductPurchaseBuy data={{ price: product.price }} />
               ) : (
-                <ProductPurchasePreOrder data={{ price: current.price }} />
+                <ProductPurchasePreOrder data={{ price: product.price }} />
               )}
 
               <ProductDetails
                 data={{
-                  condition: current.condition,
-                  description: current.description,
+                  condition: product.condition,
+                  description: product.description,
                 }}
               />
             </div>
           </div>
 
-          {moreFromSeller.length > 0 && (
+          {moreFromSeller && moreFromSeller.length > 0 && (
             <ProductMoreFromSeller
               className={styles['product-more-from-seller']}
-              data={{ products: moreFromSeller, seller: current.seller }}
+              data={{ products: moreFromSeller, seller: seller as Seller }}
             />
           )}
 
-          {recommended.length > 0 && (
+          {recommended && recommended.length > 0 && (
             <ProductRecommended
               className={styles['product-recommended']}
-              data={{ products: recommended }}
+              data={{ products: recommended, seller: seller as Seller }}
               onShowMore={handleShowMoreRecommended}
               showMoreText={
                 !isShowMoreRecommended ? 'View recommendations' : undefined

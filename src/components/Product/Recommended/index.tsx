@@ -7,10 +7,12 @@ import Card from '../Card';
 import Button from '../../Button';
 
 import type { Product } from '../../../types/product.type';
+import type { Seller } from '../../../types/seller.type';
 
 interface Props extends ComponentProps<'div'> {
   data: {
     products: Product[];
+    seller: Seller;
   };
   onShowMore: () => void;
   showMoreText?: string;
@@ -18,7 +20,7 @@ interface Props extends ComponentProps<'div'> {
 
 export function ProductRecommended({
   className,
-  data: { products },
+  data: { products, seller },
   onShowMore,
   showMoreText = 'Show more',
   ...rest
@@ -36,7 +38,7 @@ export function ProductRecommended({
           className={styles['list']}
           items={products.map((product, index) => (
             <Link to={`/products/${product.id}`}>
-              <Card data={product} key={index} />
+              <Card data={{ product, seller }} key={index} />
             </Link>
           ))}
         />

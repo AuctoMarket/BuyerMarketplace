@@ -7,15 +7,25 @@ import ProductPostedDate from '../PostedDate';
 import ProductPrice from '../Price';
 import { ProductType, Product } from '../../../types/product.type';
 
+import type { Seller } from '../../../types/seller.type';
+
 interface Props extends ComponentProps<'div'> {
-  data: Product;
+  data: {
+    product: Product;
+    seller: Seller;
+  };
 }
 
-function ProductCard({
-  className,
-  data: { seller, images = [], title, postedDate, type, bidPrice = 0, price },
-  ...rest
-}: Props) {
+function ProductCard({ className, data: { product, seller }, ...rest }: Props) {
+  const {
+    images = ['/images/no-photo.png'],
+    title,
+    postedDate,
+    type,
+    bidPrice = 0,
+    price,
+  } = product;
+
   return (
     <div className={`${styles['product-card']} ${className}`} {...rest}>
       <div className={styles['header']}>

@@ -20,9 +20,7 @@ describe('MoreFromSeller', () => {
         title: 'test',
         condition: 4,
         description: 'test',
-        seller: {
-          id: '1',
-        },
+        sellerId: '1',
         bidPrice: 1,
         numBids: 1,
         price: 1,

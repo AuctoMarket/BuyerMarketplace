@@ -19,4 +19,20 @@ describe('SellerInfo', () => {
     const text = screen.getByRole('test');
     expect(text).toBeInTheDocument();
   });
+
+  test('renders SellerInfo without avatar name & numFollowers', () => {
+    render(
+      <SellerInfo
+        data={{
+          ...data,
+          avatar: undefined,
+          name: undefined,
+          numFollowers: undefined,
+        }}
+        role="test"
+      />,
+    );
+    const text = screen.getByRole('test');
+    expect(text).toBeInTheDocument();
+  });
 });

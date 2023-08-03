@@ -9,7 +9,7 @@ interface Props extends ComponentProps<'div'> {
 
 function ProductImages({
   className,
-  data: { type, images = [] },
+  data: { type, images = ['/images/no-photo.png'] },
   ...rest
 }: Props) {
   const [selected, setSelected] = React.useState<string>();

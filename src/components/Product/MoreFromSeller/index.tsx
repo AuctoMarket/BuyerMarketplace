@@ -17,23 +17,20 @@ interface Props extends ComponentProps<'div'> {
 
 export function ProductMoreFromSeller({
   className,
-  data: {
-    products,
-    seller: { name: sellerName = 'this seller' },
-  },
+  data: { products, seller },
   ...rest
 }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['heading']}>
-        More from <strong>{sellerName}</strong>
+        More from <strong>{seller.name || 'this seller'}</strong>
       </div>
       <div className={styles['list-container']}>
         <List
           className={styles['list']}
           items={products.map((product, index) => (
             <Link to={`/products/${product.id}`}>
-              <Card data={product} key={index} />
+              <Card data={{ product, seller }} key={index} />
             </Link>
           ))}
         />

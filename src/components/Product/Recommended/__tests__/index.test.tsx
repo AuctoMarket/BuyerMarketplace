@@ -4,13 +4,14 @@ import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import Recommended from '..';
-import { ProductType } from '../../../../types/product.type';
+import { ProductType, Product } from '../../../../types/product.type';
 
-import type { Product } from '../../../../types/product.type';
+import type { Seller } from '../../../../types/seller.type';
 
 describe('Recommended', () => {
   const data: {
     products: Product[];
+    seller: Seller;
   } = {
     products: [
       {
@@ -20,15 +21,16 @@ describe('Recommended', () => {
         title: 'test',
         condition: 4,
         description: 'test',
-        seller: {
-          id: '1',
-        },
+        sellerId: '1',
         bidPrice: 1,
         numBids: 1,
         price: 1,
         postedDate: new Date(),
       },
     ],
+    seller: {
+      id: '1',
+    },
   };
 
   test('renders Recommended', async () => {
