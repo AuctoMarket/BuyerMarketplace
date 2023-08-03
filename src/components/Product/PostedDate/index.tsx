@@ -15,7 +15,7 @@ function ProductPostedDate({
 }: Props) {
   return (
     <div className={`${styles['product-posted-date']} ${className}`} {...rest}>
-      Posted {postedDate.toLocaleDateString()}
+      Posted {postedDate.toLocaleDateString('en-SG')}
     </div>
   );
 }
