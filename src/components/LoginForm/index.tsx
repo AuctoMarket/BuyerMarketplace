@@ -78,9 +78,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   return (
     <>
       <div className={styles['login-title']}>Login</div>
-      {error && <div className={styles.error}>{error}</div>}
+      {error && (
+        <div className={styles.error} data-testid="error-message">
+          {error}
+        </div>
+      )}
       <div className={styles.inputGroup}>
-        {/* <label htmlFor="email">Email:</label> */}
         <input
           type="text"
           id="email"
@@ -90,7 +93,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         />
       </div>
       <div className={styles.inputGroup}>
-        {/* <label htmlFor="password">Password:</label> */}
         <div className={styles.passwordInput}>
           <input
             type={showPassword ? 'text' : 'password'}
@@ -108,14 +110,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         </div>
       </div>
       <div className={styles.links}>
-        <a href="#">Forgot your password?</a>
+        <a href="!#">Forgot your password?</a>
         {/* Use the handleSignupClick function to open the signup form in a popup */}
-        <a href="#" onClick={handleSignupClick}>
+        <a href="!#" onClick={handleSignupClick}>
           Not a user? Sign up here!
         </a>
       </div>
       <div className={styles.btnGroup}>
-        <button className={styles.loginBtn} onClick={handleLogin}>
+        {/* Add the data-testid attribute to the login button */}
+        <button
+          className={styles.loginBtn}
+          onClick={handleLogin}
+          data-testid="login-button"
+        >
           LOGIN
         </button>
       </div>

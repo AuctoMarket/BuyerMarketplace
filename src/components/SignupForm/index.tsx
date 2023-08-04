@@ -86,7 +86,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
   return (
     <>
       <div className={styles['signup-title']}>Sign Up</div>
-      {error && <div className={styles.error}>{error}</div>}
+      {error && (
+        <div className={styles.error} data-testid="error-message">
+          {error}
+        </div>
+      )}
       <div className={styles.inputGroup}>
         <input
           type="text"
@@ -116,12 +120,16 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
       </div>
       <div className={styles.links}>
         {/* Use the onLoginClick prop to handle the "Login here" link click */}
-        <a href="#" onClick={handleLoginClick}>
+        <a href="!#" onClick={handleLoginClick}>
           Already have an account? Login here!
         </a>
       </div>
       <div className={styles.btnGroup}>
-        <button className={styles.signupBtn} onClick={handleSignup}>
+        <button
+          className={styles.signupBtn}
+          onClick={handleSignup}
+          data-testid="signup-button"
+        >
           SIGN UP
         </button>
       </div>
