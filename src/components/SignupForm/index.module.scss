@@ -14,7 +14,7 @@
   }
 }
 
-.login-title {
+.signup-title {
   @apply text-4xl text-center my-4 py-4;
 }
 
@@ -35,7 +35,7 @@
   }
 }
 
-.loginBtn {
+.signupBtn {
   @apply bg-black text-white mr-1 w-40;
 }
 
@@ -49,8 +49,4 @@
   input {
     @apply flex-1 pr-10;
   }
-}
-
-.visibilityIcon {
-  @apply absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-2xl;
 }
