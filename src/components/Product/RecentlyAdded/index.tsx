@@ -26,7 +26,7 @@ export function ProductRecentlyAdded({
       <div className={styles['heading']}>
         Recently Added
         <Link to={`/sellers/${seller.id}/products`}>
-          See all deals
+          See more recently added
           <Icon name="arrow-right" />
         </Link>
       </div>
