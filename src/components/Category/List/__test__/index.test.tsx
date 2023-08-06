@@ -2,16 +2,18 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import CategoryList from '..';
+import List from '..';
 
-describe('CategoryItem', () => {
-  test('renders CategoryList', async () => {
+describe('List', () => {
+  test('renders List', async () => {
     render(
       <BrowserRouter>
-        <CategoryList data={{ test: 'test' }} role="categories" />;
+        <List role="categories" />;
       </BrowserRouter>,
     );
+
     const category = await screen.findByRole('categories');
+
     expect(category).toBeInTheDocument();
   });
 });
