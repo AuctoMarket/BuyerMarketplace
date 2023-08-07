@@ -14,9 +14,13 @@ describe('ReadMore', () => {
 
   test('renders ReadMore with long text', async () => {
     const str = 'text'.repeat(100);
-    render(<ReadMore maxChars={10}>{str}</ReadMore>);
+    render(
+      <ReadMore showAll={false} maxChars={10}>
+        {str}
+      </ReadMore>,
+    );
 
-    const text = await screen.findByText(str.slice(0, 10) + '...');
+    const text = await screen.findByText(str.slice(0, 10));
     expect(text).toBeInTheDocument();
 
     const button = await screen.findByText('Read more');
