@@ -1,0 +1,75 @@
+:global(.popupContainer) {
+  > div:first-of-type {
+    @apply py-6 px-10;
+    max-width: 600px;
+  }
+}
+
+.container {
+  @apply flex flex-col justify-center items-center;
+
+  .heading {
+    @apply font-thicboi text-4xl font-medium;
+  }
+
+  .price {
+    @apply flex flex-row items-center gap-4 mt-4;
+
+    .label {
+      @apply font-light text-2xl;
+    }
+
+    .product-price {
+      font-size: 40px;
+    }
+  }
+
+  .qr-code {
+    @apply mt-4;
+    width: 330px;
+  }
+
+  .description {
+    @apply mt-5 font-light;
+    font-size: 22px;
+
+    > a {
+      @apply underline;
+    }
+  }
+}
+
+@media screen and (max-width: 820px) {
+  :global(.popupContainer) {
+    > div:first-of-type {
+      @apply p-6 max-w-xs;
+    }
+  }
+
+  .container {
+    .heading {
+      @apply text-3xl;
+    }
+
+    .price {
+      @apply gap-2 mt-2;
+
+      .label {
+        @apply text-lg;
+      }
+
+      .product-price {
+        @apply text-2xl;
+      }
+    }
+
+    .qr-code {
+      @apply mt-4;
+      width: 180px;
+    }
+
+    .description {
+      @apply mt-3 text-sm;
+    }
+  }
+}

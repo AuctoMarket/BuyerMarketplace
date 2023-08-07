@@ -25,7 +25,7 @@ function Popup() {
   };
 
   return (
-    <div role="dialog" className={styles.popupContainer}>
+    <div role="dialog" className="popupContainer">
       <div className={styles.popupContent}>
         {popupContent}
         <button className={styles.closeBtn} onClick={handleClick}>

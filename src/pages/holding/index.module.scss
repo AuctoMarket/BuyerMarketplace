@@ -30,6 +30,15 @@
       @apply font-medium;
       font-size: 50px;
     }
+
+    .text-3 {
+      @apply font-bold mt-10;
+      font-size: 34px;
+
+      > a {
+        @apply bg-aucto text-white py-4 px-16;
+      }
+    }
   }
 }
 
@@ -56,6 +65,15 @@
 
       .text-2 {
         font-size: 20px;
+      }
+
+      .text-3 {
+        @apply mt-6;
+        font-size: 16px;
+
+        > a {
+          @apply py-2 px-6;
+        }
       }
     }
   }

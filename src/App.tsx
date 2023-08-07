@@ -1,14 +1,14 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import ProductPage from './pages/product';
+import PreLaunchSalePage from './pages/pre-launch-sale';
 import HoldingPage from './pages/holding';
 import Popup, { PopupContext } from './components/Popup';
 
 const router = createBrowserRouter([
   {
-    path: '/products/:id',
-    element: <ProductPage />,
+    path: '/pre-launch-sale',
+    element: <PreLaunchSalePage />,
   },
   {
     path: '/',

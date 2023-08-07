@@ -1,0 +1,83 @@
+.container {
+  @apply rounded-xl border border-solid px-8 pb-8 pt-4 border-gray-500;
+
+  .row-1 {
+    @apply flex flex-col gap-1;
+
+    .label {
+      @apply font-light text-2xl;
+    }
+
+    .price {
+      @apply font-thicboi font-bold;
+      font-size: 40px;
+    }
+  }
+
+  .row-2 {
+    @apply flex flex-row items-center gap-2 mt-2;
+
+    .label {
+      @apply font-light text-2xl;
+    }
+
+    .quantity {
+      @apply border border-solid border-black text-right px-1 w-20;
+      font-size: 32px;
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+  .row-3 {
+    @apply mt-4;
+
+    .button {
+      @apply w-full;
+    }
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .container {
+    @apply px-6 pb-6 pt-3;
+
+    .row-1 {
+      @apply gap-0;
+
+      .label {
+        font-size: 20px;
+      }
+
+      .price {
+        font-size: 30px;
+      }
+    }
+
+    .row-2 {
+      @apply mt-2;
+
+      .label {
+        font-size: 20px;
+      }
+
+      .quantity {
+        font-size: 30px;
+      }
+    }
+
+    .row-3 {
+      @apply mt-4;
+
+      .button {
+        font-size: 16px;
+        height: 36px;
+      }
+    }
+  }
+}

@@ -3,12 +3,21 @@ import React, { ComponentProps, useState } from 'react';
 import styles from './index.module.scss';
 
 interface Props extends ComponentProps<'p'> {
+  showAll?: boolean;
   maxChars?: number;
   children: string;
 }
 
-function ReadMore({ className, maxChars = 150, children, ...rest }: Props) {
-  const [isReadMore, setIsReadMore] = useState(children.length > maxChars);
+function ReadMore({
+  className,
+  showAll,
+  maxChars = 150,
+  children,
+  ...rest
+}: Props) {
+  const [isReadMore, setIsReadMore] = useState(
+    !showAll ?? children.length > maxChars,
+  );
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
@@ -17,13 +26,16 @@ function ReadMore({ className, maxChars = 150, children, ...rest }: Props) {
     <p className={className} {...rest}>
       {isReadMore ? (
         <>
-          {children.slice(0, maxChars)}...
+          <span
+            dangerouslySetInnerHTML={{ __html: children.slice(0, maxChars) }}
+          />
+          ...
           <span onClick={toggleReadMore} className={styles['button']}>
             Read more
           </span>
         </>
       ) : (
-        children
+        <span dangerouslySetInnerHTML={{ __html: children }} />
       )}
     </p>
   );
