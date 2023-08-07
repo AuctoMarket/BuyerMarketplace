@@ -13,4 +13,10 @@ describe('PostedDate', () => {
     const text = screen.getByRole('test');
     expect(text).toBeInTheDocument();
   });
+
+  test('renders PostedDate without text', () => {
+    render(<PostedDate data={{ ...data, showText: false }} role="test" />);
+    const text = screen.getByRole('test');
+    expect(text).toBeInTheDocument();
+  });
 });

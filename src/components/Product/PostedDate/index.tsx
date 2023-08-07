@@ -1,21 +1,25 @@
 import React from 'react';
+import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
 
 import type { Product } from '../../../types/product.type';
 
 interface Props extends React.ComponentProps<'div'> {
-  data: Pick<Product, 'postedDate'>;
+  data: {
+    postedDate: Product['postedDate'];
+    showText?: boolean;
+  };
 }
 
 function ProductPostedDate({
   className,
-  data: { postedDate },
+  data: { postedDate, showText = true },
   ...rest
 }: Props) {
   return (
     <div className={`${styles['product-posted-date']} ${className}`} {...rest}>
-      Posted {postedDate.toLocaleDateString('en-SG')}
+      {showText && 'Posted'} {dayjs(postedDate).fromNow()}
     </div>
   );
 }
