@@ -111,10 +111,12 @@ function ProductDetailsPage() {
             <ProductRecommended
               className={styles['product-recommended']}
               data={{ products: recommended, seller: seller as Seller }}
-              onShowMore={handleShowMoreRecommended}
-              showMoreText={
-                !isShowMoreRecommended ? 'View recommendations' : undefined
-              }
+              showMoreButton={{
+                text: !isShowMoreRecommended
+                  ? 'View all recommendations'
+                  : 'Show more',
+                onClick: handleShowMoreRecommended,
+              }}
             />
           )}
         </div>

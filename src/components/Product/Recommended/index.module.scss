@@ -4,8 +4,12 @@
 .heading {
   @apply font-thicboi font-bold text-2xl;
 
-  > strong {
-    @apply font-bold text-aucto;
+  > a {
+    @apply block float-right text-lg flex items-center;
+
+    > img {
+      @apply inline-block ml-1;
+    }
   }
 }
 

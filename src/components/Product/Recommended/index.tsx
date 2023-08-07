@@ -5,6 +5,7 @@ import styles from './index.module.scss';
 import List from '../../List';
 import Card from '../Card';
 import Button from '../../Button';
+import Icon from '../../Icon';
 
 import type { Product } from '../../../types/product.type';
 import type { Seller } from '../../../types/seller.type';
@@ -14,24 +15,27 @@ interface Props extends ComponentProps<'div'> {
     products: Product[];
     seller: Seller;
   };
-  onShowMore: () => void;
-  showMoreText?: string;
+  showMoreButton?: {
+    text: string;
+    onClick: () => void;
+  };
 }
 
 export function ProductRecommended({
   className,
   data: { products, seller },
-  onShowMore,
-  showMoreText = 'Show more',
+  showMoreButton,
   ...rest
 }: Props) {
-  const handleShowMore = () => {
-    onShowMore();
-  };
-
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
-      <div className={styles['heading']}>Recommended for you</div>
+      <div className={styles['heading']}>
+        Recommended for you
+        <Link to={'/recommendations'}>
+          See all recommendations
+          <Icon name="arrow-right" />
+        </Link>
+      </div>
 
       <div className={styles['list-container']}>
         <List
@@ -44,15 +48,17 @@ export function ProductRecommended({
         />
       </div>
 
-      <div className={styles['show-more-container']}>
-        <Button
-          className={styles['show-more']}
-          theme="black"
-          onClick={handleShowMore}
-        >
-          {showMoreText}
-        </Button>
-      </div>
+      {showMoreButton && (
+        <div className={styles['show-more-container']}>
+          <Button
+            className={styles['show-more']}
+            theme="black"
+            onClick={showMoreButton.onClick}
+          >
+            {showMoreButton.text}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

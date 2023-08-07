@@ -36,7 +36,23 @@ describe('Recommended', () => {
   test('renders Recommended', async () => {
     render(
       <BrowserRouter>
-        <Recommended data={data} onShowMore={() => {}} role="test" />
+        <Recommended data={data} role="test" />
+      </BrowserRouter>,
+    );
+
+    const recommended = await screen.findByRole('test');
+
+    expect(recommended).toBeInTheDocument();
+  });
+
+  test('renders Recommended with showMoreButton', async () => {
+    render(
+      <BrowserRouter>
+        <Recommended
+          data={data}
+          showMoreButton={{ text: 'Show more', onClick: () => {} }}
+          role="test"
+        />
       </BrowserRouter>,
     );
 
@@ -44,22 +60,6 @@ describe('Recommended', () => {
     const showMore = await screen.findByText('Show more');
     userEvent.click(showMore);
 
-    expect(recommended).toBeInTheDocument();
-  });
-
-  test('renders Recommended with showMoreText', async () => {
-    render(
-      <BrowserRouter>
-        <Recommended
-          data={data}
-          onShowMore={() => {}}
-          showMoreText="test"
-          role="test"
-        />
-      </BrowserRouter>,
-    );
-
-    const recommended = await screen.findByRole('test');
     expect(recommended).toBeInTheDocument();
   });
 });
