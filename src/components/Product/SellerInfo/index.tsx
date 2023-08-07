@@ -3,18 +3,20 @@ import React, { ComponentProps } from 'react';
 import styles from './index.module.scss';
 import Verified from '../../Verified';
 
+import type { Seller } from '../../../types/seller.type';
+
 interface Props extends ComponentProps<'div'> {
-  data: {
-    avatar: string;
-    name: string;
-    isVerified: boolean;
-    numFollowers: number;
-  };
+  data: Seller;
 }
 
 function ProductSellerInfo({
   className,
-  data: { avatar, name, isVerified, numFollowers },
+  data: {
+    avatar = '/images/no-photo.png',
+    name = 'No name',
+    isVerified,
+    numFollowers = 0,
+  },
   ...rest
 }: Props) {
   return (

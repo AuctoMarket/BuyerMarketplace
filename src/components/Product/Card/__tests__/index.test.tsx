@@ -2,25 +2,28 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import Card from '..';
+import { ProductType, Product } from '../../../../types/product.type';
+
+import type { Seller } from '../../../../types/seller.type';
 
 describe('Card', () => {
-  const data = {
-    id: '1',
-    type: 'normal',
-    images: ['test'],
-    title: 'test',
-    sellerInfo: {
-      name: 'test',
-      avatar: 'test',
-      isVerified: true,
-      numFollowers: 1,
-    },
-    purchase: {
-      currentBid: 1,
+  const data: { product: Product; seller: Seller } = {
+    product: {
+      id: '1',
+      type: ProductType.Bid,
+      title: 'test',
+      condition: 4,
+      description: 'test',
+      images: ['test'],
+      sellerId: '1',
+      bidPrice: 1,
       numBids: 1,
-      buyNowPrice: 1,
+      price: 1,
+      postedDate: new Date(),
     },
-    postedDate: 'test',
+    seller: {
+      id: '1',
+    },
   };
 
   test('renders Card', async () => {
@@ -31,7 +34,30 @@ describe('Card', () => {
   });
 
   test('renders Card pre-order', async () => {
-    render(<Card data={{ ...data, type: 'pre-order' }} role="card" />);
+    render(
+      <Card
+        data={{
+          ...data,
+          product: { ...data.product, type: ProductType.PreOrder },
+        }}
+        role="card"
+      />,
+    );
+
+    const card = await screen.findByRole('card');
+    expect(card).toBeInTheDocument();
+  });
+
+  test('renders Card without images & bidPrice', async () => {
+    render(
+      <Card
+        data={{
+          ...data,
+          product: { ...data.product, images: undefined, bidPrice: undefined },
+        }}
+        role="card"
+      />,
+    );
 
     const card = await screen.findByRole('card');
     expect(card).toBeInTheDocument();

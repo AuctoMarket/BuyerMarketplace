@@ -4,8 +4,10 @@ import styles from './index.module.scss';
 import Button from '../../../Button';
 import ProductPrice from '../../Price';
 
+import type { Product } from '../../../../types/product.type';
+
 interface Props extends ComponentProps<'div'> {
-  data: { price: number };
+  data: Pick<Product, 'price'>;
 }
 
 function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {

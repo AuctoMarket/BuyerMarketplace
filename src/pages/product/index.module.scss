@@ -3,7 +3,7 @@
   padding: 66px 0;
 }
 
-.current-product {
+.product {
   @apply flex flex-row;
 
   .product-images {
@@ -38,7 +38,7 @@
     @apply p-0 pb-4;
   }
 
-  .current-product {
+  .product {
     @apply flex-col;
 
     .product-images,

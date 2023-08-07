@@ -3,18 +3,36 @@ import { render, screen } from '@testing-library/react';
 
 import SellerInfo from '..';
 
-test('renders SellerInfo', () => {
-  render(
-    <SellerInfo
-      data={{
-        avatar: 'test',
-        name: 'test',
-        isVerified: true,
-        numFollowers: 1,
-      }}
-      role="test"
-    />,
-  );
-  const text = screen.getByRole('test');
-  expect(text).toBeInTheDocument();
+import type { Seller } from '../../../../types/seller.type';
+
+describe('SellerInfo', () => {
+  const data: Seller = {
+    id: '1',
+    avatar: 'test',
+    name: 'test',
+    isVerified: true,
+    numFollowers: 1,
+  };
+
+  test('renders SellerInfo', () => {
+    render(<SellerInfo data={data} role="test" />);
+    const text = screen.getByRole('test');
+    expect(text).toBeInTheDocument();
+  });
+
+  test('renders SellerInfo without avatar name & numFollowers', () => {
+    render(
+      <SellerInfo
+        data={{
+          ...data,
+          avatar: undefined,
+          name: undefined,
+          numFollowers: undefined,
+        }}
+        role="test"
+      />,
+    );
+    const text = screen.getByRole('test');
+    expect(text).toBeInTheDocument();
+  });
 });

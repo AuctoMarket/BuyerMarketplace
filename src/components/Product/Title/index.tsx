@@ -2,8 +2,10 @@ import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
 
+import type { Product } from '../../../types/product.type';
+
 interface Props extends ComponentProps<'div'> {
-  data: { title: string };
+  data: Pick<Product, 'title'>;
 }
 
 function ProductTitle({ className, data: { title }, ...rest }: Props) {

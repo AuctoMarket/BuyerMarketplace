@@ -3,15 +3,12 @@ import { render, screen } from '@testing-library/react';
 
 import Buy from '..';
 
+import type { Product } from '../../../../../types/product.type';
+
 test('renders Buy', () => {
-  render(
-    <Buy
-      data={{
-        price: 700,
-      }}
-      role="test"
-    />,
-  );
+  const data: Pick<Product, 'price'> = { price: 1 };
+
+  render(<Buy data={data} role="test" />);
   const text = screen.getByRole('test');
   expect(text).toBeInTheDocument();
 });

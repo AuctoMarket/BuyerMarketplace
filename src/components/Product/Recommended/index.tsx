@@ -6,26 +6,13 @@ import List from '../../List';
 import Card from '../Card';
 import Button from '../../Button';
 
+import type { Product } from '../../../types/product.type';
+import type { Seller } from '../../../types/seller.type';
+
 interface Props extends ComponentProps<'div'> {
   data: {
-    products: {
-      id: string;
-      type: string;
-      images: string[];
-      title: string;
-      sellerInfo: {
-        name: string;
-        avatar: string;
-        isVerified: boolean;
-        numFollowers: number;
-      };
-      purchase: {
-        currentBid: number;
-        numBids: number;
-        buyNowPrice: number;
-      };
-      postedDate: string;
-    }[];
+    products: Product[];
+    seller: Seller;
   };
   onShowMore: () => void;
   showMoreText?: string;
@@ -33,7 +20,7 @@ interface Props extends ComponentProps<'div'> {
 
 export function ProductRecommended({
   className,
-  data,
+  data: { products, seller },
   onShowMore,
   showMoreText = 'Show more',
   ...rest
@@ -49,9 +36,9 @@ export function ProductRecommended({
       <div className={styles['list-container']}>
         <List
           className={styles['list']}
-          items={data.products.map((product, index) => (
+          items={products.map((product, index) => (
             <Link to={`/products/${product.id}`}>
-              <Card data={product} key={index} />
+              <Card data={{ product, seller }} key={index} />
             </Link>
           ))}
         />

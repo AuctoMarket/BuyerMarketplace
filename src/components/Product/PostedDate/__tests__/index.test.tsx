@@ -3,8 +3,14 @@ import { render, screen } from '@testing-library/react';
 
 import PostedDate from '..';
 
-test('renders PostedDate', () => {
-  render(<PostedDate data={{ postedDate: 'test' }} role="test" />);
-  const text = screen.getByRole('test');
-  expect(text).toBeInTheDocument();
+import type { Product } from '../../../../types/product.type';
+
+describe('PostedDate', () => {
+  const data: Pick<Product, 'postedDate'> = { postedDate: new Date() };
+
+  test('renders PostedDate', () => {
+    render(<PostedDate data={data} role="test" />);
+    const text = screen.getByRole('test');
+    expect(text).toBeInTheDocument();
+  });
 });

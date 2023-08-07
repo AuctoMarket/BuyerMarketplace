@@ -1,15 +1,17 @@
 import React, { ComponentProps, useEffect } from 'react';
 
 import styles from './index.module.scss';
+import { Product, ProductType } from '../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: {
-    type: string;
-    images: string[];
-  };
+  data: Pick<Product, 'type' | 'images'>;
 }
 
-function ProductImages({ className, data: { type, images }, ...rest }: Props) {
+function ProductImages({
+  className,
+  data: { type, images = ['/images/no-photo.png'] },
+  ...rest
+}: Props) {
   const [selected, setSelected] = React.useState<string>();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ function ProductImages({ className, data: { type, images }, ...rest }: Props) {
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['selected-container']}>
         <div className={styles['gradient']}>
-          {type === 'pre-order' && (
+          {type === ProductType.PreOrder && (
             <span className={styles['pre-order']}>Pre-Order</span>
           )}
         </div>

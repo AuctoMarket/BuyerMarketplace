@@ -4,29 +4,33 @@ import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import Recommended from '..';
+import { ProductType, Product } from '../../../../types/product.type';
+
+import type { Seller } from '../../../../types/seller.type';
 
 describe('Recommended', () => {
-  const data = {
+  const data: {
+    products: Product[];
+    seller: Seller;
+  } = {
     products: [
       {
         id: '1',
-        type: 'normal',
+        type: ProductType.Bid,
         images: ['test'],
         title: 'test',
-        sellerInfo: {
-          name: 'test',
-          avatar: 'test',
-          isVerified: true,
-          numFollowers: 1,
-        },
-        purchase: {
-          currentBid: 1,
-          numBids: 1,
-          buyNowPrice: 1,
-        },
-        postedDate: 'test',
+        condition: 4,
+        description: 'test',
+        sellerId: '1',
+        bidPrice: 1,
+        numBids: 1,
+        price: 1,
+        postedDate: new Date(),
       },
     ],
+    seller: {
+      id: '1',
+    },
   };
 
   test('renders Recommended', async () => {

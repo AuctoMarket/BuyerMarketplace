@@ -2,23 +2,21 @@ import React, { ComponentProps } from 'react';
 import { Carousel } from 'react-daisyui';
 
 import styles from './index.module.scss';
+import { Product, ProductType } from '../../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: {
-    type: string;
-    images: string[];
-  };
+  data: Pick<Product, 'type' | 'images'>;
 }
 
 function ProductImagesMobile({
   className,
-  data: { images, type },
+  data: { images = ['/images/no-photo.png'], type },
   ...rest
 }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['gradient']}>
-        {type === 'pre-order' && (
+        {type === ProductType.PreOrder && (
           <span className={styles['pre-order']}>Pre-Order</span>
         )}
       </div>
