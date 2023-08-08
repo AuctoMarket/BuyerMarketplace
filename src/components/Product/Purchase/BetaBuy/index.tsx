@@ -31,7 +31,6 @@ function ProductPurchaseBetaBuy({
   const handleBuy = () => {
     togglePopup && togglePopup(true, <Checkout data={{ totalPrice }} />);
   };
-  console.log(quantity);
 
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
