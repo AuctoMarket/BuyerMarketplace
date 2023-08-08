@@ -12,6 +12,9 @@ interface Props extends ComponentProps<'div'> {
   data: Pick<Product, 'price'>;
 }
 
+const minQuantity = 1;
+const maxQuantity = 24;
+
 function ProductPurchaseBetaBuy({
   className,
   data: { price },
@@ -23,8 +26,8 @@ function ProductPurchaseBetaBuy({
   const [error, setError] = useState<string>();
 
   const handleQuantityChange = (value: number) => {
-    // allow value to be from 0 to 12
-    const newValue = Math.min(Math.max(value, 0), 12);
+    // allow value to be from 0 to maxQuantity
+    const newValue = Math.min(Math.max(value, 0), maxQuantity);
     setQuantity(newValue);
     const boxOf6s = Math.floor(newValue / 6);
     setTotalPrice(price * newValue - boxOf6s * 100);
@@ -32,7 +35,7 @@ function ProductPurchaseBetaBuy({
   };
   const handleBuy = () => {
     if (quantity === 0) {
-      setError('Quantity must be from 1 to 12');
+      setError(`Quantity must be from ${minQuantity} to ${maxQuantity}`);
       return;
     }
     togglePopup && togglePopup(true, <Checkout data={{ totalPrice }} />);
