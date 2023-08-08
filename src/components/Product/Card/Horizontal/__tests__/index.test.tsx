@@ -27,4 +27,34 @@ describe('Horizontal', () => {
     const card = await screen.findByRole('card');
     expect(card).toBeInTheDocument();
   });
+
+  test('renders Horizontal pre-order', async () => {
+    render(
+      <Horizontal
+        data={{
+          ...data,
+          product: { ...data.product, type: ProductType.PreOrder },
+        }}
+        role="card"
+      />,
+    );
+
+    const card = await screen.findByRole('card');
+    expect(card).toBeInTheDocument();
+  });
+
+  test('renders Horizontal without images & bidPrice', async () => {
+    render(
+      <Horizontal
+        data={{
+          ...data,
+          product: { ...data.product, images: undefined, bidPrice: undefined },
+        }}
+        role="card"
+      />,
+    );
+
+    const card = await screen.findByRole('card');
+    expect(card).toBeInTheDocument();
+  });
 });
