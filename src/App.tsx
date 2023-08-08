@@ -1,20 +1,22 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createHashRouter,
+  RouteObject,
+  RouterProvider,
+} from 'react-router-dom';
 
 import PreLaunchSalePage from './pages/pre-launch-sale';
 import HoldingPage from './pages/holding';
 import Popup, { PopupContext } from './components/Popup';
 
-const router = createBrowserRouter([
-  {
-    path: '/pre-launch-sale',
-    element: <PreLaunchSalePage />,
-  },
-  {
-    path: '/',
-    element: <HoldingPage />,
-  },
-]);
+const createRouter = (routerObjects: RouteObject[]) => {
+  if (window.location.hostname === 'aucto.io') {
+    return createHashRouter(routerObjects);
+  }
+
+  return createBrowserRouter(routerObjects);
+};
 
 function App() {
   const [popupOpen, setPopupOpen] = React.useState<boolean>(false);
@@ -31,7 +33,18 @@ function App() {
     <PopupContext.Provider value={{ popupOpen, popupContent, togglePopup }}>
       <Popup />
 
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={createRouter([
+          {
+            path: '/pre-launch-sale',
+            element: <PreLaunchSalePage />,
+          },
+          {
+            path: '/',
+            element: <HoldingPage />,
+          },
+        ])}
+      />
     </PopupContext.Provider>
   );
 }

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "React application for the Buyer Marketplace",
   "private": true,
+  "homepage": "https://aucto.io",
   "engines": {
     "node": "18"
   },
