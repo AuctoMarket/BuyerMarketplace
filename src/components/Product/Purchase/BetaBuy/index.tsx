@@ -63,6 +63,9 @@ function ProductPurchaseBetaBuy({
             handleQuantityChange(Number(event.target.value))
           }
         />
+        <div className={styles['description']}>
+          Max 24 boxes per transaction
+        </div>
       </div>
       {error && <div className={styles['error']}>{error}</div>}
       <div className={styles['row-3']}>

@@ -32,6 +32,11 @@
         margin: 0;
       }
     }
+
+    .description {
+      @apply font-semibold text-gray-400 pl-2;
+      font-size: 16px;
+    }
   }
 
   .error {
@@ -71,7 +76,13 @@
       }
 
       .quantity {
+        // @apply w-16;
         font-size: 30px;
+      }
+
+      .description {
+        @apply pl-1;
+        font-size: 12px;
       }
     }
 
