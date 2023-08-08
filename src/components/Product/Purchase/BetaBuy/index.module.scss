@@ -34,6 +34,10 @@
     }
   }
 
+  .error {
+    @apply text-red-500 text-lg mt-4;
+  }
+
   .row-3 {
     @apply mt-4;
 
@@ -69,6 +73,10 @@
       .quantity {
         font-size: 30px;
       }
+    }
+
+    .error {
+      @apply mt-3;
     }
 
     .row-3 {

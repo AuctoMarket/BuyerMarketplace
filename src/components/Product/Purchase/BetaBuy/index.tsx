@@ -18,8 +18,9 @@ function ProductPurchaseBetaBuy({
   ...rest
 }: Props) {
   const { togglePopup } = useContext(PopupContext);
-  const [quantity, setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(price * quantity);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [totalPrice, setTotalPrice] = useState<number>(price * quantity);
+  const [error, setError] = useState<string>();
 
   const handleQuantityChange = (value: number) => {
     // allow value to be from 0 to 12
@@ -27,8 +28,13 @@ function ProductPurchaseBetaBuy({
     setQuantity(newValue);
     const boxOf6s = Math.floor(newValue / 6);
     setTotalPrice(price * newValue - boxOf6s * 100);
+    setError(undefined);
   };
   const handleBuy = () => {
+    if (quantity === 0) {
+      setError('Quantity must be from 1 to 12');
+      return;
+    }
     togglePopup && togglePopup(true, <Checkout data={{ totalPrice }} />);
   };
 
@@ -52,6 +58,7 @@ function ProductPurchaseBetaBuy({
           }
         />
       </div>
+      {error && <div className={styles['error']}>{error}</div>}
       <div className={styles['row-3']}>
         <Button
           className={styles['button']}
