@@ -1,8 +1,9 @@
 import React, { ComponentProps } from 'react';
-import { Carousel } from 'react-daisyui';
+import { Carousel } from 'react-responsive-carousel';
 
 import styles from './index.module.scss';
 import { Product, ProductType } from '../../../../types/product.type';
+import Image from '../../../Image';
 
 interface Props extends ComponentProps<'div'> {
   data: Pick<Product, 'type' | 'images'>;
@@ -21,9 +22,9 @@ function ProductImagesMobile({
         )}
       </div>
 
-      <Carousel display="numbered" snap="center">
+      <Carousel showArrows={false} showStatus={false} showThumbs={false}>
         {images.map((image, index) => (
-          <Carousel.Item key={index} src={image} alt={`${index}`} />
+          <Image key={index} src={image} alt={`${index}`} />
         ))}
       </Carousel>
     </div>
