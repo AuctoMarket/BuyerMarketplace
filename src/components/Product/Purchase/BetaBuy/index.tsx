@@ -56,6 +56,9 @@ function ProductPurchaseBetaBuy({
           type="number"
           className={styles['quantity']}
           value={Number(quantity).toString()}
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+            [',', '.'].includes(event.key) && event.preventDefault()
+          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleQuantityChange(Number(event.target.value))
           }

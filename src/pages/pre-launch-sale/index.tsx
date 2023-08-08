@@ -37,7 +37,7 @@ function BetaPage() {
       <li>
         Self collection (locations can be discussed with us, we will try to make sure that you don’t have to travel too much)
       </li>
-      <li>Delivery to your doorstep at a cost of 4$</li>
+      <li>Delivery to your doorstep at a cost of $4</li>
     </ol>
     <br />
     <strong>
