@@ -22,8 +22,8 @@ function ProductPurchaseBetaBuy({
   const [totalPrice, setTotalPrice] = useState(price * quantity);
 
   const handleQuantityChange = (value: number) => {
-    // allow value to be from 1 to 12
-    const newValue = Math.min(Math.max(value, 1), 12);
+    // allow value to be from 0 to 12
+    const newValue = Math.min(Math.max(value, 0), 12);
     setQuantity(newValue);
     const boxOf6s = Math.floor(newValue / 6);
     setTotalPrice(price * newValue - boxOf6s * 100);
@@ -31,6 +31,7 @@ function ProductPurchaseBetaBuy({
   const handleBuy = () => {
     togglePopup && togglePopup(true, <Checkout data={{ totalPrice }} />);
   };
+  console.log(quantity);
 
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
@@ -46,9 +47,9 @@ function ProductPurchaseBetaBuy({
         <input
           type="number"
           className={styles['quantity']}
-          value={quantity}
+          value={Number(quantity).toString()}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            handleQuantityChange(+event.target.value)
+            handleQuantityChange(Number(event.target.value))
           }
         />
       </div>
