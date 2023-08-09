@@ -2,49 +2,21 @@ import React, { ComponentProps } from 'react';
 import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
 import Icon from '../../Icon';
-import Seller from '../Card';
+import Card from '../Card';
+import type { Seller } from '../../../types/seller.type';
 
-interface Props extends ComponentProps<'div'> {}
+interface Props extends ComponentProps<'div'> {
+  data: {
+    sellers: Seller[];
+  };
+}
 
-export function Sellers({ className, ...rest }: Props) {
-  const sellers = [
-    {
-      name: 'Seller Name 1',
-      avatar: '/images/product/product-1-image-1.png',
-      follow: '74',
-      numberbookmark: 12,
-    },
-    {
-      name: 'Seller Name 1',
-      avatar: '/images/product/product-1-image-1.png',
-      follow: '74',
-      numberbookmark: 12,
-    },
-    {
-      name: 'Seller Name 1',
-      avatar: '/images/product/product-1-image-1.png',
-      follow: '74',
-      numberbookmark: 12,
-    },
-    {
-      name: 'Seller Name 1',
-      avatar: '/images/product/product-1-image-1.png',
-      follow: '74',
-      numberbookmark: 12,
-    },
-    {
-      name: 'Seller Name 1',
-      avatar: '/images/product/product-1-image-1.png',
-      follow: '74',
-      numberbookmark: 12,
-    },
-  ];
-
+export function Sellers({ className, data: { sellers }, ...rest }: Props) {
   return (
     <div className={`${styles['container']}`} {...rest}>
       <div className={styles['heading']}>
         Featured Sellers
-        <Link to={`/sellers/123/products`}>
+        <Link to={`/featured/sellers`}>
           See more feature sellers
           <Icon name="arrow-right" />
         </Link>
@@ -52,7 +24,7 @@ export function Sellers({ className, ...rest }: Props) {
       <div className={`${styles['list-container']}`}>
         {sellers.map((seller, index) => (
           <Link to={`/seller/`} key={index}>
-            <Seller data={{ seller }} />
+            <Card data={{ seller }} />
           </Link>
         ))}
       </div>

@@ -1,16 +1,12 @@
 import React, { ComponentProps } from 'react';
 import styles from './index.module.scss';
-import Image from '../../Image';
 import Verified from '../../Verified';
+import Icon from '../../Icon';
+import type { Seller } from '../../../types/seller.type';
 
 interface Props extends ComponentProps<'div'> {
   data: {
-    seller: {
-      name: string;
-      avatar: string;
-      follow: string;
-      numberbookmark: number;
-    };
+    seller: Seller;
   };
 }
 
@@ -18,22 +14,22 @@ export function Card({ className, data: { seller }, ...rest }: Props) {
   return (
     <div className={`${styles['seller-card']}`} {...rest}>
       <div className={`${styles['seller-avatar']}`}>
-        <Image src={seller.avatar} alt={seller.name} />
+        <img src={seller.avatar} alt="avatar" />
       </div>
       <div className={`${styles['seller-name']}`}>
-        <p>{seller.name}</p> <Verified />
+        <p>{seller.name}</p> {seller.isVerified && <Verified />}
       </div>
       <div className={`${styles['seller-follow']}`}>
-        <p>{seller.follow} followers</p>
+        <p>{seller.numFollowers} followers</p>
       </div>
       <div className={`${styles['seller-more']}`}>
-        <Image src="images/seller/more.png" alt="more" />
+        <Icon name="more" />
       </div>
       <div className={`${styles['seller-bookmark']}`}>
-        <Image src="images/seller/bookmark1.png" alt="bookmark1" />
+        <Icon name="bookmark1" />
       </div>
       <div className={`${styles['seller-number']}`}>
-        <p>{seller.follow}</p>
+        <p>{seller.numFollowers}</p>
       </div>
     </div>
   );
