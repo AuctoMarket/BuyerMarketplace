@@ -26,7 +26,7 @@ export function Card({ className, data: { seller }, ...rest }: Props) {
         <Icon name="more" />
       </div>
       <div className={`${styles['seller-bookmark']}`}>
-        <Icon name="bookmark1" />
+        <Icon name="bookmark" />
       </div>
       <div className={`${styles['seller-number']}`}>
         <p>{seller.numFollowers}</p>
