@@ -17,7 +17,7 @@ export function Sellers({ className, data: { sellers }, ...rest }: Props) {
       <div className={styles['heading']}>
         Featured Sellers
         <Link to={`/featured/sellers`}>
-          See more feature sellers
+          See more featured sellers
           <Icon name="arrow-right" />
         </Link>
       </div>
