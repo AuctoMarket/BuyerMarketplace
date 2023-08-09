@@ -40,6 +40,12 @@ function BetaPage() {
       <li>Delivery to your doorstep at a cost of $4</li>
     </ol>
     <br />
+    <p>
+      <strong>
+        For more information, contact us at our telegram <a style="text-decoration-line: underline;" href="https://t.me/auctomarketplace" target="blank">@auctomarketplace</a>
+      </strong>
+    </p>
+    <br />
     <strong>
       Follow our Instagram <a style="text-decoration-line: underline;" href="https://www.instagram.com/auctomarketplace" target="blank">@auctomarketplace</a> for future discounts, giveaways
       and promotions!
