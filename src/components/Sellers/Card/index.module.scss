@@ -7,22 +7,18 @@
 }
 
 .seller-avatar {
+  @apply px-6 pt-8 pb-3;
+
   > img {
-    @apply rounded-full mt-5;
+    @apply rounded-full;
   }
 }
 
 .seller-name {
-  @apply flex flex-row gap-2 items-center mt-2 pb-0;
-
-  > p {
-    @apply font-thicboi font-bold text-2xl;
-  }
+  @apply flex flex-row gap-2 items-center pb-0 font-thicboi font-bold text-2xl;
 }
 .seller-follow {
-  > p {
-    @apply font-lato font-semibold text-gray-400 text-[11px] mb-3;
-  }
+  @apply font-lato font-semibold text-gray-400 text-[11px] mb-3;
 }
 
 .seller-more {
@@ -30,12 +26,8 @@
 }
 
 .seller-bookmark {
-  @apply absolute top-[-5px] right-0;
+  @apply absolute top-[-5px] right-0 font-thicboi font-extrabold text-xl text-white flex justify-center;
 }
-.seller-number {
-  @apply absolute top-2 right-5;
-
-  > p {
-    @apply font-thicboi font-extrabold text-xl text-white;
-  }
+.seller-index {
+  @apply absolute top-2 mx-auto;
 }

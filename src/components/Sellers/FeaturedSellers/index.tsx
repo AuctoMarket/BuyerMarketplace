@@ -1,8 +1,10 @@
 import React, { ComponentProps } from 'react';
 import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
+
 import Icon from '../../Icon';
 import Card from '../Card';
+
 import type { Seller } from '../../../types/seller.type';
 
 interface Props extends ComponentProps<'div'> {
@@ -11,20 +13,24 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function Sellers({ className, data: { sellers }, ...rest }: Props) {
+export function FeaturedSellers({
+  className,
+  data: { sellers },
+  ...rest
+}: Props) {
   return (
     <div className={`${styles['container']}`} {...rest}>
       <div className={styles['heading']}>
         Featured Sellers
-        <Link to={`/featured/sellers`}>
+        <Link to="/sellers/featured">
           See more featured sellers
           <Icon name="arrow-right" />
         </Link>
       </div>
-      <div className={`${styles['list-container']}`}>
+      <div className={styles['list-container']}>
         {sellers.map((seller, index) => (
-          <Link to={`/seller/`} key={index}>
-            <Card data={{ seller }} />
+          <Link to={`/seller/${seller.id}`} key={index}>
+            <Card data={{ index: `0${index + 1}`, seller }} />
           </Link>
         ))}
       </div>
@@ -32,4 +38,4 @@ export function Sellers({ className, data: { sellers }, ...rest }: Props) {
   );
 }
 
-export default Sellers;
+export default FeaturedSellers;
