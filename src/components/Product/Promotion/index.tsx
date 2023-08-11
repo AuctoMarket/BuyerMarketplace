@@ -1,29 +1,33 @@
 import React, { ComponentProps } from 'react';
 import styles from './index.module.scss';
 import { Carousel } from 'react-responsive-carousel';
+
 import Image from '../../Image';
 import Icon from '../../Icon';
-import Button from '../../Button';
+import { Link } from 'react-router-dom';
 
 interface Props extends ComponentProps<'div'> {
   data: {
     images: string[];
+    url: string;
+    title: string;
   };
 }
 
-function FeaturedProducts({ data: { images }, ...rest }: Props) {
+function ProductPromotion({ data: { images, url, title }, ...rest }: Props) {
   return (
     <div className={`${styles['products-container']}`} {...rest}>
       <div className={`${styles['gradient']}`} />
+
       <Carousel
-        showArrows={true}
         showStatus={false}
         showThumbs={false}
-        renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
+        renderArrowPrev={(clickHandler, hasPrev) =>
           hasPrev && (
             <button
               className={`${styles['products-button-left']}`}
               onClick={clickHandler}
+              data-testid="btn-left"
             >
               <Icon name="chevron_left" />
             </button>
@@ -34,6 +38,7 @@ function FeaturedProducts({ data: { images }, ...rest }: Props) {
             <button
               className={`${styles['products-button-right']}`}
               onClick={clickHandler}
+              data-testid="btn-right"
             >
               <Icon name="chevron_right" />
             </button>
@@ -44,19 +49,19 @@ function FeaturedProducts({ data: { images }, ...rest }: Props) {
           <Image key={index} src={image} alt={`${index}`} />
         ))}
       </Carousel>
+
       <div className={`${styles['products-content']}`}>
         <div className={`${styles['products-button']}`}>
-          <Button>Pre-Order now</Button>
+          <Link to={url}>Pre-Order now</Link>
         </div>
-        <div className={`${styles['products-text-1']}`}>
-          Collection: Pokemon S&S Brilliant Stars
-        </div>
-        <div className={`${styles['products-text-2']}`}>
-          Pre-Order your today!
-        </div>
+
+        <div
+          className={`${styles['products-title']}`}
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
       </div>
     </div>
   );
 }
 
-export default FeaturedProducts;
+export default ProductPromotion;
