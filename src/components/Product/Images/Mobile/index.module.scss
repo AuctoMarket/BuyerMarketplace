@@ -1,21 +1,8 @@
 .container {
   @apply relative;
 
-  > div:nth-of-type(2)::-webkit-scrollbar {
-    display: none;
-  }
-
-  > div:nth-of-type(3) {
-    @apply absolute left-0 bottom-5 p-0;
-
-    > :global(.btn) {
-      @apply h-3 w-3 rounded-full bg-white/50;
-      @apply p-0 min-h-0 indent-96 overflow-hidden;
-
-      &:global(.btn-active) {
-        @apply bg-white;
-      }
-    }
+  :global(.carousel-root .carousel.carousel-slider .control-dots .dot) {
+    @apply h-3 w-3;
   }
 }
 

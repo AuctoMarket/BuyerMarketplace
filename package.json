@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "React application for the Buyer Marketplace",
   "private": true,
+  "homepage": "https://aucto.io",
   "engines": {
     "node": "18"
   },
@@ -19,7 +20,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "clean": "npx rimraf build coverage",
-    "predeploy": "npm run build",
+    "predeploy": "REACT_APP_GITHUB_PAGES=true npm run build",
     "deploy": "npx gh-pages -b AUCTO/Holding -d build"
   },
   "dependencies": {
@@ -38,6 +39,7 @@
     "react": "18.2.0",
     "react-daisyui": "4.0.1",
     "react-dom": "18.2.0",
+    "react-responsive-carousel": "3.2.23",
     "react-router-dom": "6.14.2",
     "react-scripts": "5.0.1",
     "sass": "1.63.6",

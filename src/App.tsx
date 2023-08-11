@@ -1,20 +1,22 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createHashRouter,
+  RouteObject,
+  RouterProvider,
+} from 'react-router-dom';
 
 import ProductPage from './pages/product';
 import HoldingPage from './pages/holding';
 import Popup, { PopupContext } from './components/Popup';
 
-const router = createBrowserRouter([
-  {
-    path: '/products/:id',
-    element: <ProductPage />,
-  },
-  {
-    path: '/',
-    element: <HoldingPage />,
-  },
-]);
+const createRouter = (routerObjects: RouteObject[]) => {
+  if (process.env.REACT_APP_GITHUB_PAGES === 'true') {
+    return createHashRouter(routerObjects);
+  }
+
+  return createBrowserRouter(routerObjects);
+};
 
 function App() {
   const [popupOpen, setPopupOpen] = React.useState<boolean>(false);
@@ -31,7 +33,18 @@ function App() {
     <PopupContext.Provider value={{ popupOpen, popupContent, togglePopup }}>
       <Popup />
 
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={createRouter([
+          {
+            path: '/products/:id',
+            element: <ProductPage />,
+          },
+          {
+            path: '/',
+            element: <HoldingPage />,
+          },
+        ])}
+      />
     </PopupContext.Provider>
   );
 }

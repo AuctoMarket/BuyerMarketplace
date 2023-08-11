@@ -1,6 +1,6 @@
 /* src/components/Popup/index.module.scss */
 
-.popupContainer {
+:global(.popupContainer) {
   @apply fixed top-0 left-0 w-full h-full flex justify-center items-center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999;
