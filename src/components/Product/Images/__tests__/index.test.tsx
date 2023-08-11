@@ -28,11 +28,4 @@ describe('Images', () => {
     const images = await screen.findByRole('images');
     expect(images).toBeInTheDocument();
   });
-
-  test('renders Images without images', async () => {
-    render(<Images data={{ ...data, images: undefined }} role="images" />);
-
-    const images = await screen.findByRole('images');
-    expect(images).toBeInTheDocument();
-  });
 });

@@ -17,14 +17,7 @@ interface Props extends ComponentProps<'div'> {
 }
 
 function ProductCard({ className, data: { product, seller }, ...rest }: Props) {
-  const {
-    images = ['/images/no-photo.png'],
-    title,
-    postedDate,
-    type,
-    bidPrice = 0,
-    price,
-  } = product;
+  const { images, title, postedDate, type, bidPrice = 0, price } = product;
 
   return (
     <div className={`${styles['product-card']} ${className}`} {...rest}>
