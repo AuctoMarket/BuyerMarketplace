@@ -16,6 +16,7 @@ import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
 import ProductRecommended from '../../components/Product/Recommended';
 import useProduct from '../../hooks/useProduct';
 import useSeller from '../../hooks/useSeller';
+import useMoreFromSeller from '../../hooks/useMoreFromSeller';
 import useProductsList from '../../hooks/useProductsList';
 import { ProductType } from '../../types/product.type';
 import { Seller } from '../../types/seller.type';
@@ -31,9 +32,7 @@ function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
   const { seller } = useSeller(product?.sellerId as string);
-  const { productsList: moreFromSeller } = useProductsList({
-    sellerId: seller?.id,
-  });
+  const { moreFromSeller } = useMoreFromSeller(seller?.id as string);
   const { productsList: recommended } = useProductsList({}, { limit });
   const isShowMoreRecommended =
     recommended && recommended.length < (isMobile() ? 9 : 15);
