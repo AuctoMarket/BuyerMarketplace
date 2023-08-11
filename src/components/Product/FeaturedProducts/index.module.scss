@@ -1,0 +1,45 @@
+.products-container {
+  @apply relative;
+}
+
+.gradient {
+  @apply absolute w-full h-full z-10;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.45) 35.94%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.products-button-left {
+  @apply absolute h-full z-30 pl-20;
+  > img {
+    @apply w-16;
+  }
+}
+
+.products-button-right {
+  @apply absolute h-full z-30 pl-20 right-0 pr-20;
+  > img {
+    @apply w-16;
+  }
+}
+
+.products-content {
+  @apply absolute bottom-[70px] left-60 z-20;
+}
+
+.products-button {
+  @apply mb-[28px];
+  > button {
+    @apply font-thicboi text-xl font-bold bg-white rounded-lg px-6 pt-[11px] pb-[9px] leading-none h-[42px];
+  }
+}
+
+.products-text-1 {
+  @apply text-white font-semibold text-4xl font-thicboi;
+}
+
+.products-text-2 {
+  @apply text-white font-semibold text-4xl font-thicboi;
+}
