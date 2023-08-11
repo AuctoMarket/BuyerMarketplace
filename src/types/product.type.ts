@@ -11,11 +11,13 @@ interface Product {
   title: string;
   condition: number;
   description: string;
-  images?: string[];
+  images: string[];
   type: ProductType;
   price: number;
   bidPrice?: number;
   numBids?: number;
+  quantity?: number;
+  soldQuantity?: number;
   sellerId: string;
   postedDate: Date;
 }

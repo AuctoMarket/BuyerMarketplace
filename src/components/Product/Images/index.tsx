@@ -7,11 +7,7 @@ interface Props extends ComponentProps<'div'> {
   data: Pick<Product, 'type' | 'images'>;
 }
 
-function ProductImages({
-  className,
-  data: { type, images = ['/images/no-photo.png'] },
-  ...rest
-}: Props) {
+function ProductImages({ className, data: { type, images }, ...rest }: Props) {
   const [selected, setSelected] = React.useState<string>();
 
   useEffect(() => {

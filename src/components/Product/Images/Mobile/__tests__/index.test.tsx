@@ -25,11 +25,4 @@ describe('Mobile', () => {
     const images = screen.getByRole('images');
     expect(images).toBeInTheDocument();
   });
-
-  test('renders Mobile without images', () => {
-    render(<Mobile data={{ ...data, images: undefined }} role="images" />);
-
-    const images = screen.getByRole('images');
-    expect(images).toBeInTheDocument();
-  });
 });

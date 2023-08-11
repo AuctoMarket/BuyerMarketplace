@@ -48,12 +48,12 @@ describe('Card', () => {
     expect(card).toBeInTheDocument();
   });
 
-  test('renders Card without images & bidPrice', async () => {
+  test('renders Card without bidPrice', async () => {
     render(
       <Card
         data={{
           ...data,
-          product: { ...data.product, images: undefined, bidPrice: undefined },
+          product: { ...data.product, bidPrice: undefined },
         }}
         role="card"
       />,
