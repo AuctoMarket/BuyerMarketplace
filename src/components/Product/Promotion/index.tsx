@@ -14,9 +14,13 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-function ProductPromotion({ data: { images, url, title }, ...rest }: Props) {
+function ProductPromotion({
+  className,
+  data: { images, url, title },
+  ...rest
+}: Props) {
   return (
-    <div className={`${styles['products-container']}`} {...rest}>
+    <div className={`${className} ${styles['products-container']}`} {...rest}>
       <div className={`${styles['gradient']}`} />
 
       <Carousel
