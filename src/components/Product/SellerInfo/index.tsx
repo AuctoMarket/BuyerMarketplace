@@ -15,7 +15,7 @@ function ProductSellerInfo({
     avatar = '/images/no-photo.png',
     name = 'No name',
     isVerified,
-    numFollowers = 0,
+    numFollowers,
   },
   ...rest
 }: Props) {
@@ -31,7 +31,9 @@ function ProductSellerInfo({
           {isVerified && <Verified />}
         </div>
 
-        <div className={styles['followers']}>{numFollowers} Followers</div>
+        {numFollowers && (
+          <div className={styles['followers']}>{numFollowers} Followers</div>
+        )}
       </div>
     </div>
   );
