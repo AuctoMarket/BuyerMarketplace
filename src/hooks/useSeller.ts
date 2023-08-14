@@ -12,9 +12,11 @@ const useSeller = (id: string) => {
     data: seller,
     error,
   } = useSWR(`/sellers/${id}`, async (url: string) => {
+    if (!id) return null;
+
     const response = await axios.get<Seller>(`${apiConfig.baseUrl}${url}`);
 
-    return transformSeller(response.data);
+    return { ...transformSeller(response.data), isVerified: true };
   });
 
   return {
