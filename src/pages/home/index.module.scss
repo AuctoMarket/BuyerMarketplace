@@ -4,6 +4,10 @@
 .promotion {
 }
 
-.recently-added {
+.content {
   @apply container mx-auto pt-[50px] pb-[100px];
+}
+
+.seller-promotion {
+  @apply border-t border-t-2 border-gray-300;
 }

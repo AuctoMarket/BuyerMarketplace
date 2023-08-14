@@ -1,10 +1,10 @@
 import React, { ComponentProps } from 'react';
-import styles from './index.module.scss';
 import { Carousel } from 'react-responsive-carousel';
+import { Link } from 'react-router-dom';
 
+import styles from './index.module.scss';
 import Image from '../../Image';
 import Icon from '../../Icon';
-import { Link } from 'react-router-dom';
 
 interface Props extends ComponentProps<'div'> {
   data: {

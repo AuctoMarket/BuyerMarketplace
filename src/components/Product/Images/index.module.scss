@@ -2,35 +2,40 @@
 }
 
 .selected-container {
-  @apply relative grid grid-cols-6;
+  @apply relative;
 
-  .gradient {
-    @apply absolute top-0 left-0 w-5/6;
-    height: 112px;
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.45) 35.94%,
-      rgba(0, 0, 0, 0) 100%
-    );
+  .image {
+    @apply relative;
+    width: calc(100% - 125px);
 
-    .pre-order {
-      @apply absolute left-6 top-6 text-2xl text-white bg-aucto font-bold font-thicboi px-6 py-2;
+    .gradient {
+      @apply absolute top-0 left-0 w-full z-10;
+      height: 112px;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.45) 35.94%,
+        rgba(0, 0, 0, 0) 100%
+      );
+
+      .pre-order {
+        @apply absolute left-6 top-6 text-2xl text-white bg-aucto font-bold font-thicboi px-6 py-2;
+      }
     }
   }
 
-  .image {
-    @apply w-full col-span-5;
-  }
-
   .thumbnails-list-container {
-    @apply absolute right-0 w-1/6 h-full grid grid-rows-5 gap-4 pl-4;
+    @apply absolute top-0 right-0 h-full flex flex-col flex-nowrap gap-4 overflow-y-auto;
 
     .thumbnail-container {
-      @apply border border-4 border-transparent cursor-pointer overflow-hidden flex;
+      @apply border border-2 cursor-pointer;
 
       &:hover,
       &.selected {
         @apply border-aucto;
+      }
+
+      .thumbnail {
+        @apply w-[105px] h-[105px] object-cover;
       }
     }
   }

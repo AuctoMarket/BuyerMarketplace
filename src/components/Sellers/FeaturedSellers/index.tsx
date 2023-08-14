@@ -13,11 +13,7 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function FeaturedSellers({
-  className,
-  data: { sellers },
-  ...rest
-}: Props) {
+function FeaturedSellers({ className, data: { sellers }, ...rest }: Props) {
   return (
     <div className={`${styles['container']}`} {...rest}>
       <div className={styles['heading']}>

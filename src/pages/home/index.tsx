@@ -4,9 +4,11 @@ import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import ProductPromotion from '../../components/Product/Promotion';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
+import SellerPromotion from '../../components/Sellers/Promotion';
 import useSeller from '../../hooks/useSeller';
 import useProductsList from '../../hooks/useProductsList';
-import { Seller } from '../../types/seller.type';
+
+import type { Seller } from '../../types/seller.type';
 
 function HomePage() {
   const { seller } = useSeller('1');
@@ -19,9 +21,9 @@ function HomePage() {
           className={styles['promotion']}
           data={{
             images: [
-              '/images/promotion/image.png',
-              '/images/promotion/image.png',
-              '/images/promotion/image.png',
+              '/images/promotion/product-banner.png',
+              '/images/promotion/product-banner.png',
+              '/images/promotion/product-banner.png',
             ],
             url: '#',
             title:
@@ -30,15 +32,20 @@ function HomePage() {
         />
 
         {recentlyAdded && recentlyAdded.length > 0 && (
-          <ProductRecentlyAdded
-            className={styles['recently-added']}
-            data={{
-              products: recentlyAdded,
-              seller: seller as Seller,
-              seeMore: false,
-            }}
-          />
+          <div className={styles['content']}>
+            <ProductRecentlyAdded
+              data={{
+                products: recentlyAdded,
+                seller: seller as Seller,
+                seeMore: false,
+              }}
+            />
+          </div>
         )}
+
+        <div className={styles['seller-promotion']}>
+          <SellerPromotion />
+        </div>
       </div>
     </Layout>
   );

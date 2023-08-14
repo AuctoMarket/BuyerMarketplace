@@ -21,16 +21,18 @@ function ProductImages({ className, data: { type, images }, ...rest }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['selected-container']}>
-        <div className={styles['gradient']}>
-          {type === ProductType.PreOrder && (
-            <span className={styles['pre-order']}>Pre-Order</span>
-          )}
+        <div className={styles['image']}>
+          <div className={styles['gradient']}>
+            {type === ProductType.PreOrder && (
+              <span className={styles['pre-order']}>Pre-Order</span>
+            )}
+          </div>
+
+          <img src={selected} alt="selected" />
         </div>
 
-        <img className={styles['image']} src={selected} alt="selected" />
-
         <div className={styles['thumbnails-list-container']}>
-          {images.map((image, index) => (
+          {images.slice(0, 5).map((image, index) => (
             <div
               key={index}
               className={`${styles['thumbnail-container']} ${

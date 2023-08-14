@@ -14,11 +14,7 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function ProductHotDeals({
-  className,
-  data: { products },
-  ...rest
-}: Props) {
+function ProductHotDeals({ className, data: { products }, ...rest }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['heading']}>

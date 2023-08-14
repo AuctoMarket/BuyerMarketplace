@@ -38,6 +38,8 @@
 }
 
 .products-button {
+  @apply hidden;
+
   > a {
     @apply font-thicboi text-xl font-bold bg-white rounded-lg px-6 pt-[11px] pb-[9px] leading-none h-[42px] hover:bg-aucto hover:text-white;
   }

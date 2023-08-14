@@ -15,7 +15,7 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function ProductMoreFromSeller({
+function ProductMoreFromSeller({
   className,
   data: { products, seller },
   ...rest
