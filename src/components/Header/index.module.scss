@@ -5,7 +5,10 @@
 
 .logo {
   @apply block;
-  height: 40px;
+
+  img {
+    height: 40px;
+  }
 }
 
 .search-box {
@@ -75,7 +78,10 @@
 
   .logo {
     @apply mx-auto;
-    height: 30px;
+
+    img {
+      height: 30px;
+    }
   }
 
   .search-box {
