@@ -35,7 +35,9 @@
       }
 
       .thumbnail {
-        @apply w-[105px] h-[105px] object-cover;
+        @apply object-cover;
+        width: 105px;
+        height: 105px;
       }
     }
   }

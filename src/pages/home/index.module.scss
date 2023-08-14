@@ -5,9 +5,11 @@
 }
 
 .content {
-  @apply container mx-auto pt-[50px] pb-[100px];
+  @apply container mx-auto;
+  padding-top: 50px;
+  padding-bottom: 100px;
 }
 
 .seller-promotion {
-  @apply border-t border-t-2 border-gray-300;
+  @apply border-t-2 border-gray-300;
 }

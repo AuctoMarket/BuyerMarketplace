@@ -18,7 +18,9 @@
   }
 
   .button {
-    @apply mt-8 w-[125px] h-[40px];
+    @apply mt-8;
+    width: 125px;
+    height: 40px;
   }
 }
 
