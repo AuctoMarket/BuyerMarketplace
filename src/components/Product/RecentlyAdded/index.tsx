@@ -13,22 +13,25 @@ interface Props extends ComponentProps<'div'> {
   data: {
     products: Product[];
     seller: Seller;
+    seeMore?: boolean;
   };
 }
 
 export function ProductRecentlyAdded({
   className,
-  data: { products, seller },
+  data: { products, seller, seeMore = true },
   ...rest
 }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['heading']}>
         Recently Added
-        <Link to={`/sellers/${seller.id}/products`}>
-          See more recently added
-          <Icon name="arrow-right" />
-        </Link>
+        {seeMore && (
+          <Link to={`/sellers/${seller.id}/products`}>
+            See more recently added
+            <Icon name="arrow-right" />
+          </Link>
+        )}
       </div>
 
       <div className={styles['list-container']}>

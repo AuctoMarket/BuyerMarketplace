@@ -2,6 +2,7 @@ import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
 import Button from '../../../Button';
+import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
 
 import type { Product } from '../../../../types/product.type';
@@ -25,9 +26,14 @@ function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {
         </Button>
       </div>
       <div className={styles['row-3']}>
-        <Button className={styles['button']} theme="black">
-          Chat with seller
-        </Button>
+        <ButtonLink
+          className={styles['button']}
+          theme="black"
+          to={`https://t.me/auctomarketplace`}
+          target="_blank"
+        >
+          Chat with us
+        </ButtonLink>
       </div>
     </div>
   );
