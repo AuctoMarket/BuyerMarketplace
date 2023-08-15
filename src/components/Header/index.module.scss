@@ -31,7 +31,7 @@
 .navbar-left-mobile {
   .dropdown > ul {
     @apply left-0 right-auto flex flex-col gap-2 z-50 p-7;
-    margin-top: 48px;
+    margin-top: 36px;
     margin-left: -20px;
 
     > li {
@@ -57,7 +57,7 @@
 .navbar-right {
   .dropdown > ul {
     @apply flex flex-col gap-5 z-50;
-    margin-top: 49px;
+    margin-top: 40px;
     margin-right: -20px;
 
     > li {
