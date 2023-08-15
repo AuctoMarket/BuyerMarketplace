@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
@@ -13,10 +13,9 @@ import ProductPurchasePreOrder from '../../components/Product/Purchase/PreOrder'
 import ProductDetails from '../../components/Product/Details';
 import ProductPostedDate from '../../components/Product/PostedDate';
 import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
-import ProductRecommended from '../../components/Product/Recommended';
+import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import useProduct from '../../hooks/useProduct';
 import useSeller from '../../hooks/useSeller';
-import useMoreFromSeller from '../../hooks/useMoreFromSeller';
 import useProductsList from '../../hooks/useProductsList';
 import { ProductType } from '../../types/product.type';
 import { Seller } from '../../types/seller.type';
@@ -26,24 +25,13 @@ function isMobile() {
 }
 
 function ProductDetailsPage() {
-  const navigate = useNavigate();
-  const [limit, setLimit] = useState<number>(isMobile() ? 3 : 5);
-
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
   const { seller } = useSeller(product?.sellerId as string);
-  const { moreFromSeller } = useMoreFromSeller(seller?.id as string);
-  const { productsList: recommended } = useProductsList({}, { limit });
-  const isShowMoreRecommended =
-    recommended && recommended.length < (isMobile() ? 9 : 15);
-
-  const handleShowMoreRecommended = () => {
-    if (isShowMoreRecommended) {
-      setLimit(isMobile() ? 6 : 10);
-    } else {
-      navigate('/recommendations');
-    }
-  };
+  const { productsList: moreFromSeller } = useProductsList({
+    sellerId: seller?.id,
+  });
+  const { productsList: recentlyAdded } = useProductsList();
 
   return (
     <Layout>
@@ -106,15 +94,13 @@ function ProductDetailsPage() {
             />
           )}
 
-          {recommended && recommended.length > 0 && (
-            <ProductRecommended
-              className={styles['product-recommended']}
-              data={{ products: recommended, seller: seller as Seller }}
-              showMoreButton={{
-                text: !isShowMoreRecommended
-                  ? 'View all recommendations'
-                  : 'Show more',
-                onClick: handleShowMoreRecommended,
+          {recentlyAdded && recentlyAdded.length > 0 && (
+            <ProductRecentlyAdded
+              className={styles['product-recently-added']}
+              data={{
+                products: recentlyAdded,
+                seller: seller as Seller,
+                seeMore: false,
               }}
             />
           )}

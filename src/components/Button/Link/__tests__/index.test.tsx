@@ -2,12 +2,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import Layout from '..';
+import Link from '..';
 
-test('renders Layout', () => {
+test('renders Link', () => {
   render(
     <BrowserRouter>
-      <Layout>test</Layout>
+      <Link to="/test">test</Link>
     </BrowserRouter>,
   );
   const text = screen.getByText('test');

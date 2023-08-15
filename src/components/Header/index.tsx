@@ -1,8 +1,9 @@
 import React, { ComponentProps } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Logo from '../Logo';
-import SearchBox from '../SearchBox';
+// import SearchBox from '../SearchBox';
 import List from '../List';
 import Icon from '../Icon';
 import Dropdown from '../Dropdown';
@@ -18,32 +19,38 @@ function Header({ className, ...rest }: Props) {
           <Dropdown
             className={styles['dropdown']}
             items={[
-              'Search',
-              'Marketplace',
-              'About',
-              'My Bids',
-              'My Orders',
-              'Contact',
+              // 'Search',
+              <Link to="/">Marketplace</Link>,
+              // 'About',
+              // 'My Bids',
+              // 'My Orders',
+              <Link to="https://t.me/auctomarketplace" target="_blank">
+                Contact Us
+              </Link>,
             ]}
           >
             <Icon name="menu" />
           </Dropdown>,
         ]}
       />
-      <Logo
-        className={styles['logo']}
-        type="horizontal"
-        theme="inverted-color"
-      />
-      <SearchBox className={styles['search-box']} />
+      <Link className={styles['logo']} to="/">
+        <Logo type="horizontal" theme="inverted-color" />
+      </Link>
+      {/* <SearchBox className={styles['search-box']} /> */}
       <List
         className={styles['navbar-right']}
         items={[
-          <Icon name="shopping-cart" />,
+          // <Icon name="shopping-cart" />,
           <Icon name="user" />,
           <Dropdown
             className={styles['dropdown']}
-            items={['Marketplace', 'About', 'My Bids', 'My Orders', 'Contact']}
+            items={[
+              <Link to="/">Marketplace</Link>,
+              <Link to="https://t.me/auctomarketplace" target="_blank">
+                Contact Us
+              </Link>,
+            ]}
+            // items={['Marketplace', 'About', 'My Bids', 'My Orders', 'Contact']}
           >
             <Icon name="menu" />
           </Dropdown>,
@@ -51,7 +58,8 @@ function Header({ className, ...rest }: Props) {
       />
       <List
         className={styles['navbar-right-mobile']}
-        items={[<Icon name="shopping-cart" />, <Icon name="user" />]}
+        items={[<Icon name="user" />]}
+        // items={[<Icon name="shopping-cart" />, <Icon name="user" />]}
       />
     </div>
   );

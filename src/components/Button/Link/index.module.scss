@@ -1,0 +1,24 @@
+.link {
+  @apply flex justify-center items-center border-none cursor-pointer font-thicboi font-bold text-xl;
+  height: 57.75px;
+}
+
+.white {
+  @apply border border-solid border-black;
+
+  &:hover {
+    @apply border-0 text-white bg-aucto;
+  }
+}
+
+.black {
+  @apply text-white bg-black;
+}
+
+.color {
+  @apply text-white bg-aucto;
+
+  &:hover {
+    @apply bg-aucto-dark;
+  }
+}

@@ -1,10 +1,11 @@
 import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
-import ProductSellerInfo from '../SellerInfo';
+import ProductSellerInfoInCard from '../SellerInfo';
 import ProductTitle from '../Title';
 import ProductPostedDate from '../PostedDate';
 import ProductPrice from '../Price';
+import Image from '../../Image';
 import { ProductType, Product } from '../../../types/product.type';
 
 import type { Seller } from '../../../types/seller.type';
@@ -22,7 +23,7 @@ function ProductCard({ className, data: { product, seller }, ...rest }: Props) {
   return (
     <div className={`${styles['product-card']} ${className}`} {...rest}>
       <div className={styles['header']}>
-        <ProductSellerInfo
+        <ProductSellerInfoInCard
           className={styles['product-seller-info']}
           data={seller}
         />
@@ -31,7 +32,11 @@ function ProductCard({ className, data: { product, seller }, ...rest }: Props) {
         {type === ProductType.PreOrder && (
           <div className={styles['pre-order']}>Pre-Order</div>
         )}
-        <img className={styles['product-image']} src={images[0]} alt={title} />
+        <Image
+          className={styles['product-image']}
+          src={images[0]}
+          alt={title}
+        />
       </div>
       <div className={styles['footer']}>
         <ProductTitle className={styles['product-title']} data={{ title }} />

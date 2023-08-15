@@ -6,7 +6,7 @@ import Card from '../Card';
 
 interface Props extends ComponentProps<'div'> {}
 
-export function List({ className, ...rest }: Props) {
+function List({ className, ...rest }: Props) {
   const categories = [
     {
       title: 'Cards',

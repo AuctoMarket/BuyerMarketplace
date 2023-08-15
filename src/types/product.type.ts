@@ -2,8 +2,8 @@ import { Sort } from './base.type';
 
 enum ProductType {
   Bid = 'Bid',
-  BuyNow = 'Buy_Now',
-  PreOrder = 'Pre_Order',
+  BuyNow = 'Buy-Now',
+  PreOrder = 'Pre-Order',
 }
 
 interface Product {

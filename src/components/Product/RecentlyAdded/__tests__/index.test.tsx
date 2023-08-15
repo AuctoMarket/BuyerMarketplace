@@ -11,6 +11,7 @@ describe('RecentlyAdded', () => {
   const data: {
     products: Product[];
     seller: Seller;
+    seeMore?: boolean;
   } = {
     products: [
       {
@@ -35,7 +36,19 @@ describe('RecentlyAdded', () => {
   test('renders RecentlyAdded', async () => {
     render(
       <BrowserRouter>
-        <RecentlyAdded data={data} onShowMore={() => {}} role="test" />
+        <RecentlyAdded data={data} role="test" />
+      </BrowserRouter>,
+    );
+
+    const recommended = await screen.findByRole('test');
+
+    expect(recommended).toBeInTheDocument();
+  });
+
+  test('renders RecentlyAdded without seeMore link', async () => {
+    render(
+      <BrowserRouter>
+        <RecentlyAdded data={{ ...data, seeMore: false }} role="test" />
       </BrowserRouter>,
     );
 

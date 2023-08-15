@@ -10,14 +10,15 @@
 }
 
 .list-container {
-  @apply mt-5;
+  @apply mt-5 overflow-auto;
 }
 
 .list {
-  @apply flex flex-row justify-between gap-5;
+  @apply flex flex-row flex-nowrap gap-5;
 
   > li {
-    @apply w-1/5;
+    @apply flex-none;
+    width: calc(100% / 5 - 1.25rem * 4 / 5);
   }
 }
 
@@ -27,14 +28,13 @@
   }
 
   .list-container {
-    @apply mt-0 overflow-auto;
+    @apply mt-0;
   }
 
   .list {
-    @apply flex-nowrap gap-3;
+    @apply gap-3;
 
     > li {
-      @apply flex-none;
       width: calc(100% / 3 - 0.75rem * 2 / 3);
     }
   }

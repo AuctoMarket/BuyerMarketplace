@@ -9,7 +9,7 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function Card({ className, data: { category }, ...rest }: Props) {
+function Card({ className, data: { category }, ...rest }: Props) {
   return (
     <div className={`${className} ${styles['category-card']}`} {...rest}>
       <div className={`${styles['category-content']}`}>
