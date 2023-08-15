@@ -1,13 +1,12 @@
 .header {
-  @apply relative flex items-center text-white bg-black;
-  padding: 20px;
+  @apply relative flex items-center text-white bg-black p-4;
 }
 
 .logo {
   @apply block;
 
   img {
-    height: 40px;
+    height: 30px;
   }
 }
 
@@ -32,7 +31,7 @@
 .navbar-left-mobile {
   .dropdown > ul {
     @apply left-0 right-auto flex flex-col gap-2 z-50 p-7;
-    margin-top: 48px;
+    margin-top: 36px;
     margin-left: -20px;
 
     > li {
@@ -58,7 +57,7 @@
 .navbar-right {
   .dropdown > ul {
     @apply flex flex-col gap-5 z-50;
-    margin-top: 49px;
+    margin-top: 40px;
     margin-right: -20px;
 
     > li {
@@ -73,15 +72,11 @@
 
 @media (max-width: 820px) {
   .header {
-    @apply px-4 py-6;
+    @apply p-3;
   }
 
   .logo {
     @apply mx-auto;
-
-    img {
-      height: 30px;
-    }
   }
 
   .search-box {

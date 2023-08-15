@@ -21,7 +21,7 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function ProductRecommended({
+function ProductRecommended({
   className,
   data: { products, seller },
   showMoreButton,

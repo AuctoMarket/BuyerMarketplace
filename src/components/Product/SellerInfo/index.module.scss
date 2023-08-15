@@ -3,31 +3,28 @@
 }
 
 .avatar {
-  @apply rounded-full overflow-hidden;
-  height: 50px;
+  @apply rounded-full overflow-hidden hidden;
+  width: 50px;
+  margin-right: 14px;
 
   > img {
-    @apply h-full;
+    @apply w-full;
   }
 }
 
 .details {
   @apply flex-1;
-  padding-left: 14px;
 
-  > div:first-child {
-    @apply flex flex-row font-semibold;
-    font-size: 20px;
-
-    > img {
-      @apply ml-1;
-      width: 27px;
-    }
+  .name {
+    @apply font-semibold text-xl;
   }
 
-  > div:nth-child(2) {
-    @apply font-semibold text-gray-500;
-    font-size: 15px;
+  .verified {
+    @apply flex flex-row gap-1 items-center font-semibold text-sm text-gray-500;
+
+    > img {
+      width: 17px;
+    }
   }
 }
 
@@ -36,22 +33,21 @@
 
 @media (max-width: 820px) {
   .avatar {
-    height: 35px;
+    @apply mr-2;
+    width: 35px;
   }
 
   .details {
-    padding-left: 8px;
-
-    > div:first-child {
-      font-size: 16px;
-
-      > img {
-        width: 20px;
-      }
+    .name {
+      @apply text-base;
     }
 
-    > div:nth-child(2) {
-      font-size: 12px;
+    .verified {
+      @apply text-xs;
+
+      > img {
+        width: 13px;
+      }
     }
   }
 }

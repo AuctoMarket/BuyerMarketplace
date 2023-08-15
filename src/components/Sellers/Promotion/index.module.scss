@@ -1,0 +1,33 @@
+.promotion {
+  @apply container mx-auto py-6 flex flex-row;
+}
+
+.content {
+  @apply w-1/2 py-12 font-bold font-thicboi;
+
+  span {
+    @apply text-aucto;
+  }
+
+  .title {
+    @apply text-4xl;
+  }
+
+  .description {
+    @apply text-2xl mt-6;
+  }
+
+  .button {
+    @apply mt-8;
+    width: 125px;
+    height: 40px;
+  }
+}
+
+.image {
+  @apply w-1/2 pl-8;
+
+  img {
+    @apply w-full;
+  }
+}

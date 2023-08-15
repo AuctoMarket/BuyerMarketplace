@@ -1,0 +1,15 @@
+.home-page {
+}
+
+.promotion {
+}
+
+.content {
+  @apply container mx-auto;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.seller-promotion {
+  @apply border-t-2 border-gray-300;
+}
