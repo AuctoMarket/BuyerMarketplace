@@ -15,7 +15,7 @@ function Promotion({ className, ...rest }: Props) {
         </div>
         <div className={styles['description']}>
           <span>Aucto</span> strives to <span>make selling easy</span> for all
-          collectible sellers by helping sellers deal with
+          collectible sellers by helping sellers deal with{' '}
           <span>communication, logistics</span> and <span>payments</span>. That
           way sellers can focus on whats truly important, finding the best
           products at the best rates for their customers.
