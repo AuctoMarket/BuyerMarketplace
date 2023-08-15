@@ -34,7 +34,7 @@
 }
 
 .content {
-  @apply relative border-t border-b border-solid border-gray-400;
+  @apply relative;
 
   .pre-order {
     @apply absolute left-3 top-3 p-1 text-white bg-aucto text-base;
@@ -50,11 +50,11 @@
   @apply p-3;
 
   .product-title {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .product-posted-date {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .product-price {
