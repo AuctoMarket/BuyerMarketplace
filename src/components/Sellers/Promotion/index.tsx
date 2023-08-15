@@ -14,11 +14,12 @@ function Promotion({ className, ...rest }: Props) {
           Interested in selling with <span>Aucto</span>
         </div>
         <div className={styles['description']}>
-          <span>Aucto</span> strives to <span>make selling easy</span> for all
-          collectible sellers by helping sellers deal with{' '}
-          <span>communication, logistics</span> and <span>payments</span>. That
-          way sellers can focus on whats truly important, finding the best
-          products at the best rates for their customers.
+          <span>Aucto</span> is dedicated to{' '}
+          <span>simplify the selling process</span> for collectible sellers by
+          assisting with <span>communication, logistics and payments</span>.
+          This enables sellers to concentrate on what really matters: sourcing
+          the finest products at the most competitive prices for their
+          customers.
         </div>
         <ButtonLink
           className={styles['button']}

@@ -1,6 +1,6 @@
 interface Sort {
-  sortBy?: string;
-  sortDirection?: 'asc' | 'desc';
+  sort_by?: string;
+  sort_direction?: 'asc' | 'desc';
 }
 
 interface Pagination {

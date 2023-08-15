@@ -26,6 +26,7 @@ function ProductPromotion({
       <Carousel
         showStatus={false}
         showThumbs={false}
+        infiniteLoop={true}
         renderArrowPrev={(clickHandler, hasPrev) =>
           hasPrev && (
             <button

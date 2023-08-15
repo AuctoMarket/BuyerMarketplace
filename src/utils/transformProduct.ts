@@ -1,11 +1,13 @@
-import { Product } from '../types/product.type';
+import transformSeller from './transformSeller';
+
+import type { Product } from '../types/product.type';
 
 const transformProduct = (product: any): Product => ({
   id: product.product_id,
   title: product.title,
   condition: product.condition,
   description: product.desc,
-  images: (!product.images || product.images.length === 0
+  images: (product.images.length === 0
     ? [
         {
           image_path: '/images/no-photo.png',
@@ -17,7 +19,7 @@ const transformProduct = (product: any): Product => ({
   price: product.price,
   quantity: product.product_quantity,
   soldQuantity: product.sold_quantity,
-  sellerId: product.seller_id,
+  seller: transformSeller(product.seller_info),
   postedDate: new Date(product.posted_date),
 });
 

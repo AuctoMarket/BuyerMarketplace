@@ -3,14 +3,14 @@
 }
 
 .content {
-  @apply w-1/2 py-12 font-bold font-thicboi;
+  @apply w-1/2 py-12 font-thicboi;
 
   span {
     @apply text-aucto;
   }
 
   .title {
-    @apply text-4xl;
+    @apply text-4xl font-bold;
   }
 
   .description {

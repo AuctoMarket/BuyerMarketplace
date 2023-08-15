@@ -4,7 +4,7 @@ const transformSeller = (seller: any): Seller => ({
   id: seller.seller_id,
   name: seller.seller_name,
   avatar: seller.avatar,
-  isVerified: seller.verified,
+  isVerified: true,
   numFollowers: seller.followers,
 });
 

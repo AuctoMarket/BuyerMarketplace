@@ -5,14 +5,10 @@ import Layout from '../../components/Layout';
 import ProductPromotion from '../../components/Product/Promotion';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import SellerPromotion from '../../components/Sellers/Promotion';
-import useSeller from '../../hooks/useSeller';
 import useProductsList from '../../hooks/useProductsList';
 
-import type { Seller } from '../../types/seller.type';
-
 function HomePage() {
-  const { seller } = useSeller('1');
-  const { productsList: recentlyAdded } = useProductsList();
+  const { productsList: recentlyAdded = [] } = useProductsList();
 
   return (
     <Layout>
@@ -31,12 +27,11 @@ function HomePage() {
           }}
         />
 
-        {recentlyAdded && recentlyAdded.length > 0 && (
+        {recentlyAdded.length > 0 && (
           <div className={styles['content']}>
             <ProductRecentlyAdded
               data={{
                 products: recentlyAdded,
-                seller: seller as Seller,
                 seeMore: false,
               }}
             />

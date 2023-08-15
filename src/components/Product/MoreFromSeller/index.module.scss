@@ -2,7 +2,9 @@
 }
 
 .heading {
-  @apply font-thicboi font-bold text-2xl;
+  @apply font-thicboi font-bold;
+  font-size: 26px;
+  line-height: 32px;
 
   > strong {
     @apply font-bold text-aucto;

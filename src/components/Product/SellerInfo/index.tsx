@@ -13,7 +13,7 @@ function ProductSellerInfo({
   className,
   data: {
     avatar = '/images/no-photo.png',
-    name = 'No name',
+    name,
     isVerified,
     // numFollowers,
   },

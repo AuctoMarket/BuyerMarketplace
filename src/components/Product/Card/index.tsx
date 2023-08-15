@@ -8,16 +8,13 @@ import ProductPrice from '../Price';
 import Image from '../../Image';
 import { ProductType, Product } from '../../../types/product.type';
 
-import type { Seller } from '../../../types/seller.type';
-
 interface Props extends ComponentProps<'div'> {
   data: {
     product: Product;
-    seller: Seller;
   };
 }
 
-function ProductCard({ className, data: { product, seller }, ...rest }: Props) {
+function ProductCard({ className, data: { product }, ...rest }: Props) {
   const { images, title, postedDate, type, bidPrice = 0, price } = product;
 
   return (
@@ -25,7 +22,7 @@ function ProductCard({ className, data: { product, seller }, ...rest }: Props) {
       <div className={styles['header']}>
         <ProductSellerInfoInCard
           className={styles['product-seller-info']}
-          data={seller}
+          data={product.seller}
         />
       </div>
       <div className={styles['content']}>
