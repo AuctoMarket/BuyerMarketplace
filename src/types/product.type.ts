@@ -1,4 +1,5 @@
 import { Sort } from './base.type';
+import { Seller } from './seller.type';
 
 enum ProductType {
   Bid = 'Bid',
@@ -16,18 +17,18 @@ interface Product {
   price: number;
   bidPrice?: number;
   numBids?: number;
-  quantity?: number;
-  soldQuantity?: number;
-  sellerId: string;
+  quantity: number;
+  soldQuantity: number;
+  seller: Seller;
   postedDate: Date;
 }
 
 interface ProductsQuery {
-  sellerId?: string;
+  seller_id?: string;
 }
 
 interface ProductsSort extends Sort {
-  sortBy?: 'posted_date';
+  sort_by?: 'posted_date';
 }
 
 export { ProductType };

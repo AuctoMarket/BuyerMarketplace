@@ -15,10 +15,8 @@ import ProductPostedDate from '../../components/Product/PostedDate';
 import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import useProduct from '../../hooks/useProduct';
-import useSeller from '../../hooks/useSeller';
 import useProductsList from '../../hooks/useProductsList';
 import { ProductType } from '../../types/product.type';
-import { Seller } from '../../types/seller.type';
 
 function isMobile() {
   return window.innerWidth <= 820;
@@ -27,11 +25,14 @@ function isMobile() {
 function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
-  const { seller } = useSeller(product?.sellerId as string);
-  const { productsList: moreFromSeller } = useProductsList({
-    sellerId: seller?.id,
-  });
-  const { productsList: recentlyAdded } = useProductsList();
+  const { productsList: moreFromSeller = [] } = useProductsList(
+    { seller_id: product?.seller.id },
+    { sort_by: 'posted_date' },
+  );
+  const { productsList: recentlyAdded = [] } = useProductsList(
+    {},
+    { sort_by: 'posted_date' },
+  );
 
   return (
     <Layout>
@@ -60,7 +61,7 @@ function ProductDetailsPage() {
               <ProductTitle data={{ title: product.title }} />
 
               <div>
-                {seller && <ProductSellerInfo data={seller} />}
+                <ProductSellerInfo data={product.seller} />
 
                 <ProductPostedDate data={{ postedDate: product.postedDate }} />
               </div>
@@ -87,19 +88,18 @@ function ProductDetailsPage() {
             </div>
           </div>
 
-          {moreFromSeller && moreFromSeller.length > 0 && (
+          {moreFromSeller.length > 0 && (
             <ProductMoreFromSeller
               className={styles['product-more-from-seller']}
-              data={{ products: moreFromSeller, seller: seller as Seller }}
+              data={{ products: moreFromSeller, seller: product.seller }}
             />
           )}
 
-          {recentlyAdded && recentlyAdded.length > 0 && (
+          {recentlyAdded.length > 0 && (
             <ProductRecentlyAdded
               className={styles['product-recently-added']}
               data={{
                 products: recentlyAdded,
-                seller: seller as Seller,
                 seeMore: false,
               }}
             />

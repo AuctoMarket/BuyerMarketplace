@@ -7,19 +7,17 @@ import Card from '../Card';
 import Icon from '../../Icon';
 
 import type { Product } from '../../../types/product.type';
-import type { Seller } from '../../../types/seller.type';
 
 interface Props extends ComponentProps<'div'> {
   data: {
     products: Product[];
-    seller: Seller;
     seeMore?: boolean;
   };
 }
 
 function ProductRecentlyAdded({
   className,
-  data: { products, seller, seeMore = true },
+  data: { products, seeMore = true },
   ...rest
 }: Props) {
   return (
@@ -27,7 +25,7 @@ function ProductRecentlyAdded({
       <div className={styles['heading']}>
         Recently Added
         {seeMore && (
-          <Link to={`/sellers/${seller.id}/products`}>
+          <Link to={`/products/recently-added`}>
             See more recently added
             <Icon name="arrow-right" />
           </Link>
@@ -39,7 +37,7 @@ function ProductRecentlyAdded({
           className={styles['list']}
           items={products.map((product, index) => (
             <Link to={`/products/${product.id}`}>
-              <Card data={{ product, seller }} key={index} />
+              <Card data={{ product }} key={index} />
             </Link>
           ))}
         />

@@ -5,12 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import RecentlyAdded from '..';
 import { ProductType, Product } from '../../../../types/product.type';
 
-import type { Seller } from '../../../../types/seller.type';
-
 describe('RecentlyAdded', () => {
   const data: {
     products: Product[];
-    seller: Seller;
     seeMore?: boolean;
   } = {
     products: [
@@ -21,16 +18,19 @@ describe('RecentlyAdded', () => {
         title: 'test',
         condition: 4,
         description: 'test',
-        sellerId: '1',
+        seller: {
+          id: '1',
+          name: 'test',
+          numFollowers: 1,
+        },
         bidPrice: 1,
         numBids: 1,
         price: 1,
+        quantity: 1,
+        soldQuantity: 1,
         postedDate: new Date(),
       },
     ],
-    seller: {
-      id: '1',
-    },
   };
 
   test('renders RecentlyAdded', async () => {

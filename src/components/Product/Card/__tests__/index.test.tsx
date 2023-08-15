@@ -4,10 +4,8 @@ import { render, screen } from '@testing-library/react';
 import Card from '..';
 import { ProductType, Product } from '../../../../types/product.type';
 
-import type { Seller } from '../../../../types/seller.type';
-
 describe('Card', () => {
-  const data: { product: Product; seller: Seller } = {
+  const data: { product: Product } = {
     product: {
       id: '1',
       type: ProductType.Bid,
@@ -15,14 +13,17 @@ describe('Card', () => {
       condition: 4,
       description: 'test',
       images: ['test'],
-      sellerId: '1',
+      seller: {
+        id: '1',
+        name: 'test',
+        numFollowers: 1,
+      },
       bidPrice: 1,
       numBids: 1,
       price: 1,
+      quantity: 1,
+      soldQuantity: 1,
       postedDate: new Date(),
-    },
-    seller: {
-      id: '1',
     },
   };
 

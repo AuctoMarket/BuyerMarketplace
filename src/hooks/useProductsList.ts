@@ -1,29 +1,30 @@
 import useSWR from 'swr';
+import axios from 'axios';
 
+import apiConfig from '../configs/api';
 import transformProduct from '../utils/transformProduct';
 
 import type { Pagination } from '../types/base.type';
 import type { ProductsQuery, ProductsSort } from '../types/product.type';
+import type { Product } from '../types/product.type';
 
 const useProductsList = (
-  _query?: ProductsQuery,
-  _options?: ProductsSort & Pagination,
+  query: ProductsQuery = {},
+  options: ProductsSort & Pagination = {},
 ) => {
   const {
     isLoading,
     data: productsList,
     error,
-  } = useSWR('/products', (_url: string) => {
-    // const { sellerId } = query || {};
-    // const {
-    //   sortBy = ProductsSortBy.postedDate,
-    //   sortDirection = ProductsSortDirection.desc,
-    //   offset = 0,
-    //   limit = 5,
-    // } = options || {};
+  } = useSWR(['/products', query, options], async ([url, query, options]) => {
+    const response = await axios.get<Product[]>(`${apiConfig.baseUrl}${url}`, {
+      params: {
+        ...query,
+        ...options,
+      },
+    });
 
-    // TODO: implement this function to return products list
-    return [].map((product) => transformProduct(product));
+    return response.data.map(transformProduct);
   });
 
   return {

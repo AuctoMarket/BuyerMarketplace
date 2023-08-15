@@ -1,9 +1,9 @@
 interface Seller {
   id: string;
-  name?: string;
+  name: string;
   avatar?: string;
   isVerified?: boolean;
-  numFollowers?: number;
+  numFollowers: number;
 }
 
 export type { Seller };
