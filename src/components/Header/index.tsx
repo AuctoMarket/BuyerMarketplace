@@ -117,24 +117,25 @@ function Header({ className, ...rest }: Props) {
       />
       <List
         className={styles['navbar-right-mobile']}
-        items={[
-          !user && (
+      {!user && (
+        <List
+          className={styles['navbar-right-mobile']}
+          items={[
             <button
               className={`${styles['button']} ${styles['login']}`}
               onClick={openLoginForm}
             >
               Login
-            </button>
-          ),
-          !user && (
+            </button>,
             <button
               className={`${styles['button']} ${styles['signup']}`}
               onClick={openSignupForm}
             >
               Signup
-            </button>
-          ),
-        ]}
+            </button>,
+          ]}
+        />
+      )}
       />
     </div>
   );
