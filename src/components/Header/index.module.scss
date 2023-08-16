@@ -59,7 +59,8 @@
   .dropdown > ul {
     @apply flex flex-col gap-5 z-50;
     margin-top: 49px;
-    margin-right: -20px;
+    margin-right: -40px;
+    margin-left: 40px;
 
     > li {
       @apply text-2xl font-medium whitespace-nowrap;
@@ -99,4 +100,22 @@
   .navbar-right-mobile {
     @apply absolute top-0 right-0 h-full pr-4 flex gap-4;
   }
+}
+
+.auth-buttons {
+  @apply flex gap-4;
+}
+
+.button {
+  @apply inline-block px-2 py-1 border-2 border-white;
+}
+
+.button.login {
+  @apply bg-black text-white;
+  margin-right: 10px;
+}
+
+.button.signup {
+  @apply bg-white text-black;
+  margin-left: 20px;
 }

@@ -44,7 +44,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
     return passwordRegex.test(password);
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     // Perform input validation
     if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
       setError('Please fill in all fields.');
@@ -71,9 +71,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
       return;
     }
 
-    // Call the onSignup prop to handle the signup action
-    if (onSignup) {
-      onSignup(email, password);
+    try {
+      // Call the onSignup prop to handle the signup action
+      if (onSignup) {
+        await onSignup(email, password);
+      }
+    } catch (error) {
+      setError('Email is already in use.'); // Set the error message received from the signup function
+      return;
     }
   };
 
@@ -120,9 +125,9 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
       </div>
       <div className={styles.links}>
         {/* Use the onLoginClick prop to handle the "Login here" link click */}
-        <a href="!#" onClick={handleLoginClick}>
+        <button className={styles.a} onClick={handleLoginClick}>
           Already have an account? Login here!
-        </a>
+        </button>
       </div>
       <div className={styles.btnGroup}>
         <button
