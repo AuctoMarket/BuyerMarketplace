@@ -86,22 +86,20 @@ function Header({ className, ...rest }: Props) {
           // <Icon name="shopping-cart" />,
           // <Icon name="user" />,
           // Display login and signup buttons only if the user is not logged in
-          !user && (
+          ...(!user && [
             <button
               className={`${styles['button']} ${styles['login']}`}
               onClick={openLoginForm}
             >
               Login
-            </button>
-          ),
-          !user && (
+            </button>,
             <button
               className={`${styles['button']} ${styles['signup']}`}
               onClick={openSignupForm}
             >
               Signup
-            </button>
-          ),
+            </button>,
+          ]),
           // Dropdown with Marketplace and Contact Us links
           user ? (
             <>
