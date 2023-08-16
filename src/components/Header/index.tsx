@@ -16,7 +16,7 @@ interface Props extends ComponentProps<'div'> {}
 
 function Header({ className, ...rest }: Props) {
   const { togglePopup } = useContext(PopupContext);
-  const { user, login, signup, logout } = useAuth();
+  const { user, login, signup } = useAuth();
 
   const openLoginForm = () => {
     if (togglePopup) {
@@ -48,11 +48,11 @@ function Header({ className, ...rest }: Props) {
     }
   };
 
-  const handleLogout = () => {
-    // Handle user logout here
-    logout();
-    console.log('User logged out');
-  };
+  // const handleLogout = () => {
+  //   // Handle user logout here
+  //   logout();
+  //   console.log('User logged out');
+  // };
 
   return (
     <div className={`${styles['header']} ${className}`} {...rest}>
@@ -112,11 +112,9 @@ function Header({ className, ...rest }: Props) {
             ]}
           >
             <Icon name="menu" />
-          </Dropdown>
+          </Dropdown>,
         ]}
       />
-      <List
-        className={styles['navbar-right-mobile']}
       {!user && (
         <List
           className={styles['navbar-right-mobile']}
@@ -136,7 +134,6 @@ function Header({ className, ...rest }: Props) {
           ]}
         />
       )}
-      />
     </div>
   );
 }
