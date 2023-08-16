@@ -1,6 +1,7 @@
 // Hooks/useAuth.ts
 import { useState } from 'react';
 import axios from 'axios';
+import api from '../configs/api';
 
 export function useAuth() {
   const [user, setUser] = useState(null);
@@ -8,7 +9,7 @@ export function useAuth() {
   const login = async (email: string, password: string) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/buyers/login`,
+        `${api.baseUrl}/buyers/login`,
         { email, password },
         {
           headers: {

@@ -102,20 +102,14 @@
   }
 }
 
-.auth-buttons {
-  @apply flex gap-4;
-}
-
 .button {
-  @apply inline-block px-2 py-1 border-2 border-white;
+  @apply px-2 py-1 border-2 border-white;
 }
 
 .button.login {
   @apply bg-black text-white;
-  margin-right: 10px;
 }
 
 .button.signup {
   @apply bg-white text-black;
-  margin-left: 20px;
 }
