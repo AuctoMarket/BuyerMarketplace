@@ -4,7 +4,11 @@ import axios from 'axios';
 import api from '../configs/api';
 
 export function useAuth() {
-  const [user, setUser] = useState(null);
+  // Retrieve user data from localStorage or set to null if not found
+  const initialUserData = JSON.parse(
+    localStorage.getItem('userData') || 'null',
+  );
+  const [user, setUser] = useState<string | null>(initialUserData);
 
   const login = async (email: string, password: string) => {
     try {
@@ -34,7 +38,7 @@ export function useAuth() {
   const signup = async (email: string, password: string) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/buyers/signup`,
+        `${api.baseUrl}/buyers/signup`,
         { email, password },
         {
           headers: {
@@ -61,6 +65,7 @@ export function useAuth() {
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('userData');
   };
 
   return { user, login, signup, logout };

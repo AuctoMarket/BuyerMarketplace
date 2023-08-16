@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Logo from '../Logo';
-// import SearchBox from '../SearchBox';
 import List from '../List';
 import Icon from '../Icon';
 import Dropdown from '../Dropdown';
@@ -48,12 +47,6 @@ function Header({ className, ...rest }: Props) {
     }
   };
 
-  // const handleLogout = () => {
-  //   // Handle user logout here
-  //   logout();
-  //   console.log('User logged out');
-  // };
-
   return (
     <div className={`${styles['header']} ${className}`} {...rest}>
       <List
@@ -62,11 +55,7 @@ function Header({ className, ...rest }: Props) {
           <Dropdown
             className={styles['dropdown']}
             items={[
-              // 'Search',
               <Link to="/">Marketplace</Link>,
-              // 'About',
-              // 'My Bids',
-              // 'My Orders',
               <Link to="https://t.me/auctomarketplace" target="_blank">
                 Contact Us
               </Link>,
@@ -79,28 +68,23 @@ function Header({ className, ...rest }: Props) {
       <Link className={styles['logo']} to="/">
         <Logo type="horizontal" theme="inverted-color" />
       </Link>
-      {/* <SearchBox className={styles['search-box']} /> */}
-      <List
-        className={styles['navbar-right']}
-        items={[
-          // <Icon name="shopping-cart" />,
-          // <Icon name="user" />,
-          // Display login and signup buttons only if the user is not logged in
-          ...(!user && [
+      <List className={styles['navbar-right']} items={[]}>
+        {!user ? (
+          <>
             <button
               className={`${styles['button']} ${styles['login']}`}
               onClick={openLoginForm}
             >
               Login
-            </button>,
+            </button>
             <button
               className={`${styles['button']} ${styles['signup']}`}
               onClick={openSignupForm}
             >
               Signup
-            </button>,
-          ]),
-          // Dropdown with Marketplace and Contact Us links
+            </button>
+          </>
+        ) : (
           <Dropdown
             className={styles['dropdown']}
             items={[
@@ -108,13 +92,14 @@ function Header({ className, ...rest }: Props) {
               <Link to="https://t.me/auctomarketplace" target="_blank">
                 Contact Us
               </Link>,
-              ...(user ? [<Link to="/profile">Profile</Link>] : []),
+              <Link to="/profile">Profile</Link>,
             ]}
           >
             <Icon name="menu" />
-          </Dropdown>,
-        ]}
-      />
+          </Dropdown>
+        )}
+      </List>
+
       {!user && (
         <List
           className={styles['navbar-right-mobile']}

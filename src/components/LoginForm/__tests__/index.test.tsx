@@ -104,3 +104,17 @@ test('displays an error message for password without a symbol', () => {
     'Password should be longer than 6 characters, with at least 1 letter, 1 number, and 1 symbol.',
   );
 });
+
+// Test for toggling password visibility
+test('toggles password visibility', () => {
+  render(<LoginForm />);
+
+  const passwordInput = screen.getByPlaceholderText('Password');
+  const visibilityIcon = screen.getByTestId('password-visibility-icon');
+
+  fireEvent.click(visibilityIcon);
+  expect(passwordInput).toHaveAttribute('type', 'text');
+
+  fireEvent.click(visibilityIcon);
+  expect(passwordInput).toHaveAttribute('type', 'password');
+});

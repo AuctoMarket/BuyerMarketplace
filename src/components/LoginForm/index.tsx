@@ -110,6 +110,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           <span
             className={styles.visibilityIcon}
             onClick={togglePasswordVisibility}
+            data-testid="password-visibility-icon"
           >
             {showPassword ? '🙈' : '👁️'}
           </span>
@@ -117,7 +118,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       </div>
       <div className={styles.links}>
         {/* Use the handleSignupClick function to open the signup form in a popup */}
-        <button className={styles.a} onClick={handleSignupClick}>
+        <button
+          className={styles.a}
+          onClick={handleSignupClick}
+          data-testid="signup-button"
+        >
           Not a user? Sign up here!
         </button>
         <button className={styles.a} onClick={handleContAsGuestClick}>
