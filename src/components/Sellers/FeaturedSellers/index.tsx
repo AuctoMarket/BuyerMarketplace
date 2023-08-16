@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
-import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
 
+import styles from './index.module.scss';
 import Icon from '../../Icon';
 import Card from '../Card';
 
@@ -13,13 +13,9 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function FeaturedSellers({
-  className,
-  data: { sellers },
-  ...rest
-}: Props) {
+function FeaturedSellers({ className, data: { sellers }, ...rest }: Props) {
   return (
-    <div className={`${styles['container']}`} {...rest}>
+    <div className={`${className} ${styles['container']}`} {...rest}>
       <div className={styles['heading']}>
         Featured Sellers
         <Link to="/sellers/featured">

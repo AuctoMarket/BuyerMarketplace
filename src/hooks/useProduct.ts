@@ -12,9 +12,11 @@ const useProduct = (id: string) => {
     data: product,
     error,
   } = useSWR(`/products/${id}`, async (url: string) => {
-    const response = await axios.get<Product>(`${apiConfig.baseUrl}${url}`);
+    if (id) {
+      const response = await axios.get<Product>(`${apiConfig.baseUrl}${url}`);
 
-    return transformProduct(response.data);
+      return transformProduct(response.data);
+    }
   });
 
   return {

@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import ProductPage from './pages/product';
-import HoldingPage from './pages/holding';
+import HomePage from './pages/home';
 import Popup, { PopupContext } from './components/Popup';
 
 const createRouter = (routerObjects: RouteObject[]) => {
@@ -41,7 +41,7 @@ function App() {
           },
           {
             path: '/',
-            element: <HoldingPage />,
+            element: <HomePage />,
           },
         ])}
       />

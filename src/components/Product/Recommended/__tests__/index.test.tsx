@@ -6,12 +6,9 @@ import userEvent from '@testing-library/user-event';
 import Recommended from '..';
 import { ProductType, Product } from '../../../../types/product.type';
 
-import type { Seller } from '../../../../types/seller.type';
-
 describe('Recommended', () => {
   const data: {
     products: Product[];
-    seller: Seller;
   } = {
     products: [
       {
@@ -21,16 +18,19 @@ describe('Recommended', () => {
         title: 'test',
         condition: 4,
         description: 'test',
-        sellerId: '1',
+        seller: {
+          id: '1',
+          name: 'test',
+          numFollowers: 1,
+        },
         bidPrice: 1,
         numBids: 1,
         price: 1,
+        quantity: 1,
+        soldQuantity: 1,
         postedDate: new Date(),
       },
     ],
-    seller: {
-      id: '1',
-    },
   };
 
   test('renders Recommended', async () => {

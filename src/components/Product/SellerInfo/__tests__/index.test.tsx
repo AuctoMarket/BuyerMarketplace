@@ -20,14 +20,12 @@ describe('SellerInfo', () => {
     expect(text).toBeInTheDocument();
   });
 
-  test('renders SellerInfo without avatar name & numFollowers', () => {
+  test('renders SellerInfo without avatar', () => {
     render(
       <SellerInfo
         data={{
           ...data,
           avatar: undefined,
-          name: undefined,
-          numFollowers: undefined,
         }}
         role="test"
       />,

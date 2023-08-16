@@ -15,7 +15,7 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function ProductMoreFromSeller({
+function ProductMoreFromSeller({
   className,
   data: { products, seller },
   ...rest
@@ -23,14 +23,14 @@ export function ProductMoreFromSeller({
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['heading']}>
-        More from <strong>{seller.name || 'this seller'}</strong>
+        More from <strong>{seller.name}</strong>
       </div>
       <div className={styles['list-container']}>
         <List
           className={styles['list']}
           items={products.map((product, index) => (
             <Link to={`/products/${product.id}`}>
-              <Card data={{ product, seller }} key={index} />
+              <Card data={{ product }} key={index} />
             </Link>
           ))}
         />

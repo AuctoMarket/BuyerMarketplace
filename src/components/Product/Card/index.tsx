@@ -1,22 +1,20 @@
 import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
-import ProductSellerInfoInCard from '../SellerInfo/InCard';
+import ProductSellerInfoInCard from '../SellerInfo';
 import ProductTitle from '../Title';
 import ProductPostedDate from '../PostedDate';
 import ProductPrice from '../Price';
+import Image from '../../Image';
 import { ProductType, Product } from '../../../types/product.type';
-
-import type { Seller } from '../../../types/seller.type';
 
 interface Props extends ComponentProps<'div'> {
   data: {
     product: Product;
-    seller: Seller;
   };
 }
 
-function ProductCard({ className, data: { product, seller }, ...rest }: Props) {
+function ProductCard({ className, data: { product }, ...rest }: Props) {
   const { images, title, postedDate, type, bidPrice = 0, price } = product;
 
   return (
@@ -24,14 +22,18 @@ function ProductCard({ className, data: { product, seller }, ...rest }: Props) {
       <div className={styles['header']}>
         <ProductSellerInfoInCard
           className={styles['product-seller-info']}
-          data={seller}
+          data={product.seller}
         />
       </div>
       <div className={styles['content']}>
         {type === ProductType.PreOrder && (
           <div className={styles['pre-order']}>Pre-Order</div>
         )}
-        <img className={styles['product-image']} src={images[0]} alt={title} />
+        <Image
+          className={styles['product-image']}
+          src={images[0]}
+          alt={title}
+        />
       </div>
       <div className={styles['footer']}>
         <ProductTitle className={styles['product-title']} data={{ title }} />

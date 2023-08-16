@@ -2,7 +2,7 @@
   @apply relative;
 
   :global(.control-dots) {
-    @apply z-[15];
+    z-index: 15;
   }
 }
 
@@ -10,9 +10,10 @@
   @apply absolute w-full h-full z-10;
 
   background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.45) 35.94%,
-    rgba(0, 0, 0, 0) 100%
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.75) 55%,
+    rgba(0, 0, 0, 0.9) 100%
   );
 }
 
@@ -33,15 +34,23 @@
 }
 
 .products-content {
-  @apply absolute bottom-[70px] left-60 z-20;
+  @apply absolute left-60 z-20;
+  bottom: 70px;
 }
 
 .products-button {
+  @apply hidden;
+
   > a {
-    @apply font-thicboi text-xl font-bold bg-white rounded-lg px-6 pt-[11px] pb-[9px] leading-none h-[42px] hover:bg-aucto hover:text-white;
+    @apply font-thicboi text-xl font-bold bg-white rounded-lg px-6 leading-none hover:bg-aucto hover:text-white;
+    padding-top: 11px;
+    padding-bottom: 9px;
+    height: 42px;
   }
 }
 
 .products-title {
-  @apply text-white font-semibold text-4xl leading-[3.5rem] font-thicboi mt-[28px];
+  @apply text-white font-semibold text-4xl font-thicboi;
+  line-height: 3.5rem;
+  margin-top: 28px;
 }

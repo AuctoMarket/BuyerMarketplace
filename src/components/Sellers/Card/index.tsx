@@ -14,9 +14,9 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function Card({ className, data: { index, seller }, ...rest }: Props) {
+function Card({ className, data: { index, seller }, ...rest }: Props) {
   return (
-    <div className={styles['seller-card']} {...rest}>
+    <div className={`${className} ${styles['seller-card']}`} {...rest}>
       {seller.avatar && (
         <div className={styles['seller-avatar']}>
           <Image src={seller.avatar} alt="avatar" />

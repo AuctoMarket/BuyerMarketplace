@@ -8,12 +8,10 @@ import Button from '../../Button';
 import Icon from '../../Icon';
 
 import type { Product } from '../../../types/product.type';
-import type { Seller } from '../../../types/seller.type';
 
 interface Props extends ComponentProps<'div'> {
   data: {
     products: Product[];
-    seller: Seller;
   };
   showMoreButton?: {
     text: string;
@@ -21,9 +19,9 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function ProductRecommended({
+function ProductRecommended({
   className,
-  data: { products, seller },
+  data: { products },
   showMoreButton,
   ...rest
 }: Props) {
@@ -42,7 +40,7 @@ export function ProductRecommended({
           className={styles['list']}
           items={products.map((product, index) => (
             <Link to={`/products/${product.id}`}>
-              <Card data={{ product, seller }} key={index} />
+              <Card data={{ product }} key={index} />
             </Link>
           ))}
         />

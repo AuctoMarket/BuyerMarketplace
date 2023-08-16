@@ -1,10 +1,10 @@
 import React, { ComponentProps } from 'react';
-import styles from './index.module.scss';
 import { Carousel } from 'react-responsive-carousel';
+import { Link } from 'react-router-dom';
 
+import styles from './index.module.scss';
 import Image from '../../Image';
 import Icon from '../../Icon';
-import { Link } from 'react-router-dom';
 
 interface Props extends ComponentProps<'div'> {
   data: {
@@ -14,14 +14,19 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-function ProductPromotion({ data: { images, url, title }, ...rest }: Props) {
+function ProductPromotion({
+  className,
+  data: { images, url, title },
+  ...rest
+}: Props) {
   return (
-    <div className={`${styles['products-container']}`} {...rest}>
+    <div className={`${className} ${styles['products-container']}`} {...rest}>
       <div className={`${styles['gradient']}`} />
 
       <Carousel
         showStatus={false}
         showThumbs={false}
+        infiniteLoop={true}
         renderArrowPrev={(clickHandler, hasPrev) =>
           hasPrev && (
             <button
