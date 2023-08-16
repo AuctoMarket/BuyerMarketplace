@@ -101,35 +101,18 @@ function Header({ className, ...rest }: Props) {
             </button>,
           ]),
           // Dropdown with Marketplace and Contact Us links
-          user ? (
-            <>
-              <Dropdown
-                className={styles['dropdown']}
-                items={[
-                  <Link to="/">Marketplace</Link>,
-                  <Link to="https://t.me/auctomarketplace" target="_blank">
-                    Contact Us
-                  </Link>,
-                  <button onClick={handleLogout}>Logout</button>,
-                ]}
-              >
-                <Icon name="menu" />
-              </Dropdown>
-              {/* <Icon name="user" /> */}
-            </>
-          ) : (
-            <Dropdown
-              className={styles['dropdown']}
-              items={[
-                <Link to="/">Marketplace</Link>,
-                <Link to="https://t.me/auctomarketplace" target="_blank">
-                  Contact Us
-                </Link>,
-              ]}
-            >
-              <Icon name="menu" />
-            </Dropdown>
-          ),
+          <Dropdown
+            className={styles['dropdown']}
+            items={[
+              <Link to="/">Marketplace</Link>,
+              <Link to="https://t.me/auctomarketplace" target="_blank">
+                Contact Us
+              </Link>,
+              ...(user ? [<Link to="/profile">Profile</Link>] : []),
+            ]}
+          >
+            <Icon name="menu" />
+          </Dropdown>
         ]}
       />
       <List
