@@ -86,74 +86,56 @@ function Header({ className, ...rest }: Props) {
           // <Icon name="shopping-cart" />,
           // <Icon name="user" />,
           // Display login and signup buttons only if the user is not logged in
-          !user && (
+          ...(!user && [
             <button
               className={`${styles['button']} ${styles['login']}`}
               onClick={openLoginForm}
             >
               Login
-            </button>
-          ),
-          !user && (
+            </button>,
             <button
               className={`${styles['button']} ${styles['signup']}`}
               onClick={openSignupForm}
             >
               Signup
-            </button>
-          ),
+            </button>,
+          ]),
           // Dropdown with Marketplace and Contact Us links
-          user ? (
-            <>
-              <Dropdown
-                className={styles['dropdown']}
-                items={[
-                  <Link to="/">Marketplace</Link>,
-                  <Link to="https://t.me/auctomarketplace" target="_blank">
-                    Contact Us
-                  </Link>,
-                  <button onClick={handleLogout}>Logout</button>,
-                ]}
-              >
-                <Icon name="menu" />
-              </Dropdown>
-              {/* <Icon name="user" /> */}
-            </>
-          ) : (
-            <Dropdown
-              className={styles['dropdown']}
-              items={[
-                <Link to="/">Marketplace</Link>,
-                <Link to="https://t.me/auctomarketplace" target="_blank">
-                  Contact Us
-                </Link>,
-              ]}
-            >
-              <Icon name="menu" />
-            </Dropdown>
-          ),
+          <Dropdown
+            className={styles['dropdown']}
+            items={[
+              <Link to="/">Marketplace</Link>,
+              <Link to="https://t.me/auctomarketplace" target="_blank">
+                Contact Us
+              </Link>,
+              ...(user ? [<Link to="/profile">Profile</Link>] : []),
+            ]}
+          >
+            <Icon name="menu" />
+          </Dropdown>
         ]}
       />
       <List
         className={styles['navbar-right-mobile']}
-        items={[
-          !user && (
+      {!user && (
+        <List
+          className={styles['navbar-right-mobile']}
+          items={[
             <button
               className={`${styles['button']} ${styles['login']}`}
               onClick={openLoginForm}
             >
               Login
-            </button>
-          ),
-          !user && (
+            </button>,
             <button
               className={`${styles['button']} ${styles['signup']}`}
               onClick={openSignupForm}
             >
               Signup
-            </button>
-          ),
-        ]}
+            </button>,
+          ]}
+        />
+      )}
       />
     </div>
   );
