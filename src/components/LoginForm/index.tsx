@@ -38,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     return passwordRegex.test(password);
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Perform input validation
     if (!email.trim() || !password.trim()) {
       setError('Please fill in all fields.');
@@ -72,6 +72,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const handleSignupClick = () => {
     if (togglePopup) {
       togglePopup(true, <SignupForm />);
+    }
+  };
+
+  const handleContAsGuestClick = () => {
+    if (togglePopup) {
+      togglePopup(false);
     }
   };
 
@@ -110,11 +116,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         </div>
       </div>
       <div className={styles.links}>
-        <a href="!#">Forgot your password?</a>
         {/* Use the handleSignupClick function to open the signup form in a popup */}
-        <a href="!#" onClick={handleSignupClick}>
+        <button className={styles.a} onClick={handleSignupClick}>
           Not a user? Sign up here!
-        </a>
+        </button>
+        <button className={styles.a} onClick={handleContAsGuestClick}>
+          Continue as a guest!
+        </button>
       </div>
       <div className={styles.btnGroup}>
         {/* Add the data-testid attribute to the login button */}

@@ -21,7 +21,7 @@
 .links {
   @apply flex flex-col items-center my-3;
 
-  a {
+  .a {
     @apply mb-3 no-underline text-black;
     text-decoration: underline;
   }
