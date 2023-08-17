@@ -107,3 +107,16 @@
 .button.signup {
   @apply bg-white text-black;
 }
+
+.mobile-button {
+  @apply px-1 py-0 border-2 border-white;
+  font-size: small;
+}
+
+.mobile-button.login {
+  @apply bg-black text-white;
+}
+
+.mobile-button.signup {
+  @apply bg-white text-black;
+}

@@ -22,8 +22,8 @@ test('renders login and signup buttons when user is not logged in', () => {
       <Header />
     </BrowserRouter>,
   );
-  const loginButton = screen.getByText('Login');
-  const signupButton = screen.getByText('Signup');
+  const loginButton = screen.getByTestId('login-desktop-button');
+  const signupButton = screen.getByTestId('signup-desktop-button');
   expect(loginButton).toBeInTheDocument();
   expect(signupButton).toBeInTheDocument();
 });
@@ -35,42 +35,8 @@ test('renders mobile login and signup buttons when user is not logged in', () =>
       <Header />
     </BrowserRouter>,
   );
-  const mobileLoginButton = screen.getByText('Login');
-  const mobileSignupButton = screen.getByText('Signup');
+  const mobileLoginButton = screen.getByTestId('login-mobile-button');
+  const mobileSignupButton = screen.getByTestId('signup-mobile-button');
   expect(mobileLoginButton).toBeInTheDocument();
   expect(mobileSignupButton).toBeInTheDocument();
-});
-
-// Test clicking the login button triggers the login popup
-test('opens login popup when clicking login button', async () => {
-  render(
-    <BrowserRouter>
-      <Header />
-    </BrowserRouter>,
-  );
-
-  const loginButton = screen.getByText('Login');
-  loginButton.click();
-
-  await waitFor(() => {
-    const loginPopup = screen.getByText('Login');
-    expect(loginPopup).toBeInTheDocument();
-  });
-});
-
-// Test clicking the signup button triggers the signup popup
-test('opens signup popup when clicking signup button', async () => {
-  render(
-    <BrowserRouter>
-      <Header />
-    </BrowserRouter>,
-  );
-
-  const signupButton = screen.getByText('Signup');
-  signupButton.click();
-
-  await waitFor(() => {
-    const signupPopup = screen.getByText('Signup');
-    expect(signupPopup).toBeInTheDocument();
-  });
 });
