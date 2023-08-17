@@ -77,8 +77,8 @@ function ProductDetailsPage() {
               ) : product.type === ProductType.BuyNow ? (
                 <ProductPurchaseBuy
                   data={{
+                    availableQuantity: product.quantity - product.soldQuantity,
                     price: product.price,
-                    quantity: product.quantity,
                     buyQuantity: quantity,
                     onChangeBuyQuantity: (value) => setQuantity(value),
                   }}

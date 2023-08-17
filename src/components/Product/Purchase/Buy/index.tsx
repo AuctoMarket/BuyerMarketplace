@@ -9,22 +9,26 @@ import NumberInput from '../../../NumberInput';
 import type { Product } from '../../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: Pick<Product, 'price' | 'quantity'> & {
+  data: Pick<Product, 'price'> & {
     buyQuantity: number;
     onChangeBuyQuantity: (quantity: number) => void;
+    availableQuantity: number;
   };
 }
 
 function ProductPurchaseBuy({
   className,
-  data: { price, quantity, buyQuantity, onChangeBuyQuantity },
+  data: { price, buyQuantity, onChangeBuyQuantity, availableQuantity },
   ...rest
 }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['price-container']}>
         <label className={styles['label']}>Price:</label>
-        <ProductPrice className={styles['price']} data={{ price }} />
+        <ProductPrice
+          className={styles['price']}
+          data={{ price: price * buyQuantity }}
+        />
       </div>
       <div className={styles['quantity-container']}>
         <label className={styles['label']}>Quantity:</label>
@@ -33,9 +37,11 @@ function ProductPurchaseBuy({
             className={styles['quantity']}
             value={buyQuantity}
             onChangeValue={onChangeBuyQuantity}
+            min={1}
+            max={availableQuantity}
           />
           <span className={styles['available-quantity']}>
-            {quantity} pieces available
+            {availableQuantity} pieces available
           </span>
         </div>
       </div>
