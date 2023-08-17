@@ -1,0 +1,27 @@
+.number-input {
+  @apply flex flex-row;
+
+  .btn-decrease,
+  .btn-increase {
+    @apply w-10 h-10 font-bold font-thicboi text-2xl;
+  }
+
+  .btn-decrease {
+    @apply border-r-0;
+  }
+
+  .btn-increase {
+    @apply border-l-0;
+  }
+
+  input {
+    @apply w-16 h-10 text-center font-bold font-thicboi text-2xl border border-solid border-black;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}

@@ -6,7 +6,11 @@
 .white {
   @apply border border-solid border-black;
 
-  &:hover {
+  &:disabled {
+    @apply opacity-30 cursor-not-allowed bg-gray-200;
+  }
+
+  &:not(:disabled):hover {
     @apply border-0 text-white bg-aucto;
   }
 }
@@ -18,7 +22,7 @@
 .color {
   @apply text-white bg-aucto;
 
-  &:hover {
+  &:not(:disabled):hover {
     @apply bg-aucto-dark;
   }
 }
