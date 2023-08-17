@@ -3,7 +3,7 @@ import React, { ComponentProps } from 'react';
 import styles from './index.module.scss';
 
 interface Props extends ComponentProps<'input'> {
-  theme?: 'black';
+  theme?: 'black' | 'white';
 }
 
 function Input({ type = 'text', theme = 'black', className, ...rest }: Props) {
