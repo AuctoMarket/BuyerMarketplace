@@ -15,7 +15,7 @@
   }
 
   input {
-    @apply w-16 h-10 text-center font-bold font-thicboi text-2xl border border-solid border-black;
+    @apply w-16 h-10 text-center font-bold font-thicboi text-2xl border border-solid border-black rounded-none;
     -moz-appearance: textfield;
 
     &::-webkit-outer-spin-button,
