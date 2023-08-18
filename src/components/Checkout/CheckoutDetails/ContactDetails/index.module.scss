@@ -1,14 +1,14 @@
 .contact-detail-content-container {
-    padding-left: 59px;
-    padding-top: 9px;
-    padding-right: 42px;
-    @apply font-thicboi;
-  }
-  
+  padding-left: 59px;
+  padding-top: 9px;
+  padding-right: 42px;
+  @apply font-thicboi;
+}
+
 .contact-detail-content-header {
   @apply text-lg font-normal;
 }
-  
+
 .contact-detail-content-text {
   color: #858585;
   @apply text-sm;
@@ -16,13 +16,11 @@
 .contact-detail-input {
   @apply mt-2 font-semibold text-sm grid grid-cols-2 gap-11 mt-5 mb-2;
 }
-  
+
 input {
   @apply w-full h-12 text-sm text-black mt-3;
 }
 
-.contact-detail-error-message{
+.contact-detail-error-message {
   @apply text-red-700;
 }
-
-  
