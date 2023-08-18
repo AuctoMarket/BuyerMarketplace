@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './index.module.scss';
@@ -23,6 +23,7 @@ function isMobile() {
 }
 
 function ProductDetailsPage() {
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
   const { productsList: moreFromSeller = [] } = useProductsList(
@@ -74,7 +75,14 @@ function ProductDetailsPage() {
                   }}
                 />
               ) : product.type === ProductType.BuyNow ? (
-                <ProductPurchaseBuy data={{ price: product.price }} />
+                <ProductPurchaseBuy
+                  data={{
+                    availableQuantity: product.quantity - product.soldQuantity,
+                    price: product.price,
+                    buyQuantity: quantity,
+                    onChangeBuyQuantity: (value) => setQuantity(value),
+                  }}
+                />
               ) : (
                 <ProductPurchasePreOrder data={{ price: product.price }} />
               )}

@@ -1,25 +1,35 @@
 .container {
   @apply rounded-xl border border-solid p-8 border-gray-500;
 
-  .row-1 {
-    @apply flex flex-row;
+  .price-container {
+    .label {
+      @apply font-light text-2xl;
+    }
 
-    .col-1 {
-      @apply flex-1;
-
-      .label {
-        @apply font-light text-2xl;
-      }
-
-      .price {
-        @apply mt-2 font-thicboi font-bold;
-        font-size: 40px;
-      }
+    .price {
+      @apply mt-2 font-thicboi font-bold;
+      font-size: 40px;
     }
   }
 
-  .row-2,
-  .row-3 {
+  .quantity-container {
+    @apply flex items-center gap-8 mt-2;
+
+    .label {
+      @apply font-light text-2xl;
+    }
+
+    > div {
+      @apply w-full flex items-center justify-between;
+    }
+
+    .available-quantity {
+      @apply text-sm font-bold text-gray-400;
+    }
+  }
+
+  .btn-buy-container,
+  .btn-chat-container {
     @apply mt-4;
 
     .button {
@@ -32,24 +42,49 @@
   .container {
     @apply p-6;
 
-    .row-1 {
-      @apply gap-4;
+    .price-container {
+      .label {
+        @apply leading-none;
+        font-size: 16px;
+      }
 
-      .col-1 {
-        .label {
-          @apply leading-none;
-          font-size: 16px;
-        }
-
-        .price {
-          @apply mt-1;
-          font-size: 30px;
-        }
+      .price {
+        @apply mt-1;
+        font-size: 30px;
       }
     }
 
-    .row-2,
-    .row-3 {
+    .quantity-container {
+      @apply gap-6 mt-1;
+
+      .label {
+        @apply leading-none;
+        font-size: 16px;
+      }
+
+      .quantity {
+        > button,
+        > input {
+          @apply h-7 text-sm;
+        }
+
+        > button {
+          @apply w-7;
+        }
+
+        > input {
+          @apply w-12;
+        }
+      }
+
+      .available-quantity {
+        @apply font-normal leading-none;
+        font-size: 10px;
+      }
+    }
+
+    .btn-buy-container,
+    .btn-chat-container {
       @apply mt-3;
 
       .button {
