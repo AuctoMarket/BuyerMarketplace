@@ -6,11 +6,7 @@
   }
 
   input {
-    @apply w-72 py-2 px-12 border border-gray-300 rounded text-center text-sm;
-
-    ::placeholder {
-      @apply text-center text-xs;
-    }
+    @apply w-72 py-2 px-12 border border-gray-300 rounded text-sm flex-1 pr-10 pl-5;
   }
 }
 
@@ -40,7 +36,7 @@
 }
 
 .error {
-  @apply text-red-500 mb-3;
+  @apply text-red-500 mb-1 text-xs;
 }
 
 .passwordInput {

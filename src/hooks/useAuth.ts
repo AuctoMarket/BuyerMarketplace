@@ -26,6 +26,9 @@ export function useAuth() {
         const userData = response.data;
         setUser(userData);
         return response.status;
+      } else if (response.status === 401) {
+        console.log('Incorrect email or password.');
+        return response.status;
       } else {
         // throw new Error('Invalid email or password.');
         return response.status;

@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import styles from './index.module.scss';
 import { PopupContext } from '../Popup'; // Import the PopupContext
 import SignupForm from '../SignupForm';
+import Icon from '../Icon';
 
 interface LoginFormProps {
   onLogin?: (email: string, password: string) => void;
@@ -10,32 +11,28 @@ interface LoginFormProps {
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const { togglePopup } = useContext(PopupContext); // Use the PopupContext
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
+
+  const [isMouseUp, setIsMouseUp] = useState(false);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-    setError(''); // Clear any previous error message when user starts typing
+    setEmailError('');
+    setError('');
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    setError(''); // Clear any previous error message when user starts typing
-  };
-
-  const validateEmail = (email: string) => {
-    // Regular expression to check email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password: string) => {
-    // Regular expression to check password format
-    const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
-    return passwordRegex.test(password);
+    setPasswordError('');
+    setError('');
   };
 
   const handleLogin = async () => {
@@ -45,23 +42,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       return;
     }
 
-    // Validate email format
-    if (!validateEmail(email)) {
-      setError('Please enter a valid email address.');
+    try {
+      // Call the onSignup prop to handle the signup action
+      if (onLogin) {
+        await onLogin(email, password);
+      }
+    } catch (error) {
+      setEmailError('Incorrect email or password.');
+      setError('');
       return;
-    }
-
-    // Validate password format
-    if (!validatePassword(password)) {
-      setError(
-        'Password should be longer than 6 characters, with at least 1 letter, 1 number, and 1 symbol.',
-      );
-      return;
-    }
-
-    // Call the onLogin prop to handle the login action
-    if (onLogin) {
-      onLogin(email, password);
     }
   };
 
@@ -75,45 +64,64 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     }
   };
 
-  const handleContAsGuestClick = () => {
-    if (togglePopup) {
-      togglePopup(false);
-    }
+  const handleMouseDown = () => {
+    setIsMouseUp(false);
+    setShowPassword(true); // Password is visible when mouse is down
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseUp(true);
+    setShowPassword(false); // Password is hidden when mouse is released
   };
 
   return (
     <>
       <div className={styles['login-title']}>Login</div>
-      {error && (
-        <div className={styles.error} data-testid="error-message">
-          {error}
-        </div>
-      )}
       <div className={styles.inputGroup}>
-        <input
-          type="text"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="Email"
-        />
+        {error && (
+          <div className={styles.error} data-testid="error-message">
+            {error}
+          </div>
+        )}
+        {emailError && (
+          <div className={styles.error} data-testid="email-error-message">
+            {emailError}
+          </div>
+        )}
+        <div className={styles.input}>
+          <input
+            type="text"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="Email"
+          />
+        </div>
       </div>
       <div className={styles.inputGroup}>
+        {passwordError && (
+          <div className={styles.error} data-testid="password-error-message">
+            {passwordError}
+          </div>
+        )}
         <div className={styles.passwordInput}>
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={isMouseUp || !showPassword ? 'password' : 'text'}
             id="password"
             value={password}
             onChange={handlePasswordChange}
             placeholder="Password"
           />
-          <span
+          <Icon
+            name="password-visibility"
             className={styles.visibilityIcon}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onTouchStart={handleMouseDown}
+            onTouchEnd={handleMouseUp}
             onClick={togglePasswordVisibility}
             data-testid="password-visibility-icon"
-          >
-            {showPassword ? '🙈' : '👁️'}
-          </span>
+          />
         </div>
       </div>
       <div className={styles.links}>
@@ -124,9 +132,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           data-testid="signup-button"
         >
           Not a user? Sign up here!
-        </button>
-        <button className={styles.a} onClick={handleContAsGuestClick}>
-          Continue as a guest!
         </button>
       </div>
       <div className={styles.btnGroup}>

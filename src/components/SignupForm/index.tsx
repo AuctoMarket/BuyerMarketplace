@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import styles from './index.module.scss'; // You can create the CSS module file for SignupForm
 import { PopupContext } from '../Popup'; // Import the PopupContext
 import LoginForm from '../LoginForm';
+import Icon from '../Icon';
 
 interface SignupFormProps {
   onSignup?: (email: string, password: string) => void;
@@ -9,26 +10,39 @@ interface SignupFormProps {
 
 const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
   const { togglePopup } = useContext(PopupContext); // Use the PopupContext
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [isMouseUp, setIsMouseUp] = useState(false);
+  const [isMouseUp2, setIsMouseUp2] = useState(false);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-    setError(''); // Clear any previous error message when user starts typing
+    setEmailError('');
+    setError('');
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    setError(''); // Clear any previous error message when user starts typing
+    setPasswordError('');
+    setError('');
   };
 
   const handleConfirmPasswordChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setConfirmPassword(event.target.value);
-    setError(''); // Clear any previous error message when user starts typing
+    setPasswordError('');
+    setError('');
   };
 
   const validateEmail = (email: string) => {
@@ -38,10 +52,28 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
   };
 
   const validatePassword = (password: string) => {
-    // Regular expression to check password format
-    const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
-    return passwordRegex.test(password);
+    const lengthRegex = /^.{8,}$/;
+    const digitRegex = /\d/;
+    const specialCharRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/;
+
+    if (!lengthRegex.test(password)) {
+      setPasswordError('Password must be at least 8 characters long.');
+      return false;
+    }
+
+    if (!digitRegex.test(password)) {
+      setPasswordError('Password must contain at least 1 digit (0-9).');
+      return false;
+    }
+
+    if (!specialCharRegex.test(password)) {
+      setPasswordError('Password must contain at least 1 special character.');
+      return false;
+    }
+
+    // If all conditions pass, the password is valid
+    setPasswordError('');
+    return true;
   };
 
   const handleSignup = async () => {
@@ -53,21 +85,22 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
 
     // Validate email format
     if (!validateEmail(email)) {
-      setError('Please enter a valid email address.');
+      setEmailError(
+        'Incorrect email format. Please enter a valid email address.',
+      );
       return;
     }
 
     // Validate password format
     if (!validatePassword(password)) {
-      setError(
-        'Password should be longer than 6 characters, with at least 1 letter, 1 number, and 1 symbol.',
-      );
       return;
     }
 
     // Check if passwords match
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setPasswordError(
+        'Passwords do not match. Please check that they are the same.',
+      );
       return;
     }
 
@@ -77,7 +110,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
         await onSignup(email, password);
       }
     } catch (error) {
-      setError('Email is already in use.'); // Set the error message received from the signup function
+      setEmailError('Email is already in use. Please use another email.'); // Set the error message received from the signup function
+      setError('');
       return;
     }
   };
@@ -88,15 +122,44 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const handleMouseDown = () => {
+    setIsMouseUp(false);
+    setShowPassword(true); // Password is visible when mouse is down
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseUp(true);
+    setShowPassword(false); // Password is hidden when mouse is released
+  };
+
+  const handleMouseDown2 = () => {
+    setIsMouseUp2(false);
+    setShowConfirmPassword(true); // Password is visible when mouse is down
+  };
+
+  const handleMouseUp2 = () => {
+    setIsMouseUp2(true);
+    setShowConfirmPassword(false); // Password is hidden when mouse is released
+  };
+
   return (
     <>
       <div className={styles['signup-title']}>Sign Up</div>
-      {error && (
-        <div className={styles.error} data-testid="error-message">
-          {error}
-        </div>
-      )}
       <div className={styles.inputGroup}>
+        {error && (
+          <div className={styles.error} data-testid="error-message">
+            {error}
+          </div>
+        )}
+        {emailError && (
+          <div className={styles.error} data-testid="email-error-message">
+            {emailError}
+          </div>
+        )}
         <input
           type="text"
           id="email"
@@ -106,22 +169,51 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
         />
       </div>
       <div className={styles.inputGroup}>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-          placeholder="Password"
-        />
+        {passwordError && (
+          <div className={styles.error} data-testid="password-error-message">
+            {passwordError}
+          </div>
+        )}
+        <div className={styles.passwordInput}>
+          <input
+            type={isMouseUp || !showPassword ? 'password' : 'text'}
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="Password"
+          />
+          <Icon
+            name="password-visibility"
+            className={styles.visibilityIcon}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onTouchStart={handleMouseDown}
+            onTouchEnd={handleMouseUp}
+            onClick={togglePasswordVisibility}
+            data-testid="password-visibility-icon"
+          />
+        </div>
       </div>
       <div className={styles.inputGroup}>
-        <input
-          type="password"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-          placeholder="Confirm Password"
-        />
+        <div className={styles.passwordInput}>
+          <input
+            type={isMouseUp2 || !showConfirmPassword ? 'password' : 'text'}
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+            placeholder="Confirm Password"
+          />
+          <Icon
+            name="password-visibility"
+            className={styles.visibilityIcon}
+            onMouseDown={handleMouseDown2}
+            onMouseUp={handleMouseUp2}
+            onTouchStart={handleMouseDown2}
+            onTouchEnd={handleMouseUp2}
+            onClick={togglePasswordVisibility}
+            data-testid="password-visibility-icon-2"
+          />
+        </div>
       </div>
       <div className={styles.links}>
         {/* Use the onLoginClick prop to handle the "Login here" link click */}

@@ -18,57 +18,38 @@ test('displays an error message for invalid email format', () => {
   fireEvent.change(emailInput, { target: { value: 'invalid_email' } });
 
   const passwordInput = screen.getByPlaceholderText('Password');
-  fireEvent.change(passwordInput, { target: { value: 'abc123!' } });
+  fireEvent.change(passwordInput, { target: { value: 'abcd1234!' } });
 
   const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-  fireEvent.change(confirmPasswordInput, { target: { value: 'abc123!' } });
+  fireEvent.change(confirmPasswordInput, { target: { value: 'abcd1234!' } });
 
   const signupButton = screen.getByTestId('signup-button');
   fireEvent.click(signupButton);
 
-  const errorMessage = screen.getByTestId('error-message');
-  expect(errorMessage).toHaveTextContent('Please enter a valid email address.');
+  const errorMessage = screen.getByTestId('email-error-message');
+  expect(errorMessage).toHaveTextContent(
+    'Incorrect email format. Please enter a valid email address.',
+  );
 });
 
-// Test for invalid password - password not longer than 6 characters
+// Test for invalid password - password not longer than 8 characters
 test('displays an error message for invalid password', () => {
   render(<SignupForm />);
   const emailInput = screen.getByPlaceholderText('Email');
   fireEvent.change(emailInput, { target: { value: 'valid_email@gmail.com' } });
 
   const passwordInput = screen.getByPlaceholderText('Password');
-  fireEvent.change(passwordInput, { target: { value: 'abcd' } });
+  fireEvent.change(passwordInput, { target: { value: 'abcd12!' } });
 
   const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-  fireEvent.change(confirmPasswordInput, { target: { value: 'abcd' } });
+  fireEvent.change(confirmPasswordInput, { target: { value: 'abcd12!' } });
 
   const signupButton = screen.getByTestId('signup-button');
   fireEvent.click(signupButton);
 
-  const errorMessage = screen.getByTestId('error-message');
+  const errorMessage = screen.getByTestId('password-error-message');
   expect(errorMessage).toHaveTextContent(
-    'Password should be longer than 6 characters, with at least 1 letter, 1 number, and 1 symbol.',
-  );
-});
-
-// Test for invalid password - password does not have a letter
-test('displays an error message for password without a letter', () => {
-  render(<SignupForm />);
-  const emailInput = screen.getByPlaceholderText('Email');
-  fireEvent.change(emailInput, { target: { value: 'valid_email@gmail.com' } });
-
-  const passwordInput = screen.getByPlaceholderText('Password');
-  fireEvent.change(passwordInput, { target: { value: '123456' } });
-
-  const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-  fireEvent.change(confirmPasswordInput, { target: { value: '123456' } });
-
-  const signupButton = screen.getByTestId('signup-button');
-  fireEvent.click(signupButton);
-
-  const errorMessage = screen.getByTestId('error-message');
-  expect(errorMessage).toHaveTextContent(
-    'Password should be longer than 6 characters, with at least 1 letter, 1 number, and 1 symbol.',
+    'Password must be at least 8 characters long.',
   );
 });
 
@@ -79,17 +60,17 @@ test('displays an error message for password without a number', () => {
   fireEvent.change(emailInput, { target: { value: 'valid_email@gmail.com' } });
 
   const passwordInput = screen.getByPlaceholderText('Password');
-  fireEvent.change(passwordInput, { target: { value: 'abcdef' } });
+  fireEvent.change(passwordInput, { target: { value: 'abcdefg!' } });
 
   const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-  fireEvent.change(confirmPasswordInput, { target: { value: 'abcdef' } });
+  fireEvent.change(confirmPasswordInput, { target: { value: 'abcdefg!' } });
 
   const signupButton = screen.getByTestId('signup-button');
   fireEvent.click(signupButton);
 
-  const errorMessage = screen.getByTestId('error-message');
+  const errorMessage = screen.getByTestId('password-error-message');
   expect(errorMessage).toHaveTextContent(
-    'Password should be longer than 6 characters, with at least 1 letter, 1 number, and 1 symbol.',
+    'Password must contain at least 1 digit (0-9).',
   );
 });
 
@@ -100,17 +81,17 @@ test('displays an error message for password without a symbol', () => {
   fireEvent.change(emailInput, { target: { value: 'valid_email@gmail.com' } });
 
   const passwordInput = screen.getByPlaceholderText('Password');
-  fireEvent.change(passwordInput, { target: { value: '123abc' } });
+  fireEvent.change(passwordInput, { target: { value: '123abcdef' } });
 
   const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-  fireEvent.change(confirmPasswordInput, { target: { value: '123abc' } });
+  fireEvent.change(confirmPasswordInput, { target: { value: '123abcdef' } });
 
   const signupButton = screen.getByTestId('signup-button');
   fireEvent.click(signupButton);
 
-  const errorMessage = screen.getByTestId('error-message');
+  const errorMessage = screen.getByTestId('password-error-message');
   expect(errorMessage).toHaveTextContent(
-    'Password should be longer than 6 characters, with at least 1 letter, 1 number, and 1 symbol.',
+    'Password must contain at least 1 special character.',
   );
 });
 
@@ -121,7 +102,7 @@ test('displays an error message for passwords that do not match', () => {
   fireEvent.change(emailInput, { target: { value: 'valid_email@gmail.com' } });
 
   const passwordInput = screen.getByPlaceholderText('Password');
-  fireEvent.change(passwordInput, { target: { value: '123abc!' } });
+  fireEvent.change(passwordInput, { target: { value: '1234abcd!' } });
 
   const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
   fireEvent.change(confirmPasswordInput, { target: { value: '123acb!' } });
@@ -129,6 +110,54 @@ test('displays an error message for passwords that do not match', () => {
   const signupButton = screen.getByTestId('signup-button');
   fireEvent.click(signupButton);
 
-  const errorMessage = screen.getByTestId('error-message');
-  expect(errorMessage).toHaveTextContent('Passwords do not match.');
+  const errorMessage = screen.getByTestId('password-error-message');
+  expect(errorMessage).toHaveTextContent(
+    'Passwords do not match. Please check that they are the same.',
+  );
+});
+
+// Test for toggling password visibility for desktop version
+test('toggles password visibility for desktop version', () => {
+  render(<SignupForm />);
+
+  const passwordInput = screen.getByPlaceholderText('Password');
+  const visibilityIcon = screen.getByTestId('password-visibility-icon');
+
+  const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
+  const visibilityIcon2 = screen.getByTestId('password-visibility-icon-2');
+
+  fireEvent.mouseDown(visibilityIcon);
+  expect(passwordInput).toHaveAttribute('type', 'text');
+
+  fireEvent.mouseUp(visibilityIcon);
+  expect(passwordInput).toHaveAttribute('type', 'password');
+
+  fireEvent.mouseDown(visibilityIcon2);
+  expect(confirmPasswordInput).toHaveAttribute('type', 'text');
+
+  fireEvent.mouseUp(visibilityIcon2);
+  expect(confirmPasswordInput).toHaveAttribute('type', 'password');
+});
+
+// Test for toggling password visibility for mobile version
+test('toggles password visibility for mobile version', () => {
+  render(<SignupForm />);
+
+  const passwordInput = screen.getByPlaceholderText('Password');
+  const visibilityIcon = screen.getByTestId('password-visibility-icon');
+
+  const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
+  const visibilityIcon2 = screen.getByTestId('password-visibility-icon-2');
+
+  fireEvent.touchStart(visibilityIcon);
+  expect(passwordInput).toHaveAttribute('type', 'text');
+
+  fireEvent.touchEnd(visibilityIcon);
+  expect(passwordInput).toHaveAttribute('type', 'password');
+
+  fireEvent.touchStart(visibilityIcon2);
+  expect(confirmPasswordInput).toHaveAttribute('type', 'text');
+
+  fireEvent.touchEnd(visibilityIcon2);
+  expect(confirmPasswordInput).toHaveAttribute('type', 'password');
 });

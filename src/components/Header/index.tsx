@@ -27,7 +27,10 @@ function Header({ className, ...rest }: Props) {
       togglePopup(true, <SignupForm onSignup={handleSignup} />);
     }
   };
-  const handleLogin = (email: string, password: string) => {
+  const handleLogin = async (email: string, password: string) => {
+    const responseStatus = await login(email, password);
+    console.log(responseStatus);
+
     // Handle user session or UI updates here
     login(email, password);
     console.log('User logged in:', email);
