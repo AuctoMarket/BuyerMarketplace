@@ -21,8 +21,6 @@ function ProductPromotion({
 }: Props) {
   return (
     <div className={`${className} ${styles['products-container']}`} {...rest}>
-      <div className={`${styles['gradient']}`} />
-
       <Carousel
         showStatus={false}
         showThumbs={false}
@@ -51,7 +49,10 @@ function ProductPromotion({
         }
       >
         {images.map((image, index) => (
-          <Image key={index} src={image} alt={`${index}`} />
+          <div key={index} className={styles['image-container']}>
+            <Image src={image} alt={`${index}`} />
+            <div className={`${styles['gradient']}`} />
+          </div>
         ))}
       </Carousel>
 

@@ -7,7 +7,7 @@
 }
 
 .gradient {
-  @apply absolute w-full h-full z-10;
+  @apply absolute w-full h-full top-0;
 
   background: linear-gradient(
     180deg,
@@ -53,4 +53,29 @@
   @apply text-white font-semibold text-4xl font-thicboi;
   line-height: 3.5rem;
   margin-top: 28px;
+}
+
+@media (max-width: 820px) {
+  .image-container {
+    @apply relative;
+
+    > img {
+      @apply object-cover;
+      height: 300px;
+    }
+  }
+
+  .products-button-left,
+  .products-button-right {
+    @apply hidden;
+  }
+
+  .products-title {
+    @apply text-xl pr-20;
+  }
+
+  .products-content {
+    @apply left-4 right-4;
+    bottom: 45px;
+  }
 }
