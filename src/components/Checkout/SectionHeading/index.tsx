@@ -9,7 +9,11 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function Header({ className, data: { number, text }, ...rest }: Props) {
+export function SectionHeading({
+  className,
+  data: { number, text },
+  ...rest
+}: Props) {
   return (
     <div
       className={`${className} ${styles['contact-detail-header']}`}
@@ -23,4 +27,4 @@ export function Header({ className, data: { number, text }, ...rest }: Props) {
   );
 }
 
-export default Header;
+export default SectionHeading;

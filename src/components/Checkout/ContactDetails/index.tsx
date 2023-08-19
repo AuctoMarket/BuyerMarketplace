@@ -2,26 +2,21 @@ import React, { useState, ComponentProps } from 'react';
 
 import styles from './index.module.scss';
 import Input from '../../Input';
-import ContactDetailHeader from './Header';
+import SectionHeading from '../SectionHeading';
+
+import type { ContactDetailsData } from '../../../types/checkout.type';
 
 interface Props extends ComponentProps<'div'> {
-  onEmailChange: (email: string, error?: string) => void;
-  onPhoneNumberChange: (phoneNumber: string, error?: string) => void;
-  onEmailConfirmChange: (emailConfirm: string, error?: string) => void;
-  onTelegramHandleChange: (telegramHandle: string, error?: string) => void;
+  data: ContactDetailsData;
+  onChangeData: (data: ContactDetailsData) => void;
 }
 
 export function ContactDetails({
   className,
-  onEmailChange,
-  onPhoneNumberChange,
-  onEmailConfirmChange,
-  onTelegramHandleChange,
+  data,
+  onChangeData,
+  ...rest
 }: Props) {
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [emailConfirm, setEmailConfirm] = useState('');
-  const [telegramHandle, setTelegramHandle] = useState('');
   const [error, setError] = useState<{
     email?: string;
     phoneNumber?: string;
@@ -33,9 +28,8 @@ export function ContactDetails({
     const email = event.target.value;
     const emailError = validateEmail(email);
 
-    setEmail(email);
     setError({ ...error, email: emailError });
-    onEmailChange(email, emailError);
+    onChangeData({ ...data, email });
   };
 
   const handlePhoneNumberChange = (
@@ -44,20 +38,18 @@ export function ContactDetails({
     const phoneNumber = event.target.value;
     const phoneNumberError = validatePhoneNumber(phoneNumber);
 
-    setPhoneNumber(phoneNumber);
     setError({ ...error, email: phoneNumberError });
-    onPhoneNumberChange(phoneNumber, phoneNumberError);
+    onChangeData({ ...data, phoneNumber });
   };
 
   const handleEmailConfirmChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const emailConfirm = event.target.value;
-    const emailConfirmError = validateEmailConfirm(email, emailConfirm);
+    const emailConfirmError = validateEmailConfirm(data.email, emailConfirm);
 
-    setEmailConfirm(emailConfirm);
     setError({ ...error, emailConfirm: emailConfirmError });
-    onEmailConfirmChange(emailConfirm, emailConfirmError);
+    onChangeData({ ...data, emailConfirm });
   };
 
   const handleTelegramHandleChange = (
@@ -66,9 +58,8 @@ export function ContactDetails({
     const telegramHandle = event.target.value;
     const telegramHandleError = validateTelegramHandle(telegramHandle);
 
-    setTelegramHandle(telegramHandle);
     setError({ ...error, telegramHandle: telegramHandleError });
-    onTelegramHandleChange(telegramHandle, telegramHandleError);
+    onChangeData({ ...data, telegramHandle });
   };
 
   const validateEmail = (email: string) => {
@@ -100,14 +91,14 @@ export function ContactDetails({
 
   const validateTelegramHandle = (telegramHandle: string) => {
     const telegramHandleRegex = /^@[A-Za-z0-9_]{5,}$/;
-    if (telegramHandleRegex.test(telegramHandle)) {
+    if (!telegramHandleRegex.test(telegramHandle)) {
       return 'Telegram invalid';
     }
   };
 
   return (
-    <div className={`${className} ${styles['contact-details']}`}>
-      <ContactDetailHeader data={{ number: '1', text: 'Contact Details' }} />
+    <div className={`${className} ${styles['contact-details']}`} {...rest}>
+      <SectionHeading data={{ number: '1', text: 'Contact Details' }} />
 
       <div className={`${styles['contact-detail-content-container']}`}>
         <div className={`${styles['contact-detail-content']}`}>
@@ -126,7 +117,7 @@ export function ContactDetails({
               className={styles['input-email-adress']}
               type="text"
               theme="white"
-              value={email}
+              value={data.email}
               onChange={handleEmailChange}
               role="input-email-adress"
             />
@@ -142,7 +133,7 @@ export function ContactDetails({
               className={styles['input-phone-number']}
               type="text"
               theme="white"
-              value={phoneNumber}
+              value={data.phoneNumber}
               onChange={handlePhoneNumberChange}
               role="input-phone-number"
             />
@@ -158,7 +149,7 @@ export function ContactDetails({
               className={styles['input-confirm-email']}
               type="text"
               theme="white"
-              value={emailConfirm}
+              value={data.emailConfirm}
               onChange={handleEmailConfirmChange}
               role="input-confirm-email"
             />
@@ -174,7 +165,7 @@ export function ContactDetails({
               className={styles['input-confirm-telegram']}
               type="text"
               theme="white"
-              value={telegramHandle}
+              value={data.telegramHandle}
               onChange={handleTelegramHandleChange}
               role="contact-detail-input-telegram"
             />

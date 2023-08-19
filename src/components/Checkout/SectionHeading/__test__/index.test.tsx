@@ -1,16 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import Header from '..';
+import SectionHeading from '..';
 
-describe('Card', () => {
+describe('SectionHeading', () => {
   const data = {
     number: '1',
     text: 'Text',
   };
 
-  test('header Card', async () => {
-    render(<Header data={data} role="header" />);
+  test('renders SectionHeading', async () => {
+    render(<SectionHeading data={data} role="header" />);
 
     const header = await screen.findByRole('header');
     expect(header).toBeInTheDocument();
