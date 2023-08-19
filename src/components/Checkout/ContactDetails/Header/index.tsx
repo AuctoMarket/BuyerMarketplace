@@ -1,7 +1,6 @@
 import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
-import Icon from '../../../Icon';
 
 interface Props extends ComponentProps<'div'> {
   data: {
@@ -10,25 +9,18 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-export function ContactDetailHeader({
-  className,
-  data: { number, text },
-  ...rest
-}: Props) {
+export function Header({ className, data: { number, text }, ...rest }: Props) {
   return (
     <div
       className={`${className} ${styles['contact-detail-header']}`}
       {...rest}
     >
-      <div className={`${styles['contact-detail-header-icon']}`}>
-        <Icon name="ellipse_6" />
-        <p className={`${styles['contact-detail-header-icon-number']}`}>
-          {number}
-        </p>
+      <div className={`${styles['contact-detail-header-number']}`}>
+        {number}
       </div>
       <div className={`${styles['contact-detail-header-content']}`}>{text}</div>
     </div>
   );
 }
 
-export default ContactDetailHeader;
+export default Header;

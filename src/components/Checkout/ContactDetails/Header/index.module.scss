@@ -3,15 +3,11 @@
   padding-left: 59px;
   padding-bottom: 33.18px;
   border-bottom: 1px solid #afafaf;
-  @apply flex flex-row items-center gap-4 relative;
+  @apply flex flex-row items-center gap-4;
 }
 
-.contact-detail-header-icon {
-  > p {
-    left: 73px;
-    top: 36px;
-    @apply absolute  text-xl;
-  }
+.contact-detail-header-number {
+  @apply font-thicboi text-xl font-normal w-10 h-10 border-2 border-aucto rounded-full flex items-center justify-center;
 }
 
 .contact-detail-header-content {

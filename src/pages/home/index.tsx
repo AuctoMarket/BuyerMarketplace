@@ -6,6 +6,7 @@ import ProductPromotion from '../../components/Product/Promotion';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import SellerPromotion from '../../components/Sellers/Promotion';
 import useProductsList from '../../hooks/useProductsList';
+import ContactDetails from '../../components/Checkout/ContactDetails';
 
 function HomePage() {
   const { productsList: recentlyAdded = [] } = useProductsList();
@@ -25,6 +26,13 @@ function HomePage() {
             title:
               '<p>Collection: Pokemon S&S Brilliant</p><p>StarsPre-Order yours today!</p>',
           }}
+        />
+
+        <ContactDetails
+          onEmailChange={() => {}}
+          onPhoneNumberChange={() => {}}
+          onEmailConfirmChange={() => {}}
+          onTelegramHandleChange={() => {}}
         />
 
         {recentlyAdded.length > 0 && (
