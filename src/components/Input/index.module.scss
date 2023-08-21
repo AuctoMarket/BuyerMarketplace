@@ -6,3 +6,7 @@
 .black {
   @apply border border-solid border-white text-white bg-black;
 }
+
+.white {
+  @apply border border-solid border-gray-300;
+}
