@@ -31,3 +31,29 @@
     @apply w-full;
   }
 }
+
+@media (max-width: 820px) {
+  .promotion {
+    @apply flex-col-reverse py-4 px-8;
+
+    .content {
+      @apply w-full pt-5 pb-0;
+
+      .title {
+        @apply text-xl;
+      }
+
+      .description {
+        @apply text-xs mt-1;
+      }
+
+      .button {
+        @apply mt-2 text-xs py-1 px-3 w-auto h-auto inline-block;
+      }
+    }
+
+    .image {
+      @apply w-full pl-0;
+    }
+  }
+}

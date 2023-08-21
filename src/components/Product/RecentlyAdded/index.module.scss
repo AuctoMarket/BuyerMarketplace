@@ -7,7 +7,7 @@
   line-height: 32px;
 
   > a {
-    @apply block float-right text-lg flex items-center;
+    @apply float-right text-lg flex items-center;
 
     > img {
       @apply inline-block ml-1;
@@ -18,6 +18,7 @@
 .list-container {
   @apply mt-5;
 }
+
 .list {
   @apply grid grid-cols-5 gap-5;
 }
@@ -28,9 +29,15 @@
   }
 
   .list-container {
-    @apply mt-0;
+    @apply mt-0 overflow-auto;
   }
+
   .list {
-    @apply grid-cols-3 gap-3;
+    @apply flex flex-row flex-nowrap gap-3;
+
+    > li {
+      @apply flex-none;
+      width: calc(100% / 3 - 0.75rem * 2 / 3 - 100% / 3 / 15);
+    }
   }
 }
