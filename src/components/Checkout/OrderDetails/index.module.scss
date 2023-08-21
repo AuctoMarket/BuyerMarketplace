@@ -1,0 +1,83 @@
+.header {
+  font-size: 32px;
+  margin-bottom: 17px;
+  @apply font-thicboi font-semibold;
+}
+
+.body {
+  @apply px-5 py-7 border border-solid font-thicboi text-xl;
+  border-color: #afafaf;
+  background-color: rgba(175, 175, 175, 0.1);
+
+  .label {
+    @apply font-medium w-32 text-right;
+  }
+
+  .price {
+    @apply font-medium;
+  }
+}
+
+.section-0 {
+  @apply flex gap-3;
+
+  .product-image {
+    @apply w-32 pl-3;
+
+    > img {
+      @apply w-full;
+    }
+  }
+
+  .product-title {
+    @apply text-2xl font-medium;
+  }
+}
+
+.section-1 {
+  @apply border-b border-solid py-3 mt-3;
+  border-color: #afafaf;
+
+  .unit-price {
+    @apply flex gap-3;
+  }
+
+  .quantity {
+    @apply flex gap-3 mt-3;
+  }
+}
+
+.section-2 {
+  @apply border-b border-solid py-3;
+  border-color: #afafaf;
+
+  .subtotal {
+    @apply flex gap-3;
+  }
+
+  .delivery,
+  .payment-fee {
+    @apply flex gap-3 mt-3;
+  }
+}
+
+.section-3 {
+  @apply pt-3;
+
+  .price {
+    @apply mt-3 text-4xl pl-6;
+    font-size: 40px;
+  }
+}
+
+.footer {
+  @apply mt-5;
+
+  .payment {
+    @apply flex gap-1 pl-11;
+  }
+
+  .button {
+    @apply mt-7;
+  }
+}
