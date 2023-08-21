@@ -3,7 +3,7 @@ import React, { ComponentProps } from 'react';
 import styles from './index.module.scss';
 
 interface Props extends ComponentProps<'button'> {
-  theme?: 'white' | 'black' | 'color';
+  theme?: 'white' | 'black' | 'color' | 'gray';
 }
 
 function Button({ theme = 'white', className, children, ...rest }: Props) {
