@@ -6,6 +6,10 @@ import OrderDetails from '../../../components/Checkout/OrderDetails';
 import ButtonLink from '../../../components/Button/Link';
 import useProduct from '../../../hooks/useProduct';
 
+function isMobile() {
+  return window.innerWidth <= 820;
+}
+
 const PaymentCompletedPage = () => {
   // the following implementation is for demo purposes only
   // TODO: fetch order details
@@ -57,8 +61,11 @@ const PaymentCompletedPage = () => {
                 already, please contact us to verify your payment.{' '}
               </>
             )}
+            {}
             <ButtonLink
-              className={styles['button']}
+              className={`${styles['button']} ${
+                isMobile() && styles['button-hidden']
+              }`}
               theme="black"
               to={`https://t.me/auctomarketplace`}
               target="_blank"
@@ -73,6 +80,16 @@ const PaymentCompletedPage = () => {
           data={orderDetails}
           showFooter={false}
         />
+        {isMobile() && (
+          <ButtonLink
+            className={styles['button']}
+            theme="black"
+            to={`https://t.me/auctomarketplace`}
+            target="_blank"
+          >
+            Chat with us
+          </ButtonLink>
+        )}
       </div>
     </Layout>
   );
