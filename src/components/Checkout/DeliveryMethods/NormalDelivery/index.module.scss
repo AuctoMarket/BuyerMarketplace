@@ -45,3 +45,43 @@
 .delivery-method-information-contact {
   @apply underline;
 }
+
+@media (max-width: 820px) {
+  .delivery-1-container {
+    padding-right: 61px;
+    @apply pt-5 pl-4;
+  }
+
+  .delivery-1-content-header {
+    @apply text-sm font-normal;
+  }
+
+  .delivery-1-content-text {
+    font-size: 10px;
+  }
+
+  .delivery-1-input {
+    font-size: 10px;
+    @apply flex flex-col mt-2;
+
+    input {
+      @apply mt-0 h-6;
+    }
+  }
+
+  .contact-detail-input-address-2 {
+    @apply mt-2;
+  }
+
+  .delivery-1-input-postal-code {
+    width: 390px;
+    @apply mt-2 ml-0;
+    input {
+      @apply mt-0 h-6;
+    }
+  }
+  .delivery-method-information {
+    margin-right: -27px;
+    @apply text-xs mt-4;
+  }
+}

@@ -22,20 +22,35 @@
   @apply text-red-700;
 }
 
-@media (max-with: 820px){
-  .contact-detail-content-container{
-    @apply px-0;
+@media (max-width: 820px) {
+  .contact-detail-content-container {
+    @apply px-0 pt-2;
+
+    input {
+      @apply h-6;
+    }
   }
 
-  .contact-detail-content{
-    padding-right: 10px;
-    @apply pl-4; 
+  .contact-detail-content {
+    @apply pl-4;
+
+    .contact-detail-content-header {
+      @apply font-normal text-sm leading-normal;
+    }
+    .contact-detail-content-text {
+      font-size: 10px;
+      @apply leading-normal;
+    }
   }
 
-  .contact-detail-content-header{
-    @apply font-normal text-sm
-  }
-  .contact-detail-content-text{
+  .contact-detail-input {
+    margin-top: 18px;
     font-size: 10px;
+    padding-right: 30px;
+    @apply pl-3 gap-5;
+  }
+  .contact-detail-input-confirm-email,
+  .contact-detail-input-confirm-email {
+    margin-bottom: 0;
   }
 }

@@ -17,6 +17,7 @@ import {
   PaymentMethod,
   PaymentMethodsData,
 } from '../../../types/checkout.type';
+import { FALSE } from 'sass';
 
 const PaymentCheckoutPage = () => {
   // the following implementation is for demo purposes only
@@ -100,6 +101,7 @@ const PaymentCheckoutPage = () => {
           <OrderDetails
             className={styles['order-details-mobile']}
             data={orderDetails}
+            showFooter={false}
           />
           <Button className={styles['checkout-button']}>
             Proceed to payment

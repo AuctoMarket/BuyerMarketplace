@@ -13,3 +13,28 @@
 .selected {
   @apply border border-solid border-aucto #{!important};
 }
+
+@media (max-width: 820px) {
+  .delivery-method-button {
+    @apply flex flex-row gap-0 px-11;
+  }
+
+  .button-self-collection {
+    height: 34px;
+    @apply w-full mr-8;
+    .text-button-1 {
+      @apply font-thicboi font-semibold text-xs;
+    }
+  }
+
+  .button-delivery-1 {
+    height: 34px;
+    @apply w-full;
+    .text-button-1 {
+      > p {
+        line-height: 9px;
+      }
+      @apply font-thicboi font-semibold text-xs;
+    }
+  }
+}
