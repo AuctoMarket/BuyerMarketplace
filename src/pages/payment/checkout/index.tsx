@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './index.module.scss';
 import Layout from '../../../components/Layout';
-
+import Button from '../../../components/Button';
 import OrderDetails from '../../../components/Checkout/OrderDetails';
 import ContactDetails from '../../../components/Checkout/ContactDetails';
 import DeliveryMethods from '../../../components/Checkout/DeliveryMethods';
@@ -17,7 +17,6 @@ import {
   PaymentMethod,
   PaymentMethodsData,
 } from '../../../types/checkout.type';
-import Button from '../../../components/Button';
 
 const PaymentCheckoutPage = () => {
   // the following implementation is for demo purposes only
