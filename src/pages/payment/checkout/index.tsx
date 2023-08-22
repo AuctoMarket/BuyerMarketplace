@@ -97,7 +97,10 @@ const PaymentCheckoutPage = () => {
               }
             />
           </div>
-
+          <OrderDetails
+            className={styles['order-details-mobile']}
+            data={orderDetails}
+          />
           <Button className={styles['checkout-button']}>
             Proceed to payment
           </Button>

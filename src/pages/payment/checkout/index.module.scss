@@ -5,7 +5,9 @@
 .checkout {
   @apply pr-10;
   width: calc(100% - 378px);
-
+  .order-details-mobile {
+    @apply hidden;
+  }
   .heading {
     font-size: 32px;
     @apply font-thicboi font-semibold;
@@ -24,4 +26,27 @@
 
 .order-details {
   width: 378px;
+}
+
+@media (max-width: 820px) {
+  .payment-page {
+    @apply pl-7;
+    @apply w-auto;
+    .order-details {
+      @apply hidden;
+    }
+  }
+  .checkout {
+    @apply w-full;
+    .heading {
+      font-size: 20px;
+    }
+    .checkout-details {
+      @apply mt-1 mb-7;
+    }
+
+    .order-details-mobile {
+      @apply inline;
+    }
+  }
 }
