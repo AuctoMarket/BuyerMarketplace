@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import PaymentCompletedPage from './pages/payment/completed';
 import ProductPage from './pages/product';
 import HomePage from './pages/home';
 import Popup, { PopupContext } from './components/Popup';
@@ -35,6 +36,10 @@ function App() {
 
       <RouterProvider
         router={createRouter([
+          {
+            path: '/payment/completed',
+            element: <PaymentCompletedPage />,
+          },
           {
             path: '/products/:id',
             element: <ProductPage />,
