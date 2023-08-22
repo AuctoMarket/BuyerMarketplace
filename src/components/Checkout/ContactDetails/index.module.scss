@@ -21,3 +21,21 @@
 .contact-detail-error-message {
   @apply text-red-700;
 }
+
+@media (max-with: 820px){
+  .contact-detail-content-container{
+    @apply px-0;
+  }
+
+  .contact-detail-content{
+    padding-right: 10px;
+    @apply pl-4; 
+  }
+
+  .contact-detail-content-header{
+    @apply font-normal text-sm
+  }
+  .contact-detail-content-text{
+    font-size: 10px;
+  }
+}

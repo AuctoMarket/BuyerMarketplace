@@ -1,11 +1,11 @@
 .header {
   font-size: 32px;
+  margin-bottom: 17px;
   @apply font-thicboi font-semibold;
 }
 
 .body {
   @apply px-5 py-7 border border-solid font-thicboi text-xl;
-  margin-top: 17px;
   border-color: #afafaf;
   background-color: rgba(175, 175, 175, 0.1);
 
@@ -79,5 +79,57 @@
 
   .button {
     @apply mt-7;
+  }
+}
+
+@media (max-width: 820px) {
+  .header {
+    @apply mb-1 text-xl;
+  }
+  .body {
+    @apply px-4 py-5 font-thicboi text-sm;
+    .label {
+      @apply w-24;
+    }
+    .section-0 {
+      gap: 22px;
+      .product-title {
+        @apply text-base;
+      }
+      .product-image {
+        @apply w-24;
+      }
+    }
+
+    .product-title {
+      @apply text-2xl font-medium;
+    }
+  }
+  .section-1 {
+    @apply pt-0;
+
+    .unit-price {
+      gap: 22px;
+    }
+
+    .quantity {
+      gap: 22.39px;
+    }
+  }
+
+  .section-2 {
+    .subtotal {
+      gap: 22px;
+    }
+
+    .delivery,
+    .payment-fee {
+      gap: 22px;
+    }
+  }
+  .section-3 {
+    .price {
+      @apply text-xl mt-1 pl-6;
+    }
   }
 }
