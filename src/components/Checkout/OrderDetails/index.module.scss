@@ -83,55 +83,53 @@
 }
 
 @media (max-width: 820px) {
-  .header{
-    @apply mb-1 text-xl
+  .header {
+    @apply mb-1 text-xl;
   }
-  .body{
+  .body {
     @apply px-4 py-5 font-thicboi text-sm;
     .label {
       @apply w-24;
     }
     .section-0 {
-      gap:22px;
+      gap: 22px;
       .product-title {
         @apply text-base;
-      }  
+      }
       .product-image {
         @apply w-24;
       }
-    
-    }
-    
-      .product-title {
-        @apply text-2xl font-medium;
-      }
-    }
-    .section-1{
-      @apply pt-0;
-      
-      .unit-price {
-        gap: 22px;
-      }
-    
-      .quantity {
-        gap: 22.39px;;
-      }
     }
 
-    .section-2 {    
-      .subtotal {
-        gap:22px;
-      }
-    
-      .delivery,
-      .payment-fee {
-        gap:22px;
-      }
+    .product-title {
+      @apply text-2xl font-medium;
     }
-    .section-3 {
-      .price{        
-        @apply text-xl mt-1 pl-6;
-      }
+  }
+  .section-1 {
+    @apply pt-0;
+
+    .unit-price {
+      gap: 22px;
+    }
+
+    .quantity {
+      gap: 22.39px;
     }
   }
 
+  .section-2 {
+    .subtotal {
+      gap: 22px;
+    }
+
+    .delivery,
+    .payment-fee {
+      gap: 22px;
+    }
+  }
+  .section-3 {
+    .price {
+      @apply text-xl mt-1 pl-6;
+    }
+  }
+}
