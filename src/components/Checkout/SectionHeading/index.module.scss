@@ -13,15 +13,15 @@
 
 @media (max-width: 820px) {
   .contact-detail-header {
-    padding-left: 14px;
-    @apply py-3;
+    @apply py-3 px-4;
   }
 
   .contact-detail-header-number {
+    @apply text-xs w-6 h-6;
     border-width: 1px;
-    @apply font-normal font-thicboi text-xs w-6 h-6;
   }
+
   .contact-detail-header-content {
-    @apply font-normal font-thicboi text-base;
+    @apply text-base;
   }
 }

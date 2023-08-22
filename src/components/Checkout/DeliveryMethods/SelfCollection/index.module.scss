@@ -37,19 +37,20 @@
 
 @media (max-width: 820px) {
   .delivery-method-choose-collection {
-    @apply mt-4 text-sm pl-5;
+    @apply mt-4 text-sm;
   }
+
   .delivery-method-choose-form {
-    padding-left: 29px;
-    @apply mt-1;
+    @apply mt-1 pl-8;
+
     > label {
       &:not(:first-of-type) {
-        margin-top: -4px;
+        @apply mt-0;
       }
     }
   }
+
   .delivery-method-information {
-    line-height: 1px;
-    @apply text-xs pl-3 pr-5 mt-5;
+    @apply text-xs mt-4;
   }
 }

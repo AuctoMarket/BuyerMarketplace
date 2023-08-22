@@ -2,6 +2,7 @@
   gap: 42px;
   @apply grid grid-cols-3;
 }
+
 .text-button-1 {
   @apply font-thicboi font-semibold text-sm;
 }
@@ -10,31 +11,26 @@
   font-size: 10px;
   @apply font-thicboi font-normal align-text-top;
 }
+
 .selected {
   @apply border border-solid border-aucto #{!important};
 }
 
 @media (max-width: 820px) {
   .delivery-method-button {
-    @apply flex flex-row gap-0 px-11;
+    @apply grid-cols-2 gap-8 px-6;
   }
 
-  .button-self-collection {
-    height: 34px;
-    @apply w-full mr-8;
-    .text-button-1 {
-      @apply font-thicboi font-semibold text-xs;
-    }
-  }
-
+  .button-self-collection,
   .button-delivery-1 {
     height: 34px;
-    @apply w-full;
-    .text-button-1 {
-      > p {
-        line-height: 9px;
-      }
-      @apply font-thicboi font-semibold text-xs;
-    }
+  }
+
+  .text-button-1 {
+    @apply text-xs;
+  }
+
+  .text-button-2 {
+    margin-top: -4px;
   }
 }

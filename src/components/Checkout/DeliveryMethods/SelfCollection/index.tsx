@@ -28,6 +28,7 @@ export function SelfCollection({
       {...rest}
     >
       <p>Choose you collection point</p>
+
       <Form className={`${styles['delivery-method-choose-form']}`}>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
@@ -100,12 +101,11 @@ export function SelfCollection({
           />
         </Form.Label>
       </Form>
+
       <div className={`${styles['delivery-method-information']}`}>
-        <p>
-          Once payment is completed, you will receive an email to schedule the
-          self collection date and time. If you have any questions, you can
-          reach out to us on telegram
-        </p>
+        Once payment is completed, you will receive an email to schedule the
+        self collection date and time. If you have any questions, you can reach
+        out to us on telegram{' '}
         <Link
           className={`${styles['delivery-method-information-contact']}`}
           to="https://t.me/auctomarketplace"
