@@ -29,7 +29,7 @@ function NumberInput({
       >
         -
       </Button>
-      <input type="number" value={value} readOnly />
+      <input className={styles['input']} type="number" value={value} readOnly />
       <Button
         className={styles['btn-increase']}
         theme="white"

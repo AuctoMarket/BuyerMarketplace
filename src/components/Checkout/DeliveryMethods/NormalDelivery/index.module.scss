@@ -1,0 +1,47 @@
+.delivery-1-container {
+  padding-top: 36px;
+  padding-right: 135px;
+  @apply font-thicboi;
+}
+
+.delivery-1-content-header {
+  @apply text-lg font-normal;
+}
+
+.delivery-1-content-text {
+  color: #858585;
+  @apply text-sm;
+}
+.delivery-1-input {
+  @apply font-semibold text-sm grid mt-5 mb-2;
+  grid-template-columns: 3fr 2fr;
+
+  input {
+    @apply w-full h-12 text-sm text-black mt-3;
+  }
+}
+
+.contact-detail-input-address-2 {
+  @apply mt-8;
+}
+
+.delivery-1-input-postal-code {
+  margin-left: 54px;
+
+  > input {
+    width: 160px;
+  }
+}
+
+.delivery-1-error-message {
+  @apply text-red-700;
+}
+
+.delivery-method-information {
+  margin-top: 42px;
+  font-size: 18px;
+}
+
+.delivery-method-information-contact {
+  @apply underline;
+}
