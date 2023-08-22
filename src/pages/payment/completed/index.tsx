@@ -61,11 +61,8 @@ const PaymentCompletedPage = () => {
                 already, please contact us to verify your payment.{' '}
               </>
             )}
-            {}
             <ButtonLink
-              className={`${styles['button']} ${
-                isMobile() && styles['button-hidden']
-              }`}
+              className={styles['button']}
               theme="black"
               to={`https://t.me/auctomarketplace`}
               target="_blank"
@@ -75,21 +72,7 @@ const PaymentCompletedPage = () => {
           </div>
         </div>
 
-        <OrderDetails
-          className={styles['order-details']}
-          data={orderDetails}
-          showFooter={false}
-        />
-        {isMobile() && (
-          <ButtonLink
-            className={styles['button']}
-            theme="black"
-            to={`https://t.me/auctomarketplace`}
-            target="_blank"
-          >
-            Chat with us
-          </ButtonLink>
-        )}
+        <OrderDetails className={styles['order-details']} data={orderDetails} />
       </div>
     </Layout>
   );

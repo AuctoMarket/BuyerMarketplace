@@ -133,4 +133,8 @@
       @apply text-xl mt-1 pl-6;
     }
   }
+
+  .footer .button {
+    @apply text-lg h-10;
+  }
 }

@@ -30,6 +30,10 @@
 
 .order-details {
   width: 378px;
+
+  > div:last-of-type {
+    @apply hidden;
+  }
 }
 
 @media (max-width: 820px) {
@@ -47,12 +51,24 @@
     .description {
       @apply text-sm p-4;
       margin-top: 10px;
+
+      .button {
+        @apply hidden;
+      }
     }
   }
 
   .order-details {
     @apply w-full;
     margin-top: 22px;
+
+    > div:last-of-type {
+      @apply block;
+
+      > div:first-of-type {
+        @apply hidden;
+      }
+    }
   }
 
   .button {
