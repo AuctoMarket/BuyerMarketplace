@@ -1,0 +1,41 @@
+.payment-method-container {
+  @apply px-14 font-thicboi pt-4 pb-8;
+}
+
+.description {
+  @apply text-lg font-normal;
+}
+
+.note {
+  @apply text-sm;
+  color: #858585;
+}
+
+.form {
+  @apply pl-12 mt-4;
+
+  > label {
+    @apply flex-row justify-start items-baseline;
+    height: 30px;
+    gap: 18px;
+
+    > input {
+      @apply accent-aucto;
+      height: 10px;
+      width: 10px;
+    }
+
+    > span {
+      @apply text-lg font-normal;
+
+      > small {
+        @apply text-sm leading-none block;
+        color: #858585;
+      }
+    }
+
+    &:nth-of-type(2) {
+      @apply mt-6;
+    }
+  }
+}
