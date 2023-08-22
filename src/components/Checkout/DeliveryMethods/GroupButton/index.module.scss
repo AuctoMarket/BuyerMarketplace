@@ -1,0 +1,15 @@
+.delivery-method-button {
+  gap: 42px;
+  @apply grid grid-cols-3;
+}
+.text-button-1 {
+  @apply font-thicboi font-semibold text-sm;
+}
+
+.text-button-2 {
+  font-size: 10px;
+  @apply font-thicboi font-normal align-text-top;
+}
+.selected {
+  @apply border border-solid border-aucto;
+}

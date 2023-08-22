@@ -1,8 +1,9 @@
 .contact-detail-content-container {
-  padding-left: 59px;
-  padding-top: 9px;
-  padding-right: 42px;
-  @apply font-thicboi;
+  @apply px-14 font-thicboi py-4;
+
+  input {
+    @apply w-full h-12 text-sm text-black;
+  }
 }
 
 .contact-detail-content-header {
@@ -14,11 +15,7 @@
   @apply text-sm;
 }
 .contact-detail-input {
-  @apply mt-2 font-semibold text-sm grid grid-cols-2 gap-11 mt-5 mb-2;
-}
-
-input {
-  @apply w-full h-12 text-sm text-black mt-3;
+  @apply font-semibold text-sm grid grid-cols-2 gap-11 mt-5;
 }
 
 .contact-detail-error-message {
