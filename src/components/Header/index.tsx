@@ -15,18 +15,26 @@ interface Props extends ComponentProps<'div'> {}
 
 function Header({ className, ...rest }: Props) {
   const { togglePopup } = useContext(PopupContext);
-  const { user, login, signup } = useAuth();
+  const { user, login, signup, guest, setGuest } = useAuth();
 
   const openLoginForm = () => {
     if (togglePopup) {
-      togglePopup(true, <LoginForm onLogin={handleLogin} />);
+      togglePopup(
+        true,
+        <LoginForm
+          onLogin={handleLogin}
+          onContinueAsGuest={handleContinueAsGuest}
+        />,
+      );
     }
   };
+
   const openSignupForm = () => {
     if (togglePopup) {
       togglePopup(true, <SignupForm onSignup={handleSignup} />);
     }
   };
+
   const handleLogin = async (email: string, password: string) => {
     const responseStatus = await login(email, password);
     console.log(responseStatus);
@@ -40,11 +48,19 @@ function Header({ className, ...rest }: Props) {
       togglePopup(false);
     }
   };
+
   const handleSignup = async (email: string, password: string) => {
     const responseStatus = await signup(email, password);
     console.log(responseStatus);
 
     // Close the signup popup after successful signup
+    if (togglePopup) {
+      togglePopup(false);
+    }
+  };
+
+  const handleContinueAsGuest = () => {
+    setGuest(true);
     if (togglePopup) {
       togglePopup(false);
     }
@@ -74,7 +90,7 @@ function Header({ className, ...rest }: Props) {
       <List
         className={styles['navbar-right']}
         items={
-          !user
+          !user && !guest
             ? [
                 <button
                   className={`${styles['button']} ${styles['login']}`}
@@ -138,7 +154,7 @@ function Header({ className, ...rest }: Props) {
         }
       />
 
-      {!user && (
+      {!user && !guest && (
         <List
           className={styles['navbar-right-mobile']}
           items={[

@@ -1,16 +1,21 @@
 // src/components/LoginForm/index.tsx
 import React, { useState, useContext } from 'react';
 import styles from './index.module.scss';
-import { PopupContext } from '../Popup'; // Import the PopupContext
+import { PopupContext } from '../Popup';
 import SignupForm from '../SignupForm';
 import Icon from '../Icon';
+import { useAuth } from '../../hooks/useAuth';
 
 interface LoginFormProps {
   onLogin?: (email: string, password: string) => void;
+  onContinueAsGuest?: () => void; // Add this prop
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
-  const { togglePopup } = useContext(PopupContext); // Use the PopupContext
+const LoginForm: React.FC<LoginFormProps> = ({
+  onLogin,
+  onContinueAsGuest, // Include the prop in the component
+}) => {
+  const { togglePopup } = useContext(PopupContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,6 +27,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [isMouseUp, setIsMouseUp] = useState(false);
+
+  const { guest } = useAuth();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -61,6 +68,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const handleSignupClick = () => {
     if (togglePopup) {
       togglePopup(true, <SignupForm />);
+    }
+  };
+
+  const handleContinueAsGuestClick = () => {
+    if (onContinueAsGuest) {
+      onContinueAsGuest();
+    }
+    if (togglePopup) {
+      togglePopup(false);
     }
   };
 
@@ -133,6 +149,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         >
           Not a user? Sign up here!
         </button>
+        {!guest && onContinueAsGuest && (
+          <button className={styles.a} onClick={handleContinueAsGuestClick}>
+            Continue as a guest!
+          </button>
+        )}
       </div>
       <div className={styles.btnGroup}>
         {/* Add the data-testid attribute to the login button */}

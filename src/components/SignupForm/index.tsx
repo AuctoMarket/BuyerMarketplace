@@ -110,7 +110,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
         await onSignup(email, password);
       }
     } catch (error) {
-      setEmailError('Email is already in use. Please use another email.'); // Set the error message received from the signup function
+      setEmailError('Email is already in use. Please use another email.');
       setError('');
       return;
     }

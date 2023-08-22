@@ -1,14 +1,31 @@
 // Hooks/useAuth.ts
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import api from '../configs/api';
 
 export function useAuth() {
-  // Retrieve user data from localStorage or set to null if not found
   const initialUserData = JSON.parse(
     localStorage.getItem('userData') || 'null',
   );
+  const initialGuestState = JSON.parse(
+    localStorage.getItem('guestState') || 'false',
+  );
   const [user, setUser] = useState<string | null>(initialUserData);
+  const [guest, setGuestState] = useState(initialGuestState);
+
+  useEffect(() => {
+    // Save user data to local storage whenever user state changes
+    if (user) {
+      localStorage.setItem('userData', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('userData');
+    }
+  }, [user]);
+
+  useEffect(() => {
+    // Save guest state to local storage whenever guest state changes
+    localStorage.setItem('guestState', JSON.stringify(guest));
+  }, [guest]);
 
   const login = async (email: string, password: string) => {
     try {
@@ -25,12 +42,12 @@ export function useAuth() {
       if (response.status === 200) {
         const userData = response.data;
         setUser(userData);
+        setGuestState(false); // Reset guest state on successful login
         return response.status;
       } else if (response.status === 401) {
         console.log('Incorrect email or password.');
         return response.status;
       } else {
-        // throw new Error('Invalid email or password.');
         return response.status;
       }
     } catch (error) {
@@ -53,12 +70,12 @@ export function useAuth() {
       if (response.status === 201) {
         const userData = response.data;
         setUser(userData);
+        setGuestState(false); // Reset guest state on successful signup
         return response.status;
       } else if (response.status === 400) {
         console.log('Email is already in use');
         return response.status;
       } else {
-        // throw new Error('Invalid email or password.');
         return response.status;
       }
     } catch (error) {
@@ -68,8 +85,14 @@ export function useAuth() {
 
   const logout = () => {
     setUser(null);
+    setGuestState(false);
     localStorage.removeItem('userData');
+    localStorage.removeItem('guestState');
   };
 
-  return { user, login, signup, logout };
+  const setGuest = (guestValue: boolean) => {
+    setGuestState(guestValue);
+  };
+
+  return { user, guest, login, signup, logout, setGuest };
 }
