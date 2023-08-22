@@ -48,9 +48,6 @@ export function useAuth() {
         setUser(userData);
         setGuestState(false); // Reset guest state on successful login
         return response.status;
-      } else if (response.status === 401) {
-        console.log('Incorrect email or password.');
-        return response.status;
       } else {
         return response.status;
       }
@@ -75,9 +72,6 @@ export function useAuth() {
         const userData = response.data;
         setUser(userData);
         setGuestState(false); // Reset guest state on successful signup
-        return response.status;
-      } else if (response.status === 400) {
-        console.log('Email is already in use');
         return response.status;
       } else {
         return response.status;
