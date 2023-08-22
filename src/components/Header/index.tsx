@@ -36,12 +36,7 @@ function Header({ className, ...rest }: Props) {
   };
 
   const handleLogin = async (email: string, password: string) => {
-    const responseStatus = await login(email, password);
-    console.log(responseStatus);
-
-    // Handle user session or UI updates here
-    login(email, password);
-    console.log('User logged in:', email);
+    await login(email, password);
 
     // Close the login popup after successful login
     if (togglePopup) {
@@ -50,8 +45,7 @@ function Header({ className, ...rest }: Props) {
   };
 
   const handleSignup = async (email: string, password: string) => {
-    const responseStatus = await signup(email, password);
-    console.log(responseStatus);
+    await signup(email, password);
 
     // Close the signup popup after successful signup
     if (togglePopup) {
@@ -142,9 +136,11 @@ function Header({ className, ...rest }: Props) {
                     >
                       Contact Us
                     </Link>,
-                    <Link to="/profile" key="profile">
-                      Profile
-                    </Link>,
+                    !guest && ( // Check if the user is not a guest
+                      <Link to="/profile" key="profile">
+                        Profile
+                      </Link>
+                    ),
                   ]}
                   key="dropdown"
                 >

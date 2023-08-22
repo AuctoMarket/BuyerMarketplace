@@ -52,11 +52,9 @@ function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {
   };
 
   const handleLogin = async (email: string, password: string) => {
-    const responseStatus = await login(email, password);
-    console.log(responseStatus);
+    await login(email, password);
 
     // Handle user session or UI updates here
-    login(email, password);
     console.log('User logged in:', email);
 
     // Close the login popup after successful login
