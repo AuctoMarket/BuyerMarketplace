@@ -1,0 +1,27 @@
+.payment-page {
+  @apply container mx-auto flex w-full py-14;
+}
+
+.checkout {
+  @apply pr-10;
+  width: calc(100% - 378px);
+
+  .heading {
+    font-size: 32px;
+    @apply font-thicboi font-semibold;
+  }
+
+  .checkout-details {
+    @apply border border-solid;
+    border-color: #afafaf;
+    margin-top: 17px;
+  }
+
+  .checkout-button {
+    @apply mt-8 px-10;
+  }
+}
+
+.order-details {
+  width: 378px;
+}

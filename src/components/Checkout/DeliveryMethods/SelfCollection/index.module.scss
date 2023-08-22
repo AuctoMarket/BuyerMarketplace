@@ -7,12 +7,16 @@
 }
 
 .delivery-method-choose-form {
-  padding-left: 48px;
+  @apply pl-12 mt-4;
 
   > label {
-    @apply flex-row-reverse justify-end mt-2;
+    @apply flex-row-reverse justify-end;
     height: 30px;
     gap: 18px;
+
+    &:not(:first-of-type) {
+      @apply mt-2;
+    }
 
     > input {
       @apply accent-aucto;

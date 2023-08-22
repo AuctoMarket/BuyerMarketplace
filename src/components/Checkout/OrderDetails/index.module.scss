@@ -1,11 +1,11 @@
 .header {
   font-size: 32px;
-  margin-bottom: 17px;
   @apply font-thicboi font-semibold;
 }
 
 .body {
   @apply px-5 py-7 border border-solid font-thicboi text-xl;
+  margin-top: 17px;
   border-color: #afafaf;
   background-color: rgba(175, 175, 175, 0.1);
 
