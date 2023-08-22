@@ -13,7 +13,7 @@
 
 @media (max-width: 820px) {
   .contact-detail-header {
-    @apply py-3 px-4;
+    @apply py-3 px-4 gap-2;
   }
 
   .contact-detail-header-number {
