@@ -83,26 +83,29 @@ function Header({ className, ...rest }: Props) {
       </Link>
       <List
         className={styles['navbar-right']}
-        items={
-          !user && !guest
+        items={[
+          !user && !guest && (
+            <button
+              className={`${styles['button']} ${styles['login']}`}
+              onClick={openLoginForm}
+              key="login"
+              data-testid="login-desktop-button"
+            >
+              Login
+            </button>
+          ),
+          !user && !guest && (
+            <button
+              className={`${styles['button']} ${styles['signup']}`}
+              onClick={openSignupForm}
+              key="signup"
+              data-testid="signup-desktop-button"
+            >
+              Signup
+            </button>
+          ),
+          !user
             ? [
-                <button
-                  className={`${styles['button']} ${styles['login']}`}
-                  onClick={openLoginForm}
-                  key="login"
-                  data-testid="login-desktop-button"
-                >
-                  Login
-                </button>,
-                <button
-                  className={`${styles['button']} ${styles['signup']}`}
-                  onClick={openSignupForm}
-                  key="signup"
-                  data-testid="signup-desktop-button"
-                >
-                  Signup
-                </button>,
-
                 <Dropdown
                   className={styles['dropdown']}
                   items={[
@@ -136,18 +139,17 @@ function Header({ className, ...rest }: Props) {
                     >
                       Contact Us
                     </Link>,
-                    !guest && ( // Check if the user is not a guest
-                      <Link to="/profile" key="profile">
-                        Profile
-                      </Link>
-                    ),
+
+                    <Link to="/profile" key="profile">
+                      Profile
+                    </Link>,
                   ]}
                   key="dropdown"
                 >
                   <Icon name="menu" />
                 </Dropdown>,
-              ]
-        }
+              ],
+        ]}
       />
 
       {!user && !guest && (

@@ -20,7 +20,11 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {
+function ProductPurchaseBuy({
+  className,
+  data: { price, buyQuantity, onChangeBuyQuantity, availableQuantity },
+  ...rest
+}: Props) {
   const { togglePopup } = useContext(PopupContext);
   const { user, login, guest, setGuest } = useAuth();
 
@@ -59,9 +63,6 @@ function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {
   const handleLogin = async (email: string, password: string) => {
     await login(email, password);
 
-    // Handle user session or UI updates here
-    console.log('User logged in:', email);
-
     // Close the login popup after successful login
     if (togglePopup) {
       togglePopup(false);
@@ -92,7 +93,7 @@ function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {
           </span>
         </div>
       </div>
-      <div className={styles['row-2']}>
+      <div className={styles['btn-buy-container']}>
         <Button
           className={styles['button']}
           theme="white"

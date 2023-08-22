@@ -13,7 +13,7 @@ interface LoginFormProps {
 
 const LoginForm: React.FC<LoginFormProps> = ({
   onLogin,
-  onContinueAsGuest, // Include the prop in the component
+  onContinueAsGuest,
 }) => {
   const { togglePopup } = useContext(PopupContext);
 

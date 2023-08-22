@@ -24,7 +24,11 @@ export function useAuth() {
 
   useEffect(() => {
     // Save guest state to local storage whenever guest state changes
-    localStorage.setItem('guestState', JSON.stringify(guest));
+    if (guest) {
+      localStorage.setItem('guestState', JSON.stringify(guest));
+    } else {
+      localStorage.removeItem('guestState');
+    }
   }, [guest]);
 
   const login = async (email: string, password: string) => {
