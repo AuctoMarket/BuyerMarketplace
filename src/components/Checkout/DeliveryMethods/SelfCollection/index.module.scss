@@ -1,0 +1,32 @@
+.delivery-method-choose-collection {
+  @apply mt-9 font-thicboi text-lg font-normal;
+}
+
+.delivery-method-choose-collection-radio {
+  padding-left: 212px;
+}
+
+.delivery-method-choose-form {
+  padding-left: 48px;
+
+  > label {
+    @apply flex-row-reverse justify-end mt-2;
+    height: 30px;
+    gap: 18px;
+
+    > input {
+      @apply accent-aucto;
+      height: 10px;
+      width: 10px;
+    }
+  }
+}
+
+.delivery-method-information {
+  margin-top: 42px;
+  font-size: 18px;
+}
+
+.delivery-method-information-contact {
+  @apply underline;
+}

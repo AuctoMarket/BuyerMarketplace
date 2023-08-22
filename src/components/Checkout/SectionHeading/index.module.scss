@@ -1,9 +1,6 @@
 .contact-detail-header {
-  padding-top: 31px;
-  padding-left: 59px;
-  padding-bottom: 33.18px;
-  border-bottom: 1px solid #afafaf;
-  @apply flex flex-row items-center gap-4;
+  @apply flex flex-row items-center gap-4 py-8 px-14 border-b border-solid;
+  border-color: #afafaf;
 }
 
 .contact-detail-header-number {
