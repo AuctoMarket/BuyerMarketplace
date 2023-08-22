@@ -4,6 +4,7 @@ import styles from './index.module.scss';
 import Button from '../../../Button';
 import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
+import NumberInput from '../../../NumberInput';
 
 import type { Product } from '../../../../types/product.type';
 
@@ -12,7 +13,11 @@ import LoginForm from '../../../LoginForm';
 import { useAuth } from '../../../../hooks/useAuth';
 
 interface Props extends ComponentProps<'div'> {
-  data: Pick<Product, 'price'>;
+  data: Pick<Product, 'price'> & {
+    buyQuantity: number;
+    onChangeBuyQuantity: (quantity: number) => void;
+    availableQuantity: number;
+  };
 }
 
 function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {
@@ -65,10 +70,26 @@ function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {
 
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
-      <div className={styles['row-1']}>
-        <div className={styles['col-1']}>
-          <label className={styles['label']}>Price:</label>
-          <ProductPrice className={styles['price']} data={{ price }} />
+      <div className={styles['price-container']}>
+        <label className={styles['label']}>Price:</label>
+        <ProductPrice
+          className={styles['price']}
+          data={{ price: price * buyQuantity }}
+        />
+      </div>
+      <div className={styles['quantity-container']}>
+        <label className={styles['label']}>Quantity:</label>
+        <div>
+          <NumberInput
+            className={styles['quantity']}
+            value={buyQuantity}
+            onChangeValue={onChangeBuyQuantity}
+            min={1}
+            max={availableQuantity}
+          />
+          <span className={styles['available-quantity']}>
+            {availableQuantity} pieces available
+          </span>
         </div>
       </div>
       <div className={styles['row-2']}>
@@ -80,7 +101,7 @@ function ProductPurchaseBuy({ className, data: { price }, ...rest }: Props) {
           Buy
         </Button>
       </div>
-      <div className={styles['row-3']}>
+      <div className={styles['btn-chat-container']}>
         <ButtonLink
           className={styles['button']}
           theme="black"

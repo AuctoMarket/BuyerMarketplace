@@ -1,0 +1,26 @@
+.number-input {
+  @apply flex flex-row;
+
+  .btn-decrease,
+  .btn-increase {
+    @apply w-10 h-10 font-bold font-thicboi text-2xl;
+  }
+
+  .btn-decrease,
+  .btn-increase {
+    &:not(:disabled):hover {
+      @apply bg-white text-aucto border border-aucto;
+    }
+  }
+
+  .input {
+    @apply w-16 h-10 text-center font-bold font-thicboi text-2xl border-t border-b border-solid border-black rounded-none;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}

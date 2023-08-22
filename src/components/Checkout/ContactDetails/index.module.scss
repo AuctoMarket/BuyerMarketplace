@@ -1,0 +1,23 @@
+.contact-detail-content-container {
+  @apply px-14 font-thicboi py-4;
+
+  input {
+    @apply w-full h-12 text-sm text-black;
+  }
+}
+
+.contact-detail-content-header {
+  @apply text-lg font-normal;
+}
+
+.contact-detail-content-text {
+  color: #858585;
+  @apply text-sm;
+}
+.contact-detail-input {
+  @apply font-semibold text-sm grid grid-cols-2 gap-11 mt-5;
+}
+
+.contact-detail-error-message {
+  @apply text-red-700;
+}

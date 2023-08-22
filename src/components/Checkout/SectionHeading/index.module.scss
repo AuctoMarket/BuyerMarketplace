@@ -1,0 +1,12 @@
+.contact-detail-header {
+  @apply flex flex-row items-center gap-4 py-8 px-14 border-b border-solid;
+  border-color: #afafaf;
+}
+
+.contact-detail-header-number {
+  @apply font-thicboi text-xl font-normal w-10 h-10 border-2 border-aucto rounded-full flex items-center justify-center;
+}
+
+.contact-detail-header-content {
+  @apply font-thicboi text-3xl font-normal;
+}
