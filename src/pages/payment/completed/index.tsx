@@ -6,10 +6,6 @@ import OrderDetails from '../../../components/Checkout/OrderDetails';
 import ButtonLink from '../../../components/Button/Link';
 import useProduct from '../../../hooks/useProduct';
 
-function isMobile() {
-  return window.innerWidth <= 820;
-}
-
 const PaymentCompletedPage = () => {
   // the following implementation is for demo purposes only
   // TODO: fetch order details
