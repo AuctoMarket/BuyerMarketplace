@@ -1,0 +1,73 @@
+.payment-status-page {
+  @apply container mx-auto flex w-full py-14;
+}
+
+.payment-status {
+  @apply pr-10;
+  width: calc(100% - 378px);
+
+  .heading {
+    font-size: 32px;
+    @apply font-thicboi font-semibold;
+  }
+
+  .description {
+    @apply border border-solid p-12 font-thicboi mt-4 font-light;
+    border-color: #afafaf;
+    font-size: 28px;
+    line-height: 32px;
+
+    .button {
+      @apply mt-8;
+      width: 375px;
+    }
+  }
+}
+
+.order-details {
+  width: 378px;
+
+  > div:last-of-type {
+    @apply hidden;
+  }
+}
+
+@media (max-width: 820px) {
+  .payment-status-page {
+    @apply flex flex-col w-full px-4 py-8;
+  }
+
+  .payment-status {
+    @apply w-full pr-0;
+
+    .heading {
+      @apply text-xl;
+    }
+
+    .description {
+      @apply text-sm p-4;
+      margin-top: 10px;
+
+      .button {
+        @apply hidden;
+      }
+    }
+  }
+
+  .order-details {
+    @apply w-full;
+    margin-top: 22px;
+
+    > div:last-of-type {
+      @apply block;
+
+      > div:first-of-type {
+        @apply hidden;
+      }
+    }
+  }
+
+  .button {
+    @apply mt-7;
+  }
+}
