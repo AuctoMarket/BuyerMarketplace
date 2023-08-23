@@ -1,13 +1,13 @@
 import React from 'react';
 
 import styles from './index.module.scss';
-import Layout from '../../../components/Layout';
-import Button from '../../../components/Button';
-import OrderDetails from '../../../components/Checkout/OrderDetails';
-import ContactDetails from '../../../components/Checkout/ContactDetails';
-import DeliveryMethods from '../../../components/Checkout/DeliveryMethods';
-import PaymentMethods from '../../../components/Checkout/PaymentMethods';
-import useProduct from '../../../hooks/useProduct';
+import Layout from '../../components/Layout';
+import Button from '../../components/Button';
+import OrderDetails from '../../components/Checkout/OrderDetails';
+import ContactDetails from '../../components/Checkout/ContactDetails';
+import DeliveryMethods from '../../components/Checkout/DeliveryMethods';
+import PaymentMethods from '../../components/Checkout/PaymentMethods';
+import useProduct from '../../hooks/useProduct';
 
 import {
   CollectionPoint,
@@ -16,9 +16,9 @@ import {
   DeliveryMethodsData,
   PaymentMethod,
   PaymentMethodsData,
-} from '../../../types/checkout.type';
+} from '../../types/checkout.type';
 
-const PaymentCheckoutPage = () => {
+const CheckoutPage = () => {
   // the following implementation is for demo purposes only
   const [checkout, setCheckout] = React.useState<{
     contactDetails: ContactDetailsData;
@@ -62,7 +62,7 @@ const PaymentCheckoutPage = () => {
 
   return (
     <Layout>
-      <div className={styles['payment-page']}>
+      <div className={styles['checkout-page']}>
         <div className={styles['checkout']}>
           <h1 className={styles['heading']}>Checkout Details</h1>
 
@@ -109,4 +109,4 @@ const PaymentCheckoutPage = () => {
   );
 };
 
-export default PaymentCheckoutPage;
+export default CheckoutPage;
