@@ -5,9 +5,7 @@
 .checkout {
   @apply pr-10;
   width: calc(100% - 378px);
-  .order-details-mobile {
-    @apply hidden;
-  }
+
   .heading {
     font-size: 32px;
     @apply font-thicboi font-semibold;
@@ -41,7 +39,7 @@
     }
 
     .checkout-details {
-      @apply mt-1;
+      margin-top: 10px;
     }
   }
 

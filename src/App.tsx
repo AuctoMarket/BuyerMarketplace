@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import CheckoutPage from './pages/checkout';
-import PaymentCompletedPage from './pages/payment/completed';
+import OrderPaymentStatusPage from './pages/orders/payment-status';
 import ProductPage from './pages/product';
 import HomePage from './pages/home';
 import Popup, { PopupContext } from './components/Popup';
@@ -42,8 +42,8 @@ function App() {
             element: <CheckoutPage />,
           },
           {
-            path: '/payment/completed',
-            element: <PaymentCompletedPage />,
+            path: '/orders/:id/payment-status',
+            element: <OrderPaymentStatusPage />,
           },
           {
             path: '/products/:id',

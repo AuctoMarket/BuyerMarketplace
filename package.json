@@ -50,6 +50,9 @@
     "web-vitals": "2.1.4"
   },
   "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    },
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/hooks/**/*",
