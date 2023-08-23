@@ -1,67 +1,63 @@
 // src/components/LoginForm/index.tsx
 import React, { useState, useContext } from 'react';
 import styles from './index.module.scss';
-import { PopupContext } from '../Popup'; // Import the PopupContext
+import { PopupContext } from '../Popup';
 import SignupForm from '../SignupForm';
+import Icon from '../Icon';
+import { useAuth } from '../../hooks/useAuth';
 
 interface LoginFormProps {
   onLogin?: (email: string, password: string) => void;
+  onContinueAsGuest?: () => void; // Add this prop
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
-  const { togglePopup } = useContext(PopupContext); // Use the PopupContext
+const LoginForm: React.FC<LoginFormProps> = ({
+  onLogin,
+  onContinueAsGuest,
+}) => {
+  const { togglePopup } = useContext(PopupContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
+
+  const [isMouseUp, setIsMouseUp] = useState(false);
+
+  const { guest } = useAuth();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-    setError(''); // Clear any previous error message when user starts typing
+    setEmailError('');
+    setError('');
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    setError(''); // Clear any previous error message when user starts typing
+    setPasswordError('');
+    setError('');
   };
 
-  const validateEmail = (email: string) => {
-    // Regular expression to check email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password: string) => {
-    // Regular expression to check password format
-    const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
-    return passwordRegex.test(password);
-  };
-
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Perform input validation
     if (!email.trim() || !password.trim()) {
       setError('Please fill in all fields.');
       return;
     }
 
-    // Validate email format
-    if (!validateEmail(email)) {
-      setError('Please enter a valid email address.');
+    try {
+      // Call the onSignup prop to handle the signup action
+      if (onLogin) {
+        await onLogin(email, password);
+      }
+    } catch (error) {
+      setEmailError('Incorrect email or password.');
+      setError('');
       return;
-    }
-
-    // Validate password format
-    if (!validatePassword(password)) {
-      setError(
-        'Password should be longer than 6 characters, with at least 1 letter, 1 number, and 1 symbol.',
-      );
-      return;
-    }
-
-    // Call the onLogin prop to handle the login action
-    if (onLogin) {
-      onLogin(email, password);
     }
   };
 
@@ -75,46 +71,89 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     }
   };
 
+  const handleContinueAsGuestClick = () => {
+    if (onContinueAsGuest) {
+      onContinueAsGuest();
+    }
+    if (togglePopup) {
+      togglePopup(false);
+    }
+  };
+
+  const handleMouseDown = () => {
+    setIsMouseUp(false);
+    setShowPassword(true); // Password is visible when mouse is down
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseUp(true);
+    setShowPassword(false); // Password is hidden when mouse is released
+  };
+
   return (
     <>
       <div className={styles['login-title']}>Login</div>
-      {error && (
-        <div className={styles.error} data-testid="error-message">
-          {error}
-        </div>
-      )}
       <div className={styles.inputGroup}>
-        <input
-          type="text"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="Email"
-        />
+        {error && (
+          <div className={styles.error} data-testid="error-message">
+            {error}
+          </div>
+        )}
+        {emailError && (
+          <div className={styles.error} data-testid="email-error-message">
+            {emailError}
+          </div>
+        )}
+        <div className={styles.input}>
+          <input
+            type="text"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="Email"
+          />
+        </div>
       </div>
       <div className={styles.inputGroup}>
+        {passwordError && (
+          <div className={styles.error} data-testid="password-error-message">
+            {passwordError}
+          </div>
+        )}
         <div className={styles.passwordInput}>
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={isMouseUp || !showPassword ? 'password' : 'text'}
             id="password"
             value={password}
             onChange={handlePasswordChange}
             placeholder="Password"
           />
-          <span
+          <Icon
+            name="password-visibility"
             className={styles.visibilityIcon}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onTouchStart={handleMouseDown}
+            onTouchEnd={handleMouseUp}
             onClick={togglePasswordVisibility}
-          >
-            {showPassword ? '🙈' : '👁️'}
-          </span>
+            data-testid="password-visibility-icon"
+          />
         </div>
       </div>
       <div className={styles.links}>
-        <a href="!#">Forgot your password?</a>
         {/* Use the handleSignupClick function to open the signup form in a popup */}
-        <a href="!#" onClick={handleSignupClick}>
+        <button
+          className={styles.a}
+          onClick={handleSignupClick}
+          data-testid="signup-button"
+        >
           Not a user? Sign up here!
-        </a>
+        </button>
+        {!guest && onContinueAsGuest && (
+          <button className={styles.a} onClick={handleContinueAsGuestClick}>
+            Continue as a guest!
+          </button>
+        )}
       </div>
       <div className={styles.btnGroup}>
         {/* Add the data-testid attribute to the login button */}

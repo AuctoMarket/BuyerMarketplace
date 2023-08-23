@@ -6,7 +6,7 @@ import OrderDetails from '../../../components/Checkout/OrderDetails';
 import ButtonLink from '../../../components/Button/Link';
 import useProduct from '../../../hooks/useProduct';
 
-const PaymentCompletedPage = () => {
+const OrderPaymentStatusPage = () => {
   // the following implementation is for demo purposes only
   // TODO: fetch order details
   const { product } = useProduct('25139b94-3a54-11ee-a2be-0aec91b1c67e');
@@ -26,8 +26,8 @@ const PaymentCompletedPage = () => {
 
   return (
     <Layout>
-      <div className={styles['payment-page']}>
-        <div className={styles['payment-completed']}>
+      <div className={styles['payment-status-page']}>
+        <div className={styles['payment-status']}>
           <h1 className={styles['heading']}>Payment Completed</h1>
 
           <div className={styles['description']}>
@@ -68,14 +68,10 @@ const PaymentCompletedPage = () => {
           </div>
         </div>
 
-        <OrderDetails
-          className={styles['order-details']}
-          data={orderDetails}
-          showFooter={false}
-        />
+        <OrderDetails className={styles['order-details']} data={orderDetails} />
       </div>
     </Layout>
   );
 };
 
-export default PaymentCompletedPage;
+export default OrderPaymentStatusPage;
