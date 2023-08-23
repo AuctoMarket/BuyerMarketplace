@@ -46,7 +46,7 @@ export function PaymentMethods({
             <Radio
               className={styles['radio']}
               name="option"
-              value={data.paymentMethod}
+              value={PaymentMethod.PayNow}
               checked={data.paymentMethod === PaymentMethod.PayNow}
               onChange={handleChangePaymentMethod}
               size="xs"
@@ -59,7 +59,7 @@ export function PaymentMethods({
             <Radio
               className={styles['radio']}
               name="option"
-              value={data.paymentMethod}
+              value={PaymentMethod.Card}
               checked={data.paymentMethod === PaymentMethod.Card}
               onChange={handleChangePaymentMethod}
               size="xs"

@@ -128,11 +128,9 @@ export function NormalDelivery({
         </div>
       </div>
       <div className={`${styles['delivery-method-information']}`}>
-        <p>
-          Once payment is completed, you will receive an email to schedule the
-          delivery date and time. If you have any questions, you can reach out
-          to us on telegram
-        </p>
+        Once payment is completed, you will receive an email to schedule the
+        delivery date and time. If you have any questions, you can reach out to
+        us on telegram{' '}
         <Link
           className={`${styles['delivery-method-information-contact']}`}
           to="https://t.me/auctomarketplace"

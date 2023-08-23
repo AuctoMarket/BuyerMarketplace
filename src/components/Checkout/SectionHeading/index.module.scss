@@ -10,3 +10,18 @@
 .contact-detail-header-content {
   @apply font-thicboi text-3xl font-normal;
 }
+
+@media (max-width: 820px) {
+  .contact-detail-header {
+    @apply py-3 px-4 gap-2;
+  }
+
+  .contact-detail-header-number {
+    @apply text-xs w-6 h-6;
+    border-width: 1px;
+  }
+
+  .contact-detail-header-content {
+    @apply text-base;
+  }
+}

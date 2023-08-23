@@ -97,13 +97,13 @@ const CheckoutPage = () => {
               }
             />
           </div>
-
-          <Button className={styles['checkout-button']}>
-            Proceed to payment
-          </Button>
         </div>
 
         <OrderDetails className={styles['order-details']} data={orderDetails} />
+
+        <Button className={styles['checkout-button']}>
+          Proceed to payment
+        </Button>
       </div>
     </Layout>
   );
