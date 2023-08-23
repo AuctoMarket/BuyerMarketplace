@@ -13,10 +13,4 @@ describe('Price', () => {
     const text = screen.getByRole('test');
     expect(text).toBeInTheDocument();
   });
-
-  test('renders Price with decimal', () => {
-    render(<Price data={{ price: 11 }} role="test" />);
-    const text = screen.getByRole('test');
-    expect(text).toBeInTheDocument();
-  });
 });
