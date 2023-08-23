@@ -1,12 +1,13 @@
 import React, { ComponentProps } from 'react';
+import { Form, Radio } from 'react-daisyui';
 
 import styles from './index.module.scss';
 import SectionHeading from '../SectionHeading';
-import { Form, Radio } from 'react-daisyui';
 
-export interface PaymentMethodsData {
-  paymentMethod: string;
-}
+import {
+  PaymentMethod,
+  PaymentMethodsData,
+} from '../../../types/checkout.type';
 
 interface Props extends ComponentProps<'div'> {
   data: PaymentMethodsData;
@@ -22,7 +23,7 @@ export function PaymentMethods({
   const handleChangePaymentMethod = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    onChangeData({ paymentMethod: event.target.value });
+    onChangeData({ paymentMethod: event.target.value as PaymentMethod });
   };
 
   return (
@@ -46,7 +47,20 @@ export function PaymentMethods({
               className={styles['radio']}
               name="option"
               value={data.paymentMethod}
-              checked={data.paymentMethod === 'card'}
+              checked={data.paymentMethod === PaymentMethod.PayNow}
+              onChange={handleChangePaymentMethod}
+              size="xs"
+              data-testid="paynow"
+            />
+            <span>PayNow</span>
+          </Form.Label>
+
+          <Form.Label className={styles['label']}>
+            <Radio
+              className={styles['radio']}
+              name="option"
+              value={data.paymentMethod}
+              checked={data.paymentMethod === PaymentMethod.Card}
               onChange={handleChangePaymentMethod}
               size="xs"
               data-testid="card"
@@ -55,19 +69,6 @@ export function PaymentMethods({
               Card Payment
               <small>*2% Payment Processing Fee</small>
             </span>
-          </Form.Label>
-
-          <Form.Label className={styles['label']}>
-            <Radio
-              className={styles['radio']}
-              name="option"
-              value={data.paymentMethod}
-              checked={data.paymentMethod === 'paynow'}
-              onChange={handleChangePaymentMethod}
-              size="xs"
-              data-testid="paynow"
-            />
-            <span>PayNow</span>
           </Form.Label>
         </Form>
       </div>

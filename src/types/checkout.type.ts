@@ -1,10 +1,3 @@
-interface ContactDetailsData {
-  email: string;
-  emailConfirm: string;
-  phoneNumber: string;
-  telegramHandle: string;
-}
-
 enum DeliveryMethod {
   SelfCollection = 'Self Collection',
   NormalDelivery = 'Normal Delivery',
@@ -16,6 +9,18 @@ enum CollectionPoint {
   AngMoKioMRT = 'Ang Mo Kio MRT',
   WoodlandsMRT = 'Woodlands MRT',
   BishanMRT = 'Bishan MRT',
+}
+
+enum PaymentMethod {
+  Card = 'Card',
+  PayNow = 'PayNow',
+}
+
+interface ContactDetailsData {
+  email: string;
+  emailConfirm: string;
+  phoneNumber: string;
+  telegramHandle: string;
 }
 
 interface DeliveryMethodsData {
@@ -30,5 +35,9 @@ interface DeliveryMethodsData {
   };
 }
 
-export { DeliveryMethod, CollectionPoint };
-export type { ContactDetailsData, DeliveryMethodsData };
+interface PaymentMethodsData {
+  paymentMethod: PaymentMethod;
+}
+
+export { DeliveryMethod, CollectionPoint, PaymentMethod };
+export type { ContactDetailsData, DeliveryMethodsData, PaymentMethodsData };

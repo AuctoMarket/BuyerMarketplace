@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
 import ProductPage from './pages/product';
 import HomePage from './pages/home';
@@ -36,6 +37,10 @@ function App() {
 
       <RouterProvider
         router={createRouter([
+          {
+            path: '/checkout',
+            element: <CheckoutPage />,
+          },
           {
             path: '/orders/:id/payment-status',
             element: <OrderPaymentStatusPage />,

@@ -11,5 +11,5 @@
   @apply font-thicboi font-normal align-text-top;
 }
 .selected {
-  @apply border border-solid border-aucto;
+  @apply border border-solid border-aucto #{!important};
 }
