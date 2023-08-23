@@ -78,77 +78,52 @@ function Header({ className, ...rest }: Props) {
           </Dropdown>,
         ]}
       />
+
       <Link className={styles['logo']} to="/">
         <Logo type="horizontal" theme="inverted-color" />
       </Link>
+
       <List
         className={styles['navbar-right']}
         items={[
-          !user && !guest && (
-            <button
-              className={`${styles['button']} ${styles['login']}`}
-              onClick={openLoginForm}
-              key="login"
-              data-testid="login-desktop-button"
-            >
-              Login
-            </button>
-          ),
-          !user && !guest && (
-            <button
-              className={`${styles['button']} ${styles['signup']}`}
-              onClick={openSignupForm}
-              key="signup"
-              data-testid="signup-desktop-button"
-            >
-              Signup
-            </button>
-          ),
-          !user
+          ...(!user && !guest
             ? [
-                <Dropdown
-                  className={styles['dropdown']}
-                  items={[
-                    <Link to="/" key="marketplace">
-                      Marketplace
-                    </Link>,
-                    <Link
-                      to="https://t.me/auctomarketplace"
-                      target="_blank"
-                      key="contact"
-                    >
-                      Contact Us
-                    </Link>,
-                  ]}
-                  key="dropdown"
+                <button
+                  className={`${styles['button']} ${styles['login']}`}
+                  onClick={openLoginForm}
+                  key="login"
+                  data-testid="login-desktop-button"
                 >
-                  <Icon name="menu" />
-                </Dropdown>,
+                  Login
+                </button>,
+                <button
+                  className={`${styles['button']} ${styles['signup']}`}
+                  onClick={openSignupForm}
+                  key="signup"
+                  data-testid="signup-desktop-button"
+                >
+                  Signup
+                </button>,
               ]
-            : [
-                <Dropdown
-                  className={styles['dropdown']}
-                  items={[
-                    <Link to="/" key="marketplace">
-                      Marketplace
-                    </Link>,
-                    <Link
-                      to="https://t.me/auctomarketplace"
-                      target="_blank"
-                      key="contact"
-                    >
-                      Contact Us
-                    </Link>,
-
-                    <Link to="/profile" key="profile">
-                      Profile
-                    </Link>,
-                  ]}
-                  key="dropdown"
-                >
-                  <Icon name="menu" />
-                </Dropdown>,
-              ],
+            : []),
+          <Dropdown
+            className={styles['dropdown']}
+            items={[
+              <Link to="/" key="marketplace">
+                Marketplace
+              </Link>,
+              <Link
+                to="https://t.me/auctomarketplace"
+                target="_blank"
+                key="contact"
+              >
+                Contact Us
+              </Link>,
+            ]}
+            key="dropdown"
+          >
+            <Icon name="menu" />
+          </Dropdown>,
         ]}
       />
 
