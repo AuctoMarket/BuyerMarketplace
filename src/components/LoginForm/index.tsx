@@ -90,6 +90,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
     setShowPassword(false); // Password is hidden when mouse is released
   };
 
+  const handleContextMenu = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.preventDefault(); // Prevent the default context menu
+  };
+
   return (
     <>
       <div className={styles['login-title']}>Login</div>
@@ -135,6 +141,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
             onMouseUp={handleMouseUp}
             onTouchStart={handleMouseDown}
             onTouchEnd={handleMouseUp}
+            onContextMenu={handleContextMenu}
             onClick={togglePasswordVisibility}
             data-testid="password-visibility-icon"
           />

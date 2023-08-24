@@ -146,6 +146,12 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
     setShowConfirmPassword(false); // Password is hidden when mouse is released
   };
 
+  const handleContextMenu = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.preventDefault(); // Prevent the default context menu
+  };
+
   return (
     <>
       <div className={styles['signup-title']}>Sign Up</div>
@@ -189,6 +195,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
             onMouseUp={handleMouseUp}
             onTouchStart={handleMouseDown}
             onTouchEnd={handleMouseUp}
+            onContextMenu={handleContextMenu}
             onClick={togglePasswordVisibility}
             data-testid="password-visibility-icon"
           />
@@ -210,6 +217,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
             onMouseUp={handleMouseUp2}
             onTouchStart={handleMouseDown2}
             onTouchEnd={handleMouseUp2}
+            onContextMenu={handleContextMenu}
             onClick={togglePasswordVisibility}
             data-testid="password-visibility-icon-2"
           />
