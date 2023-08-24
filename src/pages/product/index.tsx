@@ -35,6 +35,12 @@ function ProductDetailsPage() {
     { sort_by: 'posted_date' },
   );
 
+  const handleBuy = () => {
+    console.log('buy');
+
+    window.location.href = `/checkout?productId=${id}&quantity=${quantity}`;
+  };
+
   return (
     <Layout>
       {product && (
@@ -79,9 +85,10 @@ function ProductDetailsPage() {
                   data={{
                     availableQuantity: product.quantity - product.soldQuantity,
                     price: product.price,
-                    buyQuantity: quantity,
-                    onChangeBuyQuantity: (value) => setQuantity(value),
+                    quantity,
                   }}
+                  onChangeQuantity={setQuantity}
+                  onBuy={handleBuy}
                 />
               ) : (
                 <ProductPurchasePreOrder data={{ price: product.price }} />

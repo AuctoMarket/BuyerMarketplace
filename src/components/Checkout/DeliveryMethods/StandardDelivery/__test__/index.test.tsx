@@ -1,15 +1,15 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import NormalDelivery from '..';
+import StandardDelivery from '..';
 
-describe('NormalDelivery', () => {
+describe('StandardDelivery', () => {
   const TestComponent = () => (
     <BrowserRouter>
-      <NormalDelivery
+      <StandardDelivery
         data={{
-          address1: '',
-          address2: '',
+          addressLine1: '',
+          addressLine2: '',
           postalCode: '',
         }}
         onChangeData={() => {}}
@@ -18,7 +18,7 @@ describe('NormalDelivery', () => {
     </BrowserRouter>
   );
 
-  test('renders NormalDelivery', async () => {
+  test('renders StandardDelivery', async () => {
     render(<TestComponent />);
 
     const normalDelivery = await screen.findByRole('normal-delivery');

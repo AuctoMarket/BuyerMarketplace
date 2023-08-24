@@ -3,20 +3,14 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import GroupButton from '..';
-import { DeliveryMethod } from '../../../../../types/checkout.type';
+import { DeliveryMethod } from '../../../../../types/order.type';
 
 describe('GroupButton', () => {
   const TestComponent = () => {
-    const [selectedMethod, setSelectedMethod] = React.useState(
-      DeliveryMethod.SelfCollection,
-    );
+    const [data, setData] = React.useState(DeliveryMethod.SelfCollection);
 
     return (
-      <GroupButton
-        method={selectedMethod}
-        onChangeMethod={setSelectedMethod}
-        role="GroupButton"
-      />
+      <GroupButton data={data} onChangeData={setData} role="GroupButton" />
     );
   };
 

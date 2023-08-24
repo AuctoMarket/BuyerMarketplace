@@ -2,32 +2,44 @@ import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
 import Button from '../../../Button';
-import { DeliveryMethod } from '../../../../types/checkout.type';
+import { DeliveryMethod } from '../../../../types/order.type';
 
 interface Props extends ComponentProps<'div'> {
-  method: DeliveryMethod;
-  onChangeMethod: (method: DeliveryMethod) => void;
+  data: DeliveryMethod;
+  onChangeData: (data: DeliveryMethod) => void;
 }
 
-export function GroupButton({ method, onChangeMethod, ...rest }: Props) {
+export function GroupButton({ data, onChangeData, ...rest }: Props) {
+  const handleChangeDeliveryMethod = (deliveryMethod: DeliveryMethod) => {
+    if (data === deliveryMethod) {
+      return;
+    }
+
+    onChangeData(deliveryMethod);
+  };
+
   return (
     <div className={`${styles['delivery-method-button']}`} {...rest}>
       <Button
         className={`${styles['button-self-collection']} ${
-          method === DeliveryMethod.SelfCollection && styles['selected']
+          data === DeliveryMethod.SelfCollection && styles['selected']
         }`}
         theme="gray"
-        onClick={() => onChangeMethod(DeliveryMethod.SelfCollection)}
+        onClick={() =>
+          handleChangeDeliveryMethod(DeliveryMethod.SelfCollection)
+        }
         data-testid="btn-1"
       >
         <div className={styles['text-button-1']}>Self-collection</div>
       </Button>
       <Button
         className={`${styles['button-delivery-1']} ${
-          method === DeliveryMethod.NormalDelivery && styles['selected']
+          data === DeliveryMethod.StandardDelivery && styles['selected']
         }`}
         theme="gray"
-        onClick={() => onChangeMethod(DeliveryMethod.NormalDelivery)}
+        onClick={() =>
+          handleChangeDeliveryMethod(DeliveryMethod.StandardDelivery)
+        }
         data-testid="btn-2"
       >
         <div className={styles['text-button-1']}>

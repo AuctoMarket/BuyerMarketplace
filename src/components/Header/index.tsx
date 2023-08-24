@@ -6,10 +6,10 @@ import Logo from '../Logo';
 import List from '../List';
 import Icon from '../Icon';
 import Dropdown from '../Dropdown';
-import { PopupContext } from '../../components/Popup';
 import LoginForm from '../../components/LoginForm';
 import SignupForm from '../../components/SignupForm';
-import { useAuth } from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
+import { PopupContext } from '../../components/Popup';
 
 interface Props extends ComponentProps<'div'> {}
 

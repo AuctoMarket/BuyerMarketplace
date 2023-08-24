@@ -1,63 +1,127 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import Button from '../../components/Button';
 import OrderDetails from '../../components/Checkout/OrderDetails';
-import ContactDetails from '../../components/Checkout/ContactDetails';
+import OrderContactDetails from '../../components/Checkout/ContactDetails';
 import DeliveryMethods from '../../components/Checkout/DeliveryMethods';
 import PaymentMethods from '../../components/Checkout/PaymentMethods';
+import useAuth from '../../hooks/useAuth';
+import useQueryParams from '../../hooks/useQueryParams';
 import useProduct from '../../hooks/useProduct';
-
+import ordersApi from '../../apis/orders';
+import calculateOrderFees from '../../utils/calculateOrderFees';
 import {
-  CollectionPoint,
-  ContactDetailsData,
   DeliveryMethod,
-  DeliveryMethodsData,
+  CollectionPoint,
+  CollectionPointAddress,
   PaymentMethod,
-  PaymentMethodsData,
-} from '../../types/checkout.type';
+} from '../../types/order.type';
+
+import type { Product } from '../../types/product.type';
+import type { Order } from '../../types/order.type';
 
 const CheckoutPage = () => {
-  // the following implementation is for demo purposes only
-  const [checkout, setCheckout] = React.useState<{
-    contactDetails: ContactDetailsData;
-    deliveryMethods: DeliveryMethodsData;
-    paymentMethods: PaymentMethodsData;
-  }>({
-    contactDetails: {
-      email: '',
-      emailConfirm: '',
-      phoneNumber: '',
-      telegramHandle: '',
-    },
-    deliveryMethods: {
-      deliveryMethod: DeliveryMethod.SelfCollection,
-      selfCollection: {
-        collectionPoint: CollectionPoint.BotanicGardensMRT,
+  const queryParams = useQueryParams();
+  const { guest: isGuest, user } = useAuth();
+  const { product } = useProduct(queryParams.get('productId') as string);
+  const [order, setOrder] =
+    useState<Omit<Order, 'id' | 'paymentStatus' | 'orderedDate'>>();
+
+  useEffect(() => {
+    if (!product) {
+      return;
+    }
+
+    const price = product.price;
+    const quantity = parseInt(queryParams.get('quantity') as string, 10);
+    const deliveryMethod = DeliveryMethod.SelfCollection;
+    const paymentMethod = PaymentMethod.PayNow;
+    const { subTotal, additionalFee, deliveryFee, paymentFee, total } =
+      calculateOrderFees({
+        price,
+        quantity,
+        deliveryMethod,
+        paymentMethod,
+      });
+
+    setOrder({
+      productId: product.id,
+      price,
+      quantity,
+      subTotal,
+      additionalFee,
+      deliveryFee,
+      paymentFee,
+      total,
+      buyerId: !isGuest ? user.buyer_id : undefined,
+      contactDetails: {
+        email: !isGuest ? user.email : '',
+        emailConfirm: !isGuest ? user.email : '',
+        phoneNumber: '',
+        telegramHandle: '',
       },
-      normalDelivery: {
-        address1: '',
-        address2: '',
-        postalCode: '',
-      },
-    },
-    paymentMethods: {
-      paymentMethod: PaymentMethod.PayNow,
-    },
-  });
-  // TODO: fetch order details
-  const { product } = useProduct('25139b94-3a54-11ee-a2be-0aec91b1c67e');
-  if (!product) {
+      deliveryMethod,
+      deliveryAddress:
+        CollectionPointAddress[CollectionPoint.BotanicGardensMRT],
+      paymentMethod,
+    });
+  }, [queryParams, isGuest, user, product]);
+
+  if (!order) {
     return null;
   }
-  const orderDetails = {
-    product,
-    quantity: 1,
-    subTotal: 100,
-    delivery: 0,
-    paymentFee: 0,
-    orderTotal: 100,
+
+  const handleChangeContactDetails = (
+    contactDetails: Order['contactDetails'],
+  ) => {
+    setOrder({
+      ...order,
+      contactDetails,
+    });
+  };
+
+  const handleChangeDeliveryMethod = ({
+    deliveryMethod,
+    deliveryAddress,
+  }: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>) => {
+    const fees = calculateOrderFees({
+      price: order.price,
+      quantity: order.quantity,
+      deliveryMethod,
+      paymentMethod: order.paymentMethod,
+    });
+
+    setOrder({
+      ...order,
+      ...fees,
+      deliveryMethod,
+      deliveryAddress,
+    });
+  };
+
+  const handleChangePaymentMethod = (paymentMethod: Order['paymentMethod']) => {
+    const fees = calculateOrderFees({
+      price: order.price,
+      quantity: order.quantity,
+      deliveryMethod: order.deliveryMethod,
+      paymentMethod,
+    });
+
+    setOrder({
+      ...order,
+      ...fees,
+      paymentMethod,
+    });
+  };
+
+  const handleCreateOrder = async () => {
+    const resp = isGuest
+      ? await ordersApi.createGuestOrder(order)
+      : await ordersApi.createOrder(order);
+
+    window.location.href = resp.redirect_url;
   };
 
   return (
@@ -67,41 +131,38 @@ const CheckoutPage = () => {
           <h1 className={styles['heading']}>Checkout Details</h1>
 
           <div className={styles['checkout-details']}>
-            <ContactDetails
-              data={checkout.contactDetails}
-              onChangeData={(contactDetails) =>
-                setCheckout({
-                  ...checkout,
-                  contactDetails,
-                })
-              }
+            <OrderContactDetails
+              data={order.contactDetails}
+              onChangeData={handleChangeContactDetails}
             />
 
             <DeliveryMethods
-              data={checkout.deliveryMethods}
-              onChangeData={(deliveryMethods) =>
-                setCheckout({
-                  ...checkout,
-                  deliveryMethods,
-                })
-              }
+              data={{
+                deliveryMethod: order.deliveryMethod,
+                deliveryAddress: order.deliveryAddress,
+              }}
+              onChangeData={handleChangeDeliveryMethod}
             />
 
             <PaymentMethods
-              data={checkout.paymentMethods}
-              onChangeData={(paymentMethods) =>
-                setCheckout({
-                  ...checkout,
-                  paymentMethods,
-                })
-              }
+              data={order.paymentMethod}
+              onChangeData={handleChangePaymentMethod}
             />
           </div>
         </div>
 
-        <OrderDetails className={styles['order-details']} data={orderDetails} />
+        <OrderDetails
+          className={styles['order-details']}
+          data={{
+            ...order,
+            product: product as Product,
+          }}
+        />
 
-        <Button className={styles['checkout-button']}>
+        <Button
+          className={styles['checkout-button']}
+          onClick={handleCreateOrder}
+        >
           Proceed to payment
         </Button>
       </div>

@@ -15,7 +15,7 @@ function ProductPrice({ className, data: { price }, ...rest }: Props) {
       {new Intl.NumberFormat('en-SG', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-      }).format(price / 10)}
+      }).format(price / 100)}
     </div>
   );
 }
