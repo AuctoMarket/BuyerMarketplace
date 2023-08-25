@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import Button from '../../components/Button';
+import ButtonLink from '../../components/Button/Link';
 import OrderDetails from '../../components/Checkout/OrderDetails';
 import OrderContactDetails from '../../components/Checkout/ContactDetails';
 import DeliveryMethods from '../../components/Checkout/DeliveryMethods';
@@ -176,12 +177,23 @@ const CheckoutPage = () => {
           }}
         />
 
-        <Button
-          className={styles['checkout-button']}
-          onClick={handleCreateOrder}
-        >
-          Proceed to payment
-        </Button>
+        <div className={styles['controls']}>
+          <Button
+            className={styles['checkout-button']}
+            onClick={handleCreateOrder}
+          >
+            Proceed to payment
+          </Button>
+
+          <ButtonLink
+            className={styles['chat-button']}
+            theme="black"
+            to={`https://t.me/auctomarketplace`}
+            target="_blank"
+          >
+            Chat with us
+          </ButtonLink>
+        </div>
       </div>
     </Layout>
   );
