@@ -44,6 +44,7 @@ enum PaymentMethod {
 enum PaymentStatus {
   Pending = 'pending',
   Completed = 'completed',
+  Failed = 'failed',
 }
 
 interface ContactDetails {

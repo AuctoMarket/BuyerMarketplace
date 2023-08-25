@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './index.module.scss';
@@ -11,10 +11,56 @@ import { PaymentStatus } from '../../../types/order.type';
 import useAuth from '../../../hooks/useAuth';
 
 const OrderPaymentStatusPage = () => {
+  const [config, setConfig] = useState({
+    refreshInterval: 5000,
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+  const [paymentStatus, setPaymentStatus] = useState(PaymentStatus.Pending);
   const { guest: isGuest } = useAuth();
   const { id } = useParams<{ id: string }>();
-  const { order } = useOrder(id as string, isGuest);
+  const { order } = useOrder(id as string, isGuest, config);
   const { product } = useProduct(order?.productId as string);
+
+  useEffect(() => {
+    if (
+      !paymentStatus ||
+      paymentStatus === PaymentStatus.Pending ||
+      config.refreshInterval === 0
+    ) {
+      return;
+    }
+
+    setConfig({
+      ...config,
+      refreshInterval: 0,
+    });
+  }, [config, paymentStatus]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (paymentStatus !== PaymentStatus.Pending) {
+        return;
+      }
+
+      setConfig({
+        ...config,
+        refreshInterval: 0,
+      });
+      setPaymentStatus(PaymentStatus.Failed);
+    }, 35000);
+
+    return () => clearTimeout(timeout);
+  });
+
+  useEffect(() => {
+    if (!order) {
+      return;
+    }
+
+    setPaymentStatus(order.paymentStatus);
+  }, [order]);
 
   if (!order || !product) {
     return null;
@@ -25,22 +71,22 @@ const OrderPaymentStatusPage = () => {
       <div className={styles['payment-status-page']}>
         <div className={styles['payment-status']}>
           <h1 className={styles['heading']}>
-            {order.paymentStatus === PaymentStatus.Pending
+            {paymentStatus === PaymentStatus.Pending
               ? 'Checking Payment Status'
-              : order.paymentStatus === PaymentStatus.Completed
+              : paymentStatus === PaymentStatus.Completed
               ? 'Payment Completed'
               : 'Payment Failed'}
           </h1>
 
           <div className={styles['description']}>
-            {order.paymentStatus === PaymentStatus.Pending ? (
+            {paymentStatus === PaymentStatus.Pending ? (
               <>
                 <p>
                   We are currently checking the status of your payment. Do not
                   refresh the page while we do so.
                 </p>
               </>
-            ) : order.paymentStatus === PaymentStatus.Completed ? (
+            ) : paymentStatus === PaymentStatus.Completed ? (
               <>
                 <p>
                   Your payment has been recorded and we will be in touch with
