@@ -8,15 +8,19 @@ import type { DeliveryAddress } from '../../../../types/order.type';
 
 interface Props extends ComponentProps<'div'> {
   data: DeliveryAddress;
-  onChangeData: (data: DeliveryAddress) => void;
+  onChangeData: (data: DeliveryAddress, isError: boolean) => void;
 }
 
-export function StandardDelivery({
+const isError = (error: any) => {
+  return Object.values(error).some(Boolean);
+};
+
+const StandardDelivery = ({
   className,
   data,
   onChangeData,
   ...rest
-}: Props) {
+}: Props) => {
   const [error, setError] = useState<{
     addressLine1?: string;
     addressLine2?: string;
@@ -26,17 +30,19 @@ export function StandardDelivery({
   const handleChangeAddress1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     const addressLine1 = event.target.value;
     const errorAddress1 = validateAddress(addressLine1);
+    const newError = { ...error, addressLine1: errorAddress1 };
 
-    setError({ ...error, addressLine1: errorAddress1 });
-    onChangeData({ ...data, addressLine1 });
+    setError(newError);
+    onChangeData({ ...data, addressLine1 }, isError(newError));
   };
 
   const handleChangeAddress2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     const addressLine2 = event.target.value;
     const errorAddress2 = validateAddress(addressLine2);
+    const newError = { ...error, addressLine2: errorAddress2 };
 
-    setError({ ...error, addressLine2: errorAddress2 });
-    onChangeData({ ...data, addressLine2 });
+    setError(newError);
+    onChangeData({ ...data, addressLine2 }, isError(newError));
   };
 
   const handleChangePostalCode = (
@@ -44,9 +50,10 @@ export function StandardDelivery({
   ) => {
     const postalCode = event.target.value;
     const errorPostalCode = validatePostal(postalCode);
+    const newError = { ...error, postalCode: errorPostalCode };
 
-    setError({ ...error, postalCode: errorPostalCode });
-    onChangeData({ ...data, postalCode });
+    setError(newError);
+    onChangeData({ ...data, postalCode }, isError(newError));
   };
 
   const validateAddress = (address: string) => {
@@ -141,6 +148,6 @@ export function StandardDelivery({
       </div>
     </div>
   );
-}
+};
 
 export default StandardDelivery;

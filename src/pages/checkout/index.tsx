@@ -28,6 +28,13 @@ const CheckoutPage = () => {
   const { product } = useProduct(queryParams.get('productId') as string);
   const [order, setOrder] =
     useState<Omit<Order, 'id' | 'paymentStatus' | 'orderedDate'>>();
+  const [error, setError] = useState<{
+    contactDetails?: boolean;
+    deliveryMethod?: boolean;
+  }>({
+    contactDetails: true,
+    deliveryMethod: false,
+  });
 
   useEffect(() => {
     if (!product) {
@@ -75,17 +82,22 @@ const CheckoutPage = () => {
 
   const handleChangeContactDetails = (
     contactDetails: Order['contactDetails'],
+    isErrorContactDetails: boolean,
   ) => {
     setOrder({
       ...order,
       contactDetails,
     });
+    setError({ ...error, contactDetails: isErrorContactDetails });
   };
 
-  const handleChangeDeliveryMethod = ({
-    deliveryMethod,
-    deliveryAddress,
-  }: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>) => {
+  const handleChangeDeliveryMethod = (
+    {
+      deliveryMethod,
+      deliveryAddress,
+    }: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>,
+    isErrorDeliveryMethod: boolean,
+  ) => {
     const fees = calculateOrderFees({
       price: order.price,
       quantity: order.quantity,
@@ -99,6 +111,7 @@ const CheckoutPage = () => {
       deliveryMethod,
       deliveryAddress,
     });
+    setError({ ...error, deliveryMethod: isErrorDeliveryMethod });
   };
 
   const handleChangePaymentMethod = (paymentMethod: Order['paymentMethod']) => {
@@ -117,6 +130,10 @@ const CheckoutPage = () => {
   };
 
   const handleCreateOrder = async () => {
+    if (Object.values(error).some(Boolean)) {
+      return;
+    }
+
     const resp = isGuest
       ? await ordersApi.createGuestOrder(order)
       : await ordersApi.createOrder(order);

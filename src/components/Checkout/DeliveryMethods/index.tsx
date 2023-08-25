@@ -18,15 +18,15 @@ interface Props extends ComponentProps<'div'> {
   data: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>;
   onChangeData: (
     data: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>,
+    isError: boolean,
   ) => void;
 }
 
-export function DeliveryMethods({
-  className,
-  data,
-  onChangeData,
-  ...rest
-}: Props) {
+const isError = (error: any) => {
+  return Object.values(error).some(Boolean);
+};
+
+const DeliveryMethods = ({ className, data, onChangeData, ...rest }: Props) => {
   const [collectionPoint, setCollectionPoint] = React.useState<CollectionPoint>(
     CollectionPoint.BotanicGardensMRT,
   );
@@ -36,28 +36,48 @@ export function DeliveryMethods({
       addressLine2: '',
       postalCode: '',
     });
+  const [error, setError] = React.useState<{
+    standardDeliveryAddress?: boolean;
+  }>({
+    standardDeliveryAddress: true,
+  });
 
   const handleChangeDeliveryMethod = (deliveryMethod: DeliveryMethod) => {
-    onChangeData({
-      deliveryMethod,
-      deliveryAddress:
-        deliveryMethod === DeliveryMethod.SelfCollection
-          ? CollectionPointAddress[collectionPoint]
-          : standardDeliveryAddress,
-    });
+    onChangeData(
+      {
+        deliveryMethod,
+        deliveryAddress:
+          deliveryMethod === DeliveryMethod.SelfCollection
+            ? CollectionPointAddress[collectionPoint]
+            : standardDeliveryAddress,
+      },
+      deliveryMethod === DeliveryMethod.StandardDelivery && isError(error),
+    );
   };
+
   const handleChangeCollectionPoint = (collectionPoint: CollectionPoint) => {
     setCollectionPoint(collectionPoint);
-    onChangeData({
-      ...data,
-      deliveryAddress: CollectionPointAddress[collectionPoint],
-    });
+    onChangeData(
+      {
+        ...data,
+        deliveryAddress: CollectionPointAddress[collectionPoint],
+      },
+      false,
+    );
   };
+
   const handleChangeStandardDeliveryAddress = (
     standardDeliveryAddress: DeliveryAddress,
+    isErrorAddress: boolean,
   ) => {
+    const newError = { ...error, standardDeliveryAddress: isErrorAddress };
+
     setStandardDeliveryAddress(standardDeliveryAddress);
-    onChangeData({ ...data, deliveryAddress: standardDeliveryAddress });
+    setError(newError);
+    onChangeData(
+      { ...data, deliveryAddress: standardDeliveryAddress },
+      isError(newError),
+    );
   };
 
   return (
@@ -83,6 +103,6 @@ export function DeliveryMethods({
       </div>
     </div>
   );
-}
+};
 
 export default DeliveryMethods;

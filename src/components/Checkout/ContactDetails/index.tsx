@@ -9,15 +9,19 @@ import type { ContactDetails } from '../../../types/order.type';
 
 interface Props extends ComponentProps<'div'> {
   data: ContactDetails;
-  onChangeData: (data: ContactDetails) => void;
+  onChangeData: (data: ContactDetails, isError: boolean) => void;
 }
 
-export function OrderContactDetails({
+const isError = (error: any) => {
+  return Object.values(error).some(Boolean);
+};
+
+const OrderContactDetails = ({
   className,
   data,
   onChangeData,
   ...rest
-}: Props) {
+}: Props) => {
   const { guest: isGuest } = useAuth();
   const [error, setError] = useState<{
     email?: string;
@@ -29,9 +33,10 @@ export function OrderContactDetails({
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const email = event.target.value;
     const emailError = validateEmail(email);
+    const newError = { ...error, email: emailError };
 
-    setError({ ...error, email: emailError });
-    onChangeData({ ...data, email });
+    setError(newError);
+    onChangeData({ ...data, email }, isError(newError));
   };
 
   const handleChangePhoneNumber = (
@@ -39,9 +44,10 @@ export function OrderContactDetails({
   ) => {
     const phoneNumber = event.target.value;
     const phoneNumberError = validatePhoneNumber(phoneNumber);
+    const newError = { ...error, phoneNumber: phoneNumberError };
 
-    setError({ ...error, phoneNumber: phoneNumberError });
-    onChangeData({ ...data, phoneNumber });
+    setError(newError);
+    onChangeData({ ...data, phoneNumber }, isError(newError));
   };
 
   const handleChangeEmailConfirm = (
@@ -49,9 +55,10 @@ export function OrderContactDetails({
   ) => {
     const emailConfirm = event.target.value;
     const emailConfirmError = validateEmailConfirm(data.email, emailConfirm);
+    const newError = { ...error, emailConfirm: emailConfirmError };
 
-    setError({ ...error, emailConfirm: emailConfirmError });
-    onChangeData({ ...data, emailConfirm });
+    setError(newError);
+    onChangeData({ ...data, emailConfirm }, isError(newError));
   };
 
   const handleChangeTelegramHandle = (
@@ -62,9 +69,10 @@ export function OrderContactDetails({
       telegramHandle !== ''
         ? validateTelegramHandle(telegramHandle)
         : undefined;
+    const newError = { ...error, telegramHandle: telegramHandleError };
 
-    setError({ ...error, telegramHandle: telegramHandleError });
-    onChangeData({ ...data, telegramHandle });
+    setError(newError);
+    onChangeData({ ...data, telegramHandle }, isError(newError));
   };
 
   const validateEmail = (email: string) => {
@@ -186,6 +194,6 @@ export function OrderContactDetails({
       </div>
     </div>
   );
-}
+};
 
 export default OrderContactDetails;
