@@ -102,7 +102,7 @@ const OrderContactDetails = ({
   };
 
   const validateTelegramHandle = (telegramHandle: string) => {
-    const telegramHandleRegex = /^@[A-Za-z0-9_]{5,}$/;
+    const telegramHandleRegex = /^[A-Za-z0-9_]{5,}$/;
     if (!telegramHandleRegex.test(telegramHandle)) {
       return 'Telegram handle invalid';
     }
