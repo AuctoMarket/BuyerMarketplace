@@ -50,3 +50,11 @@
 .visibilityIcon {
   @apply absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-2xl;
 }
+
+.responsiveSignupBtn {
+  @apply bg-black text-white px-3 py-2 rounded text-sm;
+
+  @media (max-width: 768px) {
+    @apply w-32; // Adjust width for mobile screens
+  }
+}

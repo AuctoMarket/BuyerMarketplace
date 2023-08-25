@@ -15,17 +15,11 @@ interface Props extends ComponentProps<'div'> {}
 
 function Header({ className, ...rest }: Props) {
   const { togglePopup } = useContext(PopupContext);
-  const { user, login, signup, guest, setGuest } = useAuth();
+  const { user, login, signup } = useAuth();
 
   const openLoginForm = () => {
     if (togglePopup) {
-      togglePopup(
-        true,
-        <LoginForm
-          onLogin={handleLogin}
-          onContinueAsGuest={handleContinueAsGuest}
-        />,
-      );
+      togglePopup(true, <LoginForm onLogin={handleLogin} />);
     }
   };
 
@@ -53,31 +47,26 @@ function Header({ className, ...rest }: Props) {
     }
   };
 
-  const handleContinueAsGuest = () => {
-    setGuest(true);
-    if (togglePopup) {
-      togglePopup(false);
-    }
-  };
-
   return (
     <div className={`${styles['header']} ${className}`} {...rest}>
-      <List
-        className={styles['navbar-left-mobile']}
-        items={[
-          <Dropdown
-            className={styles['dropdown']}
-            items={[
-              <Link to="/">Marketplace</Link>,
-              <Link to="https://t.me/auctomarketplace" target="_blank">
-                Contact Us
-              </Link>,
-            ]}
-          >
-            <Icon name="menu" />
-          </Dropdown>,
-        ]}
-      />
+      {user && (
+        <List
+          className={styles['navbar-right-mobile']}
+          items={[
+            <Dropdown
+              className={styles['dropdown']}
+              items={[
+                <Link to="/">Marketplace</Link>,
+                <Link to="https://t.me/auctomarketplace" target="_blank">
+                  Contact Us
+                </Link>,
+              ]}
+            >
+              <Icon name="menu" />
+            </Dropdown>,
+          ]}
+        />
+      )}
 
       <Link className={styles['logo']} to="/">
         <Logo type="horizontal" theme="inverted-color" />
@@ -86,7 +75,7 @@ function Header({ className, ...rest }: Props) {
       <List
         className={styles['navbar-right']}
         items={[
-          ...(!user && !guest
+          ...(!user
             ? [
                 <button
                   className={`${styles['button']} ${styles['login']}`}
@@ -106,28 +95,32 @@ function Header({ className, ...rest }: Props) {
                 </button>,
               ]
             : []),
-          <Dropdown
-            className={styles['dropdown']}
-            items={[
-              <Link to="/" key="marketplace">
-                Marketplace
-              </Link>,
-              <Link
-                to="https://t.me/auctomarketplace"
-                target="_blank"
-                key="contact"
-              >
-                Contact Us
-              </Link>,
-            ]}
-            key="dropdown"
-          >
-            <Icon name="menu" />
-          </Dropdown>,
+          ...(user
+            ? [
+                <Dropdown
+                  className={styles['dropdown']}
+                  items={[
+                    <Link to="/" key="marketplace">
+                      Marketplace
+                    </Link>,
+                    <Link
+                      to="https://t.me/auctomarketplace"
+                      target="_blank"
+                      key="contact"
+                    >
+                      Contact Us
+                    </Link>,
+                  ]}
+                  key="dropdown"
+                >
+                  <Icon name="menu" />
+                </Dropdown>,
+              ]
+            : []),
         ]}
       />
 
-      {!user && !guest && (
+      {!user && (
         <List
           className={styles['navbar-right-mobile']}
           items={[

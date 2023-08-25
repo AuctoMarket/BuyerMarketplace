@@ -19,10 +19,10 @@ test('toggles password visibility for desktop version', () => {
   const passwordInput = screen.getByPlaceholderText('Password');
   const visibilityIcon = screen.getByTestId('password-visibility-icon');
 
-  fireEvent.mouseDown(visibilityIcon);
+  fireEvent.click(visibilityIcon);
   expect(passwordInput).toHaveAttribute('type', 'text');
 
-  fireEvent.mouseUp(visibilityIcon);
+  fireEvent.click(visibilityIcon);
   expect(passwordInput).toHaveAttribute('type', 'password');
 });
 
@@ -33,9 +33,9 @@ test('toggles password visibility for mobile version', () => {
   const passwordInput = screen.getByPlaceholderText('Password');
   const visibilityIcon = screen.getByTestId('password-visibility-icon');
 
-  fireEvent.touchStart(visibilityIcon);
+  fireEvent.click(visibilityIcon);
   expect(passwordInput).toHaveAttribute('type', 'text');
 
-  fireEvent.touchEnd(visibilityIcon);
+  fireEvent.click(visibilityIcon);
   expect(passwordInput).toHaveAttribute('type', 'password');
 });

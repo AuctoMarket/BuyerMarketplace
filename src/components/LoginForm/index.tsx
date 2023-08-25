@@ -27,8 +27,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const [isMouseUp, setIsMouseUp] = useState(false);
-
   const { guest } = useAuth();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,14 +79,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
     }
   };
 
-  const handleMouseDown = () => {
-    setIsMouseUp(false);
-    setShowPassword(true); // Password is visible when mouse is down
-  };
-
-  const handleMouseUp = () => {
-    setIsMouseUp(true);
-    setShowPassword(false); // Password is hidden when mouse is released
+  const handleContextMenu = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.preventDefault(); // Prevent the default context menu
   };
 
   return (
@@ -112,6 +106,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
             value={email}
             onChange={handleEmailChange}
             placeholder="Email"
+            autoCapitalize="none"
           />
         </div>
       </div>
@@ -123,7 +118,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         )}
         <div className={styles.passwordInput}>
           <input
-            type={isMouseUp || !showPassword ? 'password' : 'text'}
+            type={!showPassword ? 'password' : 'text'}
             id="password"
             value={password}
             onChange={handlePasswordChange}
@@ -132,11 +127,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <Icon
             name="password-visibility"
             className={styles.visibilityIcon}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            onTouchStart={handleMouseDown}
-            onTouchEnd={handleMouseUp}
             onClick={togglePasswordVisibility}
+            onContextMenu={handleContextMenu}
             data-testid="password-visibility-icon"
           />
         </div>
@@ -157,9 +149,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
         )}
       </div>
       <div className={styles.btnGroup}>
-        {/* Add the data-testid attribute to the login button */}
         <button
-          className={styles.loginBtn}
+          className={`${styles.loginBtn} ${styles.responsiveLoginBtn}`}
           onClick={handleLogin}
           data-testid="login-button"
         >

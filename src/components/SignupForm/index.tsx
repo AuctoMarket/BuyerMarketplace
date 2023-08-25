@@ -22,9 +22,6 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [isMouseUp, setIsMouseUp] = useState(false);
-  const [isMouseUp2, setIsMouseUp2] = useState(false);
-
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
     setEmailError('');
@@ -126,24 +123,16 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const handleMouseDown = () => {
-    setIsMouseUp(false);
-    setShowPassword(true); // Password is visible when mouse is down
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(
+      (prevShowConfirmPassword) => !prevShowConfirmPassword,
+    );
   };
 
-  const handleMouseUp = () => {
-    setIsMouseUp(true);
-    setShowPassword(false); // Password is hidden when mouse is released
-  };
-
-  const handleMouseDown2 = () => {
-    setIsMouseUp2(false);
-    setShowConfirmPassword(true); // Password is visible when mouse is down
-  };
-
-  const handleMouseUp2 = () => {
-    setIsMouseUp2(true);
-    setShowConfirmPassword(false); // Password is hidden when mouse is released
+  const handleContextMenu = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.preventDefault(); // Prevent the default context menu
   };
 
   return (
@@ -166,6 +155,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
           value={email}
           onChange={handleEmailChange}
           placeholder="Email"
+          autoCapitalize="none"
         />
       </div>
       <div className={styles.inputGroup}>
@@ -176,7 +166,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
         )}
         <div className={styles.passwordInput}>
           <input
-            type={isMouseUp || !showPassword ? 'password' : 'text'}
+            type={!showPassword ? 'password' : 'text'}
             id="password"
             value={password}
             onChange={handlePasswordChange}
@@ -185,11 +175,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
           <Icon
             name="password-visibility"
             className={styles.visibilityIcon}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            onTouchStart={handleMouseDown}
-            onTouchEnd={handleMouseUp}
             onClick={togglePasswordVisibility}
+            onContextMenu={handleContextMenu}
             data-testid="password-visibility-icon"
           />
         </div>
@@ -197,7 +184,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
       <div className={styles.inputGroup}>
         <div className={styles.passwordInput}>
           <input
-            type={isMouseUp2 || !showConfirmPassword ? 'password' : 'text'}
+            type={!showConfirmPassword ? 'password' : 'text'}
             id="confirmPassword"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
@@ -206,11 +193,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
           <Icon
             name="password-visibility"
             className={styles.visibilityIcon}
-            onMouseDown={handleMouseDown2}
-            onMouseUp={handleMouseUp2}
-            onTouchStart={handleMouseDown2}
-            onTouchEnd={handleMouseUp2}
-            onClick={togglePasswordVisibility}
+            onClick={toggleConfirmPasswordVisibility}
+            onContextMenu={handleContextMenu}
             data-testid="password-visibility-icon-2"
           />
         </div>
@@ -223,7 +207,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
       </div>
       <div className={styles.btnGroup}>
         <button
-          className={styles.signupBtn}
+          className={`${styles.signupBtn} ${styles.responsiveSignupBtn}`}
           onClick={handleSignup}
           data-testid="signup-button"
         >
