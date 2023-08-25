@@ -23,7 +23,7 @@ function HomePage() {
             ],
             url: '#',
             title:
-              '<p>Collection: Pokemon S&S Brilliant Stars</p><p>Pre-Order yours today!</p>',
+              'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
           }}
         />
 

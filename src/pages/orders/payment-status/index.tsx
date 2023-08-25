@@ -24,7 +24,13 @@ const OrderPaymentStatusPage = () => {
     <Layout>
       <div className={styles['payment-status-page']}>
         <div className={styles['payment-status']}>
-          <h1 className={styles['heading']}>Payment Completed</h1>
+          <h1 className={styles['heading']}>
+            {order.paymentStatus === PaymentStatus.Pending
+              ? 'Checking Payment Status'
+              : order.paymentStatus === PaymentStatus.Completed
+              ? 'Payment Completed'
+              : 'Payment Failed'}
+          </h1>
 
           <div className={styles['description']}>
             {order.paymentStatus === PaymentStatus.Pending ? (

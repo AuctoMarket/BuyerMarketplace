@@ -66,6 +66,9 @@ const StandardDelivery = ({
     if (postalCode.trim() === '') {
       return 'Postal Code is required';
     }
+    if (!/^\d{6}$/.test(postalCode)) {
+      return 'Postal Code is invalid';
+    }
   };
 
   return (

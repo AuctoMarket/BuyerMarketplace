@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './index.module.scss';
@@ -23,7 +23,6 @@ function isMobile() {
 }
 
 function ProductDetailsPage() {
-  const [quantity, setQuantity] = useState(1);
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
   const { productsList: moreFromSeller = [] } = useProductsList(
@@ -34,6 +33,11 @@ function ProductDetailsPage() {
     {},
     { sort_by: 'posted_date' },
   );
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    setQuantity(1);
+  }, [id]);
 
   const handleBuy = () => {
     console.log('buy');

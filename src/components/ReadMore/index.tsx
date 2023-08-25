@@ -1,4 +1,4 @@
-import React, { ComponentProps, useState } from 'react';
+import React, { ComponentProps, useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
 
@@ -9,6 +9,11 @@ interface Props extends ComponentProps<'p'> {
 
 function ReadMore({ className, maxChars = 150, children, ...rest }: Props) {
   const [isReadMore, setIsReadMore] = useState(children.length > maxChars);
+
+  useEffect(() => {
+    setIsReadMore(children.length > maxChars);
+  }, [children, maxChars]);
+
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
