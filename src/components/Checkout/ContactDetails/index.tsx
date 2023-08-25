@@ -12,9 +12,7 @@ interface Props extends ComponentProps<'div'> {
   onChangeData: (data: ContactDetails, isError: boolean) => void;
 }
 
-const isError = (error: any) => {
-  return Object.values(error).some(Boolean);
-};
+const isError = (error: any) => Object.values(error).some(Boolean);
 
 const OrderContactDetails = ({
   className,

@@ -23,6 +23,8 @@ import {
 import type { Product } from '../../types/product.type';
 import type { Order } from '../../types/order.type';
 
+const isError = (error: any) => Object.values(error).some(Boolean);
+
 const CheckoutPage = () => {
   const queryParams = useQueryParams();
   const { guest: isGuest, user } = useAuth();
@@ -131,7 +133,7 @@ const CheckoutPage = () => {
   };
 
   const handleCreateOrder = async () => {
-    if (Object.values(error).some(Boolean)) {
+    if (isError(error)) {
       return;
     }
 
@@ -181,6 +183,7 @@ const CheckoutPage = () => {
           <Button
             className={styles['checkout-button']}
             onClick={handleCreateOrder}
+            disabled={isError(error)}
           >
             Proceed to payment
           </Button>

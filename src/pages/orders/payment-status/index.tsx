@@ -11,49 +11,47 @@ import { PaymentStatus } from '../../../types/order.type';
 import useAuth from '../../../hooks/useAuth';
 
 const OrderPaymentStatusPage = () => {
-  const [config, setConfig] = useState({
+  const [useOrderConfig, setUseOrderConfig] = useState({
     refreshInterval: 5000,
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
   const [paymentStatus, setPaymentStatus] = useState(PaymentStatus.Pending);
+
   const { guest: isGuest } = useAuth();
   const { id } = useParams<{ id: string }>();
-  const { order } = useOrder(id as string, isGuest, config);
+  const { order } = useOrder(id as string, isGuest, useOrderConfig);
   const { product } = useProduct(order?.productId as string);
 
+  // stop refreshing order when payment is completed or failed
   useEffect(() => {
-    if (
-      !paymentStatus ||
-      paymentStatus === PaymentStatus.Pending ||
-      config.refreshInterval === 0
-    ) {
+    if (paymentStatus === PaymentStatus.Pending) {
       return;
     }
 
-    setConfig({
-      ...config,
+    setUseOrderConfig({
       refreshInterval: 0,
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
     });
-  }, [config, paymentStatus]);
+  }, [paymentStatus]);
 
+  // set paymentStatus to failed if payment is still pending after 35 seconds
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (paymentStatus !== PaymentStatus.Pending) {
         return;
       }
 
-      setConfig({
-        ...config,
-        refreshInterval: 0,
-      });
       setPaymentStatus(PaymentStatus.Failed);
     }, 35000);
 
     return () => clearTimeout(timeout);
   });
 
+  // update paymentStatus when order status changes
   useEffect(() => {
     if (!order) {
       return;

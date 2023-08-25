@@ -11,9 +11,7 @@ interface Props extends ComponentProps<'div'> {
   onChangeData: (data: DeliveryAddress, isError: boolean) => void;
 }
 
-const isError = (error: any) => {
-  return Object.values(error).some(Boolean);
-};
+const isError = (error: any) => Object.values(error).some(Boolean);
 
 const StandardDelivery = ({
   className,

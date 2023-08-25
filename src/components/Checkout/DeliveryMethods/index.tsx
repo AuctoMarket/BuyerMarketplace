@@ -22,9 +22,7 @@ interface Props extends ComponentProps<'div'> {
   ) => void;
 }
 
-const isError = (error: any) => {
-  return Object.values(error).some(Boolean);
-};
+const isError = (error: any) => Object.values(error).some(Boolean);
 
 const DeliveryMethods = ({ className, data, onChangeData, ...rest }: Props) => {
   const [collectionPoint, setCollectionPoint] = React.useState<CollectionPoint>(
