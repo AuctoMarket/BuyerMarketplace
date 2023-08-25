@@ -1,10 +1,11 @@
 // src/components/LoginForm/index.tsx
 import React, { useState, useContext } from 'react';
+
 import styles from './index.module.scss';
-import { PopupContext } from '../Popup';
 import SignupForm from '../SignupForm';
 import Icon from '../Icon';
-import { useAuth } from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
+import { PopupContext } from '../Popup';
 
 interface LoginFormProps {
   onLogin?: (email: string, password: string) => void;

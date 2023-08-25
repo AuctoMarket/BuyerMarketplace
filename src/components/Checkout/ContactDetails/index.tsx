@@ -3,20 +3,26 @@ import React, { useState, ComponentProps } from 'react';
 import styles from './index.module.scss';
 import Input from '../../Input';
 import SectionHeading from '../SectionHeading';
+import useAuth from '../../../hooks/useAuth';
 
-import type { ContactDetailsData } from '../../../types/checkout.type';
+import type { ContactDetails } from '../../../types/order.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: ContactDetailsData;
-  onChangeData: (data: ContactDetailsData) => void;
+  data: ContactDetails;
+  onChangeData: (data: ContactDetails, isError: boolean) => void;
 }
 
-export function ContactDetails({
+const isError = (error: any) => {
+  return Object.values(error).some(Boolean);
+};
+
+const OrderContactDetails = ({
   className,
   data,
   onChangeData,
   ...rest
-}: Props) {
+}: Props) => {
+  const { guest: isGuest } = useAuth();
   const [error, setError] = useState<{
     email?: string;
     phoneNumber?: string;
@@ -24,42 +30,49 @@ export function ContactDetails({
     telegramHandle?: string;
   }>({});
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const email = event.target.value;
     const emailError = validateEmail(email);
+    const newError = { ...error, email: emailError };
 
-    setError({ ...error, email: emailError });
-    onChangeData({ ...data, email });
+    setError(newError);
+    onChangeData({ ...data, email }, isError(newError));
   };
 
-  const handlePhoneNumberChange = (
+  const handleChangePhoneNumber = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const phoneNumber = event.target.value;
     const phoneNumberError = validatePhoneNumber(phoneNumber);
+    const newError = { ...error, phoneNumber: phoneNumberError };
 
-    setError({ ...error, email: phoneNumberError });
-    onChangeData({ ...data, phoneNumber });
+    setError(newError);
+    onChangeData({ ...data, phoneNumber }, isError(newError));
   };
 
-  const handleEmailConfirmChange = (
+  const handleChangeEmailConfirm = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const emailConfirm = event.target.value;
     const emailConfirmError = validateEmailConfirm(data.email, emailConfirm);
+    const newError = { ...error, emailConfirm: emailConfirmError };
 
-    setError({ ...error, emailConfirm: emailConfirmError });
-    onChangeData({ ...data, emailConfirm });
+    setError(newError);
+    onChangeData({ ...data, emailConfirm }, isError(newError));
   };
 
-  const handleTelegramHandleChange = (
+  const handleChangeTelegramHandle = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const telegramHandle = event.target.value;
-    const telegramHandleError = validateTelegramHandle(telegramHandle);
+    const telegramHandleError =
+      telegramHandle !== ''
+        ? validateTelegramHandle(telegramHandle)
+        : undefined;
+    const newError = { ...error, telegramHandle: telegramHandleError };
 
-    setError({ ...error, telegramHandle: telegramHandleError });
-    onChangeData({ ...data, telegramHandle });
+    setError(newError);
+    onChangeData({ ...data, telegramHandle }, isError(newError));
   };
 
   const validateEmail = (email: string) => {
@@ -118,8 +131,9 @@ export function ContactDetails({
               type="text"
               theme="white"
               value={data.email}
-              onChange={handleEmailChange}
+              onChange={handleChangeEmail}
               role="input-email-adress"
+              disabled={!isGuest}
             />
             {error.email && (
               <div className={`${styles['contact-detail-error-message']}`}>
@@ -134,7 +148,7 @@ export function ContactDetails({
               type="text"
               theme="white"
               value={data.phoneNumber}
-              onChange={handlePhoneNumberChange}
+              onChange={handleChangePhoneNumber}
               role="input-phone-number"
             />
             {error.phoneNumber && (
@@ -150,8 +164,9 @@ export function ContactDetails({
               type="text"
               theme="white"
               value={data.emailConfirm}
-              onChange={handleEmailConfirmChange}
+              onChange={handleChangeEmailConfirm}
               role="input-confirm-email"
+              disabled={!isGuest}
             />
             {error.emailConfirm && (
               <div className={`${styles['contact-detail-error-message']}`}>
@@ -166,7 +181,7 @@ export function ContactDetails({
               type="text"
               theme="white"
               value={data.telegramHandle}
-              onChange={handleTelegramHandleChange}
+              onChange={handleChangeTelegramHandle}
               role="contact-detail-input-telegram"
             />
             {error.telegramHandle && (
@@ -179,6 +194,6 @@ export function ContactDetails({
       </div>
     </div>
   );
-}
+};
 
-export default ContactDetails;
+export default OrderContactDetails;

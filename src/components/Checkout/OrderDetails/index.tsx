@@ -5,24 +5,28 @@ import Image from '../../Image';
 import ButtonLink from '../../Button/Link';
 import Price from '../../Product/Price';
 
+import type { Order } from '../../../types/order.type';
 import type { Product } from '../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: {
+  data: Omit<Order, 'id' | 'paymentStatus' | 'orderedDate'> & {
+    id?: string;
     product: Product;
-    quantity: number;
-    subTotal: number;
-    delivery: number;
-    paymentFee: number;
-    orderTotal: number;
   };
-  showFooter?: boolean;
 }
 
 function OrderDetails({
   className,
-  data: { product, quantity, subTotal, delivery, paymentFee, orderTotal },
-  showFooter = true,
+  data: {
+    product,
+    price,
+    quantity,
+    subTotal,
+    additionalFee,
+    deliveryFee,
+    paymentFee,
+    total,
+  },
   ...rest
 }: Props) {
   return (
@@ -42,10 +46,7 @@ function OrderDetails({
         <div className={styles['section-1']}>
           <div className={styles['unit-price']}>
             <div className={styles['label']}>Unit Price</div>
-            <Price
-              className={styles['price']}
-              data={{ price: product.price }}
-            />
+            <Price className={styles['price']} data={{ price }} />
           </div>
           <div className={styles['quantity']}>
             <div className={styles['label']}>Quantity</div>
@@ -55,15 +56,27 @@ function OrderDetails({
 
         <div className={styles['section-2']}>
           <div className={styles['subtotal']}>
-            <div className={styles['label']}>SubTotal</div>
+            <div className={styles['label']}>Subtotal</div>
             <Price className={styles['price']} data={{ price: subTotal }} />
           </div>
+          {additionalFee > 0 && (
+            <div className={styles['additional-fee']}>
+              <div className={styles['label']}>Small Order Fee</div>
+              <Price
+                className={styles['price']}
+                data={{ price: additionalFee }}
+              />
+            </div>
+          )}
           <div className={styles['delivery']}>
             <div className={styles['label']}>Delivery</div>
-            {delivery === 0 ? (
+            {deliveryFee === 0 ? (
               <div className={styles['price']}>Free</div>
             ) : (
-              <Price className={styles['price']} data={{ price: delivery }} />
+              <Price
+                className={styles['price']}
+                data={{ price: deliveryFee }}
+              />
             )}
           </div>
           <div className={styles['payment-fee']}>
@@ -78,28 +91,26 @@ function OrderDetails({
 
         <div className={styles['section-3']}>
           <div className={styles['label']}>Order Total</div>
-          <Price className={styles['price']} data={{ price: orderTotal }} />
+          <Price className={styles['price']} data={{ price: total }} />
         </div>
       </div>
 
-      {showFooter && (
-        <div className={styles['footer']}>
-          <div className={styles['payment']}>
-            <Image src="/images/payment-method/paynow.svg" />
-            <Image src="/images/payment-method/visa.svg" />
-            <Image src="/images/payment-method/mastercard.svg" />
-          </div>
-
-          <ButtonLink
-            className={styles['button']}
-            theme="black"
-            to={`https://t.me/auctomarketplace`}
-            target="_blank"
-          >
-            Chat with us
-          </ButtonLink>
+      <div className={styles['footer']}>
+        <div className={styles['payment']}>
+          <Image src="/images/payment-method/paynow.svg" />
+          <Image src="/images/payment-method/visa.svg" />
+          <Image src="/images/payment-method/mastercard.svg" />
         </div>
-      )}
+
+        <ButtonLink
+          className={styles['button']}
+          theme="black"
+          to={`https://t.me/auctomarketplace`}
+          target="_blank"
+        >
+          Chat with us
+        </ButtonLink>
+      </div>
     </div>
   );
 }

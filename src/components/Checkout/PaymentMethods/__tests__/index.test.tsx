@@ -2,13 +2,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import PaymentMethods, { PaymentMethodsData } from '..';
+import PaymentMethods from '..';
+import { PaymentMethod } from '../../../../types/order.type';
 
 describe('PaymentMethods', () => {
   const TestComponent = () => {
-    const [data, setData] = React.useState<PaymentMethodsData>({
-      paymentMethod: 'card',
-    });
+    const [data, setData] = React.useState<PaymentMethod>(PaymentMethod.Card);
 
     return (
       <PaymentMethods

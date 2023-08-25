@@ -1,16 +1,17 @@
 // Hooks/useAuth.ts
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import api from '../configs/api';
 
-export function useAuth() {
+function useAuth() {
   const initialUserData = JSON.parse(
     localStorage.getItem('userData') || 'null',
   );
   const initialGuestState = JSON.parse(
     localStorage.getItem('guestState') || 'false',
   );
-  const [user, setUser] = useState<string | null>(initialUserData);
+  const [user, setUser] = useState<any | null>(initialUserData);
   const [guest, setGuestState] = useState(initialGuestState);
 
   useEffect(() => {
@@ -94,3 +95,5 @@ export function useAuth() {
 
   return { user, guest, login, signup, logout, setGuest };
 }
+
+export default useAuth;

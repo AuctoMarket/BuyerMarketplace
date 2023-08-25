@@ -42,7 +42,7 @@ function App() {
             element: <CheckoutPage />,
           },
           {
-            path: '/orders/:id/payment-status',
+            path: '/orders/:id/payment-complete',
             element: <OrderPaymentStatusPage />,
           },
           {

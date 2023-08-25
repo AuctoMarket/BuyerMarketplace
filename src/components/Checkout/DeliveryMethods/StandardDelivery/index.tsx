@@ -4,49 +4,56 @@ import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
 import Input from '../../../Input';
 
-import type { DeliveryMethodsData } from '../../../../types/checkout.type';
+import type { DeliveryAddress } from '../../../../types/order.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: DeliveryMethodsData['normalDelivery'];
-  onChangeData: (data: DeliveryMethodsData['normalDelivery']) => void;
+  data: DeliveryAddress;
+  onChangeData: (data: DeliveryAddress, isError: boolean) => void;
 }
 
-export function NormalDelivery({
+const isError = (error: any) => {
+  return Object.values(error).some(Boolean);
+};
+
+const StandardDelivery = ({
   className,
   data,
   onChangeData,
   ...rest
-}: Props) {
+}: Props) => {
   const [error, setError] = useState<{
-    address1?: string;
-    address2?: string;
+    addressLine1?: string;
+    addressLine2?: string;
     postalCode?: string;
   }>({});
 
-  const handleAddress1Change = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const address1 = event.target.value;
-    const errorAddress1 = validateAddress(address1);
+  const handleChangeAddress1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const addressLine1 = event.target.value;
+    const errorAddress1 = validateAddress(addressLine1);
+    const newError = { ...error, addressLine1: errorAddress1 };
 
-    setError({ ...error, address1: errorAddress1 });
-    onChangeData({ ...data, address1 });
+    setError(newError);
+    onChangeData({ ...data, addressLine1 }, isError(newError));
   };
 
-  const handleAddress2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const address2 = event.target.value;
-    const errorAddress2 = validateAddress(address2);
+  const handleChangeAddress2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const addressLine2 = event.target.value;
+    const errorAddress2 = validateAddress(addressLine2);
+    const newError = { ...error, addressLine2: errorAddress2 };
 
-    setError({ ...error, address2: errorAddress2 });
-    onChangeData({ ...data, address2 });
+    setError(newError);
+    onChangeData({ ...data, addressLine2 }, isError(newError));
   };
 
-  const handlePostalCodeChange = (
+  const handleChangePostalCode = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const postalCode = event.target.value;
     const errorPostalCode = validatePostal(postalCode);
+    const newError = { ...error, postalCode: errorPostalCode };
 
-    setError({ ...error, postalCode: errorPostalCode });
-    onChangeData({ ...data, postalCode });
+    setError(newError);
+    onChangeData({ ...data, postalCode }, isError(newError));
   };
 
   const validateAddress = (address: string) => {
@@ -79,13 +86,13 @@ export function NormalDelivery({
               className={styles['delivery-1-input-address-1']}
               type="text"
               theme="white"
-              value={data.address1}
-              onChange={handleAddress1Change}
+              value={data.addressLine1}
+              onChange={handleChangeAddress1}
               role="input-address-1"
             />
-            {error.address1 && (
+            {error.addressLine1 && (
               <div className={`${styles['delivery-1-error-message']}`}>
-                {error.address1}
+                {error.addressLine1}
               </div>
             )}
           </div>
@@ -96,13 +103,13 @@ export function NormalDelivery({
               className={styles['input-address-2']}
               type="text"
               theme="white"
-              onChange={handleAddress2Change}
-              value={data.address2}
+              onChange={handleChangeAddress2}
+              value={data.addressLine2}
               role="input-address-2"
             />
-            {error.address2 && (
+            {error.addressLine2 && (
               <div className={`${styles['delivery-1-error-message']}`}>
-                {error.address2}
+                {error.addressLine2}
               </div>
             )}
           </div>
@@ -116,7 +123,7 @@ export function NormalDelivery({
               type="text"
               theme="white"
               value={data.postalCode}
-              onChange={handlePostalCodeChange}
+              onChange={handleChangePostalCode}
               role="input-postal-code"
             />
             {error.postalCode && (
@@ -141,6 +148,6 @@ export function NormalDelivery({
       </div>
     </div>
   );
-}
+};
 
-export default NormalDelivery;
+export default StandardDelivery;
