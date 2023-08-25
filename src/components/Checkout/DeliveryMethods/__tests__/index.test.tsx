@@ -3,21 +3,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import DeliveryMethods from '..';
-import {
-  CollectionPoint,
-  DeliveryMethod,
-} from '../../../../types/checkout.type';
+import { CollectionPoint, DeliveryMethod } from '../../../../types/order.type';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('DeliveryMethods', () => {
   const data = {
     deliveryMethod: DeliveryMethod.SelfCollection,
-    selfCollection: {
-      collectionPoint: CollectionPoint.BotanicGardensMRT,
-    },
-    normalDelivery: {
-      address1: '',
-      address2: '',
+    deliveryAddress: {
+      addressLine1: '',
+      addressLine2: '',
       postalCode: '',
     },
   };
@@ -49,7 +43,7 @@ describe('DeliveryMethods', () => {
     render(
       <BrowserRouter>
         <DeliveryMethods
-          data={{ ...data, deliveryMethod: DeliveryMethod.NormalDelivery }}
+          data={{ ...data, deliveryMethod: DeliveryMethod.StandardDelivery }}
           onChangeData={() => {}}
           role="DeliveryMethods"
         />

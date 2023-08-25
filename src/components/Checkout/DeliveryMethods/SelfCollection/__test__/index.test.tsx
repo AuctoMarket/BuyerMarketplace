@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import SelfCollection from '..';
-import { CollectionPoint } from '../../../../../types/checkout.type';
+import { CollectionPoint } from '../../../../../types/order.type';
 
 describe('SelfCollection', () => {
   const TestComponent = () => {
@@ -15,8 +15,8 @@ describe('SelfCollection', () => {
     return (
       <BrowserRouter>
         <SelfCollection
-          data={{ collectionPoint }}
-          onChangeData={({ collectionPoint }) =>
+          data={collectionPoint}
+          onChangeData={(collectionPoint) =>
             setCollectionPoint(collectionPoint)
           }
           role="selfcollection"

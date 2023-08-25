@@ -4,14 +4,11 @@ import { Form, Radio } from 'react-daisyui';
 import styles from './index.module.scss';
 import SectionHeading from '../SectionHeading';
 
-import {
-  PaymentMethod,
-  PaymentMethodsData,
-} from '../../../types/checkout.type';
+import { PaymentMethod } from '../../../types/order.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: PaymentMethodsData;
-  onChangeData: (data: PaymentMethodsData) => void;
+  data: PaymentMethod;
+  onChangeData: (data: PaymentMethod) => void;
 }
 
 export function PaymentMethods({
@@ -23,7 +20,11 @@ export function PaymentMethods({
   const handleChangePaymentMethod = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    onChangeData({ paymentMethod: event.target.value as PaymentMethod });
+    if (data === event.target.value) {
+      return;
+    }
+
+    onChangeData(event.target.value as PaymentMethod);
   };
 
   return (
@@ -47,7 +48,7 @@ export function PaymentMethods({
               className={styles['radio']}
               name="option"
               value={PaymentMethod.PayNow}
-              checked={data.paymentMethod === PaymentMethod.PayNow}
+              checked={data === PaymentMethod.PayNow}
               onChange={handleChangePaymentMethod}
               size="xs"
               data-testid="paynow"
@@ -60,7 +61,7 @@ export function PaymentMethods({
               className={styles['radio']}
               name="option"
               value={PaymentMethod.Card}
-              checked={data.paymentMethod === PaymentMethod.Card}
+              checked={data === PaymentMethod.Card}
               onChange={handleChangePaymentMethod}
               size="xs"
               data-testid="card"

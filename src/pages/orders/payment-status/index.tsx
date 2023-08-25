@@ -1,28 +1,24 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Layout from '../../../components/Layout';
 import OrderDetails from '../../../components/Checkout/OrderDetails';
 import ButtonLink from '../../../components/Button/Link';
 import useProduct from '../../../hooks/useProduct';
+import useOrder from '../../../hooks/useOrder';
+import { PaymentStatus } from '../../../types/order.type';
+import useAuth from '../../../hooks/useAuth';
 
 const OrderPaymentStatusPage = () => {
-  // the following implementation is for demo purposes only
-  // TODO: fetch order details
-  const { product } = useProduct('25139b94-3a54-11ee-a2be-0aec91b1c67e');
-  if (!product) {
+  const { guest: isGuest } = useAuth();
+  const { id } = useParams<{ id: string }>();
+  const { order } = useOrder(id as string, isGuest);
+  const { product } = useProduct(order?.productId as string);
+
+  if (!order || !product) {
     return null;
   }
-  const orderDetails = {
-    product,
-    quantity: 1,
-    subTotal: 100,
-    delivery: 0,
-    paymentFee: 0,
-    orderTotal: 100,
-  };
-  // TODO: fetch payment status (pending | completed | failed)
-  const paymentStatus = () => 'completed';
 
   return (
     <Layout>
@@ -31,14 +27,14 @@ const OrderPaymentStatusPage = () => {
           <h1 className={styles['heading']}>Payment Completed</h1>
 
           <div className={styles['description']}>
-            {paymentStatus() === 'pending' ? (
+            {order.paymentStatus === PaymentStatus.Pending ? (
               <>
                 <p>
                   We are currently checking the status of your payment. Do not
                   refresh the page while we do so.
                 </p>
               </>
-            ) : paymentStatus() === 'completed' ? (
+            ) : order.paymentStatus === PaymentStatus.Completed ? (
               <>
                 <p>
                   Your payment has been recorded and we will be in touch with
@@ -68,7 +64,13 @@ const OrderPaymentStatusPage = () => {
           </div>
         </div>
 
-        <OrderDetails className={styles['order-details']} data={orderDetails} />
+        <OrderDetails
+          className={styles['order-details']}
+          data={{
+            ...order,
+            product,
+          }}
+        />
       </div>
     </Layout>
   );

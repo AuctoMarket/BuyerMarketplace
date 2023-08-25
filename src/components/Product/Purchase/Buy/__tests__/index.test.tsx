@@ -7,14 +7,20 @@ import Buy from '..';
 test('renders Buy', () => {
   const data = {
     price: 1,
-    buyQuantity: 1,
-    onChangeBuyQuantity: (quantity: number) => {},
+    quantity: 1,
     availableQuantity: 1,
   };
+  const onChangeQuantity = (quantity: number) => {};
+  const onBuy = () => {};
 
   render(
     <BrowserRouter>
-      <Buy data={data} role="test" />
+      <Buy
+        data={data}
+        onChangeQuantity={onChangeQuantity}
+        onBuy={onBuy}
+        role="test"
+      />
     </BrowserRouter>,
   );
   const text = screen.getByRole('test');

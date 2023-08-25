@@ -3,11 +3,11 @@ import styles from './index.module.scss';
 import { Form, Radio } from 'react-daisyui';
 import { Link } from 'react-router-dom';
 
-import { CollectionPoint } from '../../../../types/checkout.type';
+import { CollectionPoint } from '../../../../types/order.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: { collectionPoint: CollectionPoint };
-  onChangeData: (data: { collectionPoint: CollectionPoint }) => void;
+  data: CollectionPoint;
+  onChangeData: (data: CollectionPoint) => void;
 }
 
 export function SelfCollection({
@@ -16,10 +16,14 @@ export function SelfCollection({
   onChangeData,
   ...rest
 }: Props) {
-  const handleSelectCollectionPoint = (
+  const handleChangeCollectionPoint = (
     event: ChangeEvent<HTMLInputElement>,
   ) => {
-    onChangeData({ collectionPoint: event.target.value as CollectionPoint });
+    if (data === event.target.value) {
+      return;
+    }
+
+    onChangeData(event.target.value as CollectionPoint);
   };
 
   return (
@@ -32,71 +36,71 @@ export function SelfCollection({
       <Form className={`${styles['delivery-method-choose-form']}`}>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.BotanicGardensMRT}
+          title="Botaic Gardens MRT"
           data-testid={CollectionPoint.BotanicGardensMRT}
         >
           <Radio
             className={`${styles['delivery-method-choose-radio']}`}
             name="option"
             value={CollectionPoint.BotanicGardensMRT}
-            checked={data.collectionPoint === CollectionPoint.BotanicGardensMRT}
-            onChange={handleSelectCollectionPoint}
+            checked={data === CollectionPoint.BotanicGardensMRT}
+            onChange={handleChangeCollectionPoint}
             size="xs"
           />
         </Form.Label>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.DhobyGhautMRT}
+          title="Dhoby Ghaut MRT"
           data-testid={CollectionPoint.DhobyGhautMRT}
         >
           <Radio
             className={`${styles['delivery-method-choose-radio']}`}
             name="option"
             value={CollectionPoint.DhobyGhautMRT}
-            checked={data.collectionPoint === CollectionPoint.DhobyGhautMRT}
-            onChange={handleSelectCollectionPoint}
+            checked={data === CollectionPoint.DhobyGhautMRT}
+            onChange={handleChangeCollectionPoint}
             size="xs"
           />
         </Form.Label>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.AngMoKioMRT}
+          title="Ang Mo Kio MRT"
           data-testid={CollectionPoint.AngMoKioMRT}
         >
           <Radio
             className={`${styles['delivery-method-choose-radio']}`}
             name="option"
             value={CollectionPoint.AngMoKioMRT}
-            checked={data.collectionPoint === CollectionPoint.AngMoKioMRT}
-            onChange={handleSelectCollectionPoint}
+            checked={data === CollectionPoint.AngMoKioMRT}
+            onChange={handleChangeCollectionPoint}
             size="xs"
           />
         </Form.Label>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.WoodlandsMRT}
+          title="Woodlands MRT"
           data-testid={CollectionPoint.WoodlandsMRT}
         >
           <Radio
             className={`${styles['delivery-method-choose-radio']}`}
             name="option"
             value={CollectionPoint.WoodlandsMRT}
-            checked={data.collectionPoint === CollectionPoint.WoodlandsMRT}
-            onChange={handleSelectCollectionPoint}
+            checked={data === CollectionPoint.WoodlandsMRT}
+            onChange={handleChangeCollectionPoint}
             size="xs"
           />
         </Form.Label>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.BishanMRT}
+          title="Bishan MRT"
           data-testid={CollectionPoint.BishanMRT}
         >
           <Radio
             className={`${styles['delivery-method-choose-radio']}`}
             name="option"
             value={CollectionPoint.BishanMRT}
-            checked={data.collectionPoint === CollectionPoint.BishanMRT}
-            onChange={handleSelectCollectionPoint}
+            checked={data === CollectionPoint.BishanMRT}
+            onChange={handleChangeCollectionPoint}
             size="xs"
           />
         </Form.Label>
