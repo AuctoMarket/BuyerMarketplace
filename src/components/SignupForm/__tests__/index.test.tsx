@@ -116,27 +116,17 @@ test('displays an error message for passwords that do not match', () => {
   );
 });
 
-// Test for toggling password visibility for desktop version
-test('toggles password visibility for desktop version', () => {
+test('toggles password visibility for password field', () => {
   render(<SignupForm />);
 
   const passwordInput = screen.getByPlaceholderText('Password');
   const visibilityIcon = screen.getByTestId('password-visibility-icon');
 
-  const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-  const visibilityIcon2 = screen.getByTestId('password-visibility-icon-2');
-
-  fireEvent.mouseDown(visibilityIcon);
+  fireEvent.click(visibilityIcon);
   expect(passwordInput).toHaveAttribute('type', 'text');
 
-  fireEvent.mouseUp(visibilityIcon);
+  fireEvent.click(visibilityIcon);
   expect(passwordInput).toHaveAttribute('type', 'password');
-
-  fireEvent.mouseDown(visibilityIcon2);
-  expect(confirmPasswordInput).toHaveAttribute('type', 'text');
-
-  fireEvent.mouseUp(visibilityIcon2);
-  expect(confirmPasswordInput).toHaveAttribute('type', 'password');
 });
 
 // Test for toggling password visibility for mobile version
@@ -149,15 +139,15 @@ test('toggles password visibility for mobile version', () => {
   const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
   const visibilityIcon2 = screen.getByTestId('password-visibility-icon-2');
 
-  fireEvent.touchStart(visibilityIcon);
+  fireEvent.click(visibilityIcon);
   expect(passwordInput).toHaveAttribute('type', 'text');
 
-  fireEvent.touchEnd(visibilityIcon);
+  fireEvent.click(visibilityIcon);
   expect(passwordInput).toHaveAttribute('type', 'password');
 
-  fireEvent.touchStart(visibilityIcon2);
+  fireEvent.click(visibilityIcon2);
   expect(confirmPasswordInput).toHaveAttribute('type', 'text');
 
-  fireEvent.touchEnd(visibilityIcon2);
+  fireEvent.click(visibilityIcon2);
   expect(confirmPasswordInput).toHaveAttribute('type', 'password');
 });

@@ -28,21 +28,19 @@
   }
 }
 
-.navbar-left-mobile {
+.navbar-right,
+.navbar-right-mobile {
+  @apply flex items-center ml-auto gap-6;
+
   .dropdown > ul {
-    @apply left-0 right-auto flex flex-col gap-2 z-50 p-7;
+    @apply flex flex-col gap-5 z-50;
     margin-top: 36px;
-    margin-left: -20px;
+    margin-right: -16px;
 
     > li {
       @apply text-2xl font-medium whitespace-nowrap;
     }
   }
-}
-
-.navbar-right,
-.navbar-right-mobile {
-  @apply flex items-center ml-auto gap-6;
 
   > li {
     @apply cursor-pointer;
@@ -76,7 +74,6 @@
   }
 
   .logo {
-    @apply mx-auto;
   }
 
   .search-box {
@@ -109,7 +106,7 @@
 }
 
 .mobile-button {
-  @apply px-1 py-0 border-2 border-white;
+  @apply px-2 py-1 border border-white;
   font-size: small;
 }
 

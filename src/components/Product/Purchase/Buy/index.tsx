@@ -44,15 +44,6 @@ function ProductPurchaseBuy({
           onContinueAsGuest={handleContinueAsGuest}
         />,
       );
-    } else if (!user && !guest && togglePopup) {
-      // If neither user nor guest is logged in, open the login form
-      togglePopup(
-        true,
-        <LoginForm
-          onLogin={handleLogin}
-          onContinueAsGuest={handleContinueAsGuest}
-        />,
-      );
     } else {
       // Handle the action when the user is logged in and clicks the Buy button
       // For example, navigate to the checkout page
