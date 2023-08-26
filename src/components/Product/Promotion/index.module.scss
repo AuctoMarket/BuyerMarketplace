@@ -2,13 +2,13 @@
   @apply relative;
 
   :global(.control-dots) {
-    @apply my-6;
+    @apply my-6 hidden;
     z-index: 15;
   }
 }
 
 .gradient {
-  @apply absolute w-full h-full top-0;
+  @apply absolute w-full h-full top-0 hidden;
 
   background: linear-gradient(
     180deg,
@@ -19,7 +19,7 @@
 }
 
 .products-button-left {
-  @apply absolute z-30 pl-20;
+  @apply absolute z-30 pl-20 hidden;
   bottom: 50px;
 
   > img {
@@ -28,7 +28,7 @@
 }
 
 .products-button-right {
-  @apply absolute z-30 pl-20 right-0 pr-20;
+  @apply absolute z-30 pl-20 right-0 pr-20 hidden;
   bottom: 50px;
 
   > img {
@@ -53,7 +53,7 @@
 }
 
 .products-title {
-  @apply text-white font-semibold text-4xl font-thicboi;
+  @apply text-white font-semibold text-4xl font-thicboi hidden;
   line-height: 3.5rem;
   margin-top: 28px;
 }
