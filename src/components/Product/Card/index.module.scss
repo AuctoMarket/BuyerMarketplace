@@ -41,7 +41,7 @@
   }
 
   .product-image {
-    @apply w-auto object-cover;
+    @apply w-auto object-cover m-auto;
     height: 240px;
   }
 }
