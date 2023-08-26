@@ -4,6 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+#root,
+#root > div:last-of-type {
+  @apply h-full;
+}
+
 body {
   @apply text-black bg-white leading-tight font-lato;
+}
+
+#root > div:last-of-type {
+  @apply relative;
 }

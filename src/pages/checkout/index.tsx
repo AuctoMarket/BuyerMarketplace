@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import Button from '../../components/Button';
+import ButtonLink from '../../components/Button/Link';
 import OrderDetails from '../../components/Checkout/OrderDetails';
 import OrderContactDetails from '../../components/Checkout/ContactDetails';
 import DeliveryMethods from '../../components/Checkout/DeliveryMethods';
@@ -21,6 +22,8 @@ import {
 
 import type { Product } from '../../types/product.type';
 import type { Order } from '../../types/order.type';
+
+const isError = (error: any) => Object.values(error).some(Boolean);
 
 const CheckoutPage = () => {
   const queryParams = useQueryParams();
@@ -130,7 +133,7 @@ const CheckoutPage = () => {
   };
 
   const handleCreateOrder = async () => {
-    if (Object.values(error).some(Boolean)) {
+    if (isError(error)) {
       return;
     }
 
@@ -176,12 +179,24 @@ const CheckoutPage = () => {
           }}
         />
 
-        <Button
-          className={styles['checkout-button']}
-          onClick={handleCreateOrder}
-        >
-          Proceed to payment
-        </Button>
+        <div className={styles['controls']}>
+          <Button
+            className={styles['checkout-button']}
+            onClick={handleCreateOrder}
+            disabled={isError(error)}
+          >
+            Proceed to payment
+          </Button>
+
+          <ButtonLink
+            className={styles['chat-button']}
+            theme="black"
+            to={`https://t.me/auctomarketplace`}
+            target="_blank"
+          >
+            Chat with us
+          </ButtonLink>
+        </div>
       </div>
     </Layout>
   );

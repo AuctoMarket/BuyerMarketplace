@@ -12,9 +12,7 @@ interface Props extends ComponentProps<'div'> {
   onChangeData: (data: ContactDetails, isError: boolean) => void;
 }
 
-const isError = (error: any) => {
-  return Object.values(error).some(Boolean);
-};
+const isError = (error: any) => Object.values(error).some(Boolean);
 
 const OrderContactDetails = ({
   className,
@@ -85,10 +83,9 @@ const OrderContactDetails = ({
 
   const validatePhoneNumber = (phoneNumber: string) => {
     // Regular expression to check phone number format
-    const phoneNumberRegex =
-      /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+    const phoneNumberRegex = /^[8-9][0-9]{3}[-\s.]?[0-9]{4}$/;
     if (!phoneNumberRegex.test(phoneNumber)) {
-      return 'Phone invalid';
+      return 'Phone number invalid';
     }
   };
 
@@ -103,9 +100,9 @@ const OrderContactDetails = ({
   };
 
   const validateTelegramHandle = (telegramHandle: string) => {
-    const telegramHandleRegex = /^@[A-Za-z0-9_]{5,}$/;
+    const telegramHandleRegex = /^[A-Za-z0-9_]{5,}$/;
     if (!telegramHandleRegex.test(telegramHandle)) {
-      return 'Telegram invalid';
+      return 'Telegram handle invalid';
     }
   };
 

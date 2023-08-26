@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import {
   createBrowserRouter,
   createHashRouter,
   RouteObject,
   RouterProvider,
+  useLocation,
 } from 'react-router-dom';
 
 import CheckoutPage from './pages/checkout';
@@ -20,13 +21,20 @@ const createRouter = (routerObjects: RouteObject[]) => {
   return createBrowserRouter(routerObjects);
 };
 
-function App() {
-  const [popupOpen, setPopupOpen] = React.useState<boolean>(false);
-  const [popupContent, setPopupContent] = React.useState<React.ReactNode>(null);
-  const togglePopup = (
-    isPopupOpen: boolean,
-    popupContent?: React.ReactNode,
-  ) => {
+const ScrollToTop = ({ children }: any) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return children;
+};
+
+const App = () => {
+  const [popupOpen, setPopupOpen] = useState<boolean>(false);
+  const [popupContent, setPopupContent] = useState<ReactNode>(null);
+  const togglePopup = (isPopupOpen: boolean, popupContent?: ReactNode) => {
     setPopupOpen(isPopupOpen);
     setPopupContent(popupContent);
   };
@@ -39,24 +47,40 @@ function App() {
         router={createRouter([
           {
             path: '/checkout',
-            element: <CheckoutPage />,
+            element: (
+              <ScrollToTop>
+                <CheckoutPage />
+              </ScrollToTop>
+            ),
           },
           {
             path: '/orders/:id/payment-complete',
-            element: <OrderPaymentStatusPage />,
+            element: (
+              <ScrollToTop>
+                <OrderPaymentStatusPage />
+              </ScrollToTop>
+            ),
           },
           {
             path: '/products/:id',
-            element: <ProductPage />,
+            element: (
+              <ScrollToTop>
+                <ProductPage />
+              </ScrollToTop>
+            ),
           },
           {
             path: '/',
-            element: <HomePage />,
+            element: (
+              <ScrollToTop>
+                <HomePage />
+              </ScrollToTop>
+            ),
           },
         ])}
       />
     </PopupContext.Provider>
   );
-}
+};
 
 export default App;

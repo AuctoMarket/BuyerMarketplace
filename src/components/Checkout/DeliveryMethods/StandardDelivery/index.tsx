@@ -11,9 +11,7 @@ interface Props extends ComponentProps<'div'> {
   onChangeData: (data: DeliveryAddress, isError: boolean) => void;
 }
 
-const isError = (error: any) => {
-  return Object.values(error).some(Boolean);
-};
+const isError = (error: any) => Object.values(error).some(Boolean);
 
 const StandardDelivery = ({
   className,
@@ -65,6 +63,9 @@ const StandardDelivery = ({
   const validatePostal = (postalCode: string) => {
     if (postalCode.trim() === '') {
       return 'Postal Code is required';
+    }
+    if (!/^\d{6}$/.test(postalCode)) {
+      return 'Postal Code is invalid';
     }
   };
 

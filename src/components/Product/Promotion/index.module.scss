@@ -2,12 +2,13 @@
   @apply relative;
 
   :global(.control-dots) {
+    @apply my-6 hidden;
     z-index: 15;
   }
 }
 
 .gradient {
-  @apply absolute w-full h-full top-0;
+  @apply absolute w-full h-full top-0 hidden;
 
   background: linear-gradient(
     180deg,
@@ -18,24 +19,26 @@
 }
 
 .products-button-left {
-  @apply absolute h-full z-30 pl-20;
+  @apply absolute z-30 pl-20 hidden;
+  bottom: 50px;
 
   > img {
-    @apply w-16;
+    @apply w-12;
   }
 }
 
 .products-button-right {
-  @apply absolute h-full z-30 pl-20 right-0 pr-20;
+  @apply absolute z-30 pl-20 right-0 pr-20 hidden;
+  bottom: 50px;
 
   > img {
-    @apply w-16;
+    @apply w-12;
   }
 }
 
 .products-content {
-  @apply absolute left-60 z-20;
-  bottom: 70px;
+  @apply absolute left-36 right-36 z-20 text-center;
+  bottom: 60px;
 }
 
 .products-button {
@@ -50,12 +53,18 @@
 }
 
 .products-title {
-  @apply text-white font-semibold text-4xl font-thicboi;
+  @apply text-white font-semibold text-4xl font-thicboi hidden;
   line-height: 3.5rem;
   margin-top: 28px;
 }
 
 @media (max-width: 820px) {
+  .products-container {
+    :global(.control-dots) {
+      @apply my-3;
+    }
+  }
+
   .image-container {
     @apply relative;
 
@@ -71,11 +80,11 @@
   }
 
   .products-title {
-    @apply text-xl pr-20;
+    @apply text-xl;
   }
 
   .products-content {
     @apply left-4 right-4;
-    bottom: 45px;
+    bottom: 35px;
   }
 }

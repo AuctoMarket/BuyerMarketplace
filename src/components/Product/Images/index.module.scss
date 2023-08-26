@@ -9,7 +9,7 @@
     width: calc(100% - 125px);
 
     .gradient {
-      @apply absolute top-0 left-0 w-full z-10;
+      @apply absolute top-0 left-0 w-full z-10 hidden;
       height: 112px;
       background: linear-gradient(
         180deg,

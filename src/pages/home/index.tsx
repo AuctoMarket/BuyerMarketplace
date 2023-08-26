@@ -7,26 +7,37 @@ import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import SellerPromotion from '../../components/Sellers/Promotion';
 import useProductsList from '../../hooks/useProductsList';
 
+function isMobile() {
+  return window.innerWidth <= 820;
+}
+
 function HomePage() {
   const { productsList: recentlyAdded = [] } = useProductsList();
 
   return (
     <Layout>
       <div className={styles['home-page']}>
-        <ProductPromotion
-          className={styles['promotion']}
-          data={{
-            images: [
-              '/images/promotion/product-banner.png',
-              '/images/promotion/product-banner.png',
-              '/images/promotion/product-banner.png',
-            ],
-            url: '#',
-            title:
-              '<p>Collection: Pokemon S&S Brilliant Stars</p><p>Pre-Order yours today!</p>',
-          }}
-        />
-
+        {isMobile() ? (
+          <ProductPromotion
+            className={styles['promotion']}
+            data={{
+              images: ['/images/promotion/website-cover-mobile-1.png'],
+              url: '#',
+              title:
+                'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
+            }}
+          />
+        ) : (
+          <ProductPromotion
+            className={styles['promotion']}
+            data={{
+              images: ['/images/promotion/website-cover-1.png'],
+              url: '#',
+              title:
+                'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
+            }}
+          />
+        )}
         {recentlyAdded.length > 0 && (
           <div className={styles['content']}>
             <ProductRecentlyAdded

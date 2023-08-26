@@ -22,8 +22,16 @@
   width: 378px;
 }
 
-.checkout-button {
-  @apply mt-8 px-10;
+.controls {
+  @apply w-full mt-8;
+
+  .checkout-button {
+    @apply mt-0 px-10;
+  }
+
+  .chat-button {
+    @apply hidden;
+  }
 }
 
 @media (max-width: 820px) {
@@ -48,15 +56,17 @@
     margin-top: 22px;
 
     > div:last-of-type {
-      @apply block;
-
-      > div:first-of-type {
-        @apply hidden;
-      }
+      @apply hidden;
     }
   }
 
-  .checkout-button {
-    @apply w-full text-lg mt-4 h-10 #{!important};
+  .controls {
+    .checkout-button {
+      @apply w-full text-lg h-10 #{!important};
+    }
+
+    .chat-button {
+      @apply flex mt-4 text-lg h-10;
+    }
   }
 }
