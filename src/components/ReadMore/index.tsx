@@ -1,4 +1,4 @@
-import React, { ComponentProps, useEffect, useState } from 'react';
+import React, { ComponentProps, useState, useEffect } from 'react';
 
 import styles from './index.module.scss';
 
@@ -7,30 +7,40 @@ interface Props extends ComponentProps<'p'> {
   children: string;
 }
 
+// regex to strip out html tags
+const regex = /(<([^>]+)>)/gi;
+
 function ReadMore({ className, maxChars = 150, children, ...rest }: Props) {
-  const [isReadMore, setIsReadMore] = useState(children.length > maxChars);
+  const strippedChildren = children.replace(regex, '');
+  const [isReadMore, setIsReadMore] = useState(
+    strippedChildren.length > maxChars,
+  );
 
   useEffect(() => {
-    setIsReadMore(children.length > maxChars);
-  }, [children, maxChars]);
+    setIsReadMore(strippedChildren.length > maxChars);
+  }, [strippedChildren.length, maxChars]);
 
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
 
   return (
-    <p className={className} {...rest}>
+    <div className={className} {...rest}>
       {isReadMore ? (
         <>
-          {children.slice(0, maxChars)}...
+          <span
+            dangerouslySetInnerHTML={{
+              __html: `${strippedChildren.slice(0, maxChars)}...`,
+            }}
+          />
           <span onClick={toggleReadMore} className={styles['button']}>
             Read more
           </span>
         </>
       ) : (
-        children
+        <span dangerouslySetInnerHTML={{ __html: children }} />
       )}
-    </p>
+    </div>
   );
 }
 
