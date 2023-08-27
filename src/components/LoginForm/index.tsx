@@ -9,12 +9,14 @@ import { PopupContext } from '../Popup';
 
 interface LoginFormProps {
   onLogin?: (email: string, password: string) => void;
-  onContinueAsGuest?: () => void; // Add this prop
+  onContinueAsGuest?: () => void;
+  onSignup?: (email: string, password: string) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
   onLogin,
   onContinueAsGuest,
+  onSignup,
 }) => {
   const { togglePopup } = useContext(PopupContext);
 
@@ -65,8 +67,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
   };
 
   const handleSignupClick = () => {
-    if (togglePopup) {
-      togglePopup(true, <SignupForm />);
+    if (onSignup && togglePopup) {
+      togglePopup(true, <SignupForm onSignup={onSignup} />);
     }
   };
 
@@ -134,14 +136,15 @@ const LoginForm: React.FC<LoginFormProps> = ({
         </div>
       </div>
       <div className={styles.links}>
-        {/* Use the handleSignupClick function to open the signup form in a popup */}
-        <button
-          className={styles.a}
-          onClick={handleSignupClick}
-          data-testid="signup-button"
-        >
-          Not a user? Sign up here!
-        </button>
+        {onSignup && (
+          <button
+            className={styles.a}
+            onClick={handleSignupClick}
+            data-testid="signup-button"
+          >
+            Not a user? Sign up here!
+          </button>
+        )}
         {!guest && onContinueAsGuest && (
           <button className={styles.a} onClick={handleContinueAsGuestClick}>
             Continue as a guest!

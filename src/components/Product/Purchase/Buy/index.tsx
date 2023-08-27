@@ -28,7 +28,7 @@ function ProductPurchaseBuy({
   ...rest
 }: Props) {
   const { togglePopup } = useContext(PopupContext);
-  const { user, login, guest, setGuest } = useAuth();
+  const { user, login, guest, setGuest, signup } = useAuth();
 
   const handleLogin = async (email: string, password: string) => {
     await login(email, password);
@@ -42,6 +42,12 @@ function ProductPurchaseBuy({
     onBuy();
   };
 
+  const handleSignup = async (email: string, password: string) => {
+    await signup(email, password);
+    togglePopup?.(false);
+    onBuy();
+  };
+
   const handleBuy = () => {
     if (!user && !guest) {
       togglePopup?.(
@@ -49,6 +55,7 @@ function ProductPurchaseBuy({
         <LoginForm
           onLogin={handleLogin}
           onContinueAsGuest={handleContinueAsGuest}
+          onSignup={handleSignup}
         />,
       );
     } else {
