@@ -20,7 +20,7 @@ const OrderContactDetails = ({
   onChangeData,
   ...rest
 }: Props) => {
-  const { guest: isGuest } = useAuth();
+  const { user } = useAuth();
   const [error, setError] = useState<{
     email?: string;
     phoneNumber?: string;
@@ -130,7 +130,7 @@ const OrderContactDetails = ({
               value={data.email}
               onChange={handleChangeEmail}
               role="input-email-adress"
-              disabled={!isGuest}
+              disabled={user?.buyer_id}
             />
             {error.email && (
               <div className={`${styles['contact-detail-error-message']}`}>
@@ -163,7 +163,7 @@ const OrderContactDetails = ({
               value={data.emailConfirm}
               onChange={handleChangeEmailConfirm}
               role="input-confirm-email"
-              disabled={!isGuest}
+              disabled={user?.buyer_id}
             />
             {error.emailConfirm && (
               <div className={`${styles['contact-detail-error-message']}`}>
