@@ -1,6 +1,6 @@
 {
   "name": "BuyerMarketplace",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "React application for the Buyer Marketplace",
   "private": true,
   "homepage": "https://aucto.io",
@@ -20,8 +20,11 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "clean": "npx rimraf build coverage",
-    "predeploy": "REACT_APP_GITHUB_PAGES=true npm run build",
-    "deploy": "npx gh-pages -b AUCTO/Holding -d build"
+    "release": "npx standard-version -s -t ''",
+    "release:as": "npm run release -- -r",
+    "release:major": "npm run release:as major",
+    "release:minor": "npm run release:as minor",
+    "release:patch": "npm run release:as patch"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
