@@ -116,7 +116,7 @@ const OrderContactDetails = ({
             Please enter your contact details.
           </p>
           <div className={`${styles['contact-detail-content-text']}`}>
-            <p>*Require Fields</p>
+            <p>*Required Fields</p>
             <p>An email receipt will be sent once the checkout is completed</p>
           </div>
         </div>

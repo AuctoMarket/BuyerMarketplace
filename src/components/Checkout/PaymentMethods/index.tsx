@@ -35,7 +35,7 @@ export function PaymentMethods({
         <div className={styles['description']}>
           <div>Please enter your payment details.</div>
           <div className={styles['note']}>
-            *Require Fields
+            *Required Fields
             <br />
             Note that payment processing fees apply when paying with
             credit/debit card.

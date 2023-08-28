@@ -16,16 +16,27 @@ const useProductsList = (
     isLoading,
     data: productsList,
     error,
-  } = useSWR(['/products', query, options], async ([url, query, options]) => {
-    const response = await axios.get<Product[]>(`${apiConfig.baseUrl}${url}`, {
-      params: {
-        ...query,
-        ...options,
-      },
-    });
+  } = useSWR(
+    ['/products', query, options],
+    async ([url, query, options]) => {
+      const response = await axios.get<Product[]>(
+        `${apiConfig.baseUrl}${url}`,
+        {
+          params: {
+            ...query,
+            ...options,
+          },
+        },
+      );
 
-    return response.data.map(transformProduct);
-  });
+      return response.data.map(transformProduct);
+    },
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
 
   return {
     isLoading,

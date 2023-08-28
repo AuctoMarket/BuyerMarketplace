@@ -13,9 +13,6 @@ import useAuth from '../../../hooks/useAuth';
 const OrderPaymentStatusPage = () => {
   const [useOrderConfig, setUseOrderConfig] = useState({
     refreshInterval: 5000,
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
   });
   const [paymentStatus, setPaymentStatus] = useState(PaymentStatus.Pending);
 
@@ -32,9 +29,6 @@ const OrderPaymentStatusPage = () => {
 
     setUseOrderConfig({
       refreshInterval: 0,
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
     });
   }, [paymentStatus]);
 

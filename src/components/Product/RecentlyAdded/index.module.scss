@@ -21,6 +21,14 @@
 
 .list {
   @apply grid grid-cols-5 gap-5;
+
+  .card-link {
+    @apply block h-full;
+  }
+
+  .card {
+    @apply h-full;
+  }
 }
 
 @media (max-width: 820px) {

@@ -29,8 +29,11 @@ function ProductMoreFromSeller({
         <List
           className={styles['list']}
           items={products.map((product, index) => (
-            <Link to={`/products/${product.id}`}>
-              <Card data={{ product }} key={index} />
+            <Link
+              className={styles['card-link']}
+              to={`/products/${product.id}`}
+            >
+              <Card className={styles['card']} data={{ product }} key={index} />
             </Link>
           ))}
         />

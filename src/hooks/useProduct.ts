@@ -11,13 +11,21 @@ const useProduct = (id: string) => {
     isLoading,
     data: product,
     error,
-  } = useSWR(`/products/${id}`, async (url: string) => {
-    if (id) {
-      const response = await axios.get<Product>(`${apiConfig.baseUrl}${url}`);
+  } = useSWR(
+    `/products/${id}`,
+    async (url: string) => {
+      if (id) {
+        const response = await axios.get<Product>(`${apiConfig.baseUrl}${url}`);
 
-      return transformProduct(response.data);
-    }
-  });
+        return transformProduct(response.data);
+      }
+    },
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
 
   return {
     isLoading,

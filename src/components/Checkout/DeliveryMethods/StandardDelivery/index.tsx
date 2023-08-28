@@ -76,7 +76,7 @@ const StandardDelivery = ({
           Please enter your contact details.
         </p>
         <div className={`${styles['delivery-1-content-text']}`}>
-          <p>*Require Fields</p>
+          <p>*Required Fields</p>
         </div>
       </div>
       <div className={`${styles['delivery-1-input']}`}>
@@ -136,6 +136,10 @@ const StandardDelivery = ({
         </div>
       </div>
       <div className={`${styles['delivery-method-information']}`}>
+        <div className={styles['insurance']}>
+          Deliveries are 100% insured for lost packages and will take 1-3
+          business days.
+        </div>
         Once payment is completed, you will receive an email to schedule the
         delivery date and time. If you have any questions, you can reach out to
         us on telegram{' '}

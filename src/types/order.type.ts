@@ -1,5 +1,5 @@
 enum CollectionPoint {
-  BotanicGardensMRT = 'Botaic Gardens MRT',
+  BotanicGardensMRT = 'Botanic Gardens MRT',
   DhobyGhautMRT = 'Dhoby Ghaut MRT',
   AngMoKioMRT = 'Ang Mo Kio MRT',
   WoodlandsMRT = 'Woodlands MRT',

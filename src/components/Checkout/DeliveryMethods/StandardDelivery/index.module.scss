@@ -41,6 +41,10 @@
 .delivery-method-information {
   margin-top: 42px;
   font-size: 18px;
+
+  .insurance {
+    @apply font-semibold mb-1;
+  }
 }
 
 .delivery-method-information-contact {

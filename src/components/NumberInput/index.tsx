@@ -18,6 +18,13 @@ function NumberInput({
   max,
   ...rest
 }: Props) {
+  const handleChangeValue = (value: string) => {
+    const numberValue = Number(value);
+    if (numberValue >= min && (!max || numberValue <= max)) {
+      onChangeValue(numberValue);
+    }
+  };
+
   return (
     <div className={`${className} ${styles['number-input']}`} {...rest}>
       <Button
@@ -29,7 +36,12 @@ function NumberInput({
       >
         -
       </Button>
-      <input className={styles['input']} type="number" value={value} readOnly />
+      <input
+        className={styles['input']}
+        type="number"
+        value={value}
+        onChange={(event) => handleChangeValue(event.target.value)}
+      />
       <Button
         className={styles['btn-increase']}
         theme="white"
