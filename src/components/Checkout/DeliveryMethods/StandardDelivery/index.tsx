@@ -76,7 +76,7 @@ const StandardDelivery = ({
           Please enter your contact details.
         </p>
         <div className={`${styles['delivery-1-content-text']}`}>
-          <p>*Require Fields</p>
+          <p>*Required Fields</p>
         </div>
       </div>
       <div className={`${styles['delivery-1-input']}`}>
