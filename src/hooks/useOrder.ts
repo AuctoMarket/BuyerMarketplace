@@ -11,9 +11,6 @@ const useOrder = (
   isGuest: boolean,
   options: {
     refreshInterval?: number;
-    revalidateIfStale?: boolean;
-    revalidateOnFocus?: boolean;
-    revalidateOnReconnect?: boolean;
   } = {},
 ) => {
   const {
@@ -29,7 +26,12 @@ const useOrder = (
         return transformOrder(response.data);
       }
     },
-    options,
+    {
+      ...options,
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
   );
 
   return {

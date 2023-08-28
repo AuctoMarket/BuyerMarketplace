@@ -1,5 +1,5 @@
 .product-card {
-  @apply border border-solid border-gray-400 cursor-pointer;
+  @apply border border-solid border-gray-400 cursor-pointer flex flex-col;
 
   &:hover {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -47,10 +47,10 @@
 }
 
 .footer {
-  @apply p-3;
+  @apply p-3 grow flex flex-col;
 
   .product-title {
-    font-size: 20px;
+    @apply text-lg grow;
   }
 
   .product-posted-date {
@@ -59,7 +59,7 @@
 
   .product-price {
     @apply mt-2;
-    font-size: 26px;
+    font-size: 22px;
   }
 }
 
@@ -109,7 +109,7 @@
     @apply p-1;
 
     .product-title {
-      @apply truncate;
+      @apply leading-3;
       font-size: 10px;
     }
 

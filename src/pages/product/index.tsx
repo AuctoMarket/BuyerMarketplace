@@ -16,7 +16,7 @@ import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import useProduct from '../../hooks/useProduct';
 import useProductsList from '../../hooks/useProductsList';
-import { ProductType } from '../../types/product.type';
+import { Product, ProductType } from '../../types/product.type';
 
 function isMobile() {
   return window.innerWidth <= 820;
@@ -25,23 +25,48 @@ function isMobile() {
 function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
-  const { productsList: moreFromSeller = [] } = useProductsList(
+  const { productsList: moreFromSeller } = useProductsList(
     { seller_id: product?.seller.id },
     { sort_by: 'posted_date' },
   );
-  const { productsList: recentlyAdded = [] } = useProductsList(
+  const { productsList: recentlyAdded } = useProductsList(
     {},
     { sort_by: 'posted_date' },
   );
+
   const [quantity, setQuantity] = useState(1);
+  const [moreFromSellerProducts, setMoreFromSellerProducts] = useState<
+    Product[]
+  >([]);
+  const [recentlyAddedProducts, setRecentlyAddedProducts] = useState<Product[]>(
+    [],
+  );
 
   useEffect(() => {
+    if (!id) {
+      return;
+    }
+
     setQuantity(1);
   }, [id]);
 
-  const handleBuy = () => {
-    console.log('buy');
+  useEffect(() => {
+    if (!id || !moreFromSeller || moreFromSeller.length === 0) {
+      return;
+    }
 
+    setMoreFromSellerProducts(moreFromSeller.filter((p) => p.id !== id));
+  }, [id, moreFromSeller]);
+
+  useEffect(() => {
+    if (!id || !recentlyAdded || recentlyAdded.length === 0) {
+      return;
+    }
+
+    setRecentlyAddedProducts(recentlyAdded.filter((p) => p.id !== id));
+  }, [id, recentlyAdded]);
+
+  const handleBuy = () => {
     window.location.href = `/checkout?productId=${id}&quantity=${quantity}`;
   };
 
@@ -107,18 +132,21 @@ function ProductDetailsPage() {
             </div>
           </div>
 
-          {moreFromSeller.length > 0 && (
+          {moreFromSellerProducts.length > 0 && (
             <ProductMoreFromSeller
               className={styles['product-more-from-seller']}
-              data={{ products: moreFromSeller, seller: product.seller }}
+              data={{
+                products: moreFromSellerProducts,
+                seller: product.seller,
+              }}
             />
           )}
 
-          {recentlyAdded.length > 0 && (
+          {recentlyAddedProducts.length > 0 && (
             <ProductRecentlyAdded
               className={styles['product-recently-added']}
               data={{
-                products: recentlyAdded,
+                products: recentlyAddedProducts,
                 seeMore: false,
               }}
             />

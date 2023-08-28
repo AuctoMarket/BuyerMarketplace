@@ -11,13 +11,21 @@ const useSeller = (id: string) => {
     isLoading,
     data: seller,
     error,
-  } = useSWR(`/sellers/${id}`, async (url: string) => {
-    if (id) {
-      const response = await axios.get<Seller>(`${apiConfig.baseUrl}${url}`);
+  } = useSWR(
+    `/sellers/${id}`,
+    async (url: string) => {
+      if (id) {
+        const response = await axios.get<Seller>(`${apiConfig.baseUrl}${url}`);
 
-      return transformSeller(response.data);
-    }
-  });
+        return transformSeller(response.data);
+      }
+    },
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
 
   return {
     isLoading,

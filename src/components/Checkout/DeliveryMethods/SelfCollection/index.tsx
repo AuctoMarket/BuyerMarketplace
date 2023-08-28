@@ -31,12 +31,12 @@ export function SelfCollection({
       className={`${className} ${styles['delivery-method-choose-collection']}`}
       {...rest}
     >
-      <p>Choose you collection point</p>
+      <p>Choose your collection point</p>
 
       <Form className={`${styles['delivery-method-choose-form']}`}>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title="Botaic Gardens MRT"
+          title="Botanic Gardens MRT"
           data-testid={CollectionPoint.BotanicGardensMRT}
         >
           <Radio
