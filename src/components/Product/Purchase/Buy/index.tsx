@@ -28,7 +28,7 @@ function ProductPurchaseBuy({
   ...rest
 }: Props) {
   const { togglePopup } = useContext(PopupContext);
-  const { user, login, guest, setGuest, signup } = useAuth();
+  const { user, login, guest, signup, toggleGuest } = useAuth();
 
   const handleLogin = async (email: string, password: string) => {
     await login(email, password);
@@ -37,7 +37,7 @@ function ProductPurchaseBuy({
   };
 
   const handleContinueAsGuest = () => {
-    setGuest(true);
+    toggleGuest();
     togglePopup?.(false);
     onBuy();
   };
