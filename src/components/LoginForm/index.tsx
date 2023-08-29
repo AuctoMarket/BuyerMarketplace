@@ -67,8 +67,15 @@ const LoginForm: React.FC<LoginFormProps> = ({
   };
 
   const handleSignupClick = () => {
-    if (onSignup && togglePopup) {
-      togglePopup(true, <SignupForm onSignup={onSignup} />);
+    if (togglePopup) {
+      togglePopup(
+        true,
+        <SignupForm
+          onSignup={onSignup}
+          onLogin={onLogin}
+          onContinueAsGuest={onContinueAsGuest}
+        />,
+      );
     }
   };
 
@@ -137,15 +144,14 @@ const LoginForm: React.FC<LoginFormProps> = ({
         </div>
       </div>
       <div className={styles.links}>
-        {onSignup && (
-          <button
-            className={styles.a}
-            onClick={handleSignupClick}
-            data-testid="signup-button"
-          >
-            Not a user? Sign up here!
-          </button>
-        )}
+        <button
+          className={styles.a}
+          onClick={handleSignupClick}
+          data-testid="signup-button"
+        >
+          Not a user? Sign up here!
+        </button>
+
         {!guest && onContinueAsGuest && (
           <button className={styles.a} onClick={handleContinueAsGuestClick}>
             Continue as a guest!

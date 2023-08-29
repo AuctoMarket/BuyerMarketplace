@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.0.3...1.0.4) (2023-08-29)
+
+### Bug Fixes
+
+- **AUCTO-35:** fixed toggling issue between login and signup ([60ac3c3](https://github.com/AuctoMarket/BuyerMarketplace/commit/60ac3c3fdce573dd4d414f64d96191ba968ae1c0))
+
 ### [1.0.3](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.0.2...1.0.3) (2023-08-29)
 
 ### Bug Fixes

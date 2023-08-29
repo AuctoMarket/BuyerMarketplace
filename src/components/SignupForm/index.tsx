@@ -6,9 +6,15 @@ import Icon from '../Icon';
 
 interface SignupFormProps {
   onSignup?: (email: string, password: string) => void;
+  onLogin?: (email: string, password: string) => void;
+  onContinueAsGuest?: () => void;
 }
 
-const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
+const SignupForm: React.FC<SignupFormProps> = ({
+  onSignup,
+  onLogin,
+  onContinueAsGuest,
+}) => {
   const { togglePopup } = useContext(PopupContext); // Use the PopupContext
 
   const [email, setEmail] = useState('');
@@ -115,7 +121,10 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
 
   const handleLoginClick = () => {
     if (togglePopup) {
-      togglePopup(true, <LoginForm />);
+      togglePopup(
+        true,
+        <LoginForm onLogin={onLogin} onContinueAsGuest={onContinueAsGuest} />,
+      );
     }
   };
 
@@ -200,7 +209,6 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignup }) => {
         </div>
       </div>
       <div className={styles.links}>
-        {/* Use the onLoginClick prop to handle the "Login here" link click */}
         <button className={styles.a} onClick={handleLoginClick}>
           Already have an account? Login here!
         </button>
