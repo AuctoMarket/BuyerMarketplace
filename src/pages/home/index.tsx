@@ -21,7 +21,7 @@ function HomePage() {
           <ProductPromotion
             className={styles['promotion']}
             data={{
-              images: ['/images/promotion/website-cover-mobile-1.png'],
+              images: ['/images/promotion/mobile-banner-v2.png'],
               url: '#',
               title:
                 'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
