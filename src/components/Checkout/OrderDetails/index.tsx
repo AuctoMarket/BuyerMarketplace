@@ -92,6 +92,9 @@ function OrderDetails({
         <div className={styles['section-3']}>
           <div className={styles['label']}>Order Total</div>
           <Price className={styles['price']} data={{ price: total }} />
+          <div className={styles['info']}>
+            *Small Order Fee of 1$ applies for orders below $25.00.
+          </div>
         </div>
       </div>
 

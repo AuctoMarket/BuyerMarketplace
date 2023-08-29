@@ -4,7 +4,7 @@
 }
 
 .body {
-  @apply px-5 py-7 border border-solid font-thicboi text-xl;
+  @apply px-5 pt-7 border border-solid font-thicboi text-xl;
   margin-top: 17px;
   border-color: #afafaf;
   background-color: rgba(175, 175, 175, 0.1);
@@ -68,6 +68,11 @@
   .price {
     @apply mt-3 text-4xl pl-6;
     font-size: 40px;
+  }
+  .info {
+    padding-bottom: 18px;
+    padding-left: 14px;
+    @apply text-sm pt-6;
   }
 }
 
