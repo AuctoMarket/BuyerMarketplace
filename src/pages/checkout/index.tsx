@@ -138,8 +138,8 @@ const CheckoutPage = () => {
     }
 
     const resp = user?.buyer_id
-      ? await ordersApi.createGuestOrder(order)
-      : await ordersApi.createOrder(order);
+      ? await ordersApi.createOrder(order)
+      : await ordersApi.createGuestOrder(order);
 
     window.location.href = resp.redirect_url;
   };

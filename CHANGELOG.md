@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.0.1...1.0.2) (2023-08-29)
+
+### Bug Fixes
+
+- create guest order when already logged in ([48dd046](https://github.com/AuctoMarket/BuyerMarketplace/commit/48dd0461cc17785c8c38e9a193ec84ec3524e189))
+
 ### [1.0.1](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.0.0...1.0.1) (2023-08-29)
 
 ### Features
