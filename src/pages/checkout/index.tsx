@@ -27,7 +27,7 @@ const isError = (error: any) => Object.values(error).some(Boolean);
 
 const CheckoutPage = () => {
   const queryParams = useQueryParams();
-  const { guest: isGuest, user } = useAuth();
+  const { user } = useAuth();
   const { product } = useProduct(queryParams.get('productId') as string);
   const [order, setOrder] =
     useState<Omit<Order, 'id' | 'paymentStatus' | 'orderedDate'>>();
@@ -65,10 +65,10 @@ const CheckoutPage = () => {
       deliveryFee,
       paymentFee,
       total,
-      buyerId: !isGuest ? user.buyer_id : undefined,
+      buyerId: user?.buyer_id || undefined,
       contactDetails: {
-        email: !isGuest ? user.email : '',
-        emailConfirm: !isGuest ? user.email : '',
+        email: user?.email || '',
+        emailConfirm: user?.email || '',
         phoneNumber: '',
         telegramHandle: '',
       },
@@ -77,7 +77,7 @@ const CheckoutPage = () => {
         CollectionPointAddress[CollectionPoint.BotanicGardensMRT],
       paymentMethod,
     });
-  }, [queryParams, isGuest, user, product]);
+  }, [queryParams, user, product]);
 
   if (!order) {
     return null;
@@ -137,7 +137,7 @@ const CheckoutPage = () => {
       return;
     }
 
-    const resp = isGuest
+    const resp = user?.buyer_id
       ? await ordersApi.createGuestOrder(order)
       : await ordersApi.createOrder(order);
 

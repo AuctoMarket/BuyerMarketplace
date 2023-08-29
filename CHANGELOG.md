@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.0.0...1.0.1) (2023-08-29)
+
+### Features
+
+- **AUCTO-35:** need to fix guest state ([#69](https://github.com/AuctoMarket/BuyerMarketplace/issues/69)) ([7942606](https://github.com/AuctoMarket/BuyerMarketplace/commit/79426060aead2e3e0c57162c6d6ed2593a36da81))
+
 ## 1.0.0 (2023-08-28)
 
 ### Features

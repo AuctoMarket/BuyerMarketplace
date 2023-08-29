@@ -29,7 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const { guest } = useAuth();
+  const { guest, toggleGuest } = useAuth();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -75,6 +75,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const handleContinueAsGuestClick = () => {
     if (onContinueAsGuest) {
       onContinueAsGuest();
+      toggleGuest();
     }
     if (togglePopup) {
       togglePopup(false);
@@ -84,7 +85,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const handleContextMenu = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
-    event.preventDefault(); // Prevent the default context menu
+    event.preventDefault();
   };
 
   return (

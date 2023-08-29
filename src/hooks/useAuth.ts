@@ -8,11 +8,8 @@ function useAuth() {
   const initialUserData = JSON.parse(
     localStorage.getItem('userData') || 'null',
   );
-  const initialGuestState = JSON.parse(
-    localStorage.getItem('guestState') || 'false',
-  );
   const [user, setUser] = useState<any | null>(initialUserData);
-  const [guest, setGuestState] = useState(initialGuestState);
+  const [guest, setGuest] = useState(false);
 
   useEffect(() => {
     // Save user data to local storage whenever user state changes
@@ -22,15 +19,6 @@ function useAuth() {
       localStorage.removeItem('userData');
     }
   }, [user]);
-
-  useEffect(() => {
-    // Save guest state to local storage whenever guest state changes
-    if (guest) {
-      localStorage.setItem('guestState', JSON.stringify(guest));
-    } else {
-      localStorage.removeItem('guestState');
-    }
-  }, [guest]);
 
   const login = async (email: string, password: string) => {
     try {
@@ -47,7 +35,7 @@ function useAuth() {
       if (response.status === 200) {
         const userData = response.data;
         setUser(userData);
-        setGuestState(false); // Reset guest state on successful login
+        setGuest(false);
         return response.status;
       } else {
         return response.status;
@@ -72,7 +60,7 @@ function useAuth() {
       if (response.status === 201) {
         const userData = response.data;
         setUser(userData);
-        setGuestState(false); // Reset guest state on successful signup
+        setGuest(false);
         return response.status;
       } else {
         return response.status;
@@ -84,16 +72,15 @@ function useAuth() {
 
   const logout = () => {
     setUser(null);
-    setGuestState(false);
+    setGuest(false);
     localStorage.removeItem('userData');
-    localStorage.removeItem('guestState');
   };
 
-  const setGuest = (guestValue: boolean) => {
-    setGuestState(guestValue);
+  const toggleGuest = () => {
+    setGuest((prevGuest) => !prevGuest);
   };
 
-  return { user, guest, login, signup, logout, setGuest };
+  return { user, guest, login, signup, logout, toggleGuest };
 }
 
 export default useAuth;
