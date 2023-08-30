@@ -69,11 +69,10 @@
     @apply mt-3 text-4xl pl-6;
     font-size: 40px;
   }
-  .info {
-    padding-bottom: 18px;
-    padding-left: 14px;
-    @apply text-sm pt-6 font-medium;
-  }
+}
+
+.info {
+  @apply text-sm py-4 px-1 font-medium;
 }
 
 .footer {
@@ -140,6 +139,10 @@
     .price {
       @apply text-xl mt-1 pl-6;
     }
+  }
+
+  .info {
+    @apply pb-0 px-2;
   }
 
   .footer .button {
