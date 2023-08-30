@@ -18,7 +18,7 @@ const OrderPaymentStatusPage = () => {
 
   const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
-  const { order } = useOrder(id as string, user?.buyer_id, useOrderConfig);
+  const { order } = useOrder(id as string, !user?.buyer_id, useOrderConfig);
   const { product } = useProduct(order?.productId as string);
 
   // stop refreshing order when payment is completed or failed
