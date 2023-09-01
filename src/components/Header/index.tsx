@@ -5,25 +5,12 @@ import styles from './index.module.scss';
 import Logo from '../Logo';
 import List from '../List';
 import Icon from '../Icon';
-import LoginForm from '../../components/LoginForm';
-import SignupForm from '../../components/SignupForm';
 import useAuth from '../../hooks/useAuth';
-import { PopupContext } from '../../components/Popup';
 
 interface Props extends ComponentProps<'div'> {}
 
 function Header({ className, ...rest }: Props) {
-  const { togglePopup } = useContext(PopupContext);
-  const { user, login, signup } = useAuth();
-
-  const handleSignup = async (email: string, password: string) => {
-    await signup(email, password);
-
-    // Close the signup popup after successful signup
-    if (togglePopup) {
-      togglePopup(false);
-    }
-  };
+  const { user } = useAuth();
 
   return (
     <div className={`${styles['header']} ${className}`} {...rest}>
