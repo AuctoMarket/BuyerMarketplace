@@ -49,98 +49,9 @@ function Header({ className, ...rest }: Props) {
 
   return (
     <div className={`${styles['header']} ${className}`} {...rest}>
-      {user && (
-        <List
-          className={styles['navbar-right-mobile']}
-          items={[
-            <Dropdown
-              className={styles['dropdown']}
-              items={[
-                <Link to="/">Marketplace</Link>,
-                <Link to="https://t.me/auctomarketplace" target="_blank">
-                  Contact Us
-                </Link>,
-              ]}
-            >
-              <Icon name="menu" />
-            </Dropdown>,
-          ]}
-        />
-      )}
-
       <Link className={styles['logo']} to="/">
         <Logo type="horizontal" theme="inverted-color" />
       </Link>
-
-      <List
-        className={styles['navbar-right']}
-        items={[
-          ...(!user
-            ? [
-                <button
-                  className={`${styles['button']} ${styles['login']}`}
-                  onClick={openLoginForm}
-                  key="login"
-                  data-testid="login-desktop-button"
-                >
-                  Login
-                </button>,
-                <button
-                  className={`${styles['button']} ${styles['signup']}`}
-                  onClick={openSignupForm}
-                  key="signup"
-                  data-testid="signup-desktop-button"
-                >
-                  Signup
-                </button>,
-              ]
-            : []),
-          ...(user
-            ? [
-                <Dropdown
-                  className={styles['dropdown']}
-                  items={[
-                    <Link to="/" key="marketplace">
-                      Marketplace
-                    </Link>,
-                    <Link
-                      to="https://t.me/auctomarketplace"
-                      target="_blank"
-                      key="contact"
-                    >
-                      Contact Us
-                    </Link>,
-                  ]}
-                  key="dropdown"
-                >
-                  <Icon name="menu" />
-                </Dropdown>,
-              ]
-            : []),
-        ]}
-      />
-
-      {!user && (
-        <List
-          className={styles['navbar-right-mobile']}
-          items={[
-            <button
-              className={`${styles['mobile-button']} ${styles['login']}`}
-              onClick={openLoginForm}
-              data-testid="login-mobile-button"
-            >
-              Login
-            </button>,
-            <button
-              className={`${styles['mobile-button']} ${styles['signup']}`}
-              onClick={openSignupForm}
-              data-testid="signup-mobile-button"
-            >
-              Signup
-            </button>,
-          ]}
-        />
-      )}
     </div>
   );
 }
