@@ -1,5 +1,5 @@
 .header {
-  @apply relative flex items-center text-white bg-black p-4;
+  @apply relative flex items-center text-white bg-black p-4 justify-between pr-5;
 }
 
 .logo {
@@ -9,17 +9,12 @@
     height: 30px;
   }
 }
-.navbar-left-mobile {
-  @apply hidden mr-auto;
 
-  > li {
-    @apply cursor-pointer;
-    width: 26px;
-
-    > img {
-      @apply block w-full;
-    }
-  }
+.navbar-right {
+  @apply flex gap-12 font-bold text-2xl;
+}
+.icon-user {
+  padding-top: 2px;
 }
 
 @media (max-width: 820px) {
@@ -27,14 +22,22 @@
     @apply p-3;
   }
 
-  .logo {
+  .navbar-right {
+    gap: 10px;
+    @apply text-xs;
   }
 
-  .search-box {
+  .browse {
     @apply hidden;
   }
 
-  .navbar-left-mobile {
-    @apply absolute top-0 left-0 h-full pl-4 flex items-center;
+  .icon-user {
+    height: 16px;
+  }
+
+  .logo {
+    img {
+      height: 24px;
+    }
   }
 }
