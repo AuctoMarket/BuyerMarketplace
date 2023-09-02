@@ -55,7 +55,6 @@ function ProductPurchaseBuy({
         <LoginForm
           onLogin={handleLogin}
           onContinueAsGuest={handleContinueAsGuest}
-          onSignup={handleSignup}
         />,
       );
     } else {

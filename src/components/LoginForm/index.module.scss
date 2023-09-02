@@ -1,60 +1,108 @@
-.inputGroup {
-  @apply mb-5;
+.container {
+  @apply flex flex-col items-center px-20 py-11;
+}
+.logo {
+  magrin-bottom: 15px;
+  width: 200px;
+}
+.text-1 {
+  magrin-bottom: 6px;
+  @apply text-3xl font-semibold font-thicboi;
+}
+.text-2 {
+  color: #858585;
+  width: 310px;
+  @apply text-base font-light font-thicboi mb-9 text-center;
+}
 
-  label {
-    @apply block mb-4;
-  }
+.group-input {
+  @apply w-full;
 
   input {
-    @apply w-72 py-2 px-12 border border-gray-300 rounded text-sm flex-1 pr-10 pl-5;
+    padding-left: 25px;
+  }
+  ::placeholder {
+    @apply text-sm font-thin;
+    color: rgba(37, 37, 37, 0.5);
   }
 }
 
-.login-title {
-  @apply text-4xl text-center my-4 py-4;
+.email-input {
+  @apply w-full h-14 mb-7;
 }
 
-.links {
-  @apply flex flex-col items-center my-3;
-
-  .a {
-    @apply mb-3 no-underline text-black;
-    text-decoration: underline;
-  }
+.password {
+  @apply w-full relative;
 }
 
-.btnGroup {
-  @apply flex justify-center mt-5;
-
-  button {
-    @apply px-4 py-2 rounded cursor-pointer;
-  }
+.password-input {
+  @apply w-full h-14;
 }
-
-.loginBtn {
-  @apply bg-black text-white mr-1 w-40;
-}
-
-.error {
-  @apply text-red-500 mb-1 text-xs;
-}
-
-.passwordInput {
-  @apply relative flex;
-
-  input {
-    @apply flex-1 pr-10;
-  }
-}
-
 .visibilityIcon {
-  @apply absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-2xl;
+  top: 25px;
+  @apply absolute  right-5 transform -translate-y-1/2 cursor-pointer text-2xl;
+}
+.register {
+  color: #252525;
+  margin-top: 42px;
+  margin-bottom: 27px;
+  @apply font-thicboi text-lg font-light underline;
 }
 
-.responsiveLoginBtn {
-  @apply bg-black text-white px-3 py-2 rounded text-sm;
+.login-button {
+  width: 274px;
+  @apply text-2xl font-thicboi font-normal uppercase;
+}
 
-  @media (max-width: 768px) {
-    @apply w-32; // Adjust width for mobile screens
+.login-form-error-message {
+  font-size: 14px;
+  @apply text-red-700 font-thicboi font-thicboi;
+}
+
+@media (max-width: 820px) {
+  .container {
+    @apply px-14 pt-0;
+  }
+
+  .logo {
+    margin-bottom: 11px;
+    width: 140px;
+  }
+  .text-1 {
+    margin-bottom: 1px;
+    @apply text-xl font-semibold font-thicboi;
+  }
+  .text-2 {
+    color: #858585;
+    width: 310px;
+    margin-bottom: 10px;
+    @apply text-xs font-light font-thicboi  text-center;
+  }
+  .group-input {
+    @apply w-full pl-3;
+
+    input {
+      padding-left: 18px;
+      @apply pt-0 pb-0;
+    }
+
+    ::placeholder {
+      @apply text-sm font-thin;
+      color: rgba(37, 37, 37, 0.5);
+    }
+  }
+  .email-input {
+    margin-bottom: 26px;
+    @apply w-full h-14;
+  }
+  .register {
+    color: #252525;
+    margin-top: 26px;
+    margin-bottom: 15px;
+    @apply font-thicboi text-sm font-light underline;
+  }
+  .login-button {
+    width: 204px;
+    @apply font-normal text-lg font-thicboi py-0 h-9 #{!important};
   }
 }

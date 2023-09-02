@@ -2,51 +2,44 @@
 import React, { useState, useContext } from 'react';
 
 import styles from './index.module.scss';
-import SignupForm from '../SignupForm';
 import Icon from '../Icon';
-import useAuth from '../../hooks/useAuth';
-import { PopupContext } from '../Popup';
+import Image from '../Image';
+import Input from '../Input';
+import { Link } from 'react-router-dom';
+import Button from '../Button';
 
 interface LoginFormProps {
   onLogin?: (email: string, password: string) => void;
   onContinueAsGuest?: () => void;
-  onSignup?: (email: string, password: string) => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({
-  onLogin,
-  onContinueAsGuest,
-  onSignup,
-}) => {
-  const { togglePopup } = useContext(PopupContext);
-
+const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+  const [error, setError] = useState<{
+    email?: string;
+    password?: string;
+  }>({});
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const [error, setError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
   const [showPassword, setShowPassword] = useState(false);
 
-  const { guest, toggleGuest } = useAuth();
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-    setEmailError('');
-    setError('');
+    const emailError = validateEmail(email);
+    const newError = { ...error, email: emailError };
+    setError(newError);
   };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    setPasswordError('');
-    setError('');
   };
 
   const handleLogin = async () => {
     // Perform input validation
     if (!email.trim() || !password.trim()) {
-      setError('Please fill in all fields.');
+      const newError = {
+        email: 'Please fill in all fields.',
+        password: 'Please fill in all fields.',
+      };
+      setError(newError);
       return;
     }
 
@@ -56,116 +49,78 @@ const LoginForm: React.FC<LoginFormProps> = ({
         await onLogin(email, password);
       }
     } catch (error) {
-      setEmailError('Incorrect email or password.');
-      setError('');
+      const newError = {
+        email: 'Incorrect email or password.',
+        password: 'Incorrect email or password.',
+      };
+      setError(newError);
       return;
+    }
+  };
+
+  const validateEmail = (email: string) => {
+    // Regular expression to check email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return 'Incorrect email format, please enter a valid email address.';
     }
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-
-  const handleSignupClick = () => {
-    if (togglePopup) {
-      togglePopup(
-        true,
-        <SignupForm
-          onSignup={onSignup}
-          onLogin={onLogin}
-          onContinueAsGuest={onContinueAsGuest}
-        />,
-      );
-    }
-  };
-
-  const handleContinueAsGuestClick = () => {
-    if (onContinueAsGuest) {
-      onContinueAsGuest();
-      toggleGuest();
-    }
-    if (togglePopup) {
-      togglePopup(false);
-    }
-  };
-
-  const handleContextMenu = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    event.preventDefault();
-  };
-
   return (
     <>
-      <div className={styles['login-title']}>Login</div>
-      <div className={styles.inputGroup}>
-        {error && (
-          <div className={styles.error} data-testid="error-message">
-            {error}
-          </div>
-        )}
-        {emailError && (
-          <div className={styles.error} data-testid="email-error-message">
-            {emailError}
-          </div>
-        )}
-        <div className={styles.input}>
-          <input
-            type="text"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
+      <div className={styles['container']}>
+        <Image
+          className={styles['logo']}
+          src="images/logo/horizontal/slogan/slogan-color.png"
+        />
+        <div className={styles['text-1']}>Your collectors account.</div>
+        <div className={styles['text-2']}>
+          Login to your collectors account to gain access to all things
+          collectible.{' '}
+        </div>
+        <div className={styles['group-input']}>
+          <Input
+            className={styles['email-input']}
+            theme="white"
             placeholder="Email"
-            autoCapitalize="none"
-          />
-        </div>
-      </div>
-      <div className={styles.inputGroup}>
-        {passwordError && (
-          <div className={styles.error} data-testid="password-error-message">
-            {passwordError}
+            type="text"
+            onChange={handleChangeEmail}
+            role="input-email-adress"
+          ></Input>
+          {error.email && (
+            <div className={`${styles['login-form-error-message']}`}>
+              {error.email}
+            </div>
+          )}
+          <div className={styles['password']}>
+            <Input
+              className={styles['password-input']}
+              theme="white"
+              placeholder="Password"
+              type={!showPassword ? 'password' : 'text'}
+              onChange={handleChangePassword}
+            ></Input>
+            <Icon
+              name="password-visibility"
+              className={styles.visibilityIcon}
+              data-testid="password-visibility-icon"
+              onClick={togglePasswordVisibility}
+            />
           </div>
-        )}
-        <div className={styles.passwordInput}>
-          <input
-            type={!showPassword ? 'password' : 'text'}
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
-          <Icon
-            name="password-visibility"
-            className={styles.visibilityIcon}
-            onClick={togglePasswordVisibility}
-            onContextMenu={handleContextMenu}
-            data-testid="password-visibility-icon"
-          />
         </div>
-      </div>
-      <div className={styles.links}>
-        <button
-          className={styles.a}
-          onClick={handleSignupClick}
-          data-testid="signup-button"
-        >
-          Not a user? Sign up here!
-        </button>
-
-        {!guest && onContinueAsGuest && (
-          <button className={styles.a} onClick={handleContinueAsGuestClick}>
-            Continue as a guest!
-          </button>
-        )}
-      </div>
-      <div className={styles.btnGroup}>
-        <button
-          className={`${styles.loginBtn} ${styles.responsiveLoginBtn}`}
+        <Link className={styles['register']} to="#">
+          Dont have an account? Join us here.
+        </Link>
+        <Button
+          theme="black"
+          className={styles['login-button']}
           onClick={handleLogin}
-          data-testid="login-button"
         >
-          LOGIN
-        </button>
+          Login
+        </Button>
       </div>
     </>
   );
