@@ -1,4 +1,4 @@
-import React, { ComponentProps, useContext } from 'react';
+import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
 import Button from '../../../Button';
@@ -6,7 +6,6 @@ import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
 import NumberInput from '../../../NumberInput';
 import useAuth from '../../../../hooks/useAuth';
-import { PopupContext } from '../../../Popup';
 
 import type { Product } from '../../../../types/product.type';
 
