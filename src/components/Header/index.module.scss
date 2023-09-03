@@ -11,10 +11,11 @@
 }
 
 .navbar-right {
-  @apply flex gap-12 font-bold text-2xl;
+  @apply flex items-center gap-12 font-bold text-2xl;
 }
+
 .icon-user {
-  padding-top: 2px;
+  width: 34px;
 }
 
 @media (max-width: 820px) {
@@ -22,9 +23,14 @@
     @apply p-3;
   }
 
+  .logo {
+    img {
+      height: 24px;
+    }
+  }
+
   .navbar-right {
-    gap: 10px;
-    @apply text-xs;
+    @apply gap-5 text-xs;
   }
 
   .browse {
@@ -32,12 +38,6 @@
   }
 
   .icon-user {
-    height: 16px;
-  }
-
-  .logo {
-    img {
-      height: 24px;
-    }
+    @apply w-5;
   }
 }

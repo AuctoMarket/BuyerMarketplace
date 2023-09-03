@@ -6,15 +6,18 @@
 
   @apply container mx-auto;
 }
+
 .login {
   width: 540px;
   border: 1px solid #afafaf;
   @apply m-auto;
 }
+
 @media (max-width: 820px) {
   .login-page {
     @apply pt-7;
   }
+
   .login {
     @apply w-full border-0;
   }

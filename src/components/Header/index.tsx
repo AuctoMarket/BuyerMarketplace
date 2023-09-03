@@ -21,43 +21,30 @@ function Header({ className, ...rest }: Props) {
       <List
         className={styles['navbar-right']}
         items={[
-          ...(!user
-            ? [
-                <Link className={styles['browse']} to="/">
-                  Browse
-                </Link>,
-                <Link className={styles['about-us']} to="#">
-                  About Us
-                </Link>,
-                <Link
-                  className={styles['contact-us']}
-                  to="https://t.me/auctomarketplace"
-                  target="_blank"
-                >
-                  Contact Us
-                </Link>,
-                <Link className={styles['sign-in']} to="/auth/login">
-                  Sign In
-                </Link>,
-              ]
-            : [
-                <Link className={styles['browse']} to="/">
-                  Browse
-                </Link>,
-                <Link className={styles['about-us']} to="#" target="_blank">
-                  About Us
-                </Link>,
-                <Link
-                  className={styles['contact-us']}
-                  to="https://t.me/auctomarketplace"
-                  target="_blank"
-                >
-                  Contact Us
-                </Link>,
-                <Link to="#" target="_blank">
-                  <Icon className={styles['icon-user']} name="user" />
-                </Link>,
-              ]),
+          <Link className={styles['browse']} to="/">
+            Browse
+          </Link>,
+          <Link className={styles['about-us']} to="#">
+            About Us
+          </Link>,
+          <Link
+            className={styles['contact-us']}
+            to="https://t.me/auctomarketplace"
+            target="_blank"
+          >
+            Contact Us
+          </Link>,
+          ...[
+            !user ? (
+              <Link className={styles['sign-in']} to="/auth/login">
+                Sign In
+              </Link>
+            ) : (
+              <Link to="#">
+                <Icon className={styles['icon-user']} name="user" />
+              </Link>
+            ),
+          ],
         ]}
       />
     </div>
