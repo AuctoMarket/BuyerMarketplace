@@ -5,7 +5,6 @@ import Button from '../../../Button';
 import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
 import NumberInput from '../../../NumberInput';
-import useAuth from '../../../../hooks/useAuth';
 
 import type { Product } from '../../../../types/product.type';
 
@@ -25,16 +24,6 @@ function ProductPurchaseBuy({
   onBuy,
   ...rest
 }: Props) {
-  const { user, guest } = useAuth();
-
-  const handleBuy = () => {
-    if (!user && !guest) {
-      window.location.href = `/auth/login`;
-    } else {
-      onBuy();
-    }
-  };
-
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['price-container']}>
@@ -60,7 +49,7 @@ function ProductPurchaseBuy({
         </div>
       </div>
       <div className={styles['btn-buy-container']}>
-        <Button className={styles['button']} theme="white" onClick={handleBuy}>
+        <Button className={styles['button']} theme="white" onClick={onBuy}>
           Buy
         </Button>
       </div>

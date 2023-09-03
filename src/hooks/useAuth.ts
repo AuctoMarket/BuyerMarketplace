@@ -1,30 +1,23 @@
-// Hooks/useAuth.ts
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 import api from '../configs/api';
 
-function useAuth() {
-  const initialUserData = JSON.parse(
-    localStorage.getItem('userData') || 'null',
-  );
-  const [user, setUser] = useState<any | null>(initialUserData);
-  const [guest, setGuest] = useState(false);
+const userDataKey = 'userData';
 
-  useEffect(() => {
-    // Save user data to local storage whenever user state changes
-    if (user) {
-      localStorage.setItem('userData', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('userData');
-    }
-  }, [user]);
+function useAuth() {
+  const [user, setUser] = useState<any>(
+    JSON.parse(localStorage.getItem(userDataKey) || 'null'),
+  );
 
   const login = async (email: string, password: string) => {
     try {
       const response = await axios.post(
         `${api.baseUrl}/buyers/login`,
-        { email, password },
+        {
+          email,
+          password,
+        },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -32,16 +25,10 @@ function useAuth() {
         },
       );
 
-      if (response.status === 200) {
-        const userData = response.data;
-        setUser(userData);
-        setGuest(false);
-        return response.status;
-      } else {
-        return response.status;
-      }
-    } catch (error) {
-      throw new Error('Error during login.');
+      setUser(response.data);
+      localStorage.setItem(userDataKey, JSON.stringify(response.data));
+    } catch (error: any) {
+      throw new Error(error.response.data.message);
     }
   };
 
@@ -49,7 +36,10 @@ function useAuth() {
     try {
       const response = await axios.post(
         `${api.baseUrl}/buyers/signup`,
-        { email, password },
+        {
+          email,
+          password,
+        },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -57,30 +47,14 @@ function useAuth() {
         },
       );
 
-      if (response.status === 201) {
-        const userData = response.data;
-        setUser(userData);
-        setGuest(false);
-        return response.status;
-      } else {
-        return response.status;
-      }
-    } catch (error) {
-      throw new Error('Error during signup.');
+      setUser(response.data);
+      localStorage.setItem(userDataKey, JSON.stringify(response.data));
+    } catch (error: any) {
+      throw new Error(error.response.data.message);
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    setGuest(false);
-    localStorage.removeItem('userData');
-  };
-
-  const toggleGuest = () => {
-    setGuest((prevGuest) => !prevGuest);
-  };
-
-  return { user, guest, login, signup, logout, toggleGuest };
+  return { user, login, signup };
 }
 
 export default useAuth;

@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Logo from '../Logo';
@@ -10,6 +10,7 @@ import useAuth from '../../hooks/useAuth';
 interface Props extends ComponentProps<'div'> {}
 
 function Header({ className, ...rest }: Props) {
+  const location = useLocation();
   const { user } = useAuth();
 
   return (
@@ -36,7 +37,12 @@ function Header({ className, ...rest }: Props) {
           </Link>,
           ...[
             !user ? (
-              <Link className={styles['sign-in']} to="/auth/login">
+              <Link
+                className={styles['sign-in']}
+                to={`/auth/login?redirectUrl=${encodeURIComponent(
+                  location.pathname,
+                )}`}
+              >
                 Sign In
               </Link>
             ) : (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
@@ -17,12 +17,15 @@ import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import useProduct from '../../hooks/useProduct';
 import useProductsList from '../../hooks/useProductsList';
 import { Product, ProductType } from '../../types/product.type';
+import useAuth from '../../hooks/useAuth';
 
 function isMobile() {
   return window.innerWidth <= 820;
 }
 
 function ProductDetailsPage() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
   const { productsList: moreFromSeller } = useProductsList(
@@ -67,7 +70,17 @@ function ProductDetailsPage() {
   }, [id, recentlyAdded]);
 
   const handleBuy = () => {
-    window.location.href = `/checkout?productId=${id}&quantity=${quantity}`;
+    const redirectUrl = `/checkout?productId=${id}&quantity=${quantity}`;
+
+    if (user) {
+      navigate(redirectUrl);
+    } else {
+      navigate(
+        `/auth/login/?continueAsGuest=true&redirectUrl=${encodeURIComponent(
+          redirectUrl,
+        )}`,
+      );
+    }
   };
 
   return (

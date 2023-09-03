@@ -6,6 +6,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const SignupPage = () => {
   const { signup } = useAuth();
+
   return (
     <Layout>
       <div className={styles['signup-page']}>

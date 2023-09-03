@@ -1,22 +1,22 @@
 .container {
-  @apply flex flex-col items-center px-20 py-11;
+  @apply flex flex-col items-center px-20 py-14;
 }
+
 .logo {
-  magrin-bottom: 15px;
   width: 200px;
 }
+
 .text-1 {
-  magrin-bottom: 6px;
-  @apply text-3xl font-semibold font-thicboi;
+  @apply text-3xl font-semibold font-thicboi mt-3;
 }
+
 .text-2 {
+  @apply text-base font-light font-thicboi text-center leading-4 mt-1;
   color: #858585;
-  width: 310px;
-  @apply text-base font-light font-thicboi mb-9 text-center;
 }
 
 .group-input {
-  @apply w-full;
+  @apply w-full mt-9;
 
   input {
     padding-left: 25px;
@@ -25,68 +25,69 @@
     @apply text-sm font-thin;
     color: rgba(37, 37, 37, 0.5);
   }
-}
-.email {
-  @apply mb-7;
-}
-.email-input {
-  @apply w-full h-14;
+
+  .email {
+    @apply mb-7;
+  }
+
+  .email-input {
+    @apply w-full h-14;
+  }
+
+  .password {
+    @apply w-full relative;
+  }
+
+  .password-input {
+    @apply w-full h-14;
+  }
+
+  .visibilityIcon {
+    top: 25px;
+    @apply absolute  right-5 transform -translate-y-1/2 cursor-pointer text-2xl;
+  }
+
+  .login-form-error-message {
+    font-size: 14px;
+    @apply text-red-700 font-thicboi mt-1;
+  }
 }
 
-.password {
-  @apply w-full relative;
-}
-
-.password-input {
-  @apply w-full h-14;
-}
-.visibilityIcon {
-  top: 25px;
-  @apply absolute  right-5 transform -translate-y-1/2 cursor-pointer text-2xl;
-}
-.register {
-  color: #252525;
-  margin-top: 42px;
-  margin-bottom: 25px;
-  @apply font-thicboi text-lg font-light underline;
-}
+.register,
 .as-guest {
+  @apply font-thicboi text-lg font-light underline mt-10;
   color: #252525;
-  margin-bottom: 18px;
-  @apply font-thicboi text-lg font-light underline;
+}
+
+.as-guest {
+  @apply mt-4;
 }
 
 .login-button {
+  @apply text-2xl font-thicboi font-normal uppercase mt-8 #{!important};
   width: 274px;
-  @apply text-2xl font-thicboi font-normal uppercase;
-}
-
-.login-form-error-message {
-  font-size: 14px;
-  @apply text-red-700 font-thicboi font-thicboi mt-1;
 }
 
 @media (max-width: 820px) {
   .container {
-    @apply px-14 pt-0;
+    @apply px-14 py-8;
   }
 
   .logo {
-    margin-bottom: 11px;
     width: 140px;
   }
+
   .text-1 {
-    margin-bottom: 1px;
-    @apply text-xl font-semibold font-thicboi;
+    @apply text-xl font-semibold font-thicboi mt-2;
   }
+
   .text-2 {
+    @apply text-xs font-light font-thicboi text-center mt-0 leading-none;
     color: #858585;
-    width: 310px;
-    margin-bottom: 10px;
-    @apply text-xs font-light font-thicboi  text-center;
   }
+
   .group-input {
-    @apply w-full pl-3 text-sm;
+    @apply w-full text-sm mt-5;
 
     input {
       padding-left: 18px;
@@ -97,31 +98,30 @@
       @apply text-sm font-thin;
       color: rgba(37, 37, 37, 0.5);
     }
+
+    .password {
+      margin-top: 26px;
+    }
+
+    .login-form-error-message {
+      font-size: 12px;
+      margin-top: 3px;
+      @apply text-red-700 font-thicboi;
+    }
   }
-  .email {
-    margin-bottom: 26px;
-  }
-  .email-input {
-    @apply w-full h-14;
-  }
+
   .register {
+    @apply font-thicboi text-sm font-light underline mt-6;
     color: #252525;
-    margin-top: 26px;
-    margin-bottom: 16px;
-    @apply font-thicboi text-sm font-light underline;
   }
+
   .as-guest {
     color: #252525;
-    margin-bottom: 6px;
-    @apply font-thicboi text-sm font-light underline;
+    @apply font-thicboi text-sm font-light underline mt-3;
   }
+
   .login-button {
     width: 204px;
-    @apply font-normal text-lg font-thicboi py-0 h-9 #{!important};
-  }
-  .login-form-error-message {
-    font-size: 12px;
-    margin-top: 3px;
-    @apply text-red-700 font-thicboi font-thicboi;
+    @apply font-normal text-lg font-thicboi py-0 h-9 mt-6 #{!important};
   }
 }
