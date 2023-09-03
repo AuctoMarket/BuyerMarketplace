@@ -7,6 +7,7 @@ import Image from '../Image';
 import Input from '../Input';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
+import useAuth from '../../hooks/useAuth';
 
 interface LoginFormProps {
   onLogin?: (email: string, password: string) => void;
@@ -24,6 +25,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const { guest, toggleGuest } = useAuth();
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const clearError = {
@@ -74,7 +76,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
   const handleContinueAsGuest = async () => {
     if (onContinueAsGuest) {
-      await onContinueAsGuest();
+      if (onContinueAsGuest) {
+        onContinueAsGuest();
+        toggleGuest();
+      }
     }
   };
 

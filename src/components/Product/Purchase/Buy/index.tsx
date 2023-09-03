@@ -44,13 +44,7 @@ function ProductPurchaseBuy({
 
   const handleBuy = () => {
     if (!user && !guest) {
-      togglePopup?.(
-        true,
-        <LoginForm
-          onLogin={handleLogin}
-          onContinueAsGuest={handleContinueAsGuest}
-        />,
-      );
+      window.location.href = `/auth/login`;
     } else {
       onBuy();
     }
