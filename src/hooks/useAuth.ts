@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 
-import api from '../configs/api';
+import authApi from '../apis/auth';
 
 const userDataKey = 'userData';
 
@@ -11,47 +10,17 @@ function useAuth() {
   );
 
   const login = async (email: string, password: string) => {
-    try {
-      const response = await axios.post(
-        `${api.baseUrl}/buyers/login`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
+    const data = await authApi.login({ email, password });
 
-      setUser(response.data);
-      localStorage.setItem(userDataKey, JSON.stringify(response.data));
-    } catch (error: any) {
-      throw new Error(error.response.data.message);
-    }
+    setUser(data);
+    localStorage.setItem(userDataKey, JSON.stringify(data));
   };
 
   const signup = async (email: string, password: string) => {
-    try {
-      const response = await axios.post(
-        `${api.baseUrl}/buyers/signup`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
+    const data = await authApi.signup({ email, password });
 
-      setUser(response.data);
-      localStorage.setItem(userDataKey, JSON.stringify(response.data));
-    } catch (error: any) {
-      throw new Error(error.response.data.message);
-    }
+    setUser(data);
+    localStorage.setItem(userDataKey, JSON.stringify(data));
   };
 
   return { user, login, signup };

@@ -8,6 +8,7 @@ import Input from '../Input';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import useAuth from '../../hooks/useAuth';
+import useQueryParams from '../../hooks/useQueryParams';
 
 interface Props extends ComponentProps<'div'> {
   onLogin?: () => void;
@@ -20,6 +21,7 @@ const LoginForm = ({
   onContinueAsGuest,
   ...rest
 }: Props) => {
+  const queryParams = useQueryParams();
   const [isServerError, setIsServerError] = useState(false);
   const [error, setError] = useState<{
     email?: string;
@@ -31,7 +33,7 @@ const LoginForm = ({
   const { login } = useAuth();
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const emailError = validateEmail(email);
+    const emailError = validateEmail(event.target.value);
     const newError = isServerError
       ? { email: '', password: '' }
       : { ...error, email: emailError };
@@ -64,7 +66,11 @@ const LoginForm = ({
   };
 
   const handleLogin = async () => {
-    if (error.email?.trim() || error.password?.trim()) {
+    if (error.email || error.password) {
+      return;
+    }
+
+    if (!email.trim() || !password.trim()) {
       return;
     }
 
@@ -143,7 +149,14 @@ const LoginForm = ({
         </div>
       </div>
 
-      <Link className={styles['register']} to="/auth/signup">
+      <Link
+        className={styles['register']}
+        to={`/auth/signup?continueAsGuest=${
+          queryParams.get('continueAsGuest') || false
+        }&redirectUrl=${encodeURIComponent(
+          queryParams.get('redirectUrl') as string,
+        )}`}
+      >
         Don't have an account? Join us here.
       </Link>
 

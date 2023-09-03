@@ -9,12 +9,14 @@ import useQueryParams from '../../../hooks/useQueryParams';
 const LoginPage = () => {
   const navigate = useNavigate();
   const queryParams = useQueryParams();
-  const continueAsGuest = queryParams.get('continueAsGuest');
+  const continueAsGuest = JSON.parse(
+    queryParams.get('continueAsGuest') || 'false',
+  );
   const redirectUrl = queryParams.get('redirectUrl');
 
   const handleLogin = () => {
     if (redirectUrl) {
-      navigate(decodeURIComponent(redirectUrl));
+      window.location.href = decodeURIComponent(redirectUrl);
     } else {
       navigate('/');
     }
@@ -22,7 +24,7 @@ const LoginPage = () => {
 
   const handleContinueAsGuest = () => {
     if (redirectUrl) {
-      navigate(decodeURIComponent(redirectUrl));
+      window.location.href = decodeURIComponent(redirectUrl);
     }
   };
 

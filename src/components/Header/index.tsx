@@ -40,7 +40,7 @@ function Header({ className, ...rest }: Props) {
               <Link
                 className={styles['sign-in']}
                 to={`/auth/login?redirectUrl=${encodeURIComponent(
-                  location.pathname,
+                  `${location.pathname}${location.search}`,
                 )}`}
               >
                 Sign In

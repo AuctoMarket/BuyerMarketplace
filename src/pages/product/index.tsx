@@ -73,7 +73,7 @@ function ProductDetailsPage() {
     const redirectUrl = `/checkout?productId=${id}&quantity=${quantity}`;
 
     if (user) {
-      navigate(redirectUrl);
+      window.location.href = redirectUrl;
     } else {
       navigate(
         `/auth/login/?continueAsGuest=true&redirectUrl=${encodeURIComponent(

@@ -1,145 +1,112 @@
 .container {
-  @apply flex flex-col items-center px-20 py-11;
+  @apply flex flex-col items-center px-20 py-14;
 }
+
 .logo {
-  magrin-bottom: 15px;
   width: 200px;
 }
+
 .text-1 {
   magrin-bottom: 6px;
-  @apply text-3xl font-semibold font-thicboi;
+  @apply text-3xl font-semibold font-thicboi mt-3;
 }
+
 .text-2 {
+  @apply text-base font-light font-thicboi text-center leading-4 mt-1;
   color: #858585;
-  width: 330px;
-  @apply text-base font-light font-thicboi mb-9 text-center;
 }
 
 .group-input {
-  @apply w-full;
+  @apply w-full mt-9;
 
   input {
-    padding-left: 25px;
+    @apply h-14 w-full px-6;
   }
+
   ::placeholder {
     @apply text-sm font-thin;
     color: rgba(37, 37, 37, 0.5);
   }
-}
-.email {
-  @apply mb-7;
 
-  .email-input {
-    @apply w-full h-14;
-  }
-}
-
-.password {
-  @apply w-full relative mb-7;
-
-  .password-input {
-    @apply w-full h-14;
+  .password,
+  .confirm-password {
+    @apply mt-7 relative;
   }
 
   .visibilityIcon {
-    top: 25px;
-    @apply absolute  right-5 transform -translate-y-1/2 cursor-pointer text-2xl;
+    top: 28px;
+    @apply absolute right-4 transform -translate-y-1/2 cursor-pointer text-2xl;
+  }
+
+  .signup-form-error-message {
+    font-size: 14px;
+    @apply text-red-700 font-thicboi mt-1;
   }
 }
 
-.confirm-password {
-  @apply w-full relative;
-
-  .confirm-password-input {
-    @apply w-full h-14;
-  }
-  .visibilityIcon {
-    top: 25px;
-    @apply absolute  right-5 transform -translate-y-1/2 cursor-pointer text-2xl;
-  }
-}
-.register {
+.login {
+  @apply font-thicboi text-lg font-light underline mt-10;
   color: #252525;
-  margin-top: 46px;
-  margin-bottom: 27px;
-  @apply font-thicboi text-lg font-light underline;
 }
 
 .signup-button {
+  @apply text-2xl font-thicboi font-normal uppercase mt-8 #{!important};
   width: 274px;
-  @apply text-2xl font-thicboi font-normal uppercase;
-}
-
-.signup-form-error-message {
-  font-size: 14px;
-  @apply text-red-700 font-thicboi font-thicboi mt-1;
 }
 
 @media (max-width: 820px) {
   .container {
-    @apply px-14 pt-0;
+    @apply px-14 py-8;
   }
 
   .logo {
-    margin-bottom: 11px;
     width: 140px;
   }
+
   .text-1 {
-    margin-bottom: 1px;
-    @apply text-xl font-semibold font-thicboi;
+    @apply text-xl font-semibold font-thicboi mt-2;
   }
+
   .text-2 {
+    @apply text-xs font-light font-thicboi text-center mt-0 leading-none;
     color: #858585;
-    width: 310px;
-    margin-bottom: 10px;
-    @apply text-xs font-light font-thicboi  text-center;
   }
+
   .group-input {
-    @apply w-full pl-3 text-sm;
+    @apply w-full text-sm mt-5;
 
     input {
-      padding-left: 18px;
-      @apply pt-0 pb-0;
+      @apply py-0 px-4 h-12;
     }
 
     ::placeholder {
       @apply text-sm font-thin;
       color: rgba(37, 37, 37, 0.5);
     }
-  }
-  .email {
-    margin-bottom: 26px;
-    .email-input {
-      @apply w-full h-12;
+
+    .password,
+    .confirm-password {
+      @apply mt-6;
+    }
+
+    .visibilityIcon {
+      top: 25px;
+    }
+
+    .signup-form-error-message {
+      font-size: 12px;
+      margin-top: 3px;
+      @apply text-red-700 font-thicboi;
     }
   }
 
-  .password {
-    margin-bottom: 26px;
-    .password-input {
-      @apply w-full h-12;
-    }
-  }
-
-  .confirm-password {
-    .confirm-password-input {
-      @apply w-full h-12;
-    }
-  }
-
-  .register {
+  .login {
+    @apply font-thicboi text-sm font-light underline mt-6;
     color: #252525;
-    margin-top: 26px;
-    margin-bottom: 15px;
-    @apply font-thicboi text-sm font-light underline;
   }
+
   .signup-button {
     width: 204px;
-    @apply font-normal text-lg font-thicboi py-0 h-9 #{!important};
-  }
-  .signup-form-error-message {
-    font-size: 12px;
-    margin-top: 3px;
-    @apply text-red-700 font-thicboi font-thicboi;
+    @apply font-normal text-lg font-thicboi py-0 h-9 mt-6 #{!important};
   }
 }

@@ -19,32 +19,21 @@
   @apply w-full mt-9;
 
   input {
-    padding-left: 25px;
+    @apply h-14 w-full px-6;
   }
+
   ::placeholder {
     @apply text-sm font-thin;
     color: rgba(37, 37, 37, 0.5);
   }
 
-  .email {
-    @apply mb-7;
-  }
-
-  .email-input {
-    @apply w-full h-14;
-  }
-
   .password {
-    @apply w-full relative;
-  }
-
-  .password-input {
-    @apply w-full h-14;
+    @apply mt-7 relative;
   }
 
   .visibilityIcon {
-    top: 25px;
-    @apply absolute  right-5 transform -translate-y-1/2 cursor-pointer text-2xl;
+    top: 28px;
+    @apply absolute right-4 transform -translate-y-1/2 cursor-pointer text-2xl;
   }
 
   .login-form-error-message {
@@ -90,8 +79,7 @@
     @apply w-full text-sm mt-5;
 
     input {
-      padding-left: 18px;
-      @apply pt-0 pb-0 h-12;
+      @apply py-0 px-4 h-12;
     }
 
     ::placeholder {
@@ -100,7 +88,11 @@
     }
 
     .password {
-      margin-top: 26px;
+      @apply mt-6;
+    }
+
+    .visibilityIcon {
+      top: 25px;
     }
 
     .login-form-error-message {
