@@ -42,12 +42,6 @@ function ProductPurchaseBuy({
     onBuy();
   };
 
-  const handleSignup = async (email: string, password: string) => {
-    await signup(email, password);
-    togglePopup?.(false);
-    onBuy();
-  };
-
   const handleBuy = () => {
     if (!user && !guest) {
       togglePopup?.(

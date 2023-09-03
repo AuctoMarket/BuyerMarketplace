@@ -1,5 +1,5 @@
 // src/components/LoginForm/index.tsx
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import styles from './index.module.scss';
 import Icon from '../Icon';
