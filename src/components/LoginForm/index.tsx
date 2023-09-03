@@ -25,7 +25,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { guest, toggleGuest } = useAuth();
+  const { toggleGuest } = useAuth();
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const clearError = {

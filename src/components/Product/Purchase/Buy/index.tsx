@@ -5,7 +5,6 @@ import Button from '../../../Button';
 import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
 import NumberInput from '../../../NumberInput';
-import LoginForm from '../../../LoginForm';
 import useAuth from '../../../../hooks/useAuth';
 import { PopupContext } from '../../../Popup';
 
@@ -27,20 +26,7 @@ function ProductPurchaseBuy({
   onBuy,
   ...rest
 }: Props) {
-  const { togglePopup } = useContext(PopupContext);
-  const { user, login, guest, toggleGuest } = useAuth();
-
-  const handleLogin = async (email: string, password: string) => {
-    await login(email, password);
-    togglePopup?.(false);
-    onBuy();
-  };
-
-  const handleContinueAsGuest = () => {
-    toggleGuest();
-    togglePopup?.(false);
-    onBuy();
-  };
+  const { user, guest } = useAuth();
 
   const handleBuy = () => {
     if (!user && !guest) {
