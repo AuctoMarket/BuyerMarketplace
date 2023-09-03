@@ -13,7 +13,10 @@ interface LoginFormProps {
   onContinueAsGuest?: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+  onLogin,
+  onContinueAsGuest,
+}) => {
   const [error, setError] = useState<{
     email?: string;
     password?: string;
@@ -23,12 +26,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const clearError = {
+      email: '',
+    };
+    setError(clearError);
     setEmail(event.target.value);
     const emailError = validateEmail(email);
     const newError = { ...error, email: emailError };
     setError(newError);
   };
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const clearError = {
+      password: '',
+    };
+    setError(clearError);
     setPassword(event.target.value);
   };
 
@@ -40,6 +51,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         password: 'Please fill in all fields.',
       };
       setError(newError);
+      return;
+    }
+    if (error.email || error.password) {
       return;
     }
 
@@ -55,6 +69,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       };
       setError(newError);
       return;
+    }
+  };
+
+  const handleContinueAsGuest = async () => {
+    if (onContinueAsGuest) {
+      await onContinueAsGuest();
     }
   };
 
@@ -82,19 +102,22 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           collectible.{' '}
         </div>
         <div className={styles['group-input']}>
-          <Input
-            className={styles['email-input']}
-            theme="white"
-            placeholder="Email"
-            type="text"
-            onChange={handleChangeEmail}
-            role="input-email-adress"
-          ></Input>
-          {error.email && (
-            <div className={`${styles['login-form-error-message']}`}>
-              {error.email}
-            </div>
-          )}
+          <div className={styles['email']}>
+            <Input
+              className={styles['email-input']}
+              theme="white"
+              placeholder="Email"
+              type="text"
+              onChange={handleChangeEmail}
+              role="input-email-adress"
+            ></Input>
+            {error.email && (
+              <div className={`${styles['login-form-error-message']}`}>
+                {error.email}
+              </div>
+            )}
+          </div>
+
           <div className={styles['password']}>
             <Input
               className={styles['password-input']}
@@ -103,6 +126,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
               type={!showPassword ? 'password' : 'text'}
               onChange={handleChangePassword}
             ></Input>
+            {error.password && (
+              <div className={`${styles['login-form-error-message']}`}>
+                {error.password}
+              </div>
+            )}
             <Icon
               name="password-visibility"
               className={styles.visibilityIcon}
@@ -111,9 +139,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             />
           </div>
         </div>
-        <Link className={styles['register']} to="#">
+        <Link className={styles['register']} to="/auth/signup">
           Dont have an account? Join us here.
         </Link>
+        {onContinueAsGuest && (
+          <Link
+            className={styles['as-guest']}
+            to="#"
+            onClick={handleContinueAsGuest}
+          >
+            Continue as a guest.
+          </Link>
+        )}
         <Button
           theme="black"
           className={styles['login-button']}

@@ -1,57 +1,75 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.scss'; // You can create the CSS module file for SignupForm
-import { PopupContext } from '../Popup'; // Import the PopupContext
-import LoginForm from '../LoginForm';
 import Icon from '../Icon';
+import Input from '../Input';
+import Button from '../Button';
+import Image from '../Image';
+import { Link } from 'react-router-dom';
 
 interface SignupFormProps {
   onSignup?: (email: string, password: string) => void;
-  onLogin?: (email: string, password: string) => void;
   onContinueAsGuest?: () => void;
 }
 
 const SignupForm: React.FC<SignupFormProps> = ({
   onSignup,
-  onLogin,
   onContinueAsGuest,
 }) => {
-  const { togglePopup } = useContext(PopupContext); // Use the PopupContext
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const [error, setError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState<{
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+  }>({});
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const clearError = {
+      email: '',
+    };
+    setError(clearError);
     setEmail(event.target.value);
-    setEmailError('');
-    setError('');
+    const emailError = validateEmail(email);
+    const newError = { ...error, email: emailError };
+    setError(newError);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const clearError = {
+      password: '',
+    };
+    setError(clearError);
     setPassword(event.target.value);
-    setPasswordError('');
-    setError('');
+    const passwordError = validatePassword(password);
+    const newError = { ...error, password: passwordError };
+    setError(newError);
   };
 
   const handleConfirmPasswordChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
+    const clearError = {
+      confirmPassword: '',
+    };
+    setError(clearError);
     setConfirmPassword(event.target.value);
-    setPasswordError('');
-    setError('');
+    const confirmPasswordError = validateConfirmPassword(
+      confirmPassword,
+      password,
+    );
+    const newError = { ...error, confirmPassword: confirmPasswordError };
+    setError(newError);
   };
 
   const validateEmail = (email: string) => {
     // Regular expression to check email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    if (!emailRegex.test(email)) {
+      return 'Incorrect email format, please enter a valid email address.';
+    }
   };
 
   const validatePassword = (password: string) => {
@@ -60,71 +78,49 @@ const SignupForm: React.FC<SignupFormProps> = ({
     const specialCharRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/;
 
     if (!lengthRegex.test(password)) {
-      setPasswordError('Password must be at least 8 characters long.');
-      return false;
+      return 'Password must be at least 8 characters long.';
+    } else if (!digitRegex.test(password)) {
+      return 'Password must contain at least 1 digit (0-9).';
+    } else if (!specialCharRegex.test(password)) {
+      return 'Password must contain at least 1 special character.';
     }
+  };
 
-    if (!digitRegex.test(password)) {
-      setPasswordError('Password must contain at least 1 digit (0-9).');
-      return false;
+  const validateConfirmPassword = (
+    confirmPassword: string,
+    password: string,
+  ) => {
+    if (confirmPassword !== password) {
+      return 'Passwords do not match. Please check that they are the same.';
     }
-
-    if (!specialCharRegex.test(password)) {
-      setPasswordError('Password must contain at least 1 special character.');
-      return false;
-    }
-
-    // If all conditions pass, the password is valid
-    setPasswordError('');
-    return true;
   };
 
   const handleSignup = async () => {
     // Perform input validation
     if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
-      setError('Please fill in all fields.');
+      const newError = {
+        email: 'Please fill in all fields.',
+        password: 'Please fill in all fields.',
+        confirmPassword: 'Please fill in all fields.',
+      };
+      setError(newError);
       return;
     }
-
-    // Validate email format
-    if (!validateEmail(email)) {
-      setEmailError(
-        'Incorrect email format. Please enter a valid email address.',
-      );
+    if (error.email || error.password || error.confirmPassword) {
       return;
     }
-
-    // Validate password format
-    if (!validatePassword(password)) {
-      return;
-    }
-
-    // Check if passwords match
-    if (password !== confirmPassword) {
-      setPasswordError(
-        'Passwords do not match. Please check that they are the same.',
-      );
-      return;
-    }
-
     try {
       // Call the onSignup prop to handle the signup action
       if (onSignup) {
         await onSignup(email, password);
       }
-    } catch (error) {
-      setEmailError('Email is already in use. Please use another email.');
-      setError('');
+    } catch (errors) {
+      const newError = {
+        ...error,
+        confirmPassword: 'Email is already in use. Please use another email.',
+      };
+      setError(newError);
       return;
-    }
-  };
-
-  const handleLoginClick = () => {
-    if (togglePopup) {
-      togglePopup(
-        true,
-        <LoginForm onLogin={onLogin} onContinueAsGuest={onContinueAsGuest} />,
-      );
     }
   };
 
@@ -138,89 +134,86 @@ const SignupForm: React.FC<SignupFormProps> = ({
     );
   };
 
-  const handleContextMenu = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    event.preventDefault(); // Prevent the default context menu
-  };
-
   return (
     <>
-      <div className={styles['signup-title']}>Sign Up</div>
-      <div className={styles.inputGroup}>
-        {error && (
-          <div className={styles.error} data-testid="error-message">
-            {error}
-          </div>
-        )}
-        {emailError && (
-          <div className={styles.error} data-testid="email-error-message">
-            {emailError}
-          </div>
-        )}
-        <input
-          type="text"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="Email"
-          autoCapitalize="none"
+      <div className={styles['container']}>
+        <Image
+          className={styles['logo']}
+          src="images/logo/horizontal/slogan/slogan-color.png"
         />
-      </div>
-      <div className={styles.inputGroup}>
-        {passwordError && (
-          <div className={styles.error} data-testid="password-error-message">
-            {passwordError}
+        <div className={styles['text-1']}>Become an aucto collector.</div>
+        <div className={styles['text-2']}>
+          Create an account to get exclusive access to the hottest collectibles
+          at the best prices.
+        </div>
+        <div className={styles['group-input']}>
+          <div className={styles['email']}>
+            <Input
+              className={styles['email-input']}
+              theme="white"
+              placeholder="Email"
+              type="text"
+              onChange={handleEmailChange}
+              role="input-email-adress"
+            ></Input>
+            {error.email && (
+              <div className={`${styles['signup-form-error-message']}`}>
+                {error.email}
+              </div>
+            )}
           </div>
-        )}
-        <div className={styles.passwordInput}>
-          <input
-            type={!showPassword ? 'password' : 'text'}
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
-          <Icon
-            name="password-visibility"
-            className={styles.visibilityIcon}
-            onClick={togglePasswordVisibility}
-            onContextMenu={handleContextMenu}
-            data-testid="password-visibility-icon"
-          />
+
+          <div className={styles['password']}>
+            <Input
+              className={styles['password-input']}
+              theme="white"
+              placeholder="Password"
+              type={!showPassword ? 'password' : 'text'}
+              onChange={handlePasswordChange}
+            ></Input>
+            {error.password && (
+              <div className={`${styles['signup-form-error-message']}`}>
+                {error.password}
+              </div>
+            )}
+            <Icon
+              name="password-visibility"
+              className={styles.visibilityIcon}
+              data-testid="password-visibility-icon"
+              onClick={togglePasswordVisibility}
+            />
+          </div>
+          <div className={styles['confirm-password']}>
+            <Input
+              className={styles['confirm-password-input']}
+              theme="white"
+              placeholder="Confirm password"
+              type={!showConfirmPassword ? 'password' : 'text'}
+              onChange={handleConfirmPasswordChange}
+            ></Input>
+            {error.confirmPassword && (
+              <div className={`${styles['signup-form-error-message']}`}>
+                {error.confirmPassword}
+              </div>
+            )}
+            <Icon
+              name="password-visibility"
+              className={styles.visibilityIcon}
+              data-testid="password-visibility-icon"
+              onClick={toggleConfirmPasswordVisibility}
+            />
+          </div>
         </div>
-      </div>
-      <div className={styles.inputGroup}>
-        <div className={styles.passwordInput}>
-          <input
-            type={!showConfirmPassword ? 'password' : 'text'}
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            placeholder="Confirm Password"
-          />
-          <Icon
-            name="password-visibility"
-            className={styles.visibilityIcon}
-            onClick={toggleConfirmPasswordVisibility}
-            onContextMenu={handleContextMenu}
-            data-testid="password-visibility-icon-2"
-          />
-        </div>
-      </div>
-      <div className={styles.links}>
-        <button className={styles.a} onClick={handleLoginClick}>
-          Already have an account? Login here!
-        </button>
-      </div>
-      <div className={styles.btnGroup}>
-        <button
-          className={`${styles.signupBtn} ${styles.responsiveSignupBtn}`}
+        <Link className={styles['register']} to="/auth/login">
+          Have an account? Login here.
+        </Link>
+        <Button
+          theme="black"
+          className={styles['signup-button']}
           onClick={handleSignup}
-          data-testid="signup-button"
         >
-          SIGN UP
-        </button>
+          Sign up
+        </Button>
       </div>
     </>
   );
