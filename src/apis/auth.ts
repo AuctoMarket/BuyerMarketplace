@@ -38,6 +38,24 @@ const signup = async (data: { email: string; password: string }) => {
   }
 };
 
-const authApi = { login, signup };
+const verifyEmail = async (data: { token: string; otp: string }) => {
+  try {
+    const response = await axios.post(
+      `${apiConfig.baseUrl}/buyers/verify-email`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+const authApi = { login, signup, verifyEmail };
 
 export default authApi;

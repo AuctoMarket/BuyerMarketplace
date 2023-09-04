@@ -14,6 +14,7 @@ import ProductPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
 import Popup, { PopupContext } from './components/Popup';
+import VerifyEmailPage from './pages/auth/verify';
 
 const createRouter = (routerObjects: RouteObject[]) => {
   if (process.env.REACT_APP_GITHUB_PAGES === 'true') {
@@ -60,6 +61,14 @@ const App = () => {
             element: (
               <ScrollToTop>
                 <LoginPage />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/auth/email-verification',
+            element: (
+              <ScrollToTop>
+                <VerifyEmailPage />
               </ScrollToTop>
             ),
           },

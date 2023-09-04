@@ -1,0 +1,36 @@
+.container {
+  padding-left: 100px;
+  padding-right: 100px;
+  @apply py-16 flex flex-col items-center text-center;
+
+  .logo {
+    width: 200px;
+  }
+
+  .title {
+    @apply mt-4 text-3xl font-thicboi font-semibold;
+  }
+
+  .info {
+    color: #858585;
+    @apply mt-3 text-base font-light text-center;
+  }
+
+  .group-input {
+    @apply mt-8 flex w-full;
+    gap: 19px;
+    input {
+      @apply h-11 w-full text-center;
+    }
+  }
+
+  .resend {
+    color: #252525;
+    @apply mt-11  font-thicboi text-lg font-light underline;
+  }
+
+  .submit {
+    height: 50px;
+    @apply font-normal text-center text-2xl mt-6 px-20;
+  }
+}

@@ -1,0 +1,19 @@
+.verify-email-page {
+  @apply container mx-auto pt-14;
+}
+
+.verify-email-form {
+  @apply mx-auto;
+  border: 1px solid #afafaf;
+  width: 540px;
+}
+
+.verify-email-page + :global(#footer) {
+  @apply absolute bottom-0 w-full;
+}
+
+@media (max-width: 820px) {
+  .verify-email-page {
+    @apply py-0;
+  }
+}
