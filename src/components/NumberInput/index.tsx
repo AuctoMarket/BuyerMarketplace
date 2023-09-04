@@ -41,6 +41,7 @@ function NumberInput({
         type="number"
         value={value}
         onChange={(event) => handleChangeValue(event.target.value)}
+        data-testid="input"
       />
       <Button
         className={styles['btn-increase']}

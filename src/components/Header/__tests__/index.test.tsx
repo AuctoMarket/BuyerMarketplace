@@ -4,13 +4,32 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Header from '..';
 
-// Test if the header is rendered
-test('renders Header', () => {
-  render(
-    <BrowserRouter>
-      <Header />
-    </BrowserRouter>,
-  );
-  const text = screen.getByAltText('logo-horizontal-inverted-color');
-  expect(text).toBeInTheDocument();
+describe('<Header />', () => {
+  test('renders Header with guest', () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>,
+    );
+
+    const text = screen.getByAltText('logo-horizontal-inverted-color');
+
+    expect(text).toBeInTheDocument();
+  });
+
+  test('renders Header when logged in', () => {
+    localStorage.setItem(
+      'userData',
+      JSON.stringify({ email: 'test@test.com', buyer_id: 'test' }),
+    );
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>,
+    );
+
+    const text = screen.getByAltText('logo-horizontal-inverted-color');
+
+    expect(text).toBeInTheDocument();
+  });
 });
