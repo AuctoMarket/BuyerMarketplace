@@ -10,11 +10,11 @@ import {
 import HomePage from './pages/home';
 import LoginPage from './pages/auth/login';
 import SignupPage from './pages/auth/signup';
+import EmailVerificationPage from './pages/auth/email-verification';
 import ProductPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
 import Popup, { PopupContext } from './components/Popup';
-import VerifyEmailPage from './pages/auth/verify';
 
 const createRouter = (routerObjects: RouteObject[]) => {
   if (process.env.REACT_APP_GITHUB_PAGES === 'true') {
@@ -68,7 +68,7 @@ const App = () => {
             path: '/auth/email-verification',
             element: (
               <ScrollToTop>
-                <VerifyEmailPage />
+                <EmailVerificationPage />
               </ScrollToTop>
             ),
           },

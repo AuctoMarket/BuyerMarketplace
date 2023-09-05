@@ -1,30 +1,22 @@
 import React, { ComponentProps, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
 import styles from './index.module.scss';
-import Image from '../Image';
-import Input from '../Input';
-import Button from '../Button';
-import useAuth from '../../hooks/useAuth';
+import Logo from '../../Logo';
+import Input from '../../Input';
+import Button from '../../Button';
+import useAuth from '../../../hooks/useAuth';
 
 interface Props extends ComponentProps<'div'> {
-  data: {
-    email: string;
-    token: string;
-  };
+  onVerifyEmail?: () => void;
 }
 
-function VerifyEmailForm({
-  className,
-  data: { email, token },
-  ...rest
-}: Props) {
+function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
   const [timeLeft, setTimeLeft] = useState(30);
   const [otpInputs, setOTPInput] = useState(['', '', '', '', '', '']);
   const [OTP, setOTP] = useState('');
   const [error, setError] = useState('');
-  const { otpVerify } = useAuth();
-  const navigate = useNavigate();
+  const { user, otpVerify } = useAuth();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,8 +41,9 @@ function VerifyEmailForm({
       setOTP(otpValue);
       //Call API verify Email
       try {
-        await otpVerify(token, OTP);
-        navigate('/');
+        await otpVerify('test', OTP);
+
+        onVerifyEmail?.();
       } catch (error: any) {
         setError(error.message);
       }
@@ -59,14 +52,15 @@ function VerifyEmailForm({
 
   return (
     <div className={`${className} ${styles['container']}`} {...rest}>
-      <Image
-        className={styles['logo']}
-        src="images/logo/horizontal/slogan/slogan-color.png"
-      />
+      <Logo className={styles['logo']} type="horizontal" theme="color" slogan />
+
       <div className={styles['title']}>Verify your email</div>
+
       <div className={styles['info']}>
-        We have sent an otp to the following email address: {email}
+        In order to verify your email address, we
+        <br /> sent an otp to the following email: {user.email}
       </div>
+
       <div className={styles['group-input']}>
         {otpInputs.map((inputValue, index) => (
           <Input
@@ -79,10 +73,13 @@ function VerifyEmailForm({
           />
         ))}
       </div>
+
       {error && <div className={`${styles['error-message']}`}>{error}</div>}
+
       <Link className={styles['resend']} to={'#'}>
         Didn't receive it? Resend OTP in {timeLeft}s
       </Link>
+
       <Button className={styles['submit']} theme="black" onClick={handleSubmit}>
         SUBMIT
       </Button>
