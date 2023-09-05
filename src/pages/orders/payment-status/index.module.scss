@@ -1,5 +1,6 @@
 .payment-status-page {
-  @apply container mx-auto flex w-full py-14;
+  @apply container mx-auto flex w-full pt-14;
+  padding-bottom: 126px; // pb-14 + 70px
 }
 
 .payment-status {

@@ -2,13 +2,13 @@
 import React, { ComponentProps, useState } from 'react';
 
 import styles from './index.module.scss';
-import Icon from '../Icon';
-import Image from '../Image';
-import Input from '../Input';
+import Icon from '../../Icon';
+import Logo from '../../Logo';
+import Input from '../../Input';
 import { Link } from 'react-router-dom';
-import Button from '../Button';
-import useAuth from '../../hooks/useAuth';
-import useQueryParams from '../../hooks/useQueryParams';
+import Button from '../../Button';
+import useAuth from '../../../hooks/useAuth';
+import useQueryParams from '../../../hooks/useQueryParams';
 
 interface Props extends ComponentProps<'div'> {
   onLogin?: () => void;
@@ -95,10 +95,7 @@ const LoginForm = ({
 
   return (
     <div className={`${className} ${styles['container']}`} {...rest}>
-      <Image
-        className={styles['logo']}
-        src="images/logo/horizontal/slogan/slogan-color.png"
-      />
+      <Logo className={styles['logo']} type="horizontal" theme="color" slogan />
 
       <div className={styles['text-1']}>Your collectors account.</div>
 

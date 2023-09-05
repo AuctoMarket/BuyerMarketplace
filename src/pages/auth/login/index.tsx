@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Layout from '../../../components/Layout';
-import LoginForm from '../../../components/LoginForm';
+import LoginForm from '../../../components/Auth/LoginForm';
 import useQueryParams from '../../../hooks/useQueryParams';
 
 const LoginPage = () => {
