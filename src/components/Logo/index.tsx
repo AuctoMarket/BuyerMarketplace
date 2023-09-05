@@ -19,7 +19,7 @@ function Logo({ className, type, slogan = false, theme, ...rest }: Props) {
     <Image
       className={className}
       src={`/images/logo/${path}.svg`}
-      alt={`logo-${path.replace('/', '-')}`}
+      alt={`logo-${path.replace(/\//g, '-')}`}
       {...rest}
     />
   );
