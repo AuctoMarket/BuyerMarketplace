@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Layout from '../../../components/Layout';
-import SignupForm from '../../../components/SignupForm';
+import SignupForm from '../../../components/Auth/SignupForm';
 import useQueryParams from '../../../hooks/useQueryParams';
 
 const SignupPage = () => {

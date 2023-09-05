@@ -8,7 +8,7 @@ html,
 body,
 #root,
 #root > div:last-of-type {
-  @apply h-full;
+  @apply min-h-screen;
 }
 
 body {

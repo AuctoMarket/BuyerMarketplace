@@ -2,12 +2,12 @@ import React, { ComponentProps, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
-import Icon from '../Icon';
-import Input from '../Input';
-import Button from '../Button';
-import Image from '../Image';
-import useAuth from '../../hooks/useAuth';
-import useQueryParams from '../../hooks/useQueryParams';
+import Icon from '../../Icon';
+import Input from '../../Input';
+import Button from '../../Button';
+import Logo from '../../Logo';
+import useAuth from '../../../hooks/useAuth';
+import useQueryParams from '../../../hooks/useQueryParams';
 
 interface Props extends ComponentProps<'div'> {
   onSignup?: () => void;
@@ -125,10 +125,7 @@ const SignupForm = ({ className, onSignup, ...rest }: Props) => {
 
   return (
     <div className={`${className} ${styles['container']}`} {...rest}>
-      <Image
-        className={styles['logo']}
-        src="images/logo/horizontal/slogan/slogan-color.png"
-      />
+      <Logo className={styles['logo']} type="horizontal" theme="color" slogan />
 
       <div className={styles['text-1']}>Become an aucto collector.</div>
 

@@ -4,11 +4,16 @@ import Image from '../Image';
 
 interface Props extends ComponentProps<'img'> {
   type?: 'horizontal' | 'vertical';
+  slogan?: boolean;
   theme: 'white' | 'black' | 'color' | 'full-color' | 'inverted-color';
 }
 
-function Logo({ className, type, theme, ...rest }: Props) {
-  const path = type ? `${type}/${theme}` : theme;
+function Logo({ className, type, slogan = false, theme, ...rest }: Props) {
+  const path = type
+    ? type === 'horizontal' && slogan
+      ? `${type}/slogan/${theme}`
+      : `${type}/${theme}`
+    : theme;
 
   return (
     <Image

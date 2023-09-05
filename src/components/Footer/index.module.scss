@@ -20,7 +20,7 @@
 @media (max-width: 820px) {
   .footer {
     @apply flex flex-col justify-center items-center;
-    height: 102px;
+    height: 100px;
 
     .logo {
       @apply static pl-0 block h-auto;

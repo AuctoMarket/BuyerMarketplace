@@ -11,10 +11,17 @@ describe('Logo', () => {
     expect(logo).toBeInTheDocument();
   });
 
-  test('renders Logo with type', async () => {
-    render(<Logo type="horizontal" theme="white" />);
+  test('renders Logo with type vertical', async () => {
+    render(<Logo type="vertical" theme="white" />);
 
-    const logo = await screen.findByAltText('logo-horizontal-white');
+    const logo = await screen.findByAltText('logo-vertical-white');
+    expect(logo).toBeInTheDocument();
+  });
+
+  test('renders Logo with horizontal slogan', async () => {
+    render(<Logo type="horizontal" slogan theme="white" />);
+
+    const logo = await screen.findByAltText('logo-horizontal-slogan-white');
     expect(logo).toBeInTheDocument();
   });
 });
