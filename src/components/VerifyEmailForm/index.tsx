@@ -1,9 +1,11 @@
 import React, { ComponentProps, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
 import Image from '../Image';
 import Input from '../Input';
 import Button from '../Button';
-import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 interface Props extends ComponentProps<'div'> {
   data: {
@@ -12,10 +14,17 @@ interface Props extends ComponentProps<'div'> {
   };
 }
 
-function VerifyEmailForm({ className, data: { email }, ...rest }: Props) {
+function VerifyEmailForm({
+  className,
+  data: { email, token },
+  ...rest
+}: Props) {
   const [timeLeft, setTimeLeft] = useState(30);
   const [otpInputs, setOTPInput] = useState(['', '', '', '', '', '']);
   const [OTP, setOTP] = useState('');
+  const [error, setError] = useState('');
+  const { otpVerify } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -34,11 +43,17 @@ function VerifyEmailForm({ className, data: { email }, ...rest }: Props) {
     setOTPInput(newOTPInputs);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const otpValue = otpInputs.join('');
     if (otpValue) {
       setOTP(otpValue);
-      //Call API
+      //Call API verify Email
+      try {
+        await otpVerify(token, OTP);
+        navigate('/');
+      } catch (error: any) {
+        setError(error.message);
+      }
     }
   };
 
@@ -64,6 +79,7 @@ function VerifyEmailForm({ className, data: { email }, ...rest }: Props) {
           />
         ))}
       </div>
+      {error && <div className={`${styles['error-message']}`}>{error}</div>}
       <Link className={styles['resend']} to={'#'}>
         Didn't receive it? Resend OTP in {timeLeft}s
       </Link>

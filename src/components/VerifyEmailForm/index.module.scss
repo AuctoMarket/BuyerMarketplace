@@ -23,6 +23,10 @@
       @apply h-11 w-full text-center;
     }
   }
+  .error-message {
+    font-size: 14px;
+    @apply text-red-700 font-thicboi mt-4;
+  }
 
   .resend {
     color: #252525;
@@ -31,6 +35,44 @@
 
   .submit {
     height: 50px;
-    @apply font-normal text-center text-2xl mt-6 px-20;
+    @apply font-normal font-thicboi text-center text-2xl mt-6 px-20;
+  }
+}
+
+@media (max-width: 820px) {
+  .container {
+    @apply px-14 py-8;
+  }
+
+  .logo {
+    width: 140px;
+    @apply mb-2;
+  }
+
+  .info {
+    color: #858585;
+    @apply text-xl;
+  }
+
+  .group-input {
+    @apply w-full text-sm mt-5;
+    gap: 8px;
+
+    input {
+      @apply py-0 h-10 #{!important};
+    }
+  }
+  .error-message {
+    font-size: 12px;
+    margin-top: 3px;
+    @apply text-red-700 font-thicboi;
+  }
+  .resend {
+    @apply text-sm mt-6;
+  }
+
+  .submit {
+    width: 204px;
+    @apply text-lg font-thicboi py-0 h-9 mt-6 #{!important};
   }
 }

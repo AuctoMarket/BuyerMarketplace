@@ -23,7 +23,11 @@ function useAuth() {
     localStorage.setItem(userDataKey, JSON.stringify(data));
   };
 
-  return { user, login, signup };
+  const otpVerify = async (token: string, otp: string) => {
+    await authApi.otpVerify({ token, otp });
+  };
+
+  return { user, login, signup, otpVerify };
 }
 
 export default useAuth;
