@@ -1,42 +1,58 @@
 .container {
-  padding-left: 100px;
-  padding-right: 100px;
-  @apply py-16 flex flex-col items-center text-center;
+  @apply flex flex-col items-center px-20 py-14;
+}
 
-  .logo {
-    width: 200px;
+.logo {
+  width: 200px;
+}
+
+.title {
+  @apply text-3xl font-thicboi font-semibold mt-3;
+}
+
+.info {
+  @apply text-base font-light font-thicboi text-center leading-4 mt-1;
+  color: #858585;
+}
+
+.group-input {
+  @apply mt-8 w-full;
+
+  > div:first-of-type {
+    @apply w-full gap-5 justify-center;
   }
 
-  .title {
-    @apply mt-4 text-3xl font-thicboi font-semibold;
-  }
+  .input {
+    @apply font-thicboi rounded-none border border-solid border-gray-300;
+    @apply h-11 w-11 #{!important};
+    -moz-appearance: textfield;
 
-  .info {
-    color: #858585;
-    @apply mt-3 text-base font-light text-center;
-  }
-
-  .group-input {
-    @apply mt-8 flex w-full;
-    gap: 19px;
-    input {
-      @apply h-11 w-full text-center;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
-  .error-message {
-    font-size: 14px;
-    @apply text-red-700 font-thicboi mt-4;
-  }
+}
 
-  .resend {
-    color: #252525;
-    @apply mt-11  font-thicboi text-lg font-light underline;
-  }
+.error-message {
+  font-size: 14px;
+  @apply text-red-700 font-thicboi mt-1;
+}
 
-  .submit {
-    height: 50px;
-    @apply font-normal font-thicboi text-center text-2xl mt-6 px-20;
-  }
+.resend {
+  @apply font-thicboi text-lg font-light underline mt-10;
+  color: #252525;
+}
+
+.resend-disabled {
+  @apply cursor-not-allowed;
+  color: #858585;
+}
+
+.submit {
+  @apply text-2xl font-thicboi font-normal uppercase mt-8 #{!important};
+  width: 274px;
 }
 
 @media (max-width: 820px) {
@@ -46,33 +62,40 @@
 
   .logo {
     width: 140px;
-    @apply mb-2;
+  }
+
+  .title {
+    @apply text-xl mt-2;
   }
 
   .info {
-    color: #858585;
-    @apply text-xl;
+    @apply text-xs mt-0 leading-none;
   }
 
   .group-input {
-    @apply w-full text-sm mt-5;
-    gap: 8px;
+    @apply mt-5;
 
-    input {
-      @apply py-0 h-10 #{!important};
+    > div:first-of-type {
+      gap: 8px;
+    }
+
+    .input {
+      @apply py-0;
+      @apply h-10 w-10 #{!important};
     }
   }
+
   .error-message {
     font-size: 12px;
     margin-top: 3px;
-    @apply text-red-700 font-thicboi;
   }
+
   .resend {
     @apply text-sm mt-6;
   }
 
   .submit {
     width: 204px;
-    @apply text-lg font-thicboi py-0 h-9 mt-6 #{!important};
+    @apply text-lg py-0 h-9 mt-6 #{!important};
   }
 }

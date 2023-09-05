@@ -1,22 +1,23 @@
 import React, { ComponentProps, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import OtpInput from 'react-otp-input';
 
 import styles from './index.module.scss';
 import Logo from '../../Logo';
-import Input from '../../Input';
 import Button from '../../Button';
 import useAuth from '../../../hooks/useAuth';
+import useQueryParams from '../../../hooks/useQueryParams';
 
 interface Props extends ComponentProps<'div'> {
   onVerifyEmail?: () => void;
 }
 
 function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
+  const queryParams = useQueryParams();
   const [timeLeft, setTimeLeft] = useState(30);
-  const [otpInputs, setOTPInput] = useState(['', '', '', '', '', '']);
-  const [OTP, setOTP] = useState('');
+  const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
-  const { user, otpVerify } = useAuth();
+  const { resendOtp, verifyEmail } = useAuth();
+  const email = queryParams.get('email');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -29,24 +30,35 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  const handleOtpInputChange = (index: number, value: string) => {
-    const newOTPInputs = [...otpInputs];
-    newOTPInputs[index] = value;
-    setOTPInput(newOTPInputs);
+  const handleChangeOtp = (value: string) => {
+    setOtp(value);
+    setError('');
   };
 
-  const handleSubmit = async () => {
-    const otpValue = otpInputs.join('');
-    if (otpValue) {
-      setOTP(otpValue);
-      //Call API verify Email
+  const handleResendOtp = async () => {
+    if (timeLeft === 0) {
       try {
-        await otpVerify('test', OTP);
-
-        onVerifyEmail?.();
+        await resendOtp(email as string);
+        setTimeLeft(30);
+        setOtp('');
+        setError('');
       } catch (error: any) {
         setError(error.message);
       }
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (otp.length !== 6 || error) {
+      return;
+    }
+
+    try {
+      await verifyEmail(email as string, otp);
+
+      onVerifyEmail?.();
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
@@ -58,30 +70,35 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
 
       <div className={styles['info']}>
         In order to verify your email address, we
-        <br /> sent an otp to the following email: {user.email}
+        <br /> sent an otp to the following email: {email}
       </div>
 
       <div className={styles['group-input']}>
-        {otpInputs.map((inputValue, index) => (
-          <Input
-            key={index}
-            className={styles[`input-${index + 1}`]}
-            theme="white"
-            maxLength={1}
-            value={inputValue}
-            onChange={(e) => handleOtpInputChange(index, e.target.value)}
-          />
-        ))}
+        <OtpInput
+          numInputs={6}
+          inputType="number"
+          value={otp}
+          onChange={handleChangeOtp}
+          renderInput={(props) => (
+            <input {...props} className={styles['input']} />
+          )}
+        />
       </div>
 
       {error && <div className={`${styles['error-message']}`}>{error}</div>}
 
-      <Link className={styles['resend']} to={'#'}>
-        Didn't receive it? Resend OTP in {timeLeft}s
-      </Link>
+      <a
+        className={`${styles['resend']} ${
+          timeLeft ? styles['resend-disabled'] : ''
+        }`}
+        href="javascript:void(0)"
+        onClick={handleResendOtp}
+      >
+        Didn't receive it? Resend OTP{timeLeft > 0 && ` in ${timeLeft}s`}
+      </a>
 
       <Button className={styles['submit']} theme="black" onClick={handleSubmit}>
-        SUBMIT
+        Submit
       </Button>
     </div>
   );

@@ -38,7 +38,25 @@ const signup = async (data: { email: string; password: string }) => {
   }
 };
 
-const otpVerify = async (data: { token: string; otp: string }) => {
+const resendOtp = async (data: { email: string }) => {
+  try {
+    const response = await axios.post(
+      `${apiConfig.baseUrl}/buyers/resend-otp`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+const verifyEmail = async (data: { email: string; otp: string }) => {
   try {
     const response = await axios.post(
       `${apiConfig.baseUrl}/buyers/verify-email`,
@@ -56,6 +74,6 @@ const otpVerify = async (data: { token: string; otp: string }) => {
   }
 };
 
-const authApi = { login, signup, otpVerify };
+const authApi = { login, signup, resendOtp, verifyEmail };
 
 export default authApi;
