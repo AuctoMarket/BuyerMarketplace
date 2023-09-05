@@ -87,15 +87,14 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
 
       {error && <div className={`${styles['error-message']}`}>{error}</div>}
 
-      <a
+      <div
         className={`${styles['resend']} ${
           timeLeft ? styles['resend-disabled'] : ''
         }`}
-        href="javascript:void(0)"
         onClick={handleResendOtp}
       >
         Didn't receive it? Resend OTP{timeLeft > 0 && ` in ${timeLeft}s`}
-      </a>
+      </div>
 
       <Button className={styles['submit']} theme="black" onClick={handleSubmit}>
         Submit
