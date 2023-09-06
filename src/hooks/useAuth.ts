@@ -23,15 +23,19 @@ function useAuth() {
     localStorage.setItem(userDataKey, JSON.stringify(data));
   };
 
-  const resendOtp = async (email: string) => {
-    await authApi.resendOtp({ email });
+  const resendOtp = async (buyerId: string) => {
+    await authApi.resendOtp({ buyer_id: buyerId });
   };
 
-  const verifyEmail = async (email: string, otp: string) => {
-    await authApi.verifyEmail({ email, otp });
+  const validateOtp = async (buyerId: string, otp: string) => {
+    await authApi.validateOtp({ buyer_id: buyerId, otp });
+
+    const data = { ...user, verification: 'verified' };
+    setUser(data);
+    localStorage.setItem(userDataKey, JSON.stringify(data));
   };
 
-  return { user, login, signup, resendOtp, verifyEmail };
+  return { user, login, signup, resendOtp, validateOtp };
 }
 
 export default useAuth;

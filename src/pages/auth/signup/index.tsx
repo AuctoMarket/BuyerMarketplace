@@ -12,10 +12,14 @@ const SignupPage = () => {
   const redirectUrl = queryParams.get('redirectUrl');
 
   const handleSignup = () => {
+    const emailVerificationUrl = '/auth/email-verification';
+
     if (redirectUrl) {
-      window.location.href = decodeURIComponent(redirectUrl);
+      window.location.href = `${emailVerificationUrl}?redirectUrl=${encodeURIComponent(
+        redirectUrl,
+      )}`;
     } else {
-      navigate('/');
+      navigate(emailVerificationUrl);
     }
   };
 

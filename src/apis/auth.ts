@@ -38,7 +38,7 @@ const signup = async (data: { email: string; password: string }) => {
   }
 };
 
-const resendOtp = async (data: { email: string }) => {
+const resendOtp = async (data: { buyer_id: string }) => {
   try {
     const response = await axios.post(
       `${apiConfig.baseUrl}/buyers/resend-otp`,
@@ -56,10 +56,10 @@ const resendOtp = async (data: { email: string }) => {
   }
 };
 
-const verifyEmail = async (data: { email: string; otp: string }) => {
+const validateOtp = async (data: { buyer_id: string; otp: string }) => {
   try {
     const response = await axios.post(
-      `${apiConfig.baseUrl}/buyers/verify-email`,
+      `${apiConfig.baseUrl}/buyers/validate-otp`,
       data,
       {
         headers: {
@@ -74,6 +74,6 @@ const verifyEmail = async (data: { email: string; otp: string }) => {
   }
 };
 
-const authApi = { login, signup, resendOtp, verifyEmail };
+const authApi = { login, signup, resendOtp, validateOtp };
 
 export default authApi;

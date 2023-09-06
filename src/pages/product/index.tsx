@@ -72,14 +72,20 @@ function ProductDetailsPage() {
   const handleBuy = () => {
     const redirectUrl = `/checkout?productId=${id}&quantity=${quantity}`;
 
-    if (user) {
-      window.location.href = redirectUrl;
-    } else {
+    if (!user) {
       navigate(
         `/auth/login/?continueAsGuest=true&redirectUrl=${encodeURIComponent(
           redirectUrl,
         )}`,
       );
+    } else if (user.verification !== 'verified') {
+      navigate(
+        `/auth/email-verification?redirectUrl=${encodeURIComponent(
+          redirectUrl,
+        )}`,
+      );
+    } else {
+      window.location.href = redirectUrl;
     }
   };
 

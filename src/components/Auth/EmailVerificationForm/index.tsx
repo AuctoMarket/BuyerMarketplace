@@ -5,19 +5,24 @@ import styles from './index.module.scss';
 import Logo from '../../Logo';
 import Button from '../../Button';
 import useAuth from '../../../hooks/useAuth';
-import useQueryParams from '../../../hooks/useQueryParams';
 
 interface Props extends ComponentProps<'div'> {
   onVerifyEmail?: () => void;
 }
 
 function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
-  const queryParams = useQueryParams();
   const [timeLeft, setTimeLeft] = useState(30);
+  const [optSends, setOtpSends] = useState(0);
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
-  const { resendOtp, verifyEmail } = useAuth();
-  const email = queryParams.get('email');
+  const { user, resendOtp, validateOtp } = useAuth();
+
+  useEffect(() => {
+    if (optSends === 0 && user?.buyer_id) {
+      resendOtp(user.buyer_id);
+      setOtpSends(optSends + 1);
+    }
+  }, [optSends, user?.buyer_id, resendOtp]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -38,8 +43,9 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
   const handleResendOtp = async () => {
     if (timeLeft === 0) {
       try {
-        await resendOtp(email as string);
+        await resendOtp(user.buyer_id);
         setTimeLeft(30);
+        setOtpSends(optSends + 1);
         setOtp('');
         setError('');
       } catch (error: any) {
@@ -54,7 +60,7 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
     }
 
     try {
-      await verifyEmail(email as string, otp);
+      await validateOtp(user.buyer_id, otp);
 
       onVerifyEmail?.();
     } catch (error: any) {
@@ -70,7 +76,7 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
 
       <div className={styles['info']}>
         In order to verify your email address, we
-        <br /> sent an otp to the following email: {email}
+        <br /> sent an otp to the following email: {user.email}
       </div>
 
       <div className={styles['group-input']}>
