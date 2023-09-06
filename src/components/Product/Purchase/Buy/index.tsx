@@ -1,13 +1,10 @@
-import React, { ComponentProps, useContext } from 'react';
+import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
 import Button from '../../../Button';
 import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
 import NumberInput from '../../../NumberInput';
-import LoginForm from '../../../LoginForm';
-import useAuth from '../../../../hooks/useAuth';
-import { PopupContext } from '../../../Popup';
 
 import type { Product } from '../../../../types/product.type';
 
@@ -27,42 +24,6 @@ function ProductPurchaseBuy({
   onBuy,
   ...rest
 }: Props) {
-  const { togglePopup } = useContext(PopupContext);
-  const { user, login, guest, signup, toggleGuest } = useAuth();
-
-  const handleLogin = async (email: string, password: string) => {
-    await login(email, password);
-    togglePopup?.(false);
-    onBuy();
-  };
-
-  const handleContinueAsGuest = () => {
-    toggleGuest();
-    togglePopup?.(false);
-    onBuy();
-  };
-
-  const handleSignup = async (email: string, password: string) => {
-    await signup(email, password);
-    togglePopup?.(false);
-    onBuy();
-  };
-
-  const handleBuy = () => {
-    if (!user && !guest) {
-      togglePopup?.(
-        true,
-        <LoginForm
-          onLogin={handleLogin}
-          onContinueAsGuest={handleContinueAsGuest}
-          onSignup={handleSignup}
-        />,
-      );
-    } else {
-      onBuy();
-    }
-  };
-
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['price-container']}>
@@ -88,7 +49,7 @@ function ProductPurchaseBuy({
         </div>
       </div>
       <div className={styles['btn-buy-container']}>
-        <Button className={styles['button']} theme="white" onClick={handleBuy}>
+        <Button className={styles['button']} theme="white" onClick={onBuy}>
           Buy
         </Button>
       </div>

@@ -1,73 +1,20 @@
-import React, { ComponentProps, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { ComponentProps } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Logo from '../Logo';
 import List from '../List';
 import Icon from '../Icon';
-import Dropdown from '../Dropdown';
-import LoginForm from '../../components/LoginForm';
-import SignupForm from '../../components/SignupForm';
 import useAuth from '../../hooks/useAuth';
-import { PopupContext } from '../../components/Popup';
 
 interface Props extends ComponentProps<'div'> {}
 
 function Header({ className, ...rest }: Props) {
-  const { togglePopup } = useContext(PopupContext);
-  const { user, login, signup } = useAuth();
-
-  const openLoginForm = () => {
-    if (togglePopup) {
-      togglePopup(true, <LoginForm onLogin={handleLogin} />);
-    }
-  };
-
-  const openSignupForm = () => {
-    if (togglePopup) {
-      togglePopup(true, <SignupForm onSignup={handleSignup} />);
-    }
-  };
-
-  const handleLogin = async (email: string, password: string) => {
-    await login(email, password);
-
-    // Close the login popup after successful login
-    if (togglePopup) {
-      togglePopup(false);
-    }
-  };
-
-  const handleSignup = async (email: string, password: string) => {
-    await signup(email, password);
-
-    // Close the signup popup after successful signup
-    if (togglePopup) {
-      togglePopup(false);
-    }
-  };
+  const location = useLocation();
+  const { user } = useAuth();
 
   return (
     <div className={`${styles['header']} ${className}`} {...rest}>
-      {user && (
-        <List
-          className={styles['navbar-right-mobile']}
-          items={[
-            <Dropdown
-              className={styles['dropdown']}
-              items={[
-                <Link to="/">Marketplace</Link>,
-                <Link to="https://t.me/auctomarketplace" target="_blank">
-                  Contact Us
-                </Link>,
-              ]}
-            >
-              <Icon name="menu" />
-            </Dropdown>,
-          ]}
-        />
-      )}
-
       <Link className={styles['logo']} to="/">
         <Logo type="horizontal" theme="inverted-color" />
       </Link>
@@ -75,72 +22,37 @@ function Header({ className, ...rest }: Props) {
       <List
         className={styles['navbar-right']}
         items={[
-          ...(!user
-            ? [
-                <button
-                  className={`${styles['button']} ${styles['login']}`}
-                  onClick={openLoginForm}
-                  key="login"
-                  data-testid="login-desktop-button"
-                >
-                  Login
-                </button>,
-                <button
-                  className={`${styles['button']} ${styles['signup']}`}
-                  onClick={openSignupForm}
-                  key="signup"
-                  data-testid="signup-desktop-button"
-                >
-                  Signup
-                </button>,
-              ]
-            : []),
-          ...(user
-            ? [
-                <Dropdown
-                  className={styles['dropdown']}
-                  items={[
-                    <Link to="/" key="marketplace">
-                      Marketplace
-                    </Link>,
-                    <Link
-                      to="https://t.me/auctomarketplace"
-                      target="_blank"
-                      key="contact"
-                    >
-                      Contact Us
-                    </Link>,
-                  ]}
-                  key="dropdown"
-                >
-                  <Icon name="menu" />
-                </Dropdown>,
-              ]
-            : []),
+          <Link className={styles['browse']} to="/">
+            Browse
+          </Link>,
+          <Link className={styles['about-us']} to="#">
+            About Us
+          </Link>,
+          <Link
+            className={styles['contact-us']}
+            to="https://t.me/auctomarketplace"
+            target="_blank"
+          >
+            Contact Us
+          </Link>,
+          ...[
+            !user ? (
+              <Link
+                className={styles['sign-in']}
+                to={`/auth/login?redirectUrl=${encodeURIComponent(
+                  `${location.pathname}${location.search}`,
+                )}`}
+              >
+                Sign In
+              </Link>
+            ) : (
+              <Link to="#">
+                <Icon className={styles['icon-user']} name="user" />
+              </Link>
+            ),
+          ],
         ]}
       />
-
-      {!user && (
-        <List
-          className={styles['navbar-right-mobile']}
-          items={[
-            <button
-              className={`${styles['mobile-button']} ${styles['login']}`}
-              onClick={openLoginForm}
-              data-testid="login-mobile-button"
-            >
-              Login
-            </button>,
-            <button
-              className={`${styles['mobile-button']} ${styles['signup']}`}
-              onClick={openSignupForm}
-              data-testid="signup-mobile-button"
-            >
-              Signup
-            </button>,
-          ]}
-        />
-      )}
     </div>
   );
 }
