@@ -10,6 +10,7 @@ import {
 import HomePage from './pages/home';
 import LoginPage from './pages/auth/login';
 import SignupPage from './pages/auth/signup';
+import EmailVerificationPage from './pages/auth/email-verification';
 import ProductPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
@@ -60,6 +61,14 @@ const App = () => {
             element: (
               <ScrollToTop>
                 <LoginPage />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/auth/email-verification',
+            element: (
+              <ScrollToTop>
+                <EmailVerificationPage />
               </ScrollToTop>
             ),
           },
