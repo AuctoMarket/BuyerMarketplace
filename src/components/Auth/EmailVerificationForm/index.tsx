@@ -12,17 +12,9 @@ interface Props extends ComponentProps<'div'> {
 
 function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
   const [timeLeft, setTimeLeft] = useState(30);
-  const [optSends, setOtpSends] = useState(0);
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const { user, resendOtp, validateOtp } = useAuth();
-
-  useEffect(() => {
-    if (optSends === 0 && user?.buyer_id) {
-      resendOtp(user.buyer_id);
-      setOtpSends(optSends + 1);
-    }
-  }, [optSends, user?.buyer_id, resendOtp]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,7 +37,6 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
       try {
         await resendOtp(user?.buyer_id);
         setTimeLeft(30);
-        setOtpSends(optSends + 1);
         setOtp('');
         setError('');
       } catch (error: any) {
