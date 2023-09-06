@@ -157,6 +157,11 @@ const CheckoutPage = () => {
             />
 
             <DeliveryMethods
+              product={{
+                type: product?.type as Product['type'],
+                releaseDate: product?.releaseDate,
+                orderDate: product?.orderDate,
+              }}
               data={{
                 deliveryMethod: order.deliveryMethod,
                 deliveryAddress: order.deliveryAddress,
