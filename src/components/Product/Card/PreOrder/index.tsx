@@ -20,7 +20,7 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
   return (
     <div className={`${styles['product-card']} ${className}`} {...rest}>
       <div className={styles['release-date']}>
-        RELEASE: {releaseDate ? dayjs(releaseDate).format('MMM DD') : 'N/A'}
+        RELEASE: {dayjs(releaseDate).format('MMM DD')}
       </div>
       <div className={styles['content']}>
         <Image
@@ -39,7 +39,7 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
         />
       </div>
       <div className={styles['order-date']}>
-        ORDER BY: {orderDate ? dayjs(orderDate).format('MMM DD') : 'N/A'}
+        ORDER BY: {dayjs(orderDate).format('MMM DD')}
       </div>
     </div>
   );

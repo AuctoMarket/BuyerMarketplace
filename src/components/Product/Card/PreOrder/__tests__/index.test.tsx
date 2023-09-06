@@ -8,7 +8,7 @@ describe('Card', () => {
   const data: { product: Product } = {
     product: {
       id: '1',
-      type: ProductType.Bid,
+      type: ProductType.BuyNow,
       title: 'test',
       condition: 4,
       description: 'test',
@@ -24,8 +24,6 @@ describe('Card', () => {
       quantity: 1,
       soldQuantity: 1,
       postedDate: new Date(),
-      releaseDate: new Date(),
-      orderDate: new Date(),
     },
   };
 
@@ -36,15 +34,16 @@ describe('Card', () => {
     expect(card).toBeInTheDocument();
   });
 
-  test('renders Card without releaseDate & orderDate', async () => {
+  test('renders Card with type Pre-Order, releaseDate & orderDate', async () => {
     render(
       <Card
         data={{
           ...data,
           product: {
             ...data.product,
-            releaseDate: undefined,
-            orderDate: undefined,
+            type: ProductType.PreOrder,
+            releaseDate: new Date(),
+            orderDate: new Date(),
           },
         }}
         role="card"
