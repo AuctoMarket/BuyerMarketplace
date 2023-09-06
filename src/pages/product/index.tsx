@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import ProductImages from '../../components/Product/Images';
 import ProductImagesMobile from '../../components/Product/Images/Mobile';
 import ProductTitle from '../../components/Product/Title';
-import ProductSellerInfo from '../../components/Product/SellerInfo';
 import ProductPurchaseBid from '../../components/Product/Purchase/Bid';
 import ProductPurchaseBuy from '../../components/Product/Purchase/Buy';
-import ProductPurchasePreOrder from '../../components/Product/Purchase/PreOrder';
 import ProductDetails from '../../components/Product/Details';
 import ProductPostedDate from '../../components/Product/PostedDate';
+import ProductEstimatedDeliveryDate from '../../components/Product/EstimatedDeliveryDate';
 // import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
 import ProductPreOrder from '../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
@@ -130,9 +130,21 @@ function ProductDetailsPage() {
               <ProductTitle data={{ title: product.title }} />
 
               <div>
-                <ProductSellerInfo data={product.seller} />
+                {/* <ProductSellerInfo data={product.seller} /> */}
 
-                <ProductPostedDate data={{ postedDate: product.postedDate }} />
+                {product.type === ProductType.BuyNow ? (
+                  <ProductPostedDate
+                    data={{ postedDate: product.postedDate }}
+                  />
+                ) : (
+                  <ProductEstimatedDeliveryDate
+                    data={{
+                      deliveryDate: dayjs(product.releaseDate)
+                        .add(3, 'day')
+                        .toDate(),
+                    }}
+                  />
+                )}
               </div>
 
               {product.type === ProductType.Bid ? (
@@ -142,18 +154,17 @@ function ProductDetailsPage() {
                     numBids: product.numBids,
                   }}
                 />
-              ) : product.type === ProductType.BuyNow ? (
+              ) : (
                 <ProductPurchaseBuy
                   data={{
                     availableQuantity: product.quantity - product.soldQuantity,
                     price: product.price,
                     quantity,
+                    type: product.type,
                   }}
                   onChangeQuantity={setQuantity}
                   onBuy={handleBuy}
                 />
-              ) : (
-                <ProductPurchasePreOrder data={{ price: product.price }} />
               )}
 
               <ProductDetails

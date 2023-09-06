@@ -1,13 +1,18 @@
 import React, { ComponentProps, useEffect } from 'react';
+import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
 import { Product, ProductType } from '../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: Pick<Product, 'type' | 'images'>;
+  data: Pick<Product, 'type' | 'images' | 'releaseDate' | 'orderDate'>;
 }
 
-function ProductImages({ className, data: { type, images }, ...rest }: Props) {
+function ProductImages({
+  className,
+  data: { type, images, releaseDate, orderDate },
+  ...rest
+}: Props) {
   const [selected, setSelected] = React.useState<string>();
 
   useEffect(() => {
@@ -22,13 +27,18 @@ function ProductImages({ className, data: { type, images }, ...rest }: Props) {
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['selected-container']}>
         <div className={styles['image']}>
-          <div className={styles['gradient']}>
-            {type === ProductType.PreOrder && (
-              <span className={styles['pre-order']}>Pre-Order</span>
-            )}
-          </div>
-
           <img src={selected} alt="selected" />
+
+          {type === ProductType.PreOrder && (
+            <>
+              <div className={styles['release-date']}>
+                RELEASE: {dayjs(releaseDate).format('MMM DD')}
+              </div>
+              <div className={styles['order-date']}>
+                ORDER BY: {dayjs(orderDate).format('MMM DD')}
+              </div>
+            </>
+          )}
         </div>
 
         <div className={styles['thumbnails-list-container']}>

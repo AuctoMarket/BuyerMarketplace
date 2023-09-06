@@ -6,12 +6,13 @@ import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
 import NumberInput from '../../../NumberInput';
 
-import type { Product } from '../../../../types/product.type';
+import { ProductType, type Product } from '../../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
   data: Pick<Product, 'price'> & {
     quantity: number;
     availableQuantity: number;
+    type?: Product['type'];
   };
   onChangeQuantity: (quantity: number) => void;
   onBuy: () => void;
@@ -19,7 +20,7 @@ interface Props extends ComponentProps<'div'> {
 
 function ProductPurchaseBuy({
   className,
-  data: { price, quantity, availableQuantity },
+  data: { price, quantity, availableQuantity, type },
   onChangeQuantity,
   onBuy,
   ...rest
@@ -33,6 +34,7 @@ function ProductPurchaseBuy({
           data={{ price: price * quantity }}
         />
       </div>
+
       <div className={styles['quantity-container']}>
         <label className={styles['label']}>Quantity:</label>
         <div>
@@ -43,16 +45,18 @@ function ProductPurchaseBuy({
             min={1}
             max={availableQuantity}
           />
-          <span className={styles['available-quantity']}>
+          {/* <span className={styles['available-quantity']}>
             {availableQuantity} pieces available
-          </span>
+          </span> */}
         </div>
       </div>
+
       <div className={styles['btn-buy-container']}>
         <Button className={styles['button']} theme="white" onClick={onBuy}>
-          Buy
+          {type === ProductType.BuyNow ? 'Buy' : 'Pre Order Now'}
         </Button>
       </div>
+
       <div className={styles['btn-chat-container']}>
         <ButtonLink
           className={styles['button']}
