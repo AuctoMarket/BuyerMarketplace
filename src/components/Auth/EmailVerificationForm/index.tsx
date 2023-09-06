@@ -43,7 +43,7 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
   const handleResendOtp = async () => {
     if (timeLeft === 0) {
       try {
-        await resendOtp(user.buyer_id);
+        await resendOtp(user?.buyer_id);
         setTimeLeft(30);
         setOtpSends(optSends + 1);
         setOtp('');
@@ -60,7 +60,7 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
     }
 
     try {
-      await validateOtp(user.buyer_id, otp);
+      await validateOtp(user?.buyer_id, otp);
 
       onVerifyEmail?.();
     } catch (error: any) {
@@ -76,7 +76,7 @@ function VerifyEmailForm({ className, onVerifyEmail, ...rest }: Props) {
 
       <div className={styles['info']}>
         In order to verify your email address, we
-        <br /> sent an otp to the following email: {user.email}
+        <br /> sent an otp to the following email: {user?.email}
       </div>
 
       <div className={styles['group-input']}>
