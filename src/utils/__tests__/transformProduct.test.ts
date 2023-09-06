@@ -19,6 +19,8 @@ describe('transformProduct', () => {
       followers: 1,
     },
     posted_date: '2021-01-01',
+    release_date: '2021-01-01',
+    order_date: '2021-01-01',
   };
   const transformedProduct = {
     id: product.product_id,
@@ -38,21 +40,27 @@ describe('transformProduct', () => {
       numFollowers: product.seller_info.followers,
     },
     postedDate: new Date(product.posted_date),
+    releaseDate: new Date(product.release_date),
+    orderDate: new Date(product.order_date),
   };
 
   it('should return transformed product', () => {
     expect(transformProduct(product)).toEqual(transformedProduct);
   });
 
-  it('should return transformed product when images array empty', () => {
+  it('should return transformed product when images array empty, no release_date & order_date', () => {
     expect(
       transformProduct({
         ...product,
         images: [],
+        release_date: undefined,
+        order_date: undefined,
       }),
     ).toEqual({
       ...transformedProduct,
       images: ['/images/no-photo.png'],
+      releaseDate: undefined,
+      orderDate: undefined,
     });
   });
 });

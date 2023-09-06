@@ -21,10 +21,14 @@ interface Product {
   soldQuantity: number;
   seller: Seller;
   postedDate: Date;
+  // TODO: not yet confirmed with backend about the field names
+  releaseDate?: Date;
+  orderDate?: Date;
 }
 
 interface ProductsQuery {
   seller_id?: string;
+  product_type?: ProductType;
 }
 
 interface ProductsSort extends Sort {
