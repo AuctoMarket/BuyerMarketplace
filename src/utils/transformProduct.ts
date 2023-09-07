@@ -17,13 +17,13 @@ const transformProduct = (product: any): Product => ({
   ).map((image: any) => image.image_path),
   type: product.product_type,
   price: product.price,
+  discount: product.discount,
   quantity: product.product_quantity,
   soldQuantity: product.sold_quantity,
   seller: transformSeller(product.seller_info),
   postedDate: new Date(product.posted_date),
-  // TODO: not yet confirmed with backend about the field names
-  releaseDate: product.release_date && new Date(product.release_date),
-  orderDate: product.order_date && new Date(product.order_date),
+  releasedDate: product.releases_on && new Date(product.releases_on),
+  orderedDate: product.order_by && new Date(product.order_by),
 });
 
 export default transformProduct;
