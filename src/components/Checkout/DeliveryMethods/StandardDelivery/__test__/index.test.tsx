@@ -10,8 +10,8 @@ describe('StandardDelivery', () => {
       <StandardDelivery
         product={{
           type,
-          releaseDate: new Date(),
-          orderDate: new Date(),
+          releasedDate: new Date(),
+          orderedDate: new Date(),
         }}
         data={{
           addressLine1: '',

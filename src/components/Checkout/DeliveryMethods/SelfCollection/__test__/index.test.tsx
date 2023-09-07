@@ -18,8 +18,8 @@ describe('SelfCollection', () => {
         <SelfCollection
           product={{
             type,
-            releaseDate: new Date(),
-            orderDate: new Date(),
+            releasedDate: new Date(),
+            orderedDate: new Date(),
           }}
           data={collectionPoint}
           onChangeData={(collectionPoint) =>

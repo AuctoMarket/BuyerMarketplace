@@ -9,7 +9,7 @@ import type { DeliveryAddress } from '../../../../types/order.type';
 import { ProductType, type Product } from '../../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  product: Pick<Product, 'type' | 'releaseDate' | 'orderDate'>;
+  product: Pick<Product, 'type' | 'releasedDate' | 'orderedDate'>;
   data: DeliveryAddress;
   onChangeData: (data: DeliveryAddress, isError: boolean) => void;
 }
@@ -79,7 +79,7 @@ const StandardDelivery = ({
         {product.type === ProductType.PreOrder && (
           <p className={styles['delivery-date']}>
             *The estimated delivery date of this pre-order is{' '}
-            {dayjs(product.releaseDate).format('DD MMMM YYYY')}
+            {dayjs(product.releasedDate).format('DD MMMM YYYY')}
           </p>
         )}
 

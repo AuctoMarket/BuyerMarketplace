@@ -16,7 +16,7 @@ import type { Order } from '../../../types/order.type';
 import type { Product } from '../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  product: Pick<Product, 'type' | 'releaseDate' | 'orderDate'>;
+  product: Pick<Product, 'type' | 'releasedDate' | 'orderedDate'>;
   data: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>;
   onChangeData: (
     data: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>,

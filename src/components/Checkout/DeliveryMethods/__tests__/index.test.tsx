@@ -10,8 +10,8 @@ import { ProductType } from '../../../../types/product.type';
 describe('DeliveryMethods', () => {
   const product = {
     type: ProductType.BuyNow,
-    releaseDate: new Date(),
-    orderDate: new Date(),
+    releasedDate: new Date(),
+    orderedDate: new Date(),
   };
   const data = {
     deliveryMethod: DeliveryMethod.SelfCollection,
