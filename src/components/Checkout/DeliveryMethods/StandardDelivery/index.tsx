@@ -1,12 +1,15 @@
 import React, { useState, ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
 import Input from '../../../Input';
 
 import type { DeliveryAddress } from '../../../../types/order.type';
+import { ProductType, type Product } from '../../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
+  product: Pick<Product, 'type' | 'releasedDate' | 'orderedDate'>;
   data: DeliveryAddress;
   onChangeData: (data: DeliveryAddress, isError: boolean) => void;
 }
@@ -15,6 +18,7 @@ const isError = (error: any) => Object.values(error).some(Boolean);
 
 const StandardDelivery = ({
   className,
+  product,
   data,
   onChangeData,
   ...rest
@@ -72,9 +76,17 @@ const StandardDelivery = ({
   return (
     <div className={`${className} ${styles['delivery-1-container']}`} {...rest}>
       <div className={`${styles['delivery-1-content']}`}>
+        {product.type === ProductType.PreOrder && (
+          <p className={styles['delivery-date']}>
+            *The estimated delivery date of this pre-order is{' '}
+            {dayjs(product.releasedDate).format('DD MMMM YYYY')}
+          </p>
+        )}
+
         <p className={`${styles['delivery-1-content-header']}`}>
           Please enter your contact details.
         </p>
+
         <div className={`${styles['delivery-1-content-text']}`}>
           <p>*Required Fields</p>
         </div>

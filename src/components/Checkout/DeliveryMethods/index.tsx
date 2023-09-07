@@ -13,8 +13,10 @@ import {
 } from '../../../types/order.type';
 
 import type { Order } from '../../../types/order.type';
+import type { Product } from '../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
+  product: Pick<Product, 'type' | 'releasedDate' | 'orderedDate'>;
   data: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>;
   onChangeData: (
     data: Pick<Order, 'deliveryMethod' | 'deliveryAddress'>,
@@ -24,7 +26,13 @@ interface Props extends ComponentProps<'div'> {
 
 const isError = (error: any) => Object.values(error).some(Boolean);
 
-const DeliveryMethods = ({ className, data, onChangeData, ...rest }: Props) => {
+const DeliveryMethods = ({
+  className,
+  product,
+  data,
+  onChangeData,
+  ...rest
+}: Props) => {
   const [collectionPoint, setCollectionPoint] = React.useState<CollectionPoint>(
     CollectionPoint.BotanicGardensMRT,
   );
@@ -89,11 +97,13 @@ const DeliveryMethods = ({ className, data, onChangeData, ...rest }: Props) => {
         />
         {data.deliveryMethod === DeliveryMethod.SelfCollection ? (
           <SelfCollection
+            product={product}
             data={collectionPoint}
             onChangeData={handleChangeCollectionPoint}
           />
         ) : (
           <StandardDelivery
+            product={product}
             data={standardDeliveryAddress}
             onChangeData={handleChangeStandardDeliveryAddress}
           />

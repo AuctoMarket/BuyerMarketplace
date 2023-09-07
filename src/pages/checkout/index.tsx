@@ -18,10 +18,9 @@ import {
   CollectionPoint,
   CollectionPointAddress,
   PaymentMethod,
+  type Order,
 } from '../../types/order.type';
-
-import type { Product } from '../../types/product.type';
-import type { Order } from '../../types/order.type';
+import { ProductType, type Product } from '../../types/product.type';
 
 const isError = (error: any) => Object.values(error).some(Boolean);
 
@@ -44,7 +43,10 @@ const CheckoutPage = () => {
       return;
     }
 
-    const price = product.price;
+    const price =
+      product.type === ProductType.BuyNow
+        ? product.price
+        : product.price - (product.discount || 0);
     const quantity = parseInt(queryParams.get('quantity') as string, 10);
     const deliveryMethod = DeliveryMethod.SelfCollection;
     const paymentMethod = PaymentMethod.PayNow;
@@ -157,6 +159,11 @@ const CheckoutPage = () => {
             />
 
             <DeliveryMethods
+              product={{
+                type: product?.type as Product['type'],
+                releasedDate: product?.releasedDate,
+                orderedDate: product?.orderedDate,
+              }}
               data={{
                 deliveryMethod: order.deliveryMethod,
                 deliveryAddress: order.deliveryAddress,

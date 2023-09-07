@@ -1,12 +1,18 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
 
 import DeliveryMethods from '..';
 import { CollectionPoint, DeliveryMethod } from '../../../../types/order.type';
-import { BrowserRouter } from 'react-router-dom';
+import { ProductType } from '../../../../types/product.type';
 
 describe('DeliveryMethods', () => {
+  const product = {
+    type: ProductType.BuyNow,
+    releasedDate: new Date(),
+    orderedDate: new Date(),
+  };
   const data = {
     deliveryMethod: DeliveryMethod.SelfCollection,
     deliveryAddress: {
@@ -20,6 +26,7 @@ describe('DeliveryMethods', () => {
     render(
       <BrowserRouter>
         <DeliveryMethods
+          product={product}
           data={data}
           onChangeData={() => {}}
           role="DeliveryMethods"
@@ -43,6 +50,7 @@ describe('DeliveryMethods', () => {
     render(
       <BrowserRouter>
         <DeliveryMethods
+          product={product}
           data={{ ...data, deliveryMethod: DeliveryMethod.StandardDelivery }}
           onChangeData={() => {}}
           role="DeliveryMethods"
