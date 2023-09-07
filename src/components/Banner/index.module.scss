@@ -1,0 +1,61 @@
+.promotion-container {
+  @apply relative;
+
+  .background {
+    @apply w-full;
+  }
+
+  .content {
+    left: 122px;
+    right: 122px;
+    @apply absolute top-9 bg-white py-8 px-14 rounded-2xl;
+
+    .title {
+      font-size: 54px;
+      @apply flex font-bold gap-3;
+
+      span {
+        color: #28a4da;
+      }
+    }
+    .main {
+      @apply mt-1 font-thicboi font-normal text-3xl;
+    }
+
+    .footer {
+      color: #28a4da;
+      font-size: 26px;
+      @apply mt-5 font-bold;
+
+      &:hover {
+        color: darkblue;
+      }
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .promotion-container {
+    .content {
+      left: 27px;
+      right: 27px;
+      top: 16px;
+      @apply pl-7 pr-12 py-2 top-4;
+      .title {
+        @apply text-2xl flex flex-col gap-0;
+      }
+
+      .main {
+        @apply text-sm mt-2;
+      }
+
+      .footer {
+        @apply text-base mt-1;
+
+        &:hover {
+          color: darkblue;
+        }
+      }
+    }
+  }
+}
