@@ -5,12 +5,12 @@ import styles from './index.module.scss';
 import { Product, ProductType } from '../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: Pick<Product, 'type' | 'images' | 'releaseDate' | 'orderDate'>;
+  data: Pick<Product, 'type' | 'images' | 'releasedDate' | 'orderedDate'>;
 }
 
 function ProductImages({
   className,
-  data: { type, images, releaseDate, orderDate },
+  data: { type, images, releasedDate, orderedDate },
   ...rest
 }: Props) {
   const [selected, setSelected] = React.useState<string>();
@@ -32,10 +32,10 @@ function ProductImages({
           {type === ProductType.PreOrder && (
             <>
               <div className={styles['release-date']}>
-                RELEASE: {dayjs(releaseDate).format('MMM DD')}
+                RELEASE: {dayjs(releasedDate).format('MMM DD')}
               </div>
               <div className={styles['order-date']}>
-                ORDER BY: {dayjs(orderDate).format('MMM DD')}
+                ORDER BY: {dayjs(orderedDate).format('MMM DD')}
               </div>
             </>
           )}

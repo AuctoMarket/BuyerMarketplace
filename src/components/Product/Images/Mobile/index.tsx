@@ -7,12 +7,12 @@ import Image from '../../../Image';
 import { Product, ProductType } from '../../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: Pick<Product, 'type' | 'images' | 'releaseDate' | 'orderDate'>;
+  data: Pick<Product, 'type' | 'images' | 'releasedDate' | 'orderedDate'>;
 }
 
 function ProductImagesMobile({
   className,
-  data: { images, type, releaseDate, orderDate },
+  data: { images, type, releasedDate, orderedDate },
   ...rest
 }: Props) {
   return (
@@ -20,10 +20,10 @@ function ProductImagesMobile({
       {type === ProductType.PreOrder && (
         <>
           <div className={styles['release-date']}>
-            RELEASE: {dayjs(releaseDate).format('MMM DD')}
+            RELEASE: {dayjs(releasedDate).format('MMM DD')}
           </div>
           <div className={styles['order-date']}>
-            ORDER BY: {dayjs(orderDate).format('MMM DD')}
+            ORDER BY: {dayjs(orderedDate).format('MMM DD')}
           </div>
         </>
       )}

@@ -4,8 +4,6 @@ import axios from 'axios';
 import apiConfig from '../configs/api';
 import transformProduct from '../utils/transformProduct';
 
-import { ProductType } from '../types/product.type';
-
 const useProduct = (id: string) => {
   const {
     isLoading,
@@ -16,8 +14,6 @@ const useProduct = (id: string) => {
     async (url: string) => {
       if (id) {
         const response = await axios.get(`${apiConfig.baseUrl}${url}`);
-        // TODO: Remove this when the API is ready
-        response.data.product_type = ProductType.PreOrder;
 
         return transformProduct(response.data);
       }

@@ -138,7 +138,7 @@ function ProductDetailsPage() {
                 ) : (
                   <ProductEstimatedDeliveryDate
                     data={{
-                      deliveryDate: dayjs(product.releaseDate)
+                      deliveryDate: dayjs(product.releasedDate)
                         .add(3, 'day')
                         .toDate(),
                     }}
@@ -157,7 +157,10 @@ function ProductDetailsPage() {
                 <ProductPurchaseBuy
                   data={{
                     availableQuantity: product.quantity - product.soldQuantity,
-                    price: product.price,
+                    price:
+                      product.type === ProductType.BuyNow
+                        ? product.price
+                        : product.price - (product.discount || 0),
                     quantity,
                     type: product.type,
                   }}
