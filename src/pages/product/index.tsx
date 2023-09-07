@@ -12,7 +12,8 @@ import ProductPurchaseBuy from '../../components/Product/Purchase/Buy';
 import ProductPurchasePreOrder from '../../components/Product/Purchase/PreOrder';
 import ProductDetails from '../../components/Product/Details';
 import ProductPostedDate from '../../components/Product/PostedDate';
-import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
+// import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
+import ProductPreOrder from '../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import useProduct from '../../hooks/useProduct';
 import useProductsList from '../../hooks/useProductsList';
@@ -28,19 +29,23 @@ function ProductDetailsPage() {
   const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
-  const { productsList: moreFromSeller } = useProductsList(
-    { seller_id: product?.seller.id },
-    { sort_by: 'posted_date' },
-  );
+  // const { productsList: moreFromSeller } = useProductsList(
+  //   { seller_id: product?.seller.id },
+  //   { sort_by: 'posted_date' },
+  // );
+  const { productsList: preOrder = [] } = useProductsList({
+    product_type: ProductType.PreOrder,
+  });
   const { productsList: recentlyAdded } = useProductsList(
     {},
     { sort_by: 'posted_date' },
   );
 
   const [quantity, setQuantity] = useState(1);
-  const [moreFromSellerProducts, setMoreFromSellerProducts] = useState<
-    Product[]
-  >([]);
+  // const [moreFromSellerProducts, setMoreFromSellerProducts] = useState<
+  //   Product[]
+  // >([]);
+  const [preOrderProducts, setPreOrderProducts] = useState<Product[]>([]);
   const [recentlyAddedProducts, setRecentlyAddedProducts] = useState<Product[]>(
     [],
   );
@@ -53,13 +58,21 @@ function ProductDetailsPage() {
     setQuantity(1);
   }, [id]);
 
+  // useEffect(() => {
+  //   if (!id || !moreFromSeller || moreFromSeller.length === 0) {
+  //     return;
+  //   }
+
+  //   setMoreFromSellerProducts(moreFromSeller.filter((p) => p.id !== id));
+  // }, [id, moreFromSeller]);
+
   useEffect(() => {
-    if (!id || !moreFromSeller || moreFromSeller.length === 0) {
+    if (!id || !preOrder || preOrder.length === 0) {
       return;
     }
 
-    setMoreFromSellerProducts(moreFromSeller.filter((p) => p.id !== id));
-  }, [id, moreFromSeller]);
+    setPreOrderProducts(preOrder.filter((p) => p.id !== id));
+  }, [id, preOrder]);
 
   useEffect(() => {
     if (!id || !recentlyAdded || recentlyAdded.length === 0) {
@@ -151,12 +164,21 @@ function ProductDetailsPage() {
             </div>
           </div>
 
-          {moreFromSellerProducts.length > 0 && (
+          {/* {moreFromSellerProducts.length > 0 && (
             <ProductMoreFromSeller
               className={styles['product-more-from-seller']}
               data={{
                 products: moreFromSellerProducts,
                 seller: product.seller,
+              }}
+            />
+          )} */}
+
+          {preOrderProducts.length > 0 && (
+            <ProductPreOrder
+              className={styles['product-pre-order']}
+              data={{
+                products: preOrderProducts,
               }}
             />
           )}

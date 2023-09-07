@@ -3,15 +3,20 @@ import React from 'react';
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import ProductPromotion from '../../components/Product/Promotion';
+import ProductPreOrder from '../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import SellerPromotion from '../../components/Sellers/Promotion';
 import useProductsList from '../../hooks/useProductsList';
+import { ProductType } from '../../types/product.type';
 
 function isMobile() {
   return window.innerWidth <= 820;
 }
 
 function HomePage() {
+  const { productsList: preOrder = [] } = useProductsList({
+    product_type: ProductType.PreOrder,
+  });
   const { productsList: recentlyAdded = [] } = useProductsList();
 
   return (
@@ -38,16 +43,27 @@ function HomePage() {
             }}
           />
         )}
-        {recentlyAdded.length > 0 && (
-          <div className={styles['content']}>
+
+        <div className={styles['content']}>
+          {preOrder.length > 0 && (
+            <ProductPreOrder
+              className={styles['pre-order']}
+              data={{
+                products: preOrder,
+              }}
+            />
+          )}
+
+          {recentlyAdded.length > 0 && (
             <ProductRecentlyAdded
+              className={styles['recently-added']}
               data={{
                 products: recentlyAdded,
                 seeMore: false,
               }}
             />
-          </div>
-        )}
+          )}
+        </div>
 
         <div className={styles['seller-promotion']}>
           <SellerPromotion />
