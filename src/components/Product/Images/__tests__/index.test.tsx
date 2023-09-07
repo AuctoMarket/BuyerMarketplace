@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Images from '..';
-import { Product, ProductType } from '../../../../types/product.type';
+import { ProductType } from '../../../../types/product.type';
 
 describe('Images', () => {
-  const data: Pick<Product, 'type' | 'images'> = {
-    type: ProductType.Bid,
+  const data = {
+    type: ProductType.BuyNow,
     images: ['image-1', 'image-2'],
   };
 
@@ -22,7 +22,15 @@ describe('Images', () => {
 
   test('renders Images pre-order', async () => {
     render(
-      <Images data={{ ...data, type: ProductType.PreOrder }} role="images" />,
+      <Images
+        data={{
+          ...data,
+          type: ProductType.PreOrder,
+          releasedDate: new Date(),
+          orderedDate: new Date(),
+        }}
+        role="images"
+      />,
     );
 
     const images = await screen.findByRole('images');

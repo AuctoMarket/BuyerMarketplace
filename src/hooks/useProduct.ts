@@ -4,8 +4,6 @@ import axios from 'axios';
 import apiConfig from '../configs/api';
 import transformProduct from '../utils/transformProduct';
 
-import type { Product } from '../types/product.type';
-
 const useProduct = (id: string) => {
   const {
     isLoading,
@@ -15,7 +13,7 @@ const useProduct = (id: string) => {
     `/products/${id}`,
     async (url: string) => {
       if (id) {
-        const response = await axios.get<Product>(`${apiConfig.baseUrl}${url}`);
+        const response = await axios.get(`${apiConfig.baseUrl}${url}`);
 
         return transformProduct(response.data);
       }
