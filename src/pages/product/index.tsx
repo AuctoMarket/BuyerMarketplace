@@ -111,16 +111,20 @@ function ProductDetailsPage() {
               <ProductImagesMobile
                 className={styles['product-images']}
                 data={{
-                  type: product.type,
                   images: product.images,
+                  type: product.type,
+                  releasedDate: product.releasedDate,
+                  orderedDate: product.orderedDate,
                 }}
               />
             ) : (
               <ProductImages
                 className={styles['product-images']}
                 data={{
-                  type: product.type,
                   images: product.images,
+                  type: product.type,
+                  releasedDate: product.releasedDate,
+                  orderedDate: product.orderedDate,
                 }}
               />
             )}
