@@ -34,16 +34,17 @@ describe('Card', () => {
     expect(card).toBeInTheDocument();
   });
 
-  test('renders Card with type Pre-Order, releaseDate & orderDate', async () => {
+  test('renders Card with type Pre-Order', async () => {
     render(
       <Card
         data={{
           ...data,
           product: {
             ...data.product,
+            discount: 1,
             type: ProductType.PreOrder,
-            releaseDate: new Date(),
-            orderDate: new Date(),
+            releasedDate: new Date(),
+            orderedDate: new Date(),
           },
         }}
         role="card"

@@ -9,6 +9,7 @@ describe('transformProduct', () => {
     images: [{ image_path: 'test' }],
     product_type: 'test',
     price: 1,
+    discount: 1,
     product_quantity: 1,
     sold_quantity: 1,
     seller_info: {
@@ -19,8 +20,8 @@ describe('transformProduct', () => {
       followers: 1,
     },
     posted_date: '2021-01-01',
-    release_date: '2021-01-01',
-    order_date: '2021-01-01',
+    releases_on: '2021-01-01',
+    order_by: '2021-01-01',
   };
   const transformedProduct = {
     id: product.product_id,
@@ -30,6 +31,7 @@ describe('transformProduct', () => {
     images: product.images.map((image: any) => image.image_path),
     type: product.product_type,
     price: product.price,
+    discount: product.discount,
     quantity: product.product_quantity,
     soldQuantity: product.sold_quantity,
     seller: {
@@ -40,27 +42,27 @@ describe('transformProduct', () => {
       numFollowers: product.seller_info.followers,
     },
     postedDate: new Date(product.posted_date),
-    releaseDate: new Date(product.release_date),
-    orderDate: new Date(product.order_date),
+    releasedDate: new Date(product.releases_on),
+    orderedDate: new Date(product.order_by),
   };
 
   it('should return transformed product', () => {
     expect(transformProduct(product)).toEqual(transformedProduct);
   });
 
-  it('should return transformed product when images array empty, no release_date & order_date', () => {
+  it('should return transformed product when images array empty, no releases_on & order_by', () => {
     expect(
       transformProduct({
         ...product,
         images: [],
-        release_date: undefined,
-        order_date: undefined,
+        releases_on: undefined,
+        order_by: undefined,
       }),
     ).toEqual({
       ...transformedProduct,
       images: ['/images/no-photo.png'],
-      releaseDate: undefined,
-      orderDate: undefined,
+      releasedDate: undefined,
+      orderedDate: undefined,
     });
   });
 });

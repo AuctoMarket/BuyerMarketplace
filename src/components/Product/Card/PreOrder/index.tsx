@@ -15,12 +15,12 @@ interface Props extends ComponentProps<'div'> {
 }
 
 function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
-  const { images, title, price, releaseDate, orderDate } = product;
+  const { images, title, price, discount, releasedDate, orderedDate } = product;
 
   return (
     <div className={`${styles['product-card']} ${className}`} {...rest}>
       <div className={styles['release-date']}>
-        RELEASE: {dayjs(releaseDate).format('MMM DD')}
+        RELEASE: {dayjs(releasedDate).format('MMM DD')}
       </div>
       <div className={styles['content']}>
         <Image
@@ -31,15 +31,25 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
       </div>
       <div className={styles['footer']}>
         <ProductTitle className={styles['product-title']} data={{ title }} />
-        <ProductPrice
-          className={styles['product-price']}
-          data={{
-            price,
-          }}
-        />
+        <div className={styles['product-price']}>
+          {discount && (
+            <ProductPrice
+              className={styles['old-price']}
+              data={{
+                price,
+              }}
+            />
+          )}
+          <ProductPrice
+            className={styles['price']}
+            data={{
+              price: price - (discount || 0),
+            }}
+          />
+        </div>
       </div>
       <div className={styles['order-date']}>
-        ORDER BY: {dayjs(orderDate).format('MMM DD')}
+        ORDER BY: {dayjs(orderedDate).format('MMM DD')}
       </div>
     </div>
   );

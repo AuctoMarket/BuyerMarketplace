@@ -26,8 +26,8 @@ describe('Images', () => {
         data={{
           ...data,
           type: ProductType.PreOrder,
-          releaseDate: new Date(),
-          orderDate: new Date(),
+          releasedDate: new Date(),
+          orderedDate: new Date(),
         }}
         role="images"
       />,

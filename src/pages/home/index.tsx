@@ -14,7 +14,6 @@ function isMobile() {
 }
 
 function HomePage() {
-  // TODO: fetch pre-order products list
   const { productsList: preOrder = [] } = useProductsList({
     product_type: ProductType.PreOrder,
   });
