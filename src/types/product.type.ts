@@ -15,15 +15,15 @@ interface Product {
   images: string[];
   type: ProductType;
   price: number;
+  discount?: number;
   bidPrice?: number;
   numBids?: number;
   quantity: number;
   soldQuantity: number;
   seller: Seller;
-  postedDate: Date;
-  // TODO: not yet confirmed with backend about the field names
-  releaseDate?: Date;
-  orderDate?: Date;
+  postedDate?: Date;
+  releasedDate?: Date;
+  orderedDate?: Date;
 }
 
 interface ProductsQuery {

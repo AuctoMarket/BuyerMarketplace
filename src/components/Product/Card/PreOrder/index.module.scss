@@ -29,7 +29,17 @@
   }
 
   .product-price {
-    @apply mt-7 text-4xl font-semibold;
+    @apply mt-7 text-4xl flex gap-4;
+
+    .old-price,
+    .price {
+      @apply font-semibold;
+    }
+
+    .old-price {
+      @apply line-through;
+      color: #858585;
+    }
   }
 }
 
@@ -53,7 +63,7 @@
     }
 
     .product-price {
-      @apply mt-3 text-lg leading-6;
+      @apply mt-3 text-lg leading-6 flex gap-2;
     }
   }
 }

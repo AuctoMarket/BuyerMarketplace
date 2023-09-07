@@ -33,7 +33,6 @@ function ProductDetailsPage() {
   //   { seller_id: product?.seller.id },
   //   { sort_by: 'posted_date' },
   // );
-  // TODO: fetch pre-order products list
   const { productsList: preOrder = [] } = useProductsList({
     product_type: ProductType.PreOrder,
   });
