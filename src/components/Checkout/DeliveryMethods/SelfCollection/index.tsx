@@ -2,7 +2,7 @@ import React, { ChangeEvent, ComponentProps } from 'react';
 import styles from './index.module.scss';
 import { Form, Radio } from 'react-daisyui';
 import { Link } from 'react-router-dom';
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 
 import { CollectionPoint } from '../../../../types/order.type';
 import { ProductType, type Product } from '../../../../types/product.type';
@@ -37,8 +37,11 @@ export function SelfCollection({
     >
       {product.type === ProductType.PreOrder && (
         <p className={styles['delivery-date']}>
-          *The estimated delivery date of this pre-order is{' '}
-          {dayjs(product.releasedDate).format('DD MMMM YYYY')}
+          {/* *The estimated delivery date of this pre-order is{' '}
+          {dayjs(product.releasedDate).format('DD MMMM YYYY')} */}
+          Your order will be delivered within 2 weeks of the release date and we
+          will contact you to schedule a delivery. Any delays beyond that will
+          be refunded fully.
         </p>
       )}
 
