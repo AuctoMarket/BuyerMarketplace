@@ -25,27 +25,19 @@ function HomePage() {
   return (
     <Layout>
       <div className={styles['home-page']}>
-        {isMobile() ? (
-          <ProductPromotion
-            className={styles['promotion']}
-            data={{
-              images: ['/images/promotion/website-cover-mobile-1.png'],
-              url: '#',
-              title:
-                'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
-            }}
-          />
-        ) : (
-          <ProductPromotion
-            className={styles['promotion']}
-            data={{
-              images: ['/images/promotion/website-cover-1.png'],
-              url: '#',
-              title:
-                'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
-            }}
-          />
-        )}
+        <ProductPromotion
+          className={styles['promotion']}
+          data={{
+            images: [
+              isMobile()
+                ? '/images/promotion/home-banner-mobile.png'
+                : '/images/promotion/home-banner.png',
+            ],
+            url: '#',
+            title:
+              'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
+          }}
+        />
 
         <div className={styles['content']}>
           {preOrder.length > 0 && (
