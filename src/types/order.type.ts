@@ -4,6 +4,8 @@ enum CollectionPoint {
   AngMoKioMRT = 'Ang Mo Kio MRT',
   WoodlandsMRT = 'Woodlands MRT',
   BishanMRT = 'Bishan MRT',
+  PayaLebarMRT = 'Paya Lebar MRT',
+  EunosMRT = 'Eunos MRT',
 }
 
 const CollectionPointAddress: {
@@ -28,6 +30,14 @@ const CollectionPointAddress: {
   [CollectionPoint.BishanMRT]: {
     addressLine1: 'Bishan MRT',
     postalCode: '579827',
+  },
+  [CollectionPoint.PayaLebarMRT]: {
+    addressLine1: 'Paya Lebar MRT',
+    postalCode: '409006',
+  },
+  [CollectionPoint.EunosMRT]: {
+    addressLine1: 'Eunos MRT',
+    postalCode: '409423',
   },
 };
 

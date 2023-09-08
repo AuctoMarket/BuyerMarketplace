@@ -50,7 +50,7 @@ export function SelfCollection({
       <Form className={`${styles['delivery-method-choose-form']}`}>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title="Botanic Gardens MRT"
+          title={CollectionPoint.BotanicGardensMRT}
           data-testid={CollectionPoint.BotanicGardensMRT}
         >
           <Radio
@@ -64,7 +64,7 @@ export function SelfCollection({
         </Form.Label>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title="Dhoby Ghaut MRT"
+          title={CollectionPoint.DhobyGhautMRT}
           data-testid={CollectionPoint.DhobyGhautMRT}
         >
           <Radio
@@ -78,7 +78,7 @@ export function SelfCollection({
         </Form.Label>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title="Ang Mo Kio MRT"
+          title={CollectionPoint.AngMoKioMRT}
           data-testid={CollectionPoint.AngMoKioMRT}
         >
           <Radio
@@ -92,7 +92,7 @@ export function SelfCollection({
         </Form.Label>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title="Woodlands MRT"
+          title={CollectionPoint.WoodlandsMRT}
           data-testid={CollectionPoint.WoodlandsMRT}
         >
           <Radio
@@ -106,7 +106,7 @@ export function SelfCollection({
         </Form.Label>
         <Form.Label
           className={`${styles['delivery-method-choose-form-lable']}`}
-          title="Bishan MRT"
+          title={CollectionPoint.BishanMRT}
           data-testid={CollectionPoint.BishanMRT}
         >
           <Radio
@@ -114,6 +114,34 @@ export function SelfCollection({
             name="option"
             value={CollectionPoint.BishanMRT}
             checked={data === CollectionPoint.BishanMRT}
+            onChange={handleChangeCollectionPoint}
+            size="xs"
+          />
+        </Form.Label>
+        <Form.Label
+          className={`${styles['delivery-method-choose-form-lable']}`}
+          title={CollectionPoint.PayaLebarMRT}
+          data-testid={CollectionPoint.PayaLebarMRT}
+        >
+          <Radio
+            className={`${styles['delivery-method-choose-radio']}`}
+            name="option"
+            value={CollectionPoint.PayaLebarMRT}
+            checked={data === CollectionPoint.PayaLebarMRT}
+            onChange={handleChangeCollectionPoint}
+            size="xs"
+          />
+        </Form.Label>
+        <Form.Label
+          className={`${styles['delivery-method-choose-form-lable']}`}
+          title={CollectionPoint.EunosMRT}
+          data-testid={CollectionPoint.EunosMRT}
+        >
+          <Radio
+            className={`${styles['delivery-method-choose-radio']}`}
+            name="option"
+            value={CollectionPoint.EunosMRT}
+            checked={data === CollectionPoint.EunosMRT}
             onChange={handleChangeCollectionPoint}
             size="xs"
           />
