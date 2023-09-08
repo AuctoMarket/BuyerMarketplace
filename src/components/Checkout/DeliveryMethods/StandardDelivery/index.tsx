@@ -1,6 +1,6 @@
 import React, { useState, ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
 import Input from '../../../Input';
@@ -78,8 +78,11 @@ const StandardDelivery = ({
       <div className={`${styles['delivery-1-content']}`}>
         {product.type === ProductType.PreOrder && (
           <p className={styles['delivery-date']}>
-            *The estimated delivery date of this pre-order is{' '}
-            {dayjs(product.releasedDate).format('DD MMMM YYYY')}
+            {/* *The estimated delivery date of this pre-order is{' '}
+            {dayjs(product.releasedDate).format('DD MMMM YYYY')} */}
+            Your order will be delivered within 2 weeks of the release date and
+            we will contact you to schedule a delivery. Any delays beyond that
+            will be refunded fully.
           </p>
         )}
 
