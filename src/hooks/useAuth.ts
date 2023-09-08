@@ -1,86 +1,41 @@
-// Hooks/useAuth.ts
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 
-import api from '../configs/api';
+import authApi from '../apis/auth';
+
+const userDataKey = 'userData';
 
 function useAuth() {
-  const initialUserData = JSON.parse(
-    localStorage.getItem('userData') || 'null',
+  const [user, setUser] = useState<any>(
+    JSON.parse(localStorage.getItem(userDataKey) || 'null'),
   );
-  const [user, setUser] = useState<any | null>(initialUserData);
-  const [guest, setGuest] = useState(false);
-
-  useEffect(() => {
-    // Save user data to local storage whenever user state changes
-    if (user) {
-      localStorage.setItem('userData', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('userData');
-    }
-  }, [user]);
 
   const login = async (email: string, password: string) => {
-    try {
-      const response = await axios.post(
-        `${api.baseUrl}/buyers/login`,
-        { email, password },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
+    const data = await authApi.login({ email, password });
 
-      if (response.status === 200) {
-        const userData = response.data;
-        setUser(userData);
-        setGuest(false);
-        return response.status;
-      } else {
-        return response.status;
-      }
-    } catch (error) {
-      throw new Error('Error during login.');
-    }
+    setUser(data);
+    localStorage.setItem(userDataKey, JSON.stringify(data));
   };
 
   const signup = async (email: string, password: string) => {
-    try {
-      const response = await axios.post(
-        `${api.baseUrl}/buyers/signup`,
-        { email, password },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
+    const data = await authApi.signup({ email, password });
 
-      if (response.status === 201) {
-        const userData = response.data;
-        setUser(userData);
-        setGuest(false);
-        return response.status;
-      } else {
-        return response.status;
-      }
-    } catch (error) {
-      throw new Error('Error during signup.');
-    }
+    setUser(data);
+    localStorage.setItem(userDataKey, JSON.stringify(data));
   };
 
-  const logout = () => {
-    setUser(null);
-    setGuest(false);
-    localStorage.removeItem('userData');
+  const resendOtp = async (buyerId: string) => {
+    await authApi.resendOtp({ buyer_id: buyerId });
   };
 
-  const toggleGuest = () => {
-    setGuest((prevGuest) => !prevGuest);
+  const validateOtp = async (buyerId: string, otp: string) => {
+    await authApi.validateOtp({ buyer_id: buyerId, otp });
+
+    const data = { ...user, verification: 'verified' };
+    setUser(data);
+    localStorage.setItem(userDataKey, JSON.stringify(data));
   };
 
-  return { user, guest, login, signup, logout, toggleGuest };
+  return { user, login, signup, resendOtp, validateOtp };
 }
 
 export default useAuth;

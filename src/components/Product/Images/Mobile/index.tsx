@@ -1,26 +1,32 @@
 import React, { ComponentProps } from 'react';
 import { Carousel } from 'react-responsive-carousel';
+import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
 import Image from '../../../Image';
 import { Product, ProductType } from '../../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  data: Pick<Product, 'type' | 'images'>;
+  data: Pick<Product, 'type' | 'images' | 'releasedDate' | 'orderedDate'>;
 }
 
 function ProductImagesMobile({
   className,
-  data: { images, type },
+  data: { images, type, releasedDate, orderedDate },
   ...rest
 }: Props) {
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
-      <div className={styles['gradient']}>
-        {type === ProductType.PreOrder && (
-          <span className={styles['pre-order']}>Pre-Order</span>
-        )}
-      </div>
+      {type === ProductType.PreOrder && (
+        <>
+          <div className={styles['release-date']}>
+            RELEASES: {dayjs(releasedDate).format('MMM DD')}
+          </div>
+          <div className={styles['order-date']}>
+            ORDER BY: {dayjs(orderedDate).format('MMM DD')}
+          </div>
+        </>
+      )}
 
       <Carousel showArrows={false} showStatus={false} showThumbs={false}>
         {images.map((image, index) => (

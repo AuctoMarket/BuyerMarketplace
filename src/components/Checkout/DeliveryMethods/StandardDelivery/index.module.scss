@@ -1,7 +1,11 @@
 .delivery-1-container {
   padding-top: 36px;
-  padding-right: 135px;
   @apply font-thicboi;
+}
+
+.delivery-date {
+  @apply mb-2 text-base;
+  color: #858585;
 }
 
 .delivery-1-content-header {
@@ -52,6 +56,10 @@
 }
 
 @media (max-width: 820px) {
+  .delivery-date {
+    @apply text-sm;
+  }
+
   .delivery-1-container {
     @apply pt-4 pr-0;
   }

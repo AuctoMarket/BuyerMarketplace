@@ -11,6 +11,9 @@ describe('NumberInput', () => {
     const text = await screen.findByRole('test');
     expect(text).toBeInTheDocument();
 
+    const input = await screen.findByTestId('input');
+    userEvent.type(input, '1');
+
     const btnDecrease = await screen.findByTestId('btn-decrease');
     userEvent.click(btnDecrease);
 

@@ -29,6 +29,7 @@
 }
 
 .product-more-from-seller,
+.product-pre-order,
 .product-recently-added {
   @apply mt-16;
 }
@@ -56,6 +57,7 @@
   }
 
   .product-more-from-seller,
+  .product-pre-order,
   .product-recently-added {
     @apply mt-4 px-4;
   }

@@ -1,0 +1,25 @@
+.login-page {
+  @apply container mx-auto pt-20;
+  padding-bottom: 150px; // pb-20 + 70px
+}
+
+.login-form {
+  @apply mx-auto;
+  width: 540px;
+  border: 1px solid #afafaf;
+}
+
+.login-page + :global(#footer) {
+  @apply absolute bottom-0 w-full;
+}
+
+@media (max-width: 820px) {
+  .login-page {
+    @apply pt-0;
+    padding-bottom: 100px; // pb-0 + 100px
+  }
+
+  .login-form {
+    @apply w-full border-0;
+  }
+}

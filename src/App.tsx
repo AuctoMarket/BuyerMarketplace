@@ -7,10 +7,13 @@ import {
   useLocation,
 } from 'react-router-dom';
 
+import HomePage from './pages/home';
+import LoginPage from './pages/auth/login';
+import SignupPage from './pages/auth/signup';
+import EmailVerificationPage from './pages/auth/email-verification';
+import ProductPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
-import ProductPage from './pages/product';
-import HomePage from './pages/home';
 import Popup, { PopupContext } from './components/Popup';
 
 const createRouter = (routerObjects: RouteObject[]) => {
@@ -46,18 +49,34 @@ const App = () => {
       <RouterProvider
         router={createRouter([
           {
-            path: '/checkout',
+            path: '/',
             element: (
               <ScrollToTop>
-                <CheckoutPage />
+                <HomePage />
               </ScrollToTop>
             ),
           },
           {
-            path: '/orders/:id/payment-complete',
+            path: '/auth/login',
             element: (
               <ScrollToTop>
-                <OrderPaymentStatusPage />
+                <LoginPage />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/auth/email-verification',
+            element: (
+              <ScrollToTop>
+                <EmailVerificationPage />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/auth/signup',
+            element: (
+              <ScrollToTop>
+                <SignupPage />
               </ScrollToTop>
             ),
           },
@@ -70,10 +89,18 @@ const App = () => {
             ),
           },
           {
-            path: '/',
+            path: '/checkout',
             element: (
               <ScrollToTop>
-                <HomePage />
+                <CheckoutPage />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/orders/:id/payment-complete',
+            element: (
+              <ScrollToTop>
+                <OrderPaymentStatusPage />
               </ScrollToTop>
             ),
           },

@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.0.4...1.1.0) (2023-09-08)
+
+### Features
+
+- **AUCTO-100:** update Checkout page for pre-order ([#84](https://github.com/AuctoMarket/BuyerMarketplace/issues/84)) ([ae6db71](https://github.com/AuctoMarket/BuyerMarketplace/commit/ae6db71820668861519646b801d6fd75e6cb4c5c))
+- **AUCTO-101:** add EmailVerification page ([#78](https://github.com/AuctoMarket/BuyerMarketplace/issues/78)) ([5cae552](https://github.com/AuctoMarket/BuyerMarketplace/commit/5cae552895f5c0a091b1722d1dacd7627a4bf6fd))
+- **AUCTO-107:** update new banners ([#87](https://github.com/AuctoMarket/BuyerMarketplace/issues/87)) ([ba14bae](https://github.com/AuctoMarket/BuyerMarketplace/commit/ba14baee9271da28384cbb563a364bcd33b9feeb))
+- **AUCTO-90:** rework login/signup flow ([#77](https://github.com/AuctoMarket/BuyerMarketplace/issues/77)) ([ff5fe54](https://github.com/AuctoMarket/BuyerMarketplace/commit/ff5fe54eff612fcb4d9327c65ad52747e4bacc72))
+- **AUCTO-91:** add Information on small order fee ([#76](https://github.com/AuctoMarket/BuyerMarketplace/issues/76)) ([5b5a355](https://github.com/AuctoMarket/BuyerMarketplace/commit/5b5a3552de9138e45fbd6a64601cb6340de41864))
+- **AUCTO-96:** update mobile banner ([#75](https://github.com/AuctoMarket/BuyerMarketplace/issues/75)) ([205210c](https://github.com/AuctoMarket/BuyerMarketplace/commit/205210c0d9d0d01637210fcb7e82460a9e3312f3))
+- **AUCTO-98:** add PreOrder products list ([#82](https://github.com/AuctoMarket/BuyerMarketplace/issues/82)) ([b067f62](https://github.com/AuctoMarket/BuyerMarketplace/commit/b067f620c4cfbec3db4b21d0d7f2bd48f3748970))
+- **AUCTO-99:** update Product page for pre-order ([#83](https://github.com/AuctoMarket/BuyerMarketplace/issues/83)) ([1ef88ac](https://github.com/AuctoMarket/BuyerMarketplace/commit/1ef88acee22d36d1c3d5c08765472c0de0a7146b))
+
+### Bug Fixes
+
+- **AUCTO-101:** don't send OTP on refresh page ([#80](https://github.com/AuctoMarket/BuyerMarketplace/issues/80)) ([bc40ed7](https://github.com/AuctoMarket/BuyerMarketplace/commit/bc40ed7baab23a0f495bd3ffd1e0a5b645122886))
+- **AUCTO-107:** bug fixes ([#86](https://github.com/AuctoMarket/BuyerMarketplace/issues/86)) ([89799cd](https://github.com/AuctoMarket/BuyerMarketplace/commit/89799cddf6396aaa88473f86b717e772995bc3f9))
+- **AUCTO-107:** fix pre-order Card price & add 2 new collection points ([#88](https://github.com/AuctoMarket/BuyerMarketplace/issues/88)) ([010351a](https://github.com/AuctoMarket/BuyerMarketplace/commit/010351a8aa0dbcf59fbb67bbd3fecdfec307df88))
+- **AUCTO-107:** update useSWR hooks to revalidateIfStale & revalidateOnReconnect ([#89](https://github.com/AuctoMarket/BuyerMarketplace/issues/89)) ([56c06cd](https://github.com/AuctoMarket/BuyerMarketplace/commit/56c06cd7095fb863d7c40dcc27f02dc67a88be88))
+- **AUCTO-91:** hide Small order fee note when 0 ([#81](https://github.com/AuctoMarket/BuyerMarketplace/issues/81)) ([1af465b](https://github.com/AuctoMarket/BuyerMarketplace/commit/1af465ba0b9f29a25c07b70caae06c1f71172961))
+- **AUCTO-99:** release & order by dates display wrongly ([#85](https://github.com/AuctoMarket/BuyerMarketplace/issues/85)) ([043e482](https://github.com/AuctoMarket/BuyerMarketplace/commit/043e482b81ec3f62306c6133bdddcf83d2b5ea14))
+
 ### [1.0.4](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.0.3...1.0.4) (2023-08-29)
 
 ### Bug Fixes

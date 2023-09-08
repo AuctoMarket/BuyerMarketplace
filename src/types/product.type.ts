@@ -15,16 +15,20 @@ interface Product {
   images: string[];
   type: ProductType;
   price: number;
+  discount?: number;
   bidPrice?: number;
   numBids?: number;
   quantity: number;
   soldQuantity: number;
   seller: Seller;
-  postedDate: Date;
+  postedDate?: Date;
+  releasedDate?: Date;
+  orderedDate?: Date;
 }
 
 interface ProductsQuery {
   seller_id?: string;
+  product_type?: ProductType;
 }
 
 interface ProductsSort extends Sort {

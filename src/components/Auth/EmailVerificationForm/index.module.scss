@@ -1,0 +1,101 @@
+.container {
+  @apply flex flex-col items-center px-20 py-14;
+}
+
+.logo {
+  width: 200px;
+}
+
+.title {
+  @apply text-3xl font-thicboi font-semibold mt-3;
+}
+
+.info {
+  @apply text-base font-light font-thicboi text-center leading-4 mt-1;
+  color: #858585;
+}
+
+.group-input {
+  @apply mt-8 w-full;
+
+  > div:first-of-type {
+    @apply w-full gap-5 justify-center;
+  }
+
+  .input {
+    @apply font-thicboi rounded-none border border-solid border-gray-300;
+    @apply h-11 w-11 #{!important};
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+.error-message {
+  font-size: 14px;
+  @apply text-red-700 font-thicboi mt-1;
+}
+
+.resend {
+  @apply font-thicboi text-lg font-light underline mt-10 cursor-pointer;
+  color: #252525;
+}
+
+.resend-disabled {
+  @apply cursor-not-allowed;
+  color: #858585;
+}
+
+.submit {
+  @apply text-2xl font-thicboi font-normal uppercase mt-8 #{!important};
+  width: 274px;
+}
+
+@media (max-width: 820px) {
+  .container {
+    @apply px-14 py-8;
+  }
+
+  .logo {
+    width: 140px;
+  }
+
+  .title {
+    @apply text-xl mt-2;
+  }
+
+  .info {
+    @apply text-xs mt-0 leading-none;
+  }
+
+  .group-input {
+    @apply mt-5;
+
+    > div:first-of-type {
+      gap: 8px;
+    }
+
+    .input {
+      @apply py-0;
+      @apply h-10 w-10 #{!important};
+    }
+  }
+
+  .error-message {
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .resend {
+    @apply text-sm mt-6;
+  }
+
+  .submit {
+    width: 204px;
+    @apply text-lg py-0 h-9 mt-6 #{!important};
+  }
+}

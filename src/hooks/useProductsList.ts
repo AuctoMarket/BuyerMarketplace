@@ -6,7 +6,6 @@ import transformProduct from '../utils/transformProduct';
 
 import type { Pagination } from '../types/base.type';
 import type { ProductsQuery, ProductsSort } from '../types/product.type';
-import type { Product } from '../types/product.type';
 
 const useProductsList = (
   query: ProductsQuery = {},
@@ -19,22 +18,17 @@ const useProductsList = (
   } = useSWR(
     ['/products', query, options],
     async ([url, query, options]) => {
-      const response = await axios.get<Product[]>(
-        `${apiConfig.baseUrl}${url}`,
-        {
-          params: {
-            ...query,
-            ...options,
-          },
+      const response = await axios.get<any[]>(`${apiConfig.baseUrl}${url}`, {
+        params: {
+          ...query,
+          ...options,
         },
-      );
+      });
 
       return response.data.map(transformProduct);
     },
     {
-      revalidateIfStale: false,
       revalidateOnFocus: false,
-      revalidateOnReconnect: false,
     },
   );
 

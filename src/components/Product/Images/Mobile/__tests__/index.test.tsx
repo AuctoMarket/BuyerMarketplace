@@ -2,11 +2,11 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import Mobile from '..';
-import { Product, ProductType } from '../../../../../types/product.type';
+import { ProductType } from '../../../../../types/product.type';
 
 describe('Mobile', () => {
-  const data: Pick<Product, 'type' | 'images'> = {
-    type: ProductType.Bid,
+  const data = {
+    type: ProductType.BuyNow,
     images: ['image-1', 'image-2'],
   };
 
@@ -19,7 +19,15 @@ describe('Mobile', () => {
 
   test('renders Mobile pre-order', () => {
     render(
-      <Mobile data={{ ...data, type: ProductType.PreOrder }} role="images" />,
+      <Mobile
+        data={{
+          ...data,
+          type: ProductType.PreOrder,
+          releasedDate: new Date(),
+          orderedDate: new Date(),
+        }}
+        role="images"
+      />,
     );
 
     const images = screen.getByRole('images');

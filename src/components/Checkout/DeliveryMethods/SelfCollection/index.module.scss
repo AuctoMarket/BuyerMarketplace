@@ -1,3 +1,8 @@
+.delivery-date {
+  @apply mb-2 text-base;
+  color: #858585;
+}
+
 .delivery-method-choose-collection {
   @apply mt-9 font-thicboi text-lg font-normal;
 }
@@ -29,6 +34,10 @@
 .delivery-method-information {
   margin-top: 42px;
   font-size: 18px;
+
+  .insurance {
+    @apply font-semibold mb-1;
+  }
 }
 
 .delivery-method-information-contact {
@@ -36,6 +45,10 @@
 }
 
 @media (max-width: 820px) {
+  .delivery-date {
+    @apply text-sm;
+  }
+
   .delivery-method-choose-collection {
     @apply mt-4 text-sm;
   }

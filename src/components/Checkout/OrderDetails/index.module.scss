@@ -4,7 +4,7 @@
 }
 
 .body {
-  @apply px-5 py-7 border border-solid font-thicboi text-xl;
+  @apply px-5 py-6 border border-solid font-thicboi text-xl;
   margin-top: 17px;
   border-color: #afafaf;
   background-color: rgba(175, 175, 175, 0.1);
@@ -71,6 +71,10 @@
   }
 }
 
+.info {
+  @apply text-sm mt-4 px-1 font-medium;
+}
+
 .footer {
   @apply mt-5;
 
@@ -135,6 +139,10 @@
     .price {
       @apply text-xl mt-1 pl-6;
     }
+  }
+
+  .info {
+    @apply mt-2 px-2;
   }
 
   .footer .button {

@@ -2,11 +2,17 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import StandardDelivery from '..';
+import { ProductType } from '../../../../../types/product.type';
 
 describe('StandardDelivery', () => {
-  const TestComponent = () => (
+  const TestComponent = ({ type }: { type: ProductType }) => (
     <BrowserRouter>
       <StandardDelivery
+        product={{
+          type,
+          releasedDate: new Date(),
+          orderedDate: new Date(),
+        }}
         data={{
           addressLine1: '',
           addressLine2: '',
@@ -19,7 +25,7 @@ describe('StandardDelivery', () => {
   );
 
   test('renders StandardDelivery', async () => {
-    render(<TestComponent />);
+    render(<TestComponent type={ProductType.BuyNow} />);
 
     const normalDelivery = await screen.findByRole('normal-delivery');
     expect(normalDelivery).toBeInTheDocument();
@@ -35,5 +41,12 @@ describe('StandardDelivery', () => {
     const postalCode = await screen.findByRole('input-postal-code');
     fireEvent.change(postalCode, { target: { value: '3' } });
     fireEvent.change(postalCode, { target: { value: '' } });
+  });
+
+  test('renders StandardDelivery pre-order', async () => {
+    render(<TestComponent type={ProductType.PreOrder} />);
+
+    const normalDelivery = await screen.findByRole('normal-delivery');
+    expect(normalDelivery).toBeInTheDocument();
   });
 });

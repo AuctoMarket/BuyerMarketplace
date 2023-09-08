@@ -5,9 +5,10 @@ import userEvent from '@testing-library/user-event';
 
 import SelfCollection from '..';
 import { CollectionPoint } from '../../../../../types/order.type';
+import { ProductType } from '../../../../../types/product.type';
 
 describe('SelfCollection', () => {
-  const TestComponent = () => {
+  const TestComponent = ({ type }: { type: ProductType }) => {
     const [collectionPoint, setCollectionPoint] = React.useState(
       CollectionPoint.BotanicGardensMRT,
     );
@@ -15,6 +16,11 @@ describe('SelfCollection', () => {
     return (
       <BrowserRouter>
         <SelfCollection
+          product={{
+            type,
+            releasedDate: new Date(),
+            orderedDate: new Date(),
+          }}
           data={collectionPoint}
           onChangeData={(collectionPoint) =>
             setCollectionPoint(collectionPoint)
@@ -26,7 +32,7 @@ describe('SelfCollection', () => {
   };
 
   test('renders SelfCollection', async () => {
-    render(<TestComponent />);
+    render(<TestComponent type={ProductType.BuyNow} />);
 
     const selfCollection = await screen.findByRole('selfcollection');
     expect(selfCollection).toBeInTheDocument();
@@ -51,5 +57,12 @@ describe('SelfCollection', () => {
 
     const bishanMRT = await screen.findByTestId(CollectionPoint.BishanMRT);
     userEvent.click(bishanMRT);
+  });
+
+  test('renders SelfCollection pre-order', async () => {
+    render(<TestComponent type={ProductType.PreOrder} />);
+
+    const selfCollection = await screen.findByRole('selfcollection');
+    expect(selfCollection).toBeInTheDocument();
   });
 });

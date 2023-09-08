@@ -3,51 +3,62 @@ import React from 'react';
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import ProductPromotion from '../../components/Product/Promotion';
+import ProductPreOrder from '../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import SellerPromotion from '../../components/Sellers/Promotion';
 import useProductsList from '../../hooks/useProductsList';
+import { ProductType } from '../../types/product.type';
 
 function isMobile() {
   return window.innerWidth <= 820;
 }
 
 function HomePage() {
-  const { productsList: recentlyAdded = [] } = useProductsList();
+  const { productsList: preOrder = [] } = useProductsList({
+    product_type: ProductType.PreOrder,
+  });
+  const { productsList: recentlyAdded = [] } = useProductsList(
+    { product_type: ProductType.BuyNow },
+    { sort_by: 'posted_date' },
+  );
 
   return (
     <Layout>
       <div className={styles['home-page']}>
-        {isMobile() ? (
-          <ProductPromotion
-            className={styles['promotion']}
-            data={{
-              images: ['/images/promotion/website-cover-mobile-1.png'],
-              url: '#',
-              title:
-                'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
-            }}
-          />
-        ) : (
-          <ProductPromotion
-            className={styles['promotion']}
-            data={{
-              images: ['/images/promotion/website-cover-1.png'],
-              url: '#',
-              title:
-                'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
-            }}
-          />
-        )}
-        {recentlyAdded.length > 0 && (
-          <div className={styles['content']}>
+        <ProductPromotion
+          className={styles['promotion']}
+          data={{
+            images: [
+              isMobile()
+                ? '/images/promotion/home-banner-mobile.png'
+                : '/images/promotion/home-banner.png',
+            ],
+            url: '#',
+            title:
+              'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
+          }}
+        />
+
+        <div className={styles['content']}>
+          {preOrder.length > 0 && (
+            <ProductPreOrder
+              className={styles['pre-order']}
+              data={{
+                products: preOrder,
+              }}
+            />
+          )}
+
+          {recentlyAdded.length > 0 && (
             <ProductRecentlyAdded
+              className={styles['recently-added']}
               data={{
                 products: recentlyAdded,
                 seeMore: false,
               }}
             />
-          </div>
-        )}
+          )}
+        </div>
 
         <div className={styles['seller-promotion']}>
           <SellerPromotion />

@@ -6,16 +6,15 @@
   }
 }
 
-.gradient {
-  @apply absolute top-0 left-0 w-full z-10 hidden;
-  height: 92px;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.45) 35.94%,
-    rgba(0, 0, 0, 0) 100%
-  );
+.release-date,
+.order-date {
+  @apply absolute text-lg text-white bg-aucto font-medium font-thicboi px-4 uppercase z-10;
+}
 
-  .pre-order {
-    @apply absolute left-4 top-4 text-lg text-white bg-aucto font-bold font-thicboi px-4;
-  }
+.release-date {
+  @apply top-6 left-0;
+}
+
+.order-date {
+  @apply bottom-8 right-0;
 }

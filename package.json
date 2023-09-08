@@ -1,6 +1,6 @@
 {
   "name": "BuyerMarketplace",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "React application for the Buyer Marketplace",
   "private": true,
   "homepage": "https://aucto.io",
@@ -42,6 +42,7 @@
     "react": "18.2.0",
     "react-daisyui": "4.0.1",
     "react-dom": "18.2.0",
+    "react-otp-input": "3.0.4",
     "react-responsive-carousel": "3.2.23",
     "react-router-dom": "6.14.2",
     "react-scripts": "5.0.1",
@@ -58,6 +59,8 @@
     },
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
+      "!src/apis/**/*",
+      "!src/configs/**/*",
       "!src/hooks/**/*",
       "!src/pages/**/*",
       "!src/types/**/*",
