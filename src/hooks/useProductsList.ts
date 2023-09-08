@@ -28,9 +28,7 @@ const useProductsList = (
       return response.data.map(transformProduct);
     },
     {
-      revalidateIfStale: false,
       revalidateOnFocus: false,
-      revalidateOnReconnect: false,
     },
   );
 
