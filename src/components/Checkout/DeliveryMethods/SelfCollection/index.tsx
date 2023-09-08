@@ -121,6 +121,10 @@ export function SelfCollection({
       </Form>
 
       <div className={`${styles['delivery-method-information']}`}>
+        <div className={styles['insurance']}>
+          Deliveries are 100% insured for lost packages and will take 1-3
+          business days.
+        </div>
         Once payment is completed, you will receive an email to schedule the
         self collection date and time. If you have any questions, you can reach
         out to us on telegram{' '}
