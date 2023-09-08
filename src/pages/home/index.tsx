@@ -17,7 +17,10 @@ function HomePage() {
   const { productsList: preOrder = [] } = useProductsList({
     product_type: ProductType.PreOrder,
   });
-  const { productsList: recentlyAdded = [] } = useProductsList();
+  const { productsList: recentlyAdded = [] } = useProductsList(
+    { product_type: ProductType.BuyNow },
+    { sort_by: 'posted_date' },
+  );
 
   return (
     <Layout>
