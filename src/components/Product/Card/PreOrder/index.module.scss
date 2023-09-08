@@ -29,7 +29,7 @@
   }
 
   .product-price {
-    @apply mt-7 text-4xl flex gap-4;
+    @apply mt-7 xl:text-4xl lg:text-3xl md:text-xl flex gap-4;
 
     .old-price,
     .price {
