@@ -28,9 +28,7 @@ const useOrder = (
     },
     {
       ...options,
-      revalidateIfStale: false,
       revalidateOnFocus: false,
-      revalidateOnReconnect: false,
     },
   );
 
