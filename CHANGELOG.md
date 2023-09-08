@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.1.0...1.1.1) (2023-09-08)
+
+### Bug Fixes
+
+- **AUCTO-108:** remove '#' links ([b4c325d](https://github.com/AuctoMarket/BuyerMarketplace/commit/b4c325d87e35cff9e5924145f535da28a44d164f))
+
 ## [1.1.0](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.0.4...1.1.0) (2023-09-08)
 
 ### Features
