@@ -158,13 +158,9 @@ const LoginForm = ({
       </Link>
 
       {onContinueAsGuest && (
-        <Link
-          className={styles['as-guest']}
-          to="#"
-          onClick={handleContinueAsGuest}
-        >
+        <span className={styles['as-guest']} onClick={handleContinueAsGuest}>
           Continue as a guest.
-        </Link>
+        </span>
       )}
 
       <Button

@@ -9,7 +9,7 @@ import Icon from '../../Icon';
 interface Props extends ComponentProps<'div'> {
   data: {
     images: string[];
-    url: string;
+    url?: string;
     title: string;
   };
 }
@@ -57,9 +57,11 @@ function ProductPromotion({
       </Carousel>
 
       <div className={`${styles['products-content']}`}>
-        <div className={`${styles['products-button']}`}>
-          <Link to={url}>Pre-Order now</Link>
-        </div>
+        {url && (
+          <div className={`${styles['products-button']}`}>
+            <Link to={url}>Pre-Order now</Link>
+          </div>
+        )}
 
         <div
           className={`${styles['products-title']}`}
