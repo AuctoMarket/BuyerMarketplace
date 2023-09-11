@@ -24,4 +24,16 @@ describe('ProductPromotion', () => {
 
     expect(products).toBeInTheDocument();
   });
+
+  test('renders ProductPromotion without url', async () => {
+    render(
+      <BrowserRouter>
+        <ProductPromotion data={{ ...data, url: undefined }} role="promotion" />
+      </BrowserRouter>,
+    );
+
+    const products = await screen.findByRole('promotion');
+
+    expect(products).toBeInTheDocument();
+  });
 });

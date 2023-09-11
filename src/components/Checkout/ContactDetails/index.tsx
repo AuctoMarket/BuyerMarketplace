@@ -35,6 +35,15 @@ const OrderContactDetails = ({
 
     setError(newError);
     onChangeData({ ...data, email }, isError(newError));
+
+    // validate confirm email if it exists
+    if (data.emailConfirm) {
+      const emailConfirmError = validateEmailConfirm(email, data.emailConfirm);
+      const newError = { ...error, emailConfirm: emailConfirmError };
+
+      setError(newError);
+      onChangeData({ ...data, email }, isError(newError));
+    }
   };
 
   const handleChangePhoneNumber = (

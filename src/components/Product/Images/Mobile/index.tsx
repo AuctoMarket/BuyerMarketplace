@@ -20,7 +20,7 @@ function ProductImagesMobile({
       {type === ProductType.PreOrder && (
         <>
           <div className={styles['release-date']}>
-            RELEASE: {dayjs(releasedDate).format('MMM DD')}
+            RELEASES: {dayjs(releasedDate).format('MMM DD')}
           </div>
           <div className={styles['order-date']}>
             ORDER BY: {dayjs(orderedDate).format('MMM DD')}

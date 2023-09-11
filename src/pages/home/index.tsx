@@ -17,32 +17,26 @@ function HomePage() {
   const { productsList: preOrder = [] } = useProductsList({
     product_type: ProductType.PreOrder,
   });
-  const { productsList: recentlyAdded = [] } = useProductsList();
+  const { productsList: recentlyAdded = [] } = useProductsList(
+    { product_type: ProductType.BuyNow },
+    { sort_by: 'posted_date' },
+  );
 
   return (
     <Layout>
       <div className={styles['home-page']}>
-        {isMobile() ? (
-          <ProductPromotion
-            className={styles['promotion']}
-            data={{
-              images: ['/images/promotion/website-cover-mobile-1.png'],
-              url: '#',
-              title:
-                'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
-            }}
-          />
-        ) : (
-          <ProductPromotion
-            className={styles['promotion']}
-            data={{
-              images: ['/images/promotion/website-cover-1.png'],
-              url: '#',
-              title:
-                'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
-            }}
-          />
-        )}
+        <ProductPromotion
+          className={styles['promotion']}
+          data={{
+            images: [
+              isMobile()
+                ? '/images/promotion/home-banner-mobile.png'
+                : '/images/promotion/home-banner.png',
+            ],
+            title:
+              'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
+          }}
+        />
 
         <div className={styles['content']}>
           {preOrder.length > 0 && (

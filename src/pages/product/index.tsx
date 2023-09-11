@@ -37,7 +37,7 @@ function ProductDetailsPage() {
     product_type: ProductType.PreOrder,
   });
   const { productsList: recentlyAdded } = useProductsList(
-    {},
+    { product_type: ProductType.BuyNow },
     { sort_by: 'posted_date' },
   );
 

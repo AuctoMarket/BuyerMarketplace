@@ -41,6 +41,17 @@ const SignupForm = ({ className, onSignup, ...rest }: Props) => {
 
     setPassword(event.target.value);
     setError(newError);
+
+    // Validate confirm password if it exists
+    if (confirmPassword) {
+      const confirmPasswordError = validateConfirmPassword(
+        confirmPassword,
+        event.target.value,
+      );
+      const newError = { ...error, confirmPassword: confirmPasswordError };
+
+      setError(newError);
+    }
   };
 
   const handleChangeConfirmPassword = (

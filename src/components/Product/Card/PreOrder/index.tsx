@@ -20,7 +20,7 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
   return (
     <div className={`${styles['product-card']} ${className}`} {...rest}>
       <div className={styles['release-date']}>
-        RELEASE: {dayjs(releasedDate).format('MMM DD')}
+        RELEASES: {dayjs(releasedDate).format('MMM DD')}
       </div>
       <div className={styles['content']}>
         <Image
