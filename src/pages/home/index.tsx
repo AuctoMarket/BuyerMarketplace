@@ -33,7 +33,6 @@ function HomePage() {
                 ? '/images/promotion/home-banner-mobile.png'
                 : '/images/promotion/home-banner.png',
             ],
-            url: '#',
             title:
               'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
           }}

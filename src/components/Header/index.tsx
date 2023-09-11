@@ -25,7 +25,7 @@ function Header({ className, ...rest }: Props) {
           <Link className={styles['browse']} to="/">
             Browse
           </Link>,
-          // <Link className={styles['about-us']} to="#">
+          // <Link className={styles['about-us']}>
           //   About Us
           // </Link>,
           <Link
@@ -46,9 +46,7 @@ function Header({ className, ...rest }: Props) {
                 Sign In
               </Link>
             ) : (
-              <Link to="#">
-                <Icon className={styles['icon-user']} name="user" />
-              </Link>
+              <Icon className={styles['icon-user']} name="user" />
             ),
           ],
         ]}
