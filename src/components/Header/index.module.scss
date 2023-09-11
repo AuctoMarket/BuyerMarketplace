@@ -1,5 +1,7 @@
 .header {
-  @apply relative flex items-center text-white bg-black p-4 justify-between pr-5;
+  padding-left: 70px;
+  padding-right: 70px;
+  @apply relative flex items-center text-white bg-black py-6 justify-between;
 }
 
 .logo {
@@ -11,26 +13,27 @@
 }
 
 .navbar-right {
-  @apply flex items-center gap-12 font-medium text-xl;
+  gap: 75px;
+  @apply flex items-center font-medium text-lg;
 }
 
 .icon-user {
-  height: 26px;
+  height: 40px;
 }
 
 @media (max-width: 820px) {
   .header {
-    @apply p-3;
+    @apply p-6;
   }
 
   .logo {
     img {
-      height: 24px;
+      height: 26px;
     }
   }
 
   .navbar-right {
-    @apply gap-5 text-xs;
+    @apply gap-4 text-sm;
   }
 
   .browse {

@@ -25,9 +25,9 @@ function Header({ className, ...rest }: Props) {
           <Link className={styles['browse']} to="/">
             Browse
           </Link>,
-          // <Link className={styles['about-us']}>
-          //   About Us
-          // </Link>,
+          <Link className={styles['about-us']} to="/">
+            About Us
+          </Link>,
           <Link
             className={styles['contact-us']}
             to="https://t.me/auctomarketplace"
