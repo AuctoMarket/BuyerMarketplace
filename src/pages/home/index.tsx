@@ -8,6 +8,7 @@ import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import SellerPromotion from '../../components/Sellers/Promotion';
 import useProductsList from '../../hooks/useProductsList';
 import { ProductType } from '../../types/product.type';
+import Banner from '../../components/Banner';
 
 function isMobile() {
   return window.innerWidth <= 820;
@@ -25,20 +26,8 @@ function HomePage() {
   return (
     <Layout>
       <div className={styles['home-page']}>
-        <ProductPromotion
-          className={styles['promotion']}
-          data={{
-            images: [
-              isMobile()
-                ? '/images/promotion/home-banner-mobile.png'
-                : '/images/promotion/home-banner.png',
-            ],
-            title:
-              'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
-          }}
-        />
-
         <div className={styles['content']}>
+          <Banner className={styles['banner']} />
           {preOrder.length > 0 && (
             <ProductPreOrder
               className={styles['pre-order']}

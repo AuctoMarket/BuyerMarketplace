@@ -34,7 +34,7 @@ function Banner({ className, ...rest }: Props) {
           you bought at some of the best prices available!
         </div>
         <div className={styles['footer']}>
-          <Link to={'#'}>Find out more</Link>
+          <Link to={'/about-us'}>Find out more</Link>
         </div>
       </div>
     </div>
