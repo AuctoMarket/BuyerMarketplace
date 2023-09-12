@@ -11,7 +11,7 @@ function Banner({ className, ...rest }: Props) {
     <div className={`${className} ${styles['banner-container']}`} {...rest}>
       <Image
         className={styles['banner']}
-        src="/images/banner/website-banner.png"
+        src="/images/banner/home-banner.png"
         alt="website-banner"
       />
 
