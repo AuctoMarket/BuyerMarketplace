@@ -1,34 +1,35 @@
 .header {
-  padding-left: 70px;
-  padding-right: 70px;
-  @apply relative flex items-center text-white bg-black py-6 justify-between;
+  @apply text-white bg-black;
+}
+
+.header-content {
+  @apply container mx-auto relative flex items-center py-3 justify-between;
 }
 
 .logo {
   @apply block;
 
   img {
-    height: 30px;
+    @apply h-8;
   }
 }
 
 .navbar-right {
-  gap: 75px;
-  @apply flex items-center font-medium text-lg;
+  @apply flex items-center font-medium text-lg gap-16;
 }
 
 .icon-user {
-  height: 40px;
+  @apply h-7;
 }
 
 @media (max-width: 820px) {
-  .header {
-    @apply p-6;
+  .header-content {
+    @apply px-4;
   }
 
   .logo {
     img {
-      height: 26px;
+      @apply h-6;
     }
   }
 
@@ -41,6 +42,6 @@
   }
 
   .icon-user {
-    height: 18px;
+    @apply h-5;
   }
 }
