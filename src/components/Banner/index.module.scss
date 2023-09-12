@@ -1,66 +1,58 @@
-.promotion-container {
-  @apply relative w-full h-full;
+.banner-container {
+  @apply relative px-20 py-5;
 
-  .background {
-    height: 280px;
-    @apply w-full;
+  .banner {
+    @apply absolute left-0 top-0 w-full h-full object-cover -z-10;
   }
 
   .content {
-    left: 100px;
-    right: 100px;
-    @apply absolute top-6 bg-white py-7 px-10 rounded-2xl;
+    @apply bg-white px-8 py-6 rounded-2xl;
 
     .title {
+      @apply font-semibold;
       font-size: 42px;
-      @apply flex font-bold gap-3;
 
       span {
-        color: #28a4da;
+        @apply text-aucto inline-block;
       }
     }
+
     .main {
-      font-size: 26px;
       @apply mt-2 font-thicboi font-normal;
+      font-size: 26px;
     }
 
     .footer {
-      color: #28a4da;
-      font-size: 22px;
-      @apply mt-4 font-bold;
+      @apply mt-4;
 
-      &:hover {
-        color: darkblue;
+      a {
+        @apply font-bold text-aucto hover:text-aucto-dark;
+        font-size: 22px;
       }
     }
   }
 }
 
 @media (max-width: 820px) {
-  .promotion-container {
-    .background {
-      @apply h-full;
-    }
+  .banner-container {
+    @apply p-4;
+
     .content {
-      left: 20px;
-      right: 20px;
-      top: 15px;
-      padding-left: 25px;
-      @apply py-3 leading-6;
+      @apply px-4 py-3;
+
       .title {
         font-size: 22px;
-        @apply flex flex-col font-semibold gap-0;
       }
 
       .main {
-        @apply text-sm mt-2 font-normal;
+        @apply text-sm mt-1;
       }
 
       .footer {
-        @apply text-sm mt-1 font-bold;
+        @apply mt-2;
 
-        &:hover {
-          color: darkblue;
+        a {
+          @apply text-sm;
         }
       }
     }
