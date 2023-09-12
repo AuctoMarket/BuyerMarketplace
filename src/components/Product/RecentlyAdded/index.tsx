@@ -24,7 +24,7 @@ function ProductRecentlyAdded({
   return (
     <div className={`${styles['container']} ${className}`} {...rest}>
       <div className={styles['heading']}>
-        Recently Added
+        Recently Added:
         {seeMore && (
           <Link to={`/products/recently-added`}>
             See all product
