@@ -19,7 +19,7 @@ function HomePage() {
   });
   const { productsList: recentlyAdded = [] } = useProductsList(
     { product_type: ProductType.BuyNow },
-    { sort_by: 'posted_date', limit: 4, offset: 0 },
+    { sort_by: 'posted_date', limit: 8, offset: 0 },
   );
 
   return (
