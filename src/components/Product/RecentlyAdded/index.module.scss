@@ -2,12 +2,15 @@
 }
 
 .heading {
-  @apply font-thicboi font-bold;
-  font-size: 26px;
-  line-height: 32px;
+  @apply font-thicboi font-medium;
+  font-size: 28px;
 
   > a {
-    @apply float-right text-lg flex items-center;
+    @apply float-right text-lg flex items-center font-bold;
+
+    &:hover {
+      @apply text-blue-400;
+    }
 
     > img {
       @apply inline-block ml-1;
@@ -16,11 +19,12 @@
 }
 
 .list-container {
-  @apply mt-5;
+  @apply mt-7;
 }
 
 .list {
-  @apply grid grid-cols-5 gap-5;
+  gap: 30px;
+  @apply grid grid-cols-4;
 
   .card-link {
     @apply block h-full;
@@ -30,10 +34,17 @@
     @apply h-full;
   }
 }
+.see-all-products {
+  width: 280px;
+  @apply text-2xl font-medium mx-auto px-12 mt-14 #{!important};
+}
 
 @media (max-width: 820px) {
   .heading {
-    @apply text-lg;
+    @apply text-base;
+    > a {
+      @apply text-sm;
+    }
   }
 
   .list-container {
@@ -45,7 +56,11 @@
 
     > li {
       @apply flex-none;
-      width: calc(100% / 3 - 0.75rem * 2 / 3 - 100% / 3 / 15);
+      width: calc(100% / 2 - 0.9rem * 1.5 / 2 - 100% / 2 / 15);
     }
+  }
+
+  .see-all-products {
+    @apply text-lg px-3 w-44 h-7 font-medium #{!important};
   }
 }
