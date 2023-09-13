@@ -8,9 +8,8 @@
 
 .release-date,
 .order-date {
-  @apply font-thicboi font-semibold text-2xl text-center bg-black text-white leading-7 uppercase;
+  @apply font-thicboi font-semibold text-xl text-center bg-black text-white leading-normal uppercase;
 }
-
 .content {
   @apply relative;
 
@@ -24,12 +23,12 @@
   @apply p-3 grow flex flex-col;
 
   .product-title {
-    @apply grow leading-8;
-    font-size: 28px;
+    @apply grow leading-8 text-2xl;
   }
 
   .product-price {
-    @apply mt-7 xl:text-4xl lg:text-3xl md:text-xl flex gap-4;
+    font-size: 28px;
+    @apply mt-5 flex gap-2;
 
     .old-price,
     .price {
@@ -59,11 +58,11 @@
     @apply p-2;
 
     .product-title {
-      @apply text-base leading-5;
+      @apply text-sm leading-5;
     }
 
     .product-price {
-      @apply mt-3 text-lg leading-6 flex gap-2;
+      @apply mt-3 text-base leading-6 flex gap-2;
     }
   }
 }
