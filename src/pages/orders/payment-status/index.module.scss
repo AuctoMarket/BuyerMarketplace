@@ -13,15 +13,12 @@
   }
 
   .description {
-    @apply border border-solid p-12 font-thicboi mt-4 font-light;
-    border-color: #afafaf;
-    font-size: 22px;
-    line-height: 26px;
+    @apply border border-solid p-8 font-thicboi mt-4 font-light text-lg;
+  }
 
-    .button {
-      @apply mt-8;
-      width: 375px;
-    }
+  .button {
+    @apply mt-8;
+    width: 375px;
   }
 }
 
@@ -52,10 +49,10 @@
     .description {
       @apply text-sm p-4;
       margin-top: 10px;
+    }
 
-      .button {
-        @apply hidden;
-      }
+    .button {
+      @apply hidden;
     }
   }
 
