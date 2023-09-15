@@ -26,7 +26,7 @@ function ProductRecentlyAdded({
       <div className={styles['heading']}>
         Recently Added:
         {seeMore && (
-          <Link to={`/products/recently-added`}>
+          <Link to="/products">
             See all product
             <Icon name="arrow-right" />
           </Link>
@@ -46,10 +46,11 @@ function ProductRecentlyAdded({
           ))}
         />
       </div>
+
       <ButtonLink
         className={styles['see-all-products']}
         theme="black"
-        to={'/all-products'}
+        to={'/products'}
       >
         See all products
       </ButtonLink>

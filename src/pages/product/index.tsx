@@ -38,7 +38,7 @@ function ProductDetailsPage() {
   });
   const { productsList: recentlyAdded } = useProductsList(
     { product_type: ProductType.BuyNow },
-    { sort_by: 'posted_date' },
+    { sort_by: 'posted_date', limit: 8, offset: 0 },
   );
 
   const [quantity, setQuantity] = useState(1);
@@ -206,7 +206,7 @@ function ProductDetailsPage() {
               className={styles['product-recently-added']}
               data={{
                 products: recentlyAddedProducts,
-                seeMore: false,
+                seeMore: true,
               }}
             />
           )}

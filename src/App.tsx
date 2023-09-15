@@ -11,11 +11,11 @@ import HomePage from './pages/home';
 import LoginPage from './pages/auth/login';
 import SignupPage from './pages/auth/signup';
 import EmailVerificationPage from './pages/auth/email-verification';
-import ProductPage from './pages/product';
+import ProductsListPage from './pages/products';
+import ProductDetailsPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
 import Popup, { PopupContext } from './components/Popup';
-import AllProductsPage from './pages/all-products';
 
 const createRouter = (routerObjects: RouteObject[]) => {
   if (process.env.REACT_APP_GITHUB_PAGES === 'true') {
@@ -82,10 +82,18 @@ const App = () => {
             ),
           },
           {
+            path: '/products',
+            element: (
+              <ScrollToTop>
+                <ProductsListPage />
+              </ScrollToTop>
+            ),
+          },
+          {
             path: '/products/:id',
             element: (
               <ScrollToTop>
-                <ProductPage />
+                <ProductDetailsPage />
               </ScrollToTop>
             ),
           },
@@ -102,14 +110,6 @@ const App = () => {
             element: (
               <ScrollToTop>
                 <OrderPaymentStatusPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/all-products',
-            element: (
-              <ScrollToTop>
-                <AllProductsPage />
               </ScrollToTop>
             ),
           },
