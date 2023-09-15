@@ -5,7 +5,6 @@ import Layout from '../../components/Layout';
 import ProductPromotion from '../../components/Product/Promotion';
 import ProductPreOrder from '../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
-import SellerPromotion from '../../components/Sellers/Promotion';
 import useProductsList from '../../hooks/useProductsList';
 import { ProductType } from '../../types/product.type';
 
@@ -57,10 +56,6 @@ function HomePage() {
               }}
             />
           )}
-        </div>
-
-        <div className={styles['seller-promotion']}>
-          <SellerPromotion />
         </div>
       </div>
     </Layout>
