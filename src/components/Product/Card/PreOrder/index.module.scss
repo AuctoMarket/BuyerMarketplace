@@ -23,12 +23,11 @@
   @apply p-3 grow flex flex-col;
 
   .product-title {
-    @apply grow leading-8 text-2xl;
+    @apply grow text-2xl leading-7 font-medium;
   }
 
   .product-price {
-    font-size: 28px;
-    @apply mt-5 flex gap-2;
+    @apply mt-2 xl:text-3xl lg:text-2xl md:text-xl flex gap-2;
 
     .old-price,
     .price {
@@ -45,7 +44,7 @@
 @media (max-width: 820px) {
   .release-date,
   .order-date {
-    @apply text-lg leading-6;
+    @apply text-xs;
   }
 
   .content {
@@ -55,14 +54,14 @@
   }
 
   .footer {
-    @apply p-2;
+    @apply px-2 py-0;
 
     .product-title {
-      @apply text-sm leading-5;
+      @apply text-sm leading-4;
     }
 
     .product-price {
-      @apply mt-3 text-base leading-6 flex gap-2;
+      @apply mt-1 text-base leading-6 flex gap-2;
     }
   }
 }

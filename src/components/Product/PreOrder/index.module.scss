@@ -11,8 +11,8 @@
 }
 
 .list {
-  gap: 52px;
   @apply grid grid-cols-4;
+  gap: 30px;
 
   > li {
     @apply flex-none;
@@ -33,14 +33,14 @@
   }
 
   .list-container {
-    @apply overflow-auto mt-0;
+    @apply overflow-auto mt-1;
   }
 
   .list {
-    @apply flex flex-row flex-nowrap gap-5;
+    @apply flex flex-row flex-nowrap gap-4;
 
     > li {
-      width: calc(100% / 2 - 0.95rem * 1.5 / 2 - 100% / 2 / 15);
+      width: calc(100% / 2 - 16px * 1 - 100% / 2 / 20);
     }
   }
 }
