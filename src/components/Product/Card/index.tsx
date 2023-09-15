@@ -37,7 +37,7 @@ function ProductCard({ className, data: { product }, ...rest }: Props) {
         <ProductTitle className={styles['product-title']} data={{ title }} />
         <ProductPostedDate
           className={styles['product-posted-date']}
-          data={{ postedDate }}
+          data={{ postedDate, showText: false }}
         />
         <ProductPrice
           className={styles['product-price']}

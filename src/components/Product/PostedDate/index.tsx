@@ -19,7 +19,7 @@ function ProductPostedDate({
 }: Props) {
   return (
     <div className={`${styles['product-posted-date']} ${className}`} {...rest}>
-      {showText} {dayjs(postedDate).fromNow()}
+      {showText && 'Posted'} {dayjs(postedDate).fromNow()}
     </div>
   );
 }

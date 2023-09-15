@@ -11,7 +11,7 @@ import HomePage from './pages/home';
 import LoginPage from './pages/auth/login';
 import SignupPage from './pages/auth/signup';
 import EmailVerificationPage from './pages/auth/email-verification';
-import ProductDetailsPage from './pages/product';
+import ProductPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
 import Popup, { PopupContext } from './components/Popup';
@@ -84,7 +84,7 @@ const App = () => {
             path: '/products/:id',
             element: (
               <ScrollToTop>
-                <ProductDetailsPage />
+                <ProductPage />
               </ScrollToTop>
             ),
           },
