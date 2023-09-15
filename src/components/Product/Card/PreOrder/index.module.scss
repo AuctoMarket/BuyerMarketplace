@@ -14,13 +14,13 @@
   @apply relative;
 
   .product-image {
-    @apply w-auto object-cover m-auto;
+    @apply w-auto object-cover m-auto p-4;
     height: 310px;
   }
 }
 
 .footer {
-  @apply p-3 grow flex flex-col;
+  @apply p-4 grow flex flex-col;
 
   .product-title {
     @apply grow text-2xl leading-7 font-medium;

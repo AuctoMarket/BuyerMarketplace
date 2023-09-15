@@ -11,8 +11,7 @@
 }
 
 .list {
-  @apply grid grid-cols-4;
-  gap: 30px;
+  @apply grid grid-cols-4 gap-6;
 
   > li {
     @apply flex-none;
