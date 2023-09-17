@@ -15,6 +15,7 @@ import ProductPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
 import Popup, { PopupContext } from './components/Popup';
+import AboutUsPage from './pages/about-us';
 
 const createRouter = (routerObjects: RouteObject[]) => {
   if (process.env.REACT_APP_GITHUB_PAGES === 'true') {
@@ -101,6 +102,14 @@ const App = () => {
             element: (
               <ScrollToTop>
                 <OrderPaymentStatusPage />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/about-us',
+            element: (
+              <ScrollToTop>
+                <AboutUsPage />
               </ScrollToTop>
             ),
           },

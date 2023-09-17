@@ -1,0 +1,131 @@
+.about-us-page {
+  .top {
+    font-size: 28px;
+    padding-left: 88px;
+    @apply bg-black text-white font-bold font-thicboi pt-9 flex flex-row justify-between;
+
+    .left {
+      width: 65%;
+      .content-1 {
+        margin-top: 53px;
+        font-size: 40px;
+        @apply font-semibold font-thicboi;
+
+        span {
+          color: #28a4da;
+        }
+      }
+
+      .conntent-2 {
+        @apply text-2xl font-thicboi font-normal mt-6;
+      }
+      .button {
+        background-color: #28a4da;
+        margin-right: 530px;
+        font-size: 28px;
+        @apply mt-20 rounded-lg h-11 font-bold py-2;
+      }
+    }
+    .right {
+      margin-bottom: -60px;
+    }
+  }
+
+  .bottom {
+    @apply pt-14 flex flex-row justify-between pb-24;
+
+    .left {
+      width: 100%;
+    }
+
+    .right {
+      padding-right: 88px;
+      @apply items-end;
+      .content-1 {
+        margin-top: 53px;
+        font-size: 40px;
+        @apply font-semibold font-thicboi text-right;
+
+        span {
+          color: #28a4da;
+        }
+      }
+
+      .content-2 {
+        @apply text-2xl font-thicboi font-normal mt-6 text-right;
+      }
+
+      .button {
+        background-color: #28a4da;
+        margin-left: 620px;
+        font-size: 28px;
+        border-color: #28a4da;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        @apply mt-20 rounded-lg h-11 font-bold py-2 text-white;
+      }
+    }
+  }
+}
+@media (max-width: 820px) {
+  .about-us-page {
+    .top {
+      @apply relative pl-4 pt-0;
+
+      .left {
+        width: 100%;
+        font-size: 28px;
+        @apply absolute top-6 pr-6;
+
+        .content-1 {
+          @apply mt-11 pt-0 text-lg pr-6;
+        }
+
+        .conntent-2 {
+          @apply text-xs mt-3;
+        }
+
+        .button {
+          @apply w-36 text-sm mt-3 h-6;
+        }
+      }
+      .right-mobile {
+        margin-bottom: -37px;
+        @apply text-right flex justify-end w-full pt-9;
+      }
+    }
+
+    .bottom {
+      @apply pt-12 flex flex-row justify-between pb-6 pr-3;
+
+      .left-mobile {
+        width: 40%;
+      }
+
+      .right {
+        width: 60%;
+        @apply p-0 m-0 flex flex-col;
+
+        .content-1 {
+          @apply text-lg mt-7 leading-normal;
+        }
+
+        .content-2 {
+          @apply text-xs mt-3;
+        }
+
+        .button {
+          @apply text-sm w-36 h-5 mt-4;
+        }
+      }
+    }
+  }
+  .gradient {
+    background: rpg(0, 0, 0);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.5026315789473684) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+}
