@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.1.2...1.1.3) (2023-09-15)
+
+### Features
+
+- update home's banners ([267bda1](https://github.com/AuctoMarket/BuyerMarketplace/commit/267bda13d32488464c3876d77ef2885ca21f73de))
+
+### [1.1.2](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.1.1...1.1.2) (2023-09-14)
+
+### Bug Fixes
+
+- **pre-order:** showing 0 when discount is 0 ([46298bc](https://github.com/AuctoMarket/BuyerMarketplace/commit/46298bcba9086fd40803def1f3695db8e982f335))
+
 ### [1.1.1](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.1.0...1.1.1) (2023-09-08)
 
 ### Bug Fixes

@@ -14,6 +14,7 @@ import EmailVerificationPage from './pages/auth/email-verification';
 import ProductPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
+import AboutUs from './pages/about-us';
 import Popup, { PopupContext } from './components/Popup';
 
 const createRouter = (routerObjects: RouteObject[]) => {
@@ -101,6 +102,14 @@ const App = () => {
             element: (
               <ScrollToTop>
                 <OrderPaymentStatusPage />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/about-us',
+            element: (
+              <ScrollToTop>
+                <AboutUs />
               </ScrollToTop>
             ),
           },
