@@ -1,9 +1,5 @@
 .product-card {
-  @apply border border-solid border-transparent cursor-pointer flex flex-col;
-
-  &:hover {
-    @apply border-gray-200;
-  }
+  @apply cursor-pointer flex flex-col hover:shadow-md hover:shadow-gray-300;
 }
 
 .release-date,
