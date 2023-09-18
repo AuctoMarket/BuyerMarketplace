@@ -1,27 +1,19 @@
 .home-page {
+  @apply container mx-auto my-10;
 }
 
-.promotion {
-}
-
-.content {
-  @apply container mx-auto py-12;
-
-  .recently-added {
-    @apply mt-12;
-  }
-}
-
-.seller-promotion {
-  @apply border-t-2 border-gray-300;
+.pre-order,
+.recently-added {
+  @apply mt-10;
 }
 
 @media (max-width: 820px) {
-  .content {
-    @apply py-4 px-4;
+  .home-page {
+    @apply my-4 px-4;
+  }
 
-    .recently-added {
-      @apply mt-4;
-    }
+  .pre-order,
+  .recently-added {
+    @apply mt-4;
   }
 }
