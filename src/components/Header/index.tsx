@@ -6,6 +6,7 @@ import Logo from '../Logo';
 import List from '../List';
 import Icon from '../Icon';
 import useAuth from '../../hooks/useAuth';
+import responsive from '../../utils/responsive';
 
 interface Props extends ComponentProps<'div'> {}
 
@@ -17,7 +18,10 @@ function Header({ className, ...rest }: Props) {
     <div className={`${styles['header']} ${className}`} {...rest}>
       <div className={styles['header-content']}>
         <Link className={styles['logo']} to="/">
-          <Logo type="horizontal" theme="inverted-color" />
+          <Logo
+            type={!responsive.isSm() ? 'horizontal' : undefined}
+            theme={!responsive.isSm() ? 'inverted-color' : 'color'}
+          />
         </Link>
 
         <List
