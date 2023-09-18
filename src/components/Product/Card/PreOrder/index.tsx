@@ -22,6 +22,7 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
       <div className={styles['release-date']}>
         RELEASES: {dayjs(releasedDate).format('MMM DD')}
       </div>
+
       <div className={styles['content']}>
         <Image
           className={styles['product-image']}
@@ -29,8 +30,10 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
           alt={title}
         />
       </div>
+
       <div className={styles['footer']}>
         <ProductTitle className={styles['product-title']} data={{ title }} />
+
         <div className={styles['product-price']}>
           {!!discount && (
             <ProductPrice
@@ -40,6 +43,7 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
               }}
             />
           )}
+
           <ProductPrice
             className={styles['price']}
             data={{
@@ -48,6 +52,7 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
           />
         </div>
       </div>
+
       <div className={styles['order-date']}>
         ORDER BY: {dayjs(orderedDate).format('MMM DD')}
       </div>

@@ -9,9 +9,10 @@ import { ProductType } from '../../types/product.type';
 import Banner from '../../components/Banner';
 
 function HomePage() {
-  const { productsList: preOrder = [] } = useProductsList({
-    product_type: ProductType.PreOrder,
-  });
+  const { productsList: preOrder = [] } = useProductsList(
+    { product_type: ProductType.PreOrder },
+    { limit: 4, offset: 0 },
+  );
   const { productsList: recentlyAdded = [] } = useProductsList(
     { product_type: ProductType.BuyNow },
     { sort_by: 'posted_date' },
