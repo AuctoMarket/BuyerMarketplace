@@ -1,0 +1,60 @@
+.banner-container {
+  @apply relative px-20 py-5;
+
+  .banner {
+    @apply absolute left-0 top-0 w-full h-full object-cover -z-10;
+  }
+
+  .content {
+    @apply bg-white px-8 py-6 rounded-2xl;
+
+    .title {
+      @apply font-semibold;
+      font-size: 42px;
+
+      span {
+        @apply text-aucto inline-block;
+      }
+    }
+
+    .main {
+      @apply mt-2 font-thicboi font-normal;
+      font-size: 26px;
+    }
+
+    .footer {
+      @apply mt-4;
+
+      a {
+        @apply font-bold text-aucto hover:text-aucto-dark;
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .banner-container {
+    @apply p-4;
+
+    .content {
+      @apply px-4 py-3;
+
+      .title {
+        font-size: 22px;
+      }
+
+      .main {
+        @apply text-sm mt-1;
+      }
+
+      .footer {
+        @apply mt-2;
+
+        a {
+          @apply text-sm;
+        }
+      }
+    }
+  }
+}
