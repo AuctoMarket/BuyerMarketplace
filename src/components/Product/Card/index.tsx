@@ -1,7 +1,6 @@
 import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
-import ProductSellerInfoInCard from '../SellerInfo';
 import ProductTitle from '../Title';
 import ProductPostedDate from '../PostedDate';
 import ProductPrice from '../Price';
@@ -19,27 +18,26 @@ function ProductCard({ className, data: { product }, ...rest }: Props) {
 
   return (
     <div className={`${styles['product-card']} ${className}`} {...rest}>
-      <div className={styles['header']}>
+      {/* <div className={styles['header']}>
         <ProductSellerInfoInCard
           className={styles['product-seller-info']}
           data={product.seller}
         />
-      </div>
+      </div> */}
+
       <div className={styles['content']}>
-        {type === ProductType.PreOrder && (
-          <div className={styles['pre-order']}>Pre-Order</div>
-        )}
         <Image
           className={styles['product-image']}
           src={images[0]}
           alt={title}
         />
       </div>
+
       <div className={styles['footer']}>
         <ProductTitle className={styles['product-title']} data={{ title }} />
         <ProductPostedDate
           className={styles['product-posted-date']}
-          data={{ postedDate }}
+          data={{ postedDate, showText: false }}
         />
         <ProductPrice
           className={styles['product-price']}

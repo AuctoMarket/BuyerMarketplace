@@ -1,19 +1,19 @@
 .home-page {
-  @apply container mx-auto my-10;
-}
+  @apply container mx-auto py-10;
 
-.pre-order,
-.recently-added {
-  @apply mt-10;
+  .pre-order,
+  .recently-added {
+    @apply mt-10;
+  }
 }
 
 @media (max-width: 820px) {
   .home-page {
-    @apply my-4 px-4;
-  }
+    @apply p-4;
 
-  .pre-order,
-  .recently-added {
-    @apply mt-4;
+    .pre-order,
+    .recently-added {
+      @apply mt-4;
+    }
   }
 }
