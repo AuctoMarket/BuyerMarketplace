@@ -35,7 +35,7 @@ function ProductCardPreOrder({ className, data: { product }, ...rest }: Props) {
         <ProductTitle className={styles['product-title']} data={{ title }} />
 
         <div className={styles['product-price']}>
-          {discount && (
+          {!!discount && (
             <ProductPrice
               className={styles['old-price']}
               data={{
