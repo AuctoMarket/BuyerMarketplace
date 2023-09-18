@@ -5,6 +5,7 @@ import styles from './index.module.scss';
 import List from '../../List';
 import Card from '../Card';
 import Icon from '../../Icon';
+import ButtonLink from '../../Button/Link';
 
 import type { Product } from '../../../types/product.type';
 
@@ -25,8 +26,8 @@ function ProductRecentlyAdded({
       <div className={styles['heading']}>
         Recently Added:
         {seeMore && (
-          <Link to={`/products/recently-added`}>
-            See more recently added
+          <Link to="/products">
+            See all product
             <Icon name="arrow-right" />
           </Link>
         )}
@@ -45,6 +46,14 @@ function ProductRecentlyAdded({
           ))}
         />
       </div>
+
+      <ButtonLink
+        className={styles['see-all-products']}
+        theme="black"
+        to={'/products'}
+      >
+        See all products
+      </ButtonLink>
     </div>
   );
 }
