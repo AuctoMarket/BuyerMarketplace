@@ -19,10 +19,7 @@ import useProduct from '../../hooks/useProduct';
 import useProductsList from '../../hooks/useProductsList';
 import { Product, ProductType } from '../../types/product.type';
 import useAuth from '../../hooks/useAuth';
-
-function isMobile() {
-  return window.innerWidth <= 820;
-}
+import responsive from '../../utils/responsive';
 
 function ProductDetailsPage() {
   const navigate = useNavigate();
@@ -33,9 +30,10 @@ function ProductDetailsPage() {
   //   { seller_id: product?.seller.id },
   //   { sort_by: 'posted_date' },
   // );
-  const { productsList: preOrder = [] } = useProductsList({
-    product_type: ProductType.PreOrder,
-  });
+  const { productsList: preOrder = [] } = useProductsList(
+    { product_type: ProductType.PreOrder },
+    { limit: 4, offset: 0 },
+  );
   const { productsList: recentlyAdded } = useProductsList(
     { product_type: ProductType.BuyNow },
     { sort_by: 'posted_date', limit: 8, offset: 0 },
@@ -107,7 +105,7 @@ function ProductDetailsPage() {
       {product && (
         <div className={styles['product-details-page']}>
           <div className={styles['product']}>
-            {isMobile() ? (
+            {responsive.isSm() ? (
               <ProductImagesMobile
                 className={styles['product-images']}
                 data={{

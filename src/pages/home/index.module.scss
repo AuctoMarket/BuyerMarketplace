@@ -1,25 +1,19 @@
 .home-page {
-}
+  @apply container mx-auto py-10;
 
-.promotion {
-}
-
-.content {
-  padding-bottom: 74px;
-  @apply container mx-auto pt-12;
-
+  .pre-order,
   .recently-added {
-    margin-top: 74px;
+    @apply mt-10;
   }
 }
 
 @media (max-width: 820px) {
-  .content {
-    padding-bottom: 85px;
-    @apply pt-4 px-4;
+  .home-page {
+    @apply p-4;
 
+    .pre-order,
     .recently-added {
-      @apply mt-7;
+      @apply mt-4;
     }
   }
 }
