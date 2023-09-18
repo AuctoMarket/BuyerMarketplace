@@ -1,5 +1,5 @@
 .checkout-page {
-  @apply container mx-auto flex flex-wrap w-full py-14;
+  @apply container mx-auto flex flex-wrap w-full py-10;
 }
 
 .checkout {
@@ -23,7 +23,7 @@
 }
 
 .controls {
-  @apply w-full mt-8;
+  @apply w-full mt-10;
 
   .checkout-button {
     @apply mt-0 px-10;
@@ -36,7 +36,7 @@
 
 @media (max-width: 820px) {
   .checkout-page {
-    @apply px-4 py-8;
+    @apply px-4 py-4;
   }
 
   .checkout {
@@ -52,8 +52,7 @@
   }
 
   .order-details {
-    @apply w-full;
-    margin-top: 22px;
+    @apply w-full mt-4;
 
     > div:last-of-type {
       @apply hidden;
@@ -61,6 +60,8 @@
   }
 
   .controls {
+    @apply mt-4;
+
     .checkout-button {
       @apply w-full text-lg h-10 #{!important};
     }
