@@ -19,10 +19,7 @@ import useProduct from '../../hooks/useProduct';
 import useProductsList from '../../hooks/useProductsList';
 import { Product, ProductType } from '../../types/product.type';
 import useAuth from '../../hooks/useAuth';
-
-function isMobile() {
-  return window.innerWidth <= 820;
-}
+import responsive from '../../utils/responsive';
 
 function ProductDetailsPage() {
   const navigate = useNavigate();
@@ -107,7 +104,7 @@ function ProductDetailsPage() {
       {product && (
         <div className={styles['product-details-page']}>
           <div className={styles['product']}>
-            {isMobile() ? (
+            {responsive.isSm() ? (
               <ProductImagesMobile
                 className={styles['product-images']}
                 data={{
