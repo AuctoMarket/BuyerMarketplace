@@ -1,6 +1,6 @@
 .payment-status-page {
-  @apply container mx-auto flex w-full pt-14;
-  padding-bottom: 126px; // pb-14 + 70px
+  @apply container mx-auto flex w-full pt-10;
+  padding-bottom: 140px; // pb-10 + 70px
 }
 
 .payment-status {
@@ -39,7 +39,8 @@
 
 @media (max-width: 820px) {
   .payment-status-page {
-    @apply flex flex-col w-full px-4 py-8;
+    @apply flex flex-col w-full px-4 pt-4;
+    padding-bottom: 116px; // mb-4 + 100px
   }
 
   .payment-status {
@@ -60,8 +61,7 @@
   }
 
   .order-details {
-    @apply w-full;
-    margin-top: 22px;
+    @apply w-full mt-4;
 
     > div:last-of-type {
       @apply block;
@@ -69,14 +69,10 @@
       > div:first-of-type {
         @apply hidden;
       }
+
+      > a:last-of-type {
+        @apply mt-4;
+      }
     }
-  }
-
-  .button {
-    @apply mt-7;
-  }
-
-  .payment-status-page + :global(#footer) {
-    @apply static;
   }
 }

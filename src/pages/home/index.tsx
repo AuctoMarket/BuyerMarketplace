@@ -2,66 +2,45 @@ import React from 'react';
 
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
-import ProductPromotion from '../../components/Product/Promotion';
 import ProductPreOrder from '../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
-import SellerPromotion from '../../components/Sellers/Promotion';
 import useProductsList from '../../hooks/useProductsList';
 import { ProductType } from '../../types/product.type';
-
-function isMobile() {
-  return window.innerWidth <= 820;
-}
+import Banner from '../../components/Banner';
 
 function HomePage() {
-  const { productsList: preOrder = [] } = useProductsList({
-    product_type: ProductType.PreOrder,
-  });
+  const { productsList: preOrder = [] } = useProductsList(
+    { product_type: ProductType.PreOrder },
+    { limit: 4, offset: 0 },
+  );
   const { productsList: recentlyAdded = [] } = useProductsList(
     { product_type: ProductType.BuyNow },
-    { sort_by: 'posted_date' },
+    { sort_by: 'posted_date', limit: 8, offset: 0 },
   );
 
   return (
     <Layout>
       <div className={styles['home-page']}>
-        <ProductPromotion
-          className={styles['promotion']}
-          data={{
-            images: [
-              isMobile()
-                ? '/images/promotion/home-banner-mobile.png'
-                : '/images/promotion/home-banner.png',
-            ],
-            title:
-              'Collection: Pokemon S&S Brilliant Stars Pre-Order yours today!',
-          }}
-        />
+        <Banner className={styles['banner']} />
 
-        <div className={styles['content']}>
-          {preOrder.length > 0 && (
-            <ProductPreOrder
-              className={styles['pre-order']}
-              data={{
-                products: preOrder,
-              }}
-            />
-          )}
+        {preOrder.length > 0 && (
+          <ProductPreOrder
+            className={styles['pre-order']}
+            data={{
+              products: preOrder,
+            }}
+          />
+        )}
 
-          {recentlyAdded.length > 0 && (
-            <ProductRecentlyAdded
-              className={styles['recently-added']}
-              data={{
-                products: recentlyAdded,
-                seeMore: false,
-              }}
-            />
-          )}
-        </div>
-
-        <div className={styles['seller-promotion']}>
-          <SellerPromotion />
-        </div>
+        {recentlyAdded.length > 0 && (
+          <ProductRecentlyAdded
+            className={styles['recently-added']}
+            data={{
+              products: recentlyAdded,
+              seeMore: true,
+            }}
+          />
+        )}
       </div>
     </Layout>
   );

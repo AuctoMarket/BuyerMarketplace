@@ -1,43 +1,43 @@
 .header {
-  @apply relative flex items-center text-white bg-black p-4 justify-between pr-5;
+  @apply text-white bg-black;
+}
+
+.header-content {
+  @apply container mx-auto relative flex items-center py-3 justify-between;
 }
 
 .logo {
   @apply block;
 
   img {
-    height: 30px;
+    @apply h-8;
   }
 }
 
 .navbar-right {
-  @apply flex items-center gap-12 font-medium text-xl;
+  @apply flex items-center font-medium text-lg gap-16;
 }
 
 .icon-user {
-  height: 26px;
+  @apply h-7;
 }
 
 @media (max-width: 820px) {
-  .header {
-    @apply p-3;
+  .header-content {
+    @apply px-4;
   }
 
   .logo {
     img {
-      height: 24px;
+      @apply h-6;
     }
   }
 
   .navbar-right {
-    @apply gap-5 text-xs;
-  }
-
-  .browse {
-    @apply hidden;
+    @apply gap-4 text-sm;
   }
 
   .icon-user {
-    height: 18px;
+    @apply h-5;
   }
 }

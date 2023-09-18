@@ -1,6 +1,7 @@
 import React from 'react';
-import Layout from '../../components/Layout';
+
 import styles from './index.module.scss';
+import Layout from '../../components/Layout';
 import ButtonLink from '../../components/Button/Link';
 import Image from '../../components/Image';
 
@@ -28,6 +29,7 @@ const AboutUsPage = () => {
               Marketplace
             </ButtonLink>
           </div>
+
           {isMobile() ? (
             <>
               <div className={styles['right-mobile']}>
@@ -40,6 +42,7 @@ const AboutUsPage = () => {
             </div>
           )}
         </div>
+
         <div className={styles['bottom']}>
           {isMobile() ? (
             <div className={styles['left-mobile']}>
@@ -50,20 +53,23 @@ const AboutUsPage = () => {
               <Image src="images/category/pokemon-cards-2.png" />
             </div>
           )}
+
           <div className={styles['right']}>
             <div className={styles['content-1']}>
               <span>Making collecting safe</span>, lorem ipsum dolor sit
               ametous, consectetur adipiscing elit. Maecenas et leo non massa.
             </div>
+
             <div className={styles['content-2']}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit,
               suradorased do eiusmod tempor incididunt ut labore et dolore.
               Elsem etudar elit marcenas et leon non massue triteck attis
               ametous beotes. Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, suradora sed do eiusmod tempor incididunt ut labore et
+              elit, suradorased do eiusmod tempor incididunt ut labore et
               dolore. Elsem etudar elit marcenas et leon non massue triteck
               attis ametous beotes.
             </div>
+
             <ButtonLink to={`/`} className={styles['button']}>
               Our Policies
             </ButtonLink>
@@ -73,4 +79,5 @@ const AboutUsPage = () => {
     </Layout>
   );
 };
+
 export default AboutUsPage;
