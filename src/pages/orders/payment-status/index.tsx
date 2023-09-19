@@ -97,15 +97,16 @@ const OrderPaymentStatusPage = () => {
                 already, please contact us to verify your payment.{' '}
               </>
             )}
-            <ButtonLink
-              className={styles['button']}
-              theme="black"
-              to={`https://t.me/auctomarketplace`}
-              target="_blank"
-            >
-              Chat with us
-            </ButtonLink>
           </div>
+
+          <ButtonLink
+            className={styles['button']}
+            theme="black"
+            to={`https://t.me/auctomarketplace`}
+            target="_blank"
+          >
+            Chat with us
+          </ButtonLink>
         </div>
 
         <OrderDetails
