@@ -15,7 +15,7 @@ function HomePage() {
   );
   const { productsList: recentlyAdded = [] } = useProductsList(
     { product_type: ProductType.BuyNow },
-    { sort_by: 'posted_date' },
+    { sort_by: 'posted_date', limit: 8, offset: 0 },
   );
 
   return (
@@ -37,7 +37,7 @@ function HomePage() {
             className={styles['recently-added']}
             data={{
               products: recentlyAdded,
-              seeMore: false,
+              seeMore: true,
             }}
           />
         )}
