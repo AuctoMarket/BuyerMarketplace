@@ -7,7 +7,7 @@
 
     .left {
       @apply relative container mx-auto px-4 text-2xl font-bold font-thicboi z-20;
-      @apply sm:text-3xl;
+      @apply md:px-0 sm:text-3xl;
 
       .content-1 {
         @apply font-semibold font-thicboi w-11/12 mt-10 text-lg;
@@ -60,7 +60,8 @@
     }
 
     .right {
-      @apply relative container mx-auto z-10 pr-4 text-2xl text-right;
+      @apply relative container mx-auto z-10 px-4 text-2xl text-right;
+      @apply md:px-0;
 
       .content-1 {
         @apply font-semibold font-thicboi ml-auto w-2/3 text-lg leading-6;
