@@ -15,6 +15,7 @@ import ProductPage from './pages/product';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
 import AboutUs from './pages/about-us';
+import BrowsePage from './pages/browse';
 import Popup, { PopupContext } from './components/Popup';
 
 const createRouter = (routerObjects: RouteObject[]) => {
@@ -110,6 +111,14 @@ const App = () => {
             element: (
               <ScrollToTop>
                 <AboutUs />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/browse',
+            element: (
+              <ScrollToTop>
+                <BrowsePage />
               </ScrollToTop>
             ),
           },

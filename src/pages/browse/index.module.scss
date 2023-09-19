@@ -1,0 +1,29 @@
+.browse-page {
+  padding: 67px 50px;
+  @apply flex flex-row justify-between;
+
+  .side-bar {
+    @apply font-thicboi;
+
+    .title-sidebar {
+      @apply text-4xl font-medium;
+    }
+  }
+  .main {
+    .header {
+      font-size: 26px;
+      @apply font-medium flex items-center;
+      .sort {
+        .sort-title {
+          button {
+            font-size: 26px;
+            @apply font-medium;
+          }
+        }
+        ul {
+          @apply text-xl px-4;
+        }
+      }
+    }
+  }
+}

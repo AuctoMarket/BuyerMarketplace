@@ -1,0 +1,17 @@
+.fillter {
+  @apply flex flex-col mt-10 text-2xl gap-10;
+
+  .title-fillter {
+    @apply border-b border-solid border-black pl-7 font-medium;
+  }
+
+  .choose-form {
+    @apply pl-7 font-normal text-xl;
+    > label {
+      @apply flex-row-reverse justify-end gap-3 mt-3;
+      &:not(:first-of-type) {
+        @apply mt-3;
+      }
+    }
+  }
+}
