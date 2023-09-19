@@ -4,7 +4,6 @@ import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import ButtonLink from '../../components/Button/Link';
 import Image from '../../components/Image';
-import responsive from '../../utils/responsive';
 
 const AboutUsPage = () => {
   return (
@@ -14,14 +13,17 @@ const AboutUsPage = () => {
           <div className={styles.left}>
             About Us
             <div className={styles['content-1']}>
-              <span>Making collecting accessible</span>, lorem ipsum dolor sit
-              ametous, consectetur adipiscing elit. Maecenas et leo non massa
-              egestas tristique, congue tellus mattis ultrices.
+              <span>Collecting made easy</span>. At Aucto, we want collectors to
+              enjoy their passions without worrying about trust
             </div>
             <div className={styles['content-2']}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, suradora
-              do eiusmod tempor incididunt ut labore et dolore. Elsem etudar
-              elit marcenas et leon non massue triteck attis ametous beotes.
+              At Aucto, we understand that collecting is more than just a
+              hobby—it's a passion. It's the thrill of the hunt, the joy of the
+              find, and the satisfaction of owning a piece of art. As collectors
+              ourselves, we know collecting can be hard, and we have created a
+              specialized marketplace exclusively for our fellow collectors to
+              find all types of collectibles. Aucto is your go-to destination
+              for collectibles that you can trust.
             </div>
             <ButtonLink to={`/`} className={styles['button']} theme="color">
               Marketplace
@@ -32,7 +34,7 @@ const AboutUsPage = () => {
             <Image src="images/about-us/pokemon-cards.png" />
           </div>
 
-          {responsive.isMd() && <div className={styles['gradient']} />}
+          <div className={styles['gradient']} />
         </div>
 
         <div className={styles['bottom']}>
@@ -42,20 +44,23 @@ const AboutUsPage = () => {
 
           <div className={styles['right']}>
             <div className={styles['content-1']}>
-              <span>Making collecting safe</span>, lorem ipsum dolor sit
-              ametous, consectetur adipiscing elit. Maecenas et leo non massa
-              egestas tristique, congue tellus mattis ultrices.
+              <span>Making collecting safe</span>. Aucto verifies all its
+              sellers and insures deliveries to ensure that collectors get
+              exactly what they order.
             </div>
 
             <div className={styles['content-2']}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              suradorased do eiusmod tempor incididunt ut labore et dolore.
-              Elsem etudar elit marcenas et leon non massue triteck attis
-              ametous beotes.
+              We partner only with established sellers who have a comprehensive
+              history of sales and proven credibility. We also understand the
+              importance of handling your prized collectibles with care. That's
+              why our delivery process is designed to be as secure as possible.
+              From the moment a transaction is completed, we ensure that your
+              item reaches you in the same condition it left the seller—pristine
+              and intact. If not, we will refund you!
             </div>
 
             <ButtonLink to={`/`} className={styles['button']} theme="color">
-              Our Policies
+              Refund Policy
             </ButtonLink>
           </div>
         </div>

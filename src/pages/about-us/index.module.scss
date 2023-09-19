@@ -2,14 +2,16 @@
   @apply overflow-hidden;
 
   .top {
-    @apply relative bg-black text-white pt-10 pb-28;
+    @apply relative bg-black text-white pt-5 pb-28;
+    @apply md:pt-10 md:pb-28;
 
     .left {
-      @apply relative container mx-auto text-3xl font-bold font-thicboi z-20;
+      @apply relative container mx-auto px-4 text-2xl font-bold font-thicboi z-20;
+      @apply sm:text-3xl;
 
       .content-1 {
-        @apply font-semibold font-thicboi mt-12 leading-none w-3/4;
-        font-size: 40px;
+        @apply font-semibold font-thicboi w-11/12 mt-10 text-lg;
+        @apply lg:w-3/5 sm:mt-12 sm:text-4xl;
 
         span {
           @apply text-aucto;
@@ -17,35 +19,52 @@
       }
 
       .content-2 {
-        @apply text-2xl font-normal mt-6 w-3/5;
+        @apply font-normal w-11/12 text-xs mt-4;
+        @apply lg:w-3/5 sm:text-2xl sm:mt-6;
       }
 
       .button {
-        @apply mt-20 rounded-lg h-11 w-72 font-semibold py-2 text-2xl;
+        @apply rounded-lg font-semibold py-2 w-36 text-sm mt-4 h-5;
+        @apply sm:w-72 sm:text-2xl sm:mt-20 sm:h-11;
       }
     }
 
     .right {
-      @apply absolute right-0 -bottom-14 z-0;
+      @apply absolute w-5/6 -right-10 -bottom-10 z-0;
+      @apply sm:w-auto xl:right-0 sm:-bottom-14;
+    }
+
+    .gradient {
+      @apply absolute left-0 top-0 w-full h-full z-10;
+      @apply lg:hidden;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.5) 90%,
+        rgba(255, 255, 255, 0) 100%
+      );
     }
   }
 
   .bottom {
-    @apply relative pt-36 xl:pb-60 lg:pb-32 md:pb-24;
+    @apply relative py-16;
+    @apply sm:py-36 md:py-24 lg:py-32;
 
     .left {
-      @apply absolute left-0 top-10 z-0 xl:w-2/5 lg:w-1/3 md:w-2/5;
+      @apply absolute -left-32 top-0 h-full w-auto -z-10 flex items-center;
+      @apply sm:-left-1/2 md:-left-44 lg:-left-0;
 
       > img {
-        @apply w-full;
+        @apply h-4/5;
       }
     }
 
     .right {
-      @apply relative container mx-auto text-right z-10;
+      @apply relative container mx-auto z-10 pr-4 text-2xl text-right;
 
       .content-1 {
-        @apply font-semibold font-thicboi leading-tight w-3/5 ml-auto xl:text-4xl md:text-2xl;
+        @apply font-semibold font-thicboi ml-auto w-2/3 text-lg leading-6;
+        @apply sm:w-3/5 sm:text-4xl sm:leading-tight;
 
         span {
           @apply text-aucto;
@@ -53,73 +72,13 @@
       }
 
       .content-2 {
-        @apply xl:text-2xl md:text-lg font-normal mt-6 w-3/5 ml-auto;
+        @apply font-normal ml-auto w-2/3 text-xs mt-4;
+        @apply sm:w-3/5 sm:text-2xl sm:mt-6;
       }
 
       .button {
-        @apply mt-20 rounded-lg h-11 w-72 font-semibold py-2 text-2xl ml-auto;
-      }
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .about-us-page {
-    .top {
-      @apply pt-5 pb-28;
-
-      .left {
-        @apply px-4 text-2xl;
-
-        .content-1 {
-          @apply w-11/12 mt-10 text-lg;
-        }
-
-        .content-2 {
-          @apply w-11/12 text-xs mt-4;
-        }
-
-        .button {
-          @apply w-36 text-sm mt-4 h-5;
-        }
-      }
-
-      .right {
-        @apply w-5/6 -right-10 -bottom-10;
-      }
-
-      .gradient {
-        @apply absolute left-0 top-0 w-full h-full z-10;
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 1) 0%,
-          rgba(0, 0, 0, 0.5) 90%,
-          rgba(255, 255, 255, 0) 100%
-        );
-      }
-    }
-
-    .bottom {
-      @apply pt-20 pb-24;
-
-      .left {
-        @apply -left-32 h-auto w-3/4;
-      }
-
-      .right {
-        @apply pr-4 text-2xl;
-
-        .content-1 {
-          @apply w-3/4 text-lg leading-6;
-        }
-
-        .content-2 {
-          @apply w-3/4 text-xs mt-4;
-        }
-
-        .button {
-          @apply w-36 text-sm mt-4 h-5;
-        }
+        @apply rounded-lg font-semibold py-2 ml-auto h-5 w-36 text-sm mt-4;
+        @apply sm:h-11 sm:w-72 sm:text-2xl sm:mt-20;
       }
     }
   }
