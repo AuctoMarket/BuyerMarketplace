@@ -32,4 +32,17 @@ describe('<Header />', () => {
 
     expect(text).toBeInTheDocument();
   });
+
+  test('renders Header with mobile logo', () => {
+    window.innerWidth = 640;
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>,
+    );
+
+    const text = screen.getByAltText('logo-color');
+
+    expect(text).toBeInTheDocument();
+  });
 });

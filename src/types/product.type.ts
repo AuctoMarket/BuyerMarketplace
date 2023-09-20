@@ -7,6 +7,16 @@ enum ProductType {
   PreOrder = 'Pre-Order',
 }
 
+enum Language {
+  Eng = 'Eng',
+  Jap = 'Jap',
+}
+
+enum Expansion {
+  SH = 'SH', // Sword & Shield
+  SV = 'SV', // Scarlet & Violet
+}
+
 interface Product {
   id: string;
   title: string;
@@ -21,6 +31,8 @@ interface Product {
   quantity: number;
   soldQuantity: number;
   seller: Seller;
+  language?: Language;
+  expansion?: Expansion;
   postedDate?: Date;
   releasedDate?: Date;
   orderedDate?: Date;
@@ -28,12 +40,21 @@ interface Product {
 
 interface ProductsQuery {
   seller_id?: string;
-  product_type?: ProductType;
+  product_type?: ProductType[];
+  language?: Language[];
+  expansion?: Expansion[];
+  min_price?: number;
+  max_price?: number;
 }
 
 interface ProductsSort extends Sort {
-  sort_by?: 'posted_date';
+  sort_by?:
+    | 'posted_date'
+    | 'price-low'
+    | 'price-high'
+    | 'name-asc'
+    | 'name-desc';
 }
 
-export { ProductType };
+export { ProductType, Language, Expansion };
 export type { Product, ProductsQuery, ProductsSort };

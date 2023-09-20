@@ -3,23 +3,23 @@ import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
-import Layout from '../../components/Layout';
-import ProductImages from '../../components/Product/Images';
-import ProductImagesMobile from '../../components/Product/Images/Mobile';
-import ProductTitle from '../../components/Product/Title';
-import ProductPurchaseBid from '../../components/Product/Purchase/Bid';
-import ProductPurchaseBuy from '../../components/Product/Purchase/Buy';
-import ProductDetails from '../../components/Product/Details';
-import ProductPostedDate from '../../components/Product/PostedDate';
-import ProductEstimatedDeliveryDate from '../../components/Product/EstimatedDeliveryDate';
+import Layout from '../../../components/Layout';
+import ProductImages from '../../../components/Product/Images';
+import ProductImagesMobile from '../../../components/Product/Images/Mobile';
+import ProductTitle from '../../../components/Product/Title';
+import ProductPurchaseBid from '../../../components/Product/Purchase/Bid';
+import ProductPurchaseBuy from '../../../components/Product/Purchase/Buy';
+import ProductDetails from '../../../components/Product/Details';
+import ProductPostedDate from '../../../components/Product/PostedDate';
+import ProductEstimatedDeliveryDate from '../../../components/Product/EstimatedDeliveryDate';
 // import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
-import ProductPreOrder from '../../components/Product/PreOrder';
-import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
-import useProduct from '../../hooks/useProduct';
-import useProductsList from '../../hooks/useProductsList';
-import { Product, ProductType } from '../../types/product.type';
-import useAuth from '../../hooks/useAuth';
-import responsive from '../../utils/responsive';
+import ProductPreOrder from '../../../components/Product/PreOrder';
+import ProductRecentlyAdded from '../../../components/Product/RecentlyAdded';
+import useProduct from '../../../hooks/useProduct';
+import useProductsList from '../../../hooks/useProductsList';
+import useAuth from '../../../hooks/useAuth';
+import { Product, ProductType } from '../../../types/product.type';
+import responsive from '../../../utils/responsive';
 
 function ProductDetailsPage() {
   const navigate = useNavigate();
@@ -30,14 +30,15 @@ function ProductDetailsPage() {
   //   { seller_id: product?.seller.id },
   //   { sort_by: 'posted_date' },
   // );
-  const { productsList: preOrder = [] } = useProductsList(
-    { product_type: ProductType.PreOrder },
-    { limit: 4, offset: 0 },
+  const { data: { products: preOrder } = { products: [] } } = useProductsList(
+    { product_type: [ProductType.PreOrder] },
+    { anchor: 0, limit: 4 },
   );
-  const { productsList: recentlyAdded } = useProductsList(
-    { product_type: ProductType.BuyNow },
-    { sort_by: 'posted_date', limit: 8, offset: 0 },
-  );
+  const { data: { products: recentlyAdded } = { products: [] } } =
+    useProductsList(
+      { product_type: [ProductType.BuyNow] },
+      { sort_by: 'posted_date', anchor: 0, limit: 8 },
+    );
 
   const [quantity, setQuantity] = useState(1);
   // const [moreFromSellerProducts, setMoreFromSellerProducts] = useState<

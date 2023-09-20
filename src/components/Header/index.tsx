@@ -27,7 +27,7 @@ function Header({ className, ...rest }: Props) {
         <List
           className={styles['navbar-right']}
           items={[
-            <Link className={styles['browse']} to="/">
+            <Link className={styles['browse']} to="/products">
               Browse
             </Link>,
             <Link className={styles['about-us']} to="/">

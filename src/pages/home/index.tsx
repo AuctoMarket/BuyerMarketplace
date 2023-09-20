@@ -2,21 +2,22 @@ import React from 'react';
 
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
+import Banner from '../../components/Banner';
 import ProductPreOrder from '../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../components/Product/RecentlyAdded';
 import useProductsList from '../../hooks/useProductsList';
 import { ProductType } from '../../types/product.type';
-import Banner from '../../components/Banner';
 
 function HomePage() {
-  const { productsList: preOrder = [] } = useProductsList(
-    { product_type: ProductType.PreOrder },
-    { limit: 4, offset: 0 },
+  const { data: { products: preOrder } = { products: [] } } = useProductsList(
+    { product_type: [ProductType.PreOrder] },
+    { anchor: 0, limit: 4 },
   );
-  const { productsList: recentlyAdded = [] } = useProductsList(
-    { product_type: ProductType.BuyNow },
-    { sort_by: 'posted_date', limit: 8, offset: 0 },
-  );
+  const { data: { products: recentlyAdded } = { products: [] } } =
+    useProductsList(
+      { product_type: [ProductType.BuyNow] },
+      { sort_by: 'posted_date', anchor: 0, limit: 8 },
+    );
 
   return (
     <Layout>
