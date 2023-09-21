@@ -18,7 +18,7 @@ const sortBy: { label: string; value: ProductsSort['sort_by'] }[] = [
   { label: 'Name (A-Z)', value: 'name-asc' },
   { label: 'Name (Z-A)', value: 'name-desc' },
 ];
-const defaultPaging = { anchor: 0, limit: 2 };
+const defaultPaging = { anchor: 0, limit: 12 };
 const defaultFilter = {
   language: [],
   expansion: [],
