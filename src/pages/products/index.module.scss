@@ -157,8 +157,9 @@
         }
 
         .filter-content {
-          @apply mt-48 bg-white overflow-scroll;
+          @apply absolute left-0 top-48 w-full bg-white overflow-scroll;
           max-height: calc(100vh - 192px);
+          padding-bottom: calc(100lvh - 100svh);
 
           .filter-heading {
             @apply sticky top-0 text-xl flex justify-between items-center p-4 bg-white;
