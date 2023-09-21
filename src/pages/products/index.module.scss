@@ -62,10 +62,6 @@
           @apply hidden;
         }
       }
-
-      .filter-footer {
-        @apply hidden;
-      }
     }
 
     .products-list-container {
@@ -153,7 +149,7 @@
       @apply mt-4;
 
       .filter-container {
-        @apply hidden absolute left-0 top-0 w-full h-full z-10;
+        @apply hidden absolute left-0 top-0 w-full h-screen z-10;
         background: rgba(0, 0, 0, 0.6);
 
         &.shown {
@@ -161,7 +157,8 @@
         }
 
         .filter-content {
-          @apply absolute left-0 top-48 bottom-0 w-full bg-white overflow-scroll;
+          @apply mt-48 bg-white overflow-scroll;
+          max-height: calc(100vh - 192px);
 
           .filter-heading {
             @apply sticky top-0 text-xl flex justify-between items-center p-4 bg-white;
@@ -173,14 +170,6 @@
 
           .filter {
             @apply p-4;
-          }
-        }
-
-        .filter-footer {
-          @apply block mt-4 mb-8 text-center;
-
-          .clear-button {
-            @apply w-44 h-8 text-lg font-normal;
           }
         }
       }

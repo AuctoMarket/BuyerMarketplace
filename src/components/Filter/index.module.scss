@@ -16,6 +16,10 @@
       }
     }
   }
+
+  .footer {
+    @apply hidden;
+  }
 }
 
 @media (max-width: 768px) {
@@ -29,6 +33,23 @@
 
       .form {
         @apply text-base;
+      }
+    }
+
+    .footer {
+      @apply grid gap-4 justify-items-center my-4;
+
+      .apply-button,
+      .clear-button {
+        @apply w-44 h-8 text-lg font-normal;
+      }
+
+      .clear-button {
+        @apply border-0;
+
+        &:hover {
+          @apply text-black bg-white;
+        }
       }
     }
   }

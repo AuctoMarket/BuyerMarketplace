@@ -1,8 +1,10 @@
-import React, { ComponentProps } from 'react';
+import React, { ComponentProps, useState } from 'react';
 import { Form, Checkbox } from 'react-daisyui';
 
 import styles from './index.module.scss';
+import Button from '../Button';
 import { ProductType, Language, Expansion } from '../../types/product.type';
+import responsive from '../../utils/responsive';
 
 interface Data {
   language?: Language[];
@@ -95,22 +97,37 @@ const filters: {
 ];
 
 const Filter = ({ className, data, onChangeData, ...rest }: Props) => {
+  const [filter, setFilter] = useState(data);
+
   const handleChangeFilter = (
     key: keyof Data,
     value: Language | Expansion | string | ProductType,
   ) => {
-    const newData = { ...data };
+    const newFilter = { ...filter };
     if (key === 'price') {
-      newData[key] =
-        newData[key]?.join('-') === value
+      newFilter[key] =
+        newFilter[key]?.join('-') === value
           ? []
           : (value as string).split('-').map((item) => Number(item));
     } else {
-      newData[key] = data[key]?.includes(value as never)
-        ? (data[key] as any[])?.filter((item) => item !== value)
-        : [...(data[key] || []), value];
+      newFilter[key] = filter[key]?.includes(value as never)
+        ? (filter[key] as any[])?.filter((item) => item !== value)
+        : [...(filter[key] || []), value];
     }
-    onChangeData(newData);
+
+    setFilter(newFilter);
+
+    if (!responsive.isSm()) {
+      onChangeData(newFilter);
+    }
+  };
+  const handleApplyFilter = () => {
+    onChangeData(filter);
+  };
+  const handleClearFilter = () => {
+    const newFilter = {};
+    setFilter(newFilter);
+    onChangeData(newFilter);
   };
 
   return (
@@ -126,8 +143,8 @@ const Filter = ({ className, data, onChangeData, ...rest }: Props) => {
                   name="option"
                   checked={
                     key === 'price'
-                      ? data[key]?.join('-') === value
-                      : data[key]?.includes(value as never)
+                      ? filter[key]?.join('-') === value
+                      : filter[key]?.includes(value as never)
                   }
                   onChange={() => handleChangeFilter(key, value)}
                 />
@@ -136,6 +153,20 @@ const Filter = ({ className, data, onChangeData, ...rest }: Props) => {
           </Form>
         </div>
       ))}
+
+      <div className={styles['footer']}>
+        <Button
+          className={styles['apply-button']}
+          theme="black"
+          onClick={handleApplyFilter}
+        >
+          Apply Filters
+        </Button>
+
+        <Button className={styles['clear-button']} onClick={handleClearFilter}>
+          Clear Filters
+        </Button>
+      </div>
     </div>
   );
 };

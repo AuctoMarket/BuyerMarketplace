@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dropdown } from 'react-daisyui';
 import { Link } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ const ProductsPage = () => {
         language: filter.language,
         expansion: filter.expansion,
         product_type: filter.product_type,
-        ...(filter.price.length > 0 && {
+        ...(filter.price?.length > 0 && {
           min_price: filter.price[0],
           max_price: filter.price[1],
         }),
@@ -46,16 +46,21 @@ const ProductsPage = () => {
       { sort_by: sort, ...paging },
     );
 
+  useEffect(() => {
+    if (showFilter) {
+      document.body.classList.add('frozen');
+    } else {
+      document.body.classList.remove('frozen');
+    }
+  }, [showFilter]);
+
   const handleShowFilter = () => {
     setShowFilter(true);
   };
   const handleChangeFilter = (filter: any) => {
+    setShowFilter(false);
     setFilter(filter);
     setPaging(defaultPaging);
-  };
-  const handleClearFilter = () => {
-    setFilter(defaultFilter);
-    setShowFilter(false);
   };
   const handleChangeSort = (sort: ProductsSort['sort_by']) => {
     setSort(sort);
@@ -128,16 +133,6 @@ const ProductsPage = () => {
                 data={filter}
                 onChangeData={handleChangeFilter}
               />
-
-              <div className={styles['filter-footer']}>
-                <Button
-                  className={styles['clear-button']}
-                  theme="black"
-                  onClick={handleClearFilter}
-                >
-                  Clear Filters
-                </Button>
-              </div>
             </div>
           </div>
 
