@@ -30,7 +30,7 @@ function Header({ className, ...rest }: Props) {
             <Link className={styles['browse']} to="/">
               Browse
             </Link>,
-            <Link className={styles['about-us']} to="/">
+            <Link className={styles['about-us']} to="/about-us">
               About Us
             </Link>,
             <Link
