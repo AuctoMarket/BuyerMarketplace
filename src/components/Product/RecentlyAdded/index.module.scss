@@ -2,11 +2,11 @@
 }
 
 .heading {
-  @apply font-thicboi font-normal;
+  @apply font-thicboi font-normal flex justify-between items-center;
   font-size: 28px;
 
   > a {
-    @apply float-right text-xl flex items-center font-normal;
+    @apply text-xl flex items-center font-normal;
 
     &:hover {
       @apply text-blue-400;
@@ -40,7 +40,7 @@
 
 @media (max-width: 768px) {
   .heading {
-    @apply text-base;
+    @apply text-base font-medium;
 
     > a {
       @apply text-sm;
