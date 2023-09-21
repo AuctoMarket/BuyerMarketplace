@@ -101,7 +101,10 @@ const Filter = ({ className, data, onChangeData, ...rest }: Props) => {
   ) => {
     const newData = { ...data };
     if (key === 'price') {
-      newData[key] = (value as string).split('-').map((item) => Number(item));
+      newData[key] =
+        newData[key]?.join('-') === value
+          ? []
+          : (value as string).split('-').map((item) => Number(item));
     } else {
       newData[key] = data[key]?.includes(value as never)
         ? (data[key] as any[])?.filter((item) => item !== value)

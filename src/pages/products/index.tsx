@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
 import Layout from '../../components/Layout';
 import CardBuyNow from '../../components/Product/Card';
-import CardPreOrder from '../../components/Product/Card/PreOrder';
 import Filter from '../../components/Filter';
 import Icon from '../../components/Icon';
 import Button from '../../components/Button';
 import useProductsList from '../../hooks/useProductsList';
-import { ProductType, ProductsSort } from '../../types/product.type';
+import { ProductsSort } from '../../types/product.type';
 
 const sortBy: { label: string; value: ProductsSort['sort_by'] }[] = [
   { label: 'Recently Posted', value: 'posted_date' },
@@ -19,16 +18,17 @@ const sortBy: { label: string; value: ProductsSort['sort_by'] }[] = [
   { label: 'Name (A-Z)', value: 'name-asc' },
   { label: 'Name (Z-A)', value: 'name-desc' },
 ];
-const defaultPaging = { anchor: 0, limit: 12 };
+const defaultPaging = { anchor: 0, limit: 2 };
+const defaultFilter = {
+  language: [],
+  expansion: [],
+  price: [],
+  product_type: [],
+};
 
 const ProductsPage = () => {
   const [showFilter, setShowFilter] = React.useState(false);
-  const [filter, setFilter] = React.useState({
-    language: [],
-    expansion: [],
-    price: [],
-    product_type: [],
-  });
+  const [filter, setFilter] = React.useState(defaultFilter);
   const [sort, setSort] =
     React.useState<ProductsSort['sort_by']>('posted_date');
   const [paging, setPaging] = React.useState(defaultPaging);
@@ -53,6 +53,10 @@ const ProductsPage = () => {
     setFilter(filter);
     setPaging(defaultPaging);
   };
+  const handleClearFilter = () => {
+    setFilter(defaultFilter);
+    setShowFilter(false);
+  };
   const handleChangeSort = (sort: ProductsSort['sort_by']) => {
     setSort(sort);
     setPaging(defaultPaging);
@@ -65,7 +69,7 @@ const ProductsPage = () => {
     <Layout>
       <div className={styles['products-page']}>
         <div className={styles['header']}>
-          <div className={styles['title']}>All Product ({count})</div>
+          <div className={styles['title']}>All Products ({count})</div>
 
           <div className={styles['controls']}>
             <button className={styles['filter']} onClick={handleShowFilter}>
@@ -124,6 +128,16 @@ const ProductsPage = () => {
                 data={filter}
                 onChangeData={handleChangeFilter}
               />
+
+              <div className={styles['filter-footer']}>
+                <Button
+                  className={styles['clear-button']}
+                  theme="black"
+                  onClick={handleClearFilter}
+                >
+                  Clear Filters
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -135,14 +149,7 @@ const ProductsPage = () => {
                   className={styles['card-link']}
                   to={`/products/${product.id}`}
                 >
-                  {product.type === ProductType.PreOrder ? (
-                    <CardPreOrder
-                      className={styles['card']}
-                      data={{ product }}
-                    />
-                  ) : (
-                    <CardBuyNow className={styles['card']} data={{ product }} />
-                  )}
+                  <CardBuyNow className={styles['card']} data={{ product }} />
                 </Link>
               ))}
             </div>

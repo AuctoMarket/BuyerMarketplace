@@ -10,8 +10,7 @@
   @apply relative;
 
   .product-image {
-    @apply w-auto object-cover m-auto p-4;
-    height: 310px;
+    @apply w-auto object-cover m-auto p-4 h-64;
   }
 }
 
@@ -19,11 +18,12 @@
   @apply p-4 grow flex flex-col;
 
   .product-title {
-    @apply grow text-2xl leading-7 font-medium;
+    @apply grow text-xl leading-7 font-medium;
   }
 
   .product-price {
-    @apply mt-2 xl:text-3xl lg:text-2xl md:text-xl flex gap-2;
+    @apply mt-2 flex gap-2 font-medium;
+    font-size: 22px;
 
     .old-price,
     .price {

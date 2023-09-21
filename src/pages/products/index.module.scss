@@ -3,11 +3,11 @@
   padding-bottom: 140px; // pb-10 + 70px
 
   .header {
-    @apply flex justify-between items-center gap-10 font-medium;
-    font-size: 26px;
+    @apply flex justify-between items-center gap-10;
 
     .title {
-      @apply whitespace-nowrap;
+      @apply whitespace-nowrap font-medium;
+      font-size: 34px;
     }
 
     .controls {
@@ -18,7 +18,7 @@
       }
 
       .sort {
-        @apply w-full text-right;
+        @apply w-full text-right text-xl;
 
         .mobile-shown {
           @apply hidden;
@@ -28,12 +28,11 @@
           @apply text-aucto;
 
           > button {
-            @apply h-auto min-h-0 font-medium pr-0;
-            font-size: 26px;
+            @apply h-auto min-h-0 font-medium pl-2 pr-0 text-xl;
           }
 
           .chevron-down-icon {
-            @apply ml-2;
+            @apply ml-2 w-3;
           }
         }
 
@@ -63,13 +62,17 @@
           @apply hidden;
         }
       }
+
+      .filter-footer {
+        @apply hidden;
+      }
     }
 
     .products-list-container {
       @apply col-span-3;
 
       .products-list {
-        @apply grid grid-cols-3 gap-5;
+        @apply grid grid-cols-3 gap-10;
 
         .card-link {
           @apply block h-full;
@@ -84,7 +87,7 @@
         @apply flex justify-center mt-5;
 
         .view-more {
-          @apply whitespace-nowrap w-64 h-14 font-medium;
+          @apply whitespace-nowrap w-56 h-14 font-normal;
         }
       }
     }
@@ -101,14 +104,24 @@
     padding-bottom: 116px; // mb-4 + 100px
 
     .header {
-      @apply gap-4 text-base;
+      @apply gap-4;
+
+      .title {
+        @apply text-base;
+      }
 
       .controls {
         .filter {
-          @apply flex items-center gap-1;
+          @apply flex items-center gap-1 text-sm;
+
+          .filter-icon {
+            @apply w-4;
+          }
         }
 
         .sort {
+          @apply text-sm;
+
           .mobile-shown {
             @apply inline-block;
           }
@@ -121,7 +134,7 @@
             @apply text-black;
 
             > button {
-              @apply text-base pl-0;
+              @apply text-sm pl-0;
 
               .chevron-down-icon {
                 @apply w-3 ml-1;
@@ -160,6 +173,14 @@
 
           .filter {
             @apply p-4;
+          }
+        }
+
+        .filter-footer {
+          @apply block mt-4 mb-8 text-center;
+
+          .clear-button {
+            @apply w-44 h-8 text-lg font-normal;
           }
         }
       }

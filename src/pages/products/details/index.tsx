@@ -35,10 +35,7 @@ function ProductDetailsPage() {
     { anchor: 0, limit: 4 },
   );
   const { data: { products: recentlyAdded } = { products: [] } } =
-    useProductsList(
-      { product_type: [ProductType.BuyNow] },
-      { sort_by: 'posted_date', anchor: 0, limit: 8 },
-    );
+    useProductsList({}, { sort_by: 'posted_date', anchor: 0, limit: 8 });
 
   const [quantity, setQuantity] = useState(1);
   // const [moreFromSellerProducts, setMoreFromSellerProducts] = useState<
