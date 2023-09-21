@@ -60,7 +60,8 @@
 @media (max-width: 768px) {
   .product-card {
     .pre-order {
-      @apply text-sm font-medium px-2;
+      @apply font-semibold px-2 py-1 leading-3;
+      font-size: 10px;
     }
   }
 
