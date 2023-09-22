@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.1.3...1.2.0) (2023-09-22)
+
+### Features
+
+- **AUCTO-102:** new Home page Banner ([#93](https://github.com/AuctoMarket/BuyerMarketplace/issues/93)) ([c0021c3](https://github.com/AuctoMarket/BuyerMarketplace/commit/c0021c39ca3075a7c43ac825d8d3d933ceaf059f))
+- **AUCTO-103:** rework Recently Added ([#96](https://github.com/AuctoMarket/BuyerMarketplace/issues/96)) ([c30516e](https://github.com/AuctoMarket/BuyerMarketplace/commit/c30516e30a14cca45f16cb37f170c811e73df302))
+- **AUCTO-104:** restyle main image in Product page ([#99](https://github.com/AuctoMarket/BuyerMarketplace/issues/99)) ([9dbee83](https://github.com/AuctoMarket/BuyerMarketplace/commit/9dbee83bc11c7ac2280b7e0f22f1b088dbcf86b0))
+- **AUCTO-105:** create About Us page ([#102](https://github.com/AuctoMarket/BuyerMarketplace/issues/102)) ([bdc24b0](https://github.com/AuctoMarket/BuyerMarketplace/commit/bdc24b047197591ddd6b5c5ad4648909fa249915))
+- **AUCTO-110:** rework NavBar ([#92](https://github.com/AuctoMarket/BuyerMarketplace/issues/92)) ([5e67784](https://github.com/AuctoMarket/BuyerMarketplace/commit/5e6778495e3331ebfbb7193dd53c0ce9fe9bc823))
+- **AUCTO-111:** rework PreOrder ([#95](https://github.com/AuctoMarket/BuyerMarketplace/issues/95)) ([005f831](https://github.com/AuctoMarket/BuyerMarketplace/commit/005f8311664e32ce220a053ca7ade2ac314352c1))
+- **AUCTO-112:** reduce font weight of input fields in Checkout page ([#100](https://github.com/AuctoMarket/BuyerMarketplace/issues/100)) ([3561714](https://github.com/AuctoMarket/BuyerMarketplace/commit/35617146c02a714b8a32ddb4be7b54eb40d47e6d))
+- **AUCTO-113:** restyle payment status description ([#101](https://github.com/AuctoMarket/BuyerMarketplace/issues/101)) ([c5c78e3](https://github.com/AuctoMarket/BuyerMarketplace/commit/c5c78e38e8bcb7ddb939386e330908b6e1b48d03))
+- **AUCTO-114:** create Browse page ([#103](https://github.com/AuctoMarket/BuyerMarketplace/issues/103)) ([69242e5](https://github.com/AuctoMarket/BuyerMarketplace/commit/69242e5729b235fcaf8dbdea3cc52606d6a419b4))
+- **AUCTO-117:** add Refund Policy link ([2015ca7](https://github.com/AuctoMarket/BuyerMarketplace/commit/2015ca79d35c2b4dba92db33f5e768f4d9e2b04f))
+
+### Bug Fixes
+
+- **AUCTO-117:** show 12 more instead of 2; Sort By toggle doesn't work ([7f04c24](https://github.com/AuctoMarket/BuyerMarketplace/commit/7f04c245da5524df455f37cf99d926e945d834fb))
+
 ### [1.1.3](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.1.2...1.1.3) (2023-09-15)
 
 ### Features

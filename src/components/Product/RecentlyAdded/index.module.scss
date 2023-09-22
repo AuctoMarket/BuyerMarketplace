@@ -2,12 +2,15 @@
 }
 
 .heading {
-  @apply font-thicboi font-bold;
-  font-size: 26px;
-  line-height: 32px;
+  @apply font-thicboi font-normal flex justify-between items-center;
+  font-size: 28px;
 
   > a {
-    @apply float-right text-lg flex items-center;
+    @apply text-xl flex items-center font-normal;
+
+    &:hover {
+      @apply text-blue-400;
+    }
 
     > img {
       @apply inline-block ml-1;
@@ -20,7 +23,7 @@
 }
 
 .list {
-  @apply grid grid-cols-5 gap-5;
+  @apply grid grid-cols-4 gap-6;
 
   .card-link {
     @apply block h-full;
@@ -31,21 +34,37 @@
   }
 }
 
-@media (max-width: 820px) {
+.see-all-products {
+  @apply w-56 text-xl font-normal mx-auto mt-10 #{!important};
+}
+
+@media (max-width: 768px) {
   .heading {
-    @apply text-lg;
+    @apply text-base font-medium;
+
+    > a {
+      @apply text-sm;
+
+      > img {
+        @apply w-3;
+      }
+    }
   }
 
   .list-container {
-    @apply mt-0 overflow-auto;
+    @apply overflow-auto mt-2 pb-2;
   }
 
   .list {
-    @apply flex flex-row flex-nowrap gap-3;
+    @apply flex flex-row flex-nowrap gap-4;
 
     > li {
       @apply flex-none;
-      width: calc(100% / 3 - 0.75rem * 2 / 3 - 100% / 3 / 15);
+      width: calc(100% / 2 - 16px * 1 - 100% / 2 / 20);
     }
+  }
+
+  .see-all-products {
+    @apply text-lg px-3 w-48 h-8 mt-4 #{!important};
   }
 }

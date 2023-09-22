@@ -21,6 +21,8 @@ const transformProduct = (product: any): Product => ({
   quantity: product.product_quantity,
   soldQuantity: product.sold_quantity,
   seller: transformSeller(product.seller_info),
+  language: product.language,
+  expansion: product.expansion,
   postedDate: new Date(product.posted_date),
   releasedDate: product.releases_on && new Date(product.releases_on),
   orderedDate: product.order_by && new Date(product.order_by),

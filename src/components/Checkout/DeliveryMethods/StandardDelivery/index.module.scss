@@ -22,7 +22,7 @@
   grid-template-columns: 3fr 2fr;
 
   input {
-    @apply w-full h-12 text-sm text-black mt-3;
+    @apply w-full h-12 text-sm font-normal mt-3;
   }
 }
 
@@ -55,7 +55,7 @@
   @apply underline;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 768px) {
   .delivery-date {
     @apply text-sm;
   }
