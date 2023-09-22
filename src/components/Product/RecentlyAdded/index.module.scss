@@ -2,11 +2,11 @@
 }
 
 .heading {
-  @apply font-thicboi font-medium;
+  @apply font-thicboi font-normal flex justify-between items-center;
   font-size: 28px;
 
   > a {
-    @apply float-right text-lg flex items-center font-bold;
+    @apply text-xl flex items-center font-normal;
 
     &:hover {
       @apply text-blue-400;
@@ -35,13 +35,12 @@
 }
 
 .see-all-products {
-  width: 280px;
-  @apply text-2xl font-medium mx-auto px-12 mt-10 #{!important};
+  @apply w-56 text-xl font-normal mx-auto mt-10 #{!important};
 }
 
-@media (max-width: 820px) {
+@media (max-width: 768px) {
   .heading {
-    @apply text-base;
+    @apply text-base font-medium;
 
     > a {
       @apply text-sm;

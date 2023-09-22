@@ -17,6 +17,10 @@
 
 .black {
   @apply text-white bg-black;
+
+  &:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
 }
 
 .color {

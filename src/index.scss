@@ -4,17 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-#root,
-#root > div:last-of-type {
-  @apply min-h-screen;
-}
-
 body {
   @apply text-black bg-white leading-tight font-lato;
-}
 
-#root > div:last-of-type {
-  @apply relative;
+  #root > div:last-of-type {
+    @apply min-h-screen relative;
+  }
+
+  &.frozen #root > div:last-of-type {
+    @apply h-screen overflow-hidden;
+  }
 }

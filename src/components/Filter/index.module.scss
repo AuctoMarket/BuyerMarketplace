@@ -1,0 +1,56 @@
+.filter-container {
+  @apply flex flex-col gap-5;
+
+  .filter {
+    @apply font-thicboi;
+
+    .title {
+      @apply border-b border-solid border-black pl-4 font-medium text-2xl;
+    }
+
+    .form {
+      @apply pl-8 font-normal text-xl;
+
+      > label {
+        @apply flex-row-reverse justify-end gap-2 mt-2;
+      }
+    }
+  }
+
+  .footer {
+    @apply hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-container {
+    @apply gap-4;
+
+    .filter {
+      .title {
+        @apply text-lg;
+      }
+
+      .form {
+        @apply text-base;
+      }
+    }
+
+    .footer {
+      @apply grid gap-4 justify-items-center my-4;
+
+      .apply-button,
+      .clear-button {
+        @apply w-44 h-8 text-lg font-normal;
+      }
+
+      .clear-button {
+        @apply border-0;
+
+        &:hover {
+          @apply text-black bg-white;
+        }
+      }
+    }
+  }
+}

@@ -25,6 +25,10 @@ function ProductCard({ className, data: { product }, ...rest }: Props) {
         />
       </div> */}
 
+      {product.type === ProductType.PreOrder && (
+        <div className={styles['pre-order']}>Pre-Order</div>
+      )}
+
       <div className={styles['content']}>
         <Image
           className={styles['product-image']}
