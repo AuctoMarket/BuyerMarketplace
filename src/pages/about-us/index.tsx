@@ -59,7 +59,12 @@ const AboutUsPage = () => {
               and intact. If not, we will refund you!
             </div>
 
-            <ButtonLink to={`/`} className={styles['button']} theme="color">
+            <ButtonLink
+              to="https://aucto-s3-prod.s3.ap-southeast-1.amazonaws.com/refund/Refund+Policy_20230913.pdf"
+              className={styles['button']}
+              theme="color"
+              target="_blank"
+            >
               Refund Policy
             </ButtonLink>
           </div>
