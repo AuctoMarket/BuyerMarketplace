@@ -3,24 +3,22 @@ import { Form, Checkbox } from 'react-daisyui';
 
 import styles from './index.module.scss';
 import Button from '../Button';
-import { ProductType, Language, Expansion } from '../../types/product.type';
+import {
+  ProductType,
+  Language,
+  Expansion,
+  ProductsQuery,
+} from '../../types/product.type';
 import responsive from '../../utils/responsive';
 
-interface Data {
-  language?: Language[];
-  expansion?: Expansion[];
-  price?: number[];
-  product_type?: ProductType[];
-}
-
 interface Props extends ComponentProps<'div'> {
-  data: Data;
-  onChangeData: (data: Data) => void;
+  data: Omit<ProductsQuery, 'seller_id'>;
+  onChangeData: (data: Omit<ProductsQuery, 'seller_id'>) => void;
 }
 
 const filters: {
   title: string;
-  key: keyof Data;
+  key: keyof Omit<ProductsQuery, 'seller_id'>;
   options: {
     title: string;
     value: Language | Expansion | string | ProductType;
@@ -28,7 +26,7 @@ const filters: {
 }[] = [
   {
     title: 'Language',
-    key: 'language',
+    key: 'languages',
     options: [
       {
         title: 'English',
@@ -42,7 +40,7 @@ const filters: {
   },
   {
     title: 'Expansion',
-    key: 'expansion',
+    key: 'expansions',
     options: [
       {
         title: 'Scarlet & Violet',
@@ -56,33 +54,33 @@ const filters: {
   },
   {
     title: 'Price',
-    key: 'price',
+    key: 'prices',
     options: [
       {
         title: 'Under S$20',
-        value: [0, 2000].join('-'),
+        value: '0-20',
       },
       {
         title: 'S$20 - S$50',
-        value: [2000, 5000].join('-'),
+        value: '20-50',
       },
       {
         title: 'S$50 - S$100',
-        value: [5000, 10000].join('-'),
+        value: '50-100',
       },
       {
         title: 'S$100 - S$200',
-        value: [10000, 20000].join('-'),
+        value: '100-200',
       },
       {
         title: 'Over S$200',
-        value: [20000].join('-'),
+        value: '200',
       },
     ],
   },
   {
     title: 'Availability',
-    key: 'product_type',
+    key: 'product_types',
     options: [
       {
         title: 'Available Now',
@@ -100,20 +98,13 @@ const Filter = ({ className, data, onChangeData, ...rest }: Props) => {
   const [filter, setFilter] = useState(data);
 
   const handleChangeFilter = (
-    key: keyof Data,
+    key: keyof Omit<ProductsQuery, 'seller_id'>,
     value: Language | Expansion | string | ProductType,
   ) => {
     const newFilter = { ...filter };
-    if (key === 'price') {
-      newFilter[key] =
-        newFilter[key]?.join('-') === value
-          ? []
-          : (value as string).split('-').map((item) => Number(item));
-    } else {
-      newFilter[key] = filter[key]?.includes(value as never)
-        ? (filter[key] as any[])?.filter((item) => item !== value)
-        : [...(filter[key] || []), value];
-    }
+    newFilter[key] = filter[key]?.includes(value as never)
+      ? (filter[key] as any[])?.filter((item) => item !== value)
+      : [...(filter[key] || []), value];
 
     setFilter(newFilter);
 
@@ -141,11 +132,7 @@ const Filter = ({ className, data, onChangeData, ...rest }: Props) => {
               <Form.Label title={title} key={index}>
                 <Checkbox
                   name="option"
-                  checked={
-                    key === 'price'
-                      ? filter[key]?.join('-') === value
-                      : filter[key]?.includes(value as never)
-                  }
+                  checked={filter[key]?.includes(value as never)}
                   onChange={() => handleChangeFilter(key, value)}
                 />
               </Form.Label>

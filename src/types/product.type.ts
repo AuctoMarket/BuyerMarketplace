@@ -40,11 +40,10 @@ interface Product {
 
 interface ProductsQuery {
   seller_id?: string;
-  product_type?: ProductType[];
-  language?: Language[];
-  expansion?: Expansion[];
-  min_price?: number;
-  max_price?: number;
+  product_types?: ProductType[];
+  languages?: Language[];
+  expansions?: Expansion[];
+  prices?: string[];
 }
 
 interface ProductsSort extends Sort {

@@ -31,7 +31,7 @@ function ProductDetailsPage() {
   //   { sort_by: 'posted_date' },
   // );
   const { data: { products: preOrder } = { products: [] } } = useProductsList(
-    { product_type: [ProductType.PreOrder] },
+    { product_types: [ProductType.PreOrder] },
     { anchor: 0, limit: 4 },
   );
   const { data: { products: recentlyAdded } = { products: [] } } =

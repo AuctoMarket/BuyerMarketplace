@@ -20,10 +20,10 @@ const sortBy: { label: string; value: ProductsSort['sort_by'] }[] = [
 ];
 const defaultPaging = { anchor: 0, limit: 12 };
 const defaultFilter = {
-  language: [],
-  expansion: [],
-  price: [],
-  product_type: [],
+  languages: [],
+  expansions: [],
+  prices: [],
+  product_types: [],
 };
 
 const ProductsPage = () => {
@@ -33,18 +33,7 @@ const ProductsPage = () => {
     React.useState<ProductsSort['sort_by']>('posted_date');
   const [paging, setPaging] = React.useState(defaultPaging);
   const { data: { count, products } = { count: 0, products: [] } } =
-    useProductsList(
-      {
-        language: filter.language,
-        expansion: filter.expansion,
-        product_type: filter.product_type,
-        ...(filter.price?.length > 0 && {
-          min_price: filter.price[0],
-          max_price: filter.price[1],
-        }),
-      },
-      { sort_by: sort, ...paging },
-    );
+    useProductsList(filter, { sort_by: sort, ...paging });
 
   useEffect(() => {
     if (showFilter) {

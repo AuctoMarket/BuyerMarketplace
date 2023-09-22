@@ -1,3 +1,4 @@
+import qs from 'qs';
 import useSWR from 'swr';
 import axios from 'axios';
 
@@ -29,13 +30,11 @@ const useProductsList = (
     ]) => {
       const response = await axios.get(`${apiConfig.baseUrl}${url}`, {
         params: {
-          language: query.language?.join(',') || undefined,
-          expansion: query.expansion?.join(',') || undefined,
-          product_type: query.product_type?.join(',') || undefined,
-          seller_id: query.seller_id || undefined,
-          min_price: query.min_price || undefined,
-          max_price: query.max_price || undefined,
+          ...query,
           ...options,
+        },
+        paramsSerializer: (params) => {
+          return qs.stringify(params, { arrayFormat: 'repeat' });
         },
       });
 
