@@ -6,6 +6,7 @@ import Logo from '../Logo';
 import List from '../List';
 import Icon from '../Icon';
 import useAuth from '../../hooks/useAuth';
+import useCart from '../../hooks/useCart';
 import responsive from '../../utils/responsive';
 
 interface Props extends ComponentProps<'div'> {}
@@ -13,6 +14,7 @@ interface Props extends ComponentProps<'div'> {}
 function Header({ className, ...rest }: Props) {
   const location = useLocation();
   const { user } = useAuth();
+  const { products } = useCart();
 
   return (
     <div className={`${styles['header']} ${className}`} {...rest}>
@@ -48,10 +50,23 @@ function Header({ className, ...rest }: Props) {
                     `${location.pathname}${location.search}`,
                   )}`}
                 >
-                  Sign In
+                  Sign In›
                 </Link>
               ) : (
-                <Icon className={styles['icon-user']} name="user" />
+                <div className={styles['group-icon']}>
+                  <Icon className={styles['icon-user']} name="user" />
+                  <Link className={styles['shopping-card']} to={'/cart'}>
+                    <Icon
+                      className={styles['icon-card']}
+                      name="shopping-cart"
+                    />
+                  </Link>
+                  {products.length > 0 && (
+                    <div className={styles['item-number']}>
+                      <span>{products.length}</span>
+                    </div>
+                  )}
+                </div>
               ),
             ],
           ]}
