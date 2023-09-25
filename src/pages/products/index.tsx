@@ -9,7 +9,7 @@ import Filter from '../../components/Filter';
 import Icon from '../../components/Icon';
 import Button from '../../components/Button';
 import useProductsList from '../../hooks/useProductsList';
-import { ProductsSort } from '../../types/product.type';
+import { Product, ProductsSort } from '../../types/product.type';
 
 const sortBy: { label: string; value: ProductsSort['sort_by'] }[] = [
   { label: 'Recently Posted', value: 'posted_date' },
@@ -29,11 +29,16 @@ const defaultFilter = {
 const ProductsPage = () => {
   const [showFilter, setShowFilter] = React.useState(false);
   const [filter, setFilter] = React.useState(defaultFilter);
+  const [showSort, setShowSort] = React.useState(false);
   const [sort, setSort] =
     React.useState<ProductsSort['sort_by']>('posted_date');
   const [paging, setPaging] = React.useState(defaultPaging);
-  const { data: { count, products } = { count: 0, products: [] } } =
-    useProductsList(filter, { sort_by: sort, ...paging });
+  const [count, setCount] = React.useState<number>(0);
+  const [products, setProducts] = React.useState<Product[]>([]);
+  const { isLoading, data } = useProductsList(filter, {
+    sort_by: sort,
+    ...paging,
+  });
 
   useEffect(() => {
     if (showFilter) {
@@ -42,6 +47,12 @@ const ProductsPage = () => {
       document.body.classList.remove('frozen');
     }
   }, [showFilter]);
+  useEffect(() => {
+    if (!isLoading && data) {
+      setCount(data.count);
+      setProducts(data.products);
+    }
+  }, [isLoading, data]);
 
   const handleShowFilter = () => {
     setShowFilter(true);
@@ -51,12 +62,15 @@ const ProductsPage = () => {
     setFilter(filter);
     setPaging(defaultPaging);
   };
+  const handleToggleSort = () => {
+    setShowSort(!showSort);
+  };
   const handleChangeSort = (sort: ProductsSort['sort_by']) => {
     setSort(sort);
     setPaging(defaultPaging);
   };
   const handleViewMore = () => {
-    setPaging({ ...paging, limit: paging.limit + 2 });
+    setPaging({ ...paging, limit: paging.limit + defaultPaging.limit });
   };
 
   return (
@@ -71,9 +85,12 @@ const ProductsPage = () => {
               <Icon name="filter" className={styles['filter-icon']} />
             </button>
 
-            <Dropdown className={styles['sort']}>
+            <Dropdown className={styles['sort']} end open={showSort}>
               <span className={styles['mobile-hidden']}>Sort By:</span>
-              <Dropdown.Toggle className={styles['sort-toggle']}>
+              <Dropdown.Toggle
+                className={styles['sort-toggle']}
+                onClick={handleToggleSort}
+              >
                 <span className={styles['mobile-shown']}>Sort By</span>
                 <span className={styles['mobile-hidden']}>
                   {sortBy.find((item) => item.value === sort)?.label}
@@ -83,19 +100,21 @@ const ProductsPage = () => {
                   className={styles['chevron-down-icon']}
                 />
               </Dropdown.Toggle>
-              <Dropdown.Menu className={styles['sort-menu']}>
-                {sortBy.map((item, index) => (
-                  <Dropdown.Item
-                    className={`${styles['sort-menu-item']} ${
-                      sort === item.value ? styles['active'] : ''
-                    }`}
-                    key={index}
-                    onClick={() => handleChangeSort(item.value)}
-                  >
-                    {item.label}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
+              {showSort && (
+                <Dropdown.Menu className={styles['sort-menu']}>
+                  {sortBy.map((item, index) => (
+                    <Dropdown.Item
+                      className={`${styles['sort-menu-item']} ${
+                        sort === item.value ? styles['active'] : ''
+                      }`}
+                      key={index}
+                      onClick={() => handleChangeSort(item.value)}
+                    >
+                      {item.label}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              )}
             </Dropdown>
           </div>
         </div>
