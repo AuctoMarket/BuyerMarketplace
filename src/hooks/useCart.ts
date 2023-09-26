@@ -4,7 +4,7 @@ import { Product } from '../types/product.type';
 const cartDataKey = 'cartData';
 
 function useCart() {
-  const [products, setProducts] = useState<Product[]>(
+  const [products] = useState<Product[]>(
     JSON.parse(localStorage.getItem(cartDataKey) || 'null') || [],
   );
 
