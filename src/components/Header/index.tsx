@@ -50,7 +50,7 @@ function Header({ className, ...rest }: Props) {
                     `${location.pathname}${location.search}`,
                   )}`}
                 >
-                  Sign In›
+                  Sign In
                 </Link>
               ) : (
                 <div className={styles['group-icon']}>
