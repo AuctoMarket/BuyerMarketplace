@@ -9,16 +9,10 @@ function useCart() {
   );
 
   const addProduct = (product: Product, quantity: number) => {
-    //const newProducts = products.concat({ ...product, quantity });
-    const updatedProducts = [...products];
-    const existingProductIndex = updatedProducts.findIndex(
-      (p) => p.id === product.id,
-    );
+    const existingProductIndex = products.findIndex((p) => p.id === product.id);
     if (existingProductIndex !== -1) {
-      console.log('a');
       updateProduct(existingProductIndex, quantity);
     } else {
-      console.log('b');
       const newProducts = products.concat(product);
       setProducts(newProducts);
       localStorage.setItem('cartData', JSON.stringify(newProducts));

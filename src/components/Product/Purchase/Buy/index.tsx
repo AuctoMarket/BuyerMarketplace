@@ -2,7 +2,6 @@ import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
 import Button from '../../../Button';
-import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
 import NumberInput from '../../../NumberInput';
 

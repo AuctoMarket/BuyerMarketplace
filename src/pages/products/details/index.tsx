@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
@@ -17,14 +17,11 @@ import ProductPreOrder from '../../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../../components/Product/RecentlyAdded';
 import useProduct from '../../../hooks/useProduct';
 import useProductsList from '../../../hooks/useProductsList';
-import useAuth from '../../../hooks/useAuth';
 import useCart from '../../../hooks/useCart';
 import { Product, ProductType } from '../../../types/product.type';
 import responsive from '../../../utils/responsive';
 
 function ProductDetailsPage() {
-  const navigate = useNavigate();
-  const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
   const { addProduct } = useCart();
