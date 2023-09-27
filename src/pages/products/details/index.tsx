@@ -18,6 +18,7 @@ import ProductRecentlyAdded from '../../../components/Product/RecentlyAdded';
 import useProduct from '../../../hooks/useProduct';
 import useProductsList from '../../../hooks/useProductsList';
 import useAuth from '../../../hooks/useAuth';
+import useCart from '../../../hooks/useCart';
 import { Product, ProductType } from '../../../types/product.type';
 import responsive from '../../../utils/responsive';
 
@@ -26,6 +27,8 @@ function ProductDetailsPage() {
   const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
+  const { addProduct } = useCart();
+
   // const { productsList: moreFromSeller } = useProductsList(
   //   { seller_id: product?.seller.id },
   //   { sort_by: 'posted_date' },
@@ -79,25 +82,13 @@ function ProductDetailsPage() {
   }, [id, recentlyAdded]);
 
   const handleBuy = () => {
-    const redirectUrl = `/checkout?productId=${id}&quantity=${quantity}`;
-
-    if (!user) {
-      navigate(
-        `/auth/login/?continueAsGuest=true&redirectUrl=${encodeURIComponent(
-          redirectUrl,
-        )}`,
-      );
-    } else if (user.verification !== 'verified') {
-      navigate(
-        `/auth/email-verification?redirectUrl=${encodeURIComponent(
-          redirectUrl,
-        )}`,
-      );
-    } else {
-      window.location.href = redirectUrl;
-    }
+    addProduct(product as Product, quantity);
+    window.location.href = '/checkout';
   };
 
+  const handleAddToCart = () => {
+    addProduct(product as Product, quantity);
+  };
   return (
     <Layout>
       {product && (
@@ -166,6 +157,7 @@ function ProductDetailsPage() {
                   }}
                   onChangeQuantity={setQuantity}
                   onBuy={handleBuy}
+                  onAddToCart={handleAddToCart}
                 />
               )}
 

@@ -4,12 +4,25 @@ import { Product } from '../types/product.type';
 const cartDataKey = 'cartData';
 
 function useCart() {
-  const [products] = useState<Product[]>(
+  const [products, setProducts] = useState<(Product & { quantity: number })[]>(
     JSON.parse(localStorage.getItem(cartDataKey) || 'null') || [],
   );
 
-  const addProduct = (Product: Product) => {
-    // todo
+  const addProduct = (product: Product, quantity: number) => {
+    //const newProducts = products.concat({ ...product, quantity });
+    const updatedProducts = [...products];
+    const existingProductIndex = updatedProducts.findIndex(
+      (p) => p.id === product.id,
+    );
+    if (existingProductIndex !== -1) {
+      console.log('a');
+      updateProduct(existingProductIndex, quantity);
+    } else {
+      console.log('b');
+      const newProducts = products.concat(product);
+      setProducts(newProducts);
+      localStorage.setItem('cartData', JSON.stringify(newProducts));
+    }
   };
 
   const removeProduct = (index: number) => {
@@ -17,7 +30,10 @@ function useCart() {
   };
 
   const updateProduct = (index: number, quantity: number) => {
-    //todo
+    const newProducts = [...products];
+    newProducts[index].quantity = quantity;
+    setProducts(newProducts);
+    localStorage.setItem('cartData', JSON.stringify(newProducts));
   };
 
   return { products, addProduct, removeProduct, updateProduct };
