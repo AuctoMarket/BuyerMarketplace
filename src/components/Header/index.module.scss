@@ -18,7 +18,7 @@
   @apply flex items-center font-medium text-lg gap-16;
 }
 
-.group-icon {
+.shopping-card {
   @apply flex gap-16 relative;
 
   .item-number {
@@ -52,7 +52,7 @@
   .navbar-right {
     @apply gap-4 text-sm;
   }
-  .group-icon {
+  .shopping-card {
     @apply gap-6;
 
     .item-number {

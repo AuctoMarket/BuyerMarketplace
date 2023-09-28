@@ -24,7 +24,7 @@ import responsive from '../../../utils/responsive';
 function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
-  const { addProduct } = useCart();
+  const { addCartItem } = useCart();
 
   // const { productsList: moreFromSeller } = useProductsList(
   //   { seller_id: product?.seller.id },
@@ -79,12 +79,12 @@ function ProductDetailsPage() {
   }, [id, recentlyAdded]);
 
   const handleBuy = () => {
-    addProduct(product as Product, quantity);
+    addCartItem(product?.id as string, quantity);
     window.location.href = '/checkout';
   };
 
   const handleAddToCart = () => {
-    addProduct(product as Product, quantity);
+    addCartItem(product?.id as string, quantity);
   };
   return (
     <Layout>
