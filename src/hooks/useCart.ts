@@ -1,36 +1,37 @@
 import { useState } from 'react';
-import { Product } from '../types/product.type';
+
+import { CartItem } from '../types/cart.type';
 
 const cartDataKey = 'cartData';
 
 function useCart() {
-  const [products, setProducts] = useState<(Product & { quantity: number })[]>(
+  const [cartItems, setCartItems] = useState<CartItem[]>(
     JSON.parse(localStorage.getItem(cartDataKey) || 'null') || [],
   );
 
-  const addProduct = (product: Product, quantity: number) => {
-    const existingProductIndex = products.findIndex((p) => p.id === product.id);
-    if (existingProductIndex !== -1) {
-      updateProduct(existingProductIndex, quantity);
+  const addCartItem = (productId: string, quantity: number) => {
+    const index = cartItems.findIndex((item) => item.productId === productId);
+    if (index !== -1) {
+      updateCartItem(index, cartItems[index].quantity + quantity);
     } else {
-      const newProducts = products.concat(product);
-      setProducts(newProducts);
-      localStorage.setItem('cartData', JSON.stringify(newProducts));
+      const newCartItems = cartItems.concat({ productId, quantity });
+      setCartItems(newCartItems);
+      localStorage.setItem('cartData', JSON.stringify(newCartItems));
     }
   };
 
-  const removeProduct = (index: number) => {
+  const updateCartItem = (index: number, quantity: number) => {
+    const newCartItems = [...cartItems];
+    newCartItems[index].quantity = quantity;
+    setCartItems(newCartItems);
+    localStorage.setItem('cartData', JSON.stringify(newCartItems));
+  };
+
+  const removeCartItem = (index: number) => {
     //todo
   };
 
-  const updateProduct = (index: number, quantity: number) => {
-    const newProducts = [...products];
-    newProducts[index].quantity = quantity;
-    setProducts(newProducts);
-    localStorage.setItem('cartData', JSON.stringify(newProducts));
-  };
-
-  return { products, addProduct, removeProduct, updateProduct };
+  return { cartItems, addCartItem, removeCartItem, updateCartItem };
 }
 
 export default useCart;
