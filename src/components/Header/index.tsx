@@ -14,7 +14,7 @@ interface Props extends ComponentProps<'div'> {}
 function Header({ className, ...rest }: Props) {
   const location = useLocation();
   const { user } = useAuth();
-  const { products } = useCart();
+  const { cartItems } = useCart();
 
   return (
     <div className={`${styles['header']} ${className}`} {...rest}>
@@ -54,12 +54,11 @@ function Header({ className, ...rest }: Props) {
             ) : (
               <Icon className={styles['icon-user']} name="user" />
             ),
-
             <Link className={styles['shopping-card']} to={'/cart'}>
               <Icon className={styles['icon-card']} name="shopping-cart" />
-              {products.length > 0 && (
+              {cartItems.length > 0 && (
                 <div className={styles['item-number']}>
-                  <span>{products.length}</span>
+                  <span>{cartItems.length}</span>
                 </div>
               )}
             </Link>,

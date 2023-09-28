@@ -1,10 +1,12 @@
 import { useState } from 'react';
+
 import { Product } from '../types/product.type';
+import { CartItem } from '../types/cart.type';
 
 const cartDataKey = 'cartData';
 
 function useCart() {
-  const [products] = useState<Product[]>(
+  const [cartItems] = useState<CartItem[]>(
     JSON.parse(localStorage.getItem(cartDataKey) || 'null') || [],
   );
 
@@ -20,7 +22,7 @@ function useCart() {
     //todo
   };
 
-  return { products, addProduct, removeProduct, updateProduct };
+  return { cartItems, addProduct, removeProduct, updateProduct };
 }
 
 export default useCart;
