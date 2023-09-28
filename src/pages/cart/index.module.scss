@@ -1,0 +1,22 @@
+.cart-page {
+  @apply container mx-auto pt-16;
+
+  .title {
+    @apply text-4xl font-medium;
+  }
+
+  .list-container {
+    @apply pl-8;
+
+    .product {
+      @apply flex flex-row;
+
+      .image {
+        @apply px-8 py-3;
+        img {
+          height: 200px;
+        }
+      }
+    }
+  }
+}
