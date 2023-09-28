@@ -42,33 +42,27 @@ function Header({ className, ...rest }: Props) {
             >
               Contact Us
             </Link>,
-            ...[
-              !user ? (
-                <Link
-                  className={styles['sign-in']}
-                  to={`/auth/login?redirectUrl=${encodeURIComponent(
-                    `${location.pathname}${location.search}`,
-                  )}`}
-                >
-                  Sign In
-                </Link>
-              ) : (
-                <div className={styles['group-icon']}>
-                  <Icon className={styles['icon-user']} name="user" />
-                  <Link className={styles['shopping-card']} to={'/cart'}>
-                    <Icon
-                      className={styles['icon-card']}
-                      name="shopping-cart"
-                    />
-                  </Link>
-                  {products.length > 0 && (
-                    <div className={styles['item-number']}>
-                      <span>{products.length}</span>
-                    </div>
-                  )}
+            !user ? (
+              <Link
+                className={styles['sign-in']}
+                to={`/auth/login?redirectUrl=${encodeURIComponent(
+                  `${location.pathname}${location.search}`,
+                )}`}
+              >
+                Sign In
+              </Link>
+            ) : (
+              <Icon className={styles['icon-user']} name="user" />
+            ),
+
+            <Link className={styles['shopping-card']} to={'/cart'}>
+              <Icon className={styles['icon-card']} name="shopping-cart" />
+              {products.length > 0 && (
+                <div className={styles['item-number']}>
+                  <span>{products.length}</span>
                 </div>
-              ),
-            ],
+              )}
+            </Link>,
           ]}
         />
       </div>
