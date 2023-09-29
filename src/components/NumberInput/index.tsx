@@ -41,6 +41,7 @@ function NumberInput({
         type="number"
         value={value}
         onChange={(event) => handleChangeValue(event.target.value)}
+        disabled={!max || max <= 0}
         data-testid="input"
       />
       <Button

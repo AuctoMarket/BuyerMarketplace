@@ -17,6 +17,10 @@
     @apply w-16 h-10 text-center font-bold font-thicboi text-2xl border-t border-b border-solid border-black rounded-none;
     -moz-appearance: textfield;
 
+    &:disabled {
+      @apply opacity-30 cursor-not-allowed bg-gray-200;
+    }
+
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;

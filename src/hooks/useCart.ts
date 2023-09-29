@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CartItem } from '../types/cart.type';
 
@@ -9,6 +9,10 @@ function useCart() {
     JSON.parse(localStorage.getItem(cartDataKey) || 'null') || [],
   );
 
+  useEffect(() => {
+    localStorage.setItem(cartDataKey, JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const addCartItem = (productId: string, quantity: number) => {
     const index = cartItems.findIndex((item) => item.productId === productId);
     if (index !== -1) {
@@ -16,7 +20,6 @@ function useCart() {
     } else {
       const newCartItems = cartItems.concat({ productId, quantity });
       setCartItems(newCartItems);
-      localStorage.setItem('cartData', JSON.stringify(newCartItems));
     }
   };
 
@@ -24,14 +27,25 @@ function useCart() {
     const newCartItems = [...cartItems];
     newCartItems[index].quantity = quantity;
     setCartItems(newCartItems);
-    localStorage.setItem('cartData', JSON.stringify(newCartItems));
   };
 
   const removeCartItem = (index: number) => {
-    //todo
+    const newCartItems = [...cartItems];
+    newCartItems.splice(index, 1);
+    setCartItems(newCartItems);
   };
 
-  return { cartItems, addCartItem, removeCartItem, updateCartItem };
+  const removeAllCartItems = () => {
+    setCartItems([]);
+  };
+
+  return {
+    cartItems,
+    addCartItem,
+    removeCartItem,
+    updateCartItem,
+    removeAllCartItems,
+  };
 }
 
 export default useCart;
