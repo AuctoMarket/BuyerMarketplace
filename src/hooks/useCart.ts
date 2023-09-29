@@ -28,12 +28,21 @@ const CartContext = createContext<{
 function useCart() {
   const { cartItems, setCartItems } = useContext(CartContext);
 
-  const addCartItem = (productId: string, quantity: number) => {
-    const index = cartItems.findIndex((item) => item.productId === productId);
-    if (index !== -1) {
-      updateCartItem(index, cartItems[index].quantity + quantity);
+  const addCartItem = (
+    productId: string,
+    quantity: number,
+    removeAll?: boolean,
+  ) => {
+    if (!removeAll) {
+      const index = cartItems.findIndex((item) => item.productId === productId);
+      if (index !== -1) {
+        updateCartItem(index, cartItems[index].quantity + quantity);
+      } else {
+        const newCartItems = cartItems.concat({ productId, quantity });
+        setCartItems(newCartItems);
+      }
     } else {
-      const newCartItems = cartItems.concat({ productId, quantity });
+      const newCartItems = [{ productId, quantity }];
       setCartItems(newCartItems);
     }
   };
@@ -50,16 +59,11 @@ function useCart() {
     setCartItems(newCartItems);
   };
 
-  const removeAllCartItems = () => {
-    setCartItems([]);
-  };
-
   return {
     cartItems,
     addCartItem,
     removeCartItem,
     updateCartItem,
-    removeAllCartItems,
   };
 }
 
