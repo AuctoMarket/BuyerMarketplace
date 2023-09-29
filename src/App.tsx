@@ -18,6 +18,13 @@ import OrderPaymentStatusPage from './pages/orders/payment-status';
 import AboutUsPage from './pages/about-us';
 import CartPage from './pages/cart';
 import Popup, { PopupContext } from './components/Popup';
+import {
+  getCartItemsFromLocalStorage,
+  setCartItemsToLocalStorage,
+  CartContext,
+} from './hooks/useCart';
+
+import type { CartItem } from './types/cart.type';
 
 const createRouter = (routerObjects: RouteObject[]) => {
   if (process.env.REACT_APP_GITHUB_PAGES === 'true') {
@@ -44,95 +51,104 @@ const App = () => {
     setPopupOpen(isPopupOpen);
     setPopupContent(popupContent);
   };
+  const [cartItems, setCartItems] = useState<CartItem[]>(
+    getCartItemsFromLocalStorage(),
+  );
+
+  useEffect(() => {
+    setCartItemsToLocalStorage(cartItems);
+  }, [cartItems]);
 
   return (
     <PopupContext.Provider value={{ popupOpen, popupContent, togglePopup }}>
       <Popup />
 
-      <RouterProvider
-        router={createRouter([
-          {
-            path: '/',
-            element: (
-              <ScrollToTop>
-                <HomePage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/auth/login',
-            element: (
-              <ScrollToTop>
-                <LoginPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/auth/email-verification',
-            element: (
-              <ScrollToTop>
-                <EmailVerificationPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/auth/signup',
-            element: (
-              <ScrollToTop>
-                <SignupPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/products',
-            element: (
-              <ScrollToTop>
-                <ProductsPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/products/:id',
-            element: (
-              <ScrollToTop>
-                <ProductDetailsPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/checkout',
-            element: (
-              <ScrollToTop>
-                <CheckoutPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/cart',
-            element: (
-              <ScrollToTop>
-                <CartPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/orders/:id/payment-complete',
-            element: (
-              <ScrollToTop>
-                <OrderPaymentStatusPage />
-              </ScrollToTop>
-            ),
-          },
-          {
-            path: '/about-us',
-            element: (
-              <ScrollToTop>
-                <AboutUsPage />
-              </ScrollToTop>
-            ),
-          },
-        ])}
-      />
+      <CartContext.Provider value={{ cartItems, setCartItems }}>
+        <RouterProvider
+          router={createRouter([
+            {
+              path: '/',
+              element: (
+                <ScrollToTop>
+                  <HomePage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/auth/login',
+              element: (
+                <ScrollToTop>
+                  <LoginPage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/auth/email-verification',
+              element: (
+                <ScrollToTop>
+                  <EmailVerificationPage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/auth/signup',
+              element: (
+                <ScrollToTop>
+                  <SignupPage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/products',
+              element: (
+                <ScrollToTop>
+                  <ProductsPage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/products/:id',
+              element: (
+                <ScrollToTop>
+                  <ProductDetailsPage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/checkout',
+              element: (
+                <ScrollToTop>
+                  <CheckoutPage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/cart',
+              element: (
+                <ScrollToTop>
+                  <CartPage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/orders/:id/payment-complete',
+              element: (
+                <ScrollToTop>
+                  <OrderPaymentStatusPage />
+                </ScrollToTop>
+              ),
+            },
+            {
+              path: '/about-us',
+              element: (
+                <ScrollToTop>
+                  <AboutUsPage />
+                </ScrollToTop>
+              ),
+            },
+          ])}
+        />
+      </CartContext.Provider>
     </PopupContext.Provider>
   );
 };
