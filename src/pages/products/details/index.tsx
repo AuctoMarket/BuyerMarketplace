@@ -16,15 +16,17 @@ import ProductPreOrder from '../../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../../components/Product/RecentlyAdded';
 import useProduct from '../../../hooks/useProduct';
 import useProductsList from '../../../hooks/useProductsList';
+import useAuth from '../../../hooks/useAuth';
 import useCart from '../../../hooks/useCart';
 import { Product, ProductType } from '../../../types/product.type';
 import responsive from '../../../utils/responsive';
 
 function ProductDetailsPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
-  const { cartItems, addCartItem, removeAllCartItems } = useCart();
+  const { cartItems, addCartItem } = useCart();
   const [quantity, setQuantity] = useState(1);
   const availableQuantity = product
     ? product.quantity -
@@ -72,9 +74,25 @@ function ProductDetailsPage() {
       return;
     }
 
-    removeAllCartItems();
-    addCartItem(product.id, quantity);
-    navigate('/checkout');
+    addCartItem(product.id, quantity, true);
+
+    const redirectUrl = '/checkout';
+
+    if (!user) {
+      navigate(
+        `/auth/login/?continueAsGuest=true&redirectUrl=${encodeURIComponent(
+          redirectUrl,
+        )}`,
+      );
+    } else if (user.verification !== 'verified') {
+      navigate(
+        `/auth/email-verification?redirectUrl=${encodeURIComponent(
+          redirectUrl,
+        )}`,
+      );
+    } else {
+      navigate(redirectUrl);
+    }
   };
 
   const handleAddToCart = () => {
