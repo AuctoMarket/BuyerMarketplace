@@ -53,7 +53,12 @@ function ProductPurchaseBuy({
       </div>
 
       <div className={styles['btn-buy-container']}>
-        <Button className={styles['button']} theme="white" onClick={onBuy}>
+        <Button
+          className={styles['button']}
+          theme="white"
+          onClick={onBuy}
+          disabled={availableQuantity <= 0}
+        >
           {type === ProductType.BuyNow ? 'Buy' : 'Pre Order Now'}
         </Button>
       </div>
@@ -63,6 +68,7 @@ function ProductPurchaseBuy({
           className={styles['button']}
           theme="black"
           onClick={onAddToCart}
+          disabled={availableQuantity <= 0}
         >
           Add To Cart
         </Button>
