@@ -9,8 +9,8 @@ import OrderContactDetails from '../../components/Checkout/ContactDetails';
 import DeliveryMethods from '../../components/Checkout/DeliveryMethods';
 import PaymentMethods from '../../components/Checkout/PaymentMethods';
 import useAuth from '../../hooks/useAuth';
-import useQueryParams from '../../hooks/useQueryParams';
-import useProduct from '../../hooks/useProduct';
+import useCart from '../../hooks/useCart';
+import useProductsByIds from '../../hooks/useProductsByIds';
 import ordersApi from '../../apis/orders';
 import calculateOrderFees from '../../utils/calculateOrderFees';
 import {
@@ -20,14 +20,15 @@ import {
   PaymentMethod,
   type Order,
 } from '../../types/order.type';
-import { ProductType, type Product } from '../../types/product.type';
 
 const isError = (error: any) => Object.values(error).some(Boolean);
 
 const CheckoutPage = () => {
-  const queryParams = useQueryParams();
   const { user } = useAuth();
-  const { product } = useProduct(queryParams.get('productId') as string);
+  const { cartItems } = useCart();
+  const { products = [] } = useProductsByIds(
+    cartItems.map((item) => item.productId),
+  );
   const [order, setOrder] =
     useState<Omit<Order, 'id' | 'paymentStatus' | 'orderedDate'>>();
   const [error, setError] = useState<{
@@ -39,30 +40,33 @@ const CheckoutPage = () => {
   });
 
   useEffect(() => {
-    if (!product) {
+    if (products.length === 0) {
       return;
     }
 
-    const price =
-      product.type === ProductType.BuyNow
-        ? product.price
-        : product.price - (product.discount || 0);
-    const quantity = parseInt(queryParams.get('quantity') as string, 10);
     const deliveryMethod = DeliveryMethod.SelfCollection;
     const paymentMethod = PaymentMethod.PayNow;
-    const { subTotal, additionalFee, deliveryFee, paymentFee, total } =
+    const { additionalFee, deliveryFee, paymentFee, total } =
       calculateOrderFees({
-        price,
-        quantity,
+        products: cartItems.map((item) => {
+          const product = products.find(
+            (product) => product.id === item.productId,
+          );
+
+          return {
+            price: product?.price || 0,
+            quantity: item.quantity,
+          };
+        }),
         deliveryMethod,
         paymentMethod,
       });
 
     setOrder({
-      productId: product.id,
-      price,
-      quantity,
-      subTotal,
+      products: cartItems.map((item) => ({
+        id: item.productId,
+        quantity: item.quantity,
+      })),
       additionalFee,
       deliveryFee,
       paymentFee,
@@ -79,7 +83,7 @@ const CheckoutPage = () => {
         CollectionPointAddress[CollectionPoint.BotanicGardensMRT],
       paymentMethod,
     });
-  }, [queryParams, user, product]);
+  }, [user, products, cartItems]);
 
   if (!order) {
     return null;
@@ -104,8 +108,16 @@ const CheckoutPage = () => {
     isErrorDeliveryMethod: boolean,
   ) => {
     const fees = calculateOrderFees({
-      price: order.price,
-      quantity: order.quantity,
+      products: cartItems.map((item) => {
+        const product = products.find(
+          (product) => product.id === item.productId,
+        );
+
+        return {
+          price: product?.price || 0,
+          quantity: item.quantity,
+        };
+      }),
       deliveryMethod,
       paymentMethod: order.paymentMethod,
     });
@@ -121,8 +133,16 @@ const CheckoutPage = () => {
 
   const handleChangePaymentMethod = (paymentMethod: Order['paymentMethod']) => {
     const fees = calculateOrderFees({
-      price: order.price,
-      quantity: order.quantity,
+      products: cartItems.map((item) => {
+        const product = products.find(
+          (product) => product.id === item.productId,
+        );
+
+        return {
+          price: product?.price || 0,
+          quantity: item.quantity,
+        };
+      }),
       deliveryMethod: order.deliveryMethod,
       paymentMethod,
     });
@@ -159,11 +179,6 @@ const CheckoutPage = () => {
             />
 
             <DeliveryMethods
-              product={{
-                type: product?.type as Product['type'],
-                releasedDate: product?.releasedDate,
-                orderedDate: product?.orderedDate,
-              }}
               data={{
                 deliveryMethod: order.deliveryMethod,
                 deliveryAddress: order.deliveryAddress,
@@ -181,8 +196,8 @@ const CheckoutPage = () => {
         <OrderDetails
           className={styles['order-details']}
           data={{
-            ...order,
-            product: product as Product,
+            order,
+            products,
           }}
         />
 

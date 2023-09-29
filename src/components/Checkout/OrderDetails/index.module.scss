@@ -18,32 +18,38 @@
   }
 }
 
-.section-0 {
-  @apply flex gap-3;
+.section-0-1 {
+  &:not(:first-child) {
+    @apply mt-4;
+  }
 
-  .product-image {
-    @apply w-32 pl-3;
+  .section-0 {
+    @apply flex gap-3;
 
-    > img {
-      @apply w-full;
+    .product-image {
+      @apply w-32 pl-3;
+
+      > img {
+        @apply w-full;
+      }
+    }
+
+    .product-title {
+      @apply text-2xl font-medium;
     }
   }
 
-  .product-title {
-    @apply text-2xl font-medium;
-  }
-}
+  .section-1 {
+    @apply border-b border-solid py-3 mt-3;
+    border-color: #afafaf;
 
-.section-1 {
-  @apply border-b border-solid py-3 mt-3;
-  border-color: #afafaf;
+    .unit-price {
+      @apply flex gap-3;
+    }
 
-  .unit-price {
-    @apply flex gap-3;
-  }
-
-  .quantity {
-    @apply flex gap-3 mt-3;
+    .quantity {
+      @apply flex gap-3 mt-3;
+    }
   }
 }
 

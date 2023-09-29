@@ -6,10 +6,8 @@ import styles from './index.module.scss';
 import Input from '../../../Input';
 
 import type { DeliveryAddress } from '../../../../types/order.type';
-import { ProductType, type Product } from '../../../../types/product.type';
 
 interface Props extends ComponentProps<'div'> {
-  product: Pick<Product, 'type' | 'releasedDate' | 'orderedDate'>;
   data: DeliveryAddress;
   onChangeData: (data: DeliveryAddress, isError: boolean) => void;
 }
@@ -18,7 +16,6 @@ const isError = (error: any) => Object.values(error).some(Boolean);
 
 const StandardDelivery = ({
   className,
-  product,
   data,
   onChangeData,
   ...rest
@@ -76,16 +73,6 @@ const StandardDelivery = ({
   return (
     <div className={`${className} ${styles['delivery-1-container']}`} {...rest}>
       <div className={`${styles['delivery-1-content']}`}>
-        {product.type === ProductType.PreOrder && (
-          <p className={styles['delivery-date']}>
-            {/* *The estimated delivery date of this pre-order is{' '}
-            {dayjs(product.releasedDate).format('DD MMMM YYYY')} */}
-            Your order will be delivered within 2 weeks of the release date and
-            we will contact you to schedule a delivery. Any delays beyond that
-            will be refunded fully.
-          </p>
-        )}
-
         <p className={`${styles['delivery-1-content-header']}`}>
           Please enter your contact details.
         </p>
