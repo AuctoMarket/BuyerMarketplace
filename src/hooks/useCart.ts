@@ -1,17 +1,32 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext } from 'react';
 
 import { CartItem } from '../types/cart.type';
 
-const cartDataKey = 'cartData';
+const LOCAL_STORAGE_CART_KEY = 'cartData';
+
+const getCartItemsFromLocalStorage = (): CartItem[] => {
+  const cartData = localStorage.getItem(LOCAL_STORAGE_CART_KEY);
+  if (cartData) {
+    return JSON.parse(cartData);
+  }
+
+  return [];
+};
+
+const setCartItemsToLocalStorage = (cartItems: CartItem[]) => {
+  localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(cartItems));
+};
+
+const CartContext = createContext<{
+  cartItems: CartItem[];
+  setCartItems: (cartItems: CartItem[]) => void;
+}>({
+  cartItems: [],
+  setCartItems: (_: CartItem[]) => {},
+});
 
 function useCart() {
-  const [cartItems, setCartItems] = useState<CartItem[]>(
-    JSON.parse(localStorage.getItem(cartDataKey) || 'null') || [],
-  );
-
-  useEffect(() => {
-    localStorage.setItem(cartDataKey, JSON.stringify(cartItems));
-  }, [cartItems]);
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   const addCartItem = (productId: string, quantity: number) => {
     const index = cartItems.findIndex((item) => item.productId === productId);
@@ -48,4 +63,11 @@ function useCart() {
   };
 }
 
+export {
+  LOCAL_STORAGE_CART_KEY,
+  getCartItemsFromLocalStorage,
+  setCartItemsToLocalStorage,
+  CartContext,
+  useCart,
+};
 export default useCart;
