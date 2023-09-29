@@ -6,16 +6,155 @@
   }
 
   .list-container {
+    padding-right: 371px;
     @apply pl-8;
 
     .product {
-      @apply flex flex-row;
+      @apply flex flex-row mt-7;
 
       .image {
         @apply px-8 py-3;
         img {
-          height: 200px;
+          height: 133px;
+          width: 173px;
         }
+      }
+      .info {
+        @apply w-full pt-1;
+        .name {
+          @apply text-3xl font-medium;
+        }
+        .quantity-container {
+          @apply flex flex-row items-center;
+
+          .label {
+            color: #858585;
+            @apply text-lg mr-3;
+          }
+
+          .quantity {
+            .quantity-input {
+              > input {
+                width: 22px;
+                height: 22px;
+                @apply text-sm text-center font-bold;
+              }
+              > button {
+                height: 22px;
+                width: 22px;
+                @apply text-center text-sm font-bold;
+              }
+            }
+          }
+        }
+      }
+
+      .price-remove {
+        @apply mt-12 flex flex-row justify-between items-center;
+        .price {
+          @apply text-2xl font-medium;
+        }
+        .remove {
+          color: #858585;
+          @apply text-lg font-medium border border-0;
+        }
+      }
+    }
+  }
+  .footer {
+    margin-top: 75px;
+    @apply border-t-2 pt-9 flex flex-col;
+
+    .subtotal {
+      @apply text-3xl font-thicboi font-medium;
+      > span {
+        font-size: 44px;
+        @apply pl-14;
+      }
+    }
+    .checkout {
+      width: 330px;
+      @apply mt-16 font-bold text-2xl;
+    }
+
+    .chat {
+      width: 330px;
+      @apply mt-6 text-2xl font-bold;
+    }
+  }
+}
+.cart-page + :global(#footer) {
+  @apply absolute bottom-0 w-full;
+}
+
+@media (max-width: 768px) {
+  .cart-page {
+    @apply mx-5 pt-7;
+
+    .title {
+      @apply text-base font-medium;
+    }
+
+    .list-container {
+      @apply mt-3 pr-0 pl-0;
+      .product {
+        @apply flex flex-row;
+        .image {
+          @apply m-4 my-2;
+          img {
+          }
+        }
+        .info {
+          .name {
+            @apply text-sm font-medium font-thicboi;
+          }
+          .quantity-container {
+            @apply mt-3;
+            .label {
+              @apply text-xs;
+            }
+
+            .quantity {
+              .quantity-input {
+                > input {
+                  @apply w-4 h-4 text-xs text-center font-semibold;
+                }
+                > button {
+                  @apply w-4 h-4 text-xs text-center font-semibold;
+                }
+              }
+            }
+          }
+        }
+
+        .price-remove {
+          @apply mt-3;
+          .price {
+            @apply text-base;
+          }
+          .remove {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+    .footer {
+      margin-top: 22px;
+      .subtotal {
+        @apply text-base;
+
+        > span {
+          font-size: 22px;
+          @apply pl-1;
+        }
+      }
+      .checkout {
+        width: 200px;
+        @apply text-base font-thicboi font-bold mt-6;
+      }
+      .chat {
+        width: 200px;
+        @apply text-base font-thicboi font-bold mt-3;
       }
     }
   }
