@@ -25,7 +25,7 @@
           @apply text-3xl font-medium;
         }
         .quantity-container {
-          @apply flex flex-row items-center;
+          @apply flex flex-row items-center mt-3;
 
           .label {
             color: #858585;
@@ -89,6 +89,7 @@
 
 @media (max-width: 768px) {
   .cart-page {
+    width: 90%;
     @apply mx-5 pt-7;
 
     .title {
@@ -102,6 +103,8 @@
         .image {
           @apply m-4 my-2;
           img {
+            width: 59px;
+            height: 77px;
           }
         }
         .info {
@@ -130,7 +133,7 @@
         .price-remove {
           @apply mt-3;
           .price {
-            @apply text-base;
+            @apply text-base font-medium;
           }
           .remove {
             font-size: 10px;

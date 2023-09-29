@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Layout from '../../components/Layout';
 import styles from './index.module.scss';
@@ -7,14 +7,19 @@ import Image from '../../components/Image';
 import NumberInput from '../../components/NumberInput';
 import useProductByIds from '../../hooks/useProductByIds';
 import Button from '../../components/Button';
+import ButtonLink from '../../components/Button/Link';
+import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types/product.type';
+import useAuth from '../../hooks/useAuth';
 
-function CartPage({}) {
-  const { cartItems, updateCartItem } = useCart();
+function CartPage() {
+  const { cartItems, updateCartItem, removeCartItem } = useCart();
   const { products } = useProductByIds(
     cartItems.map(({ productId }) => productId),
   );
-  const onChangeQuantity = (id: string, quantity: number, price: number) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const onChangeQuantity = (id: string, quantity: number) => {
     const index = cartItems.findIndex((item) => item.productId === id);
     if (index !== -1) {
       updateCartItem(index, quantity);
@@ -26,6 +31,30 @@ function CartPage({}) {
       ?.quantity as number;
   };
 
+  const handleRemoveItem = (id: string) => {
+    const index = cartItems.findIndex((item) => item.productId === id);
+    removeCartItem(index);
+  };
+
+  const handleCheckout = () => {
+    const redirectUrl = `/checkout`;
+
+    if (!user) {
+      navigate(
+        `/auth/login/?continueAsGuest=true&redirectUrl=${encodeURIComponent(
+          redirectUrl,
+        )}`,
+      );
+    } else if (user.verification !== 'verified') {
+      navigate(
+        `/auth/email-verification?redirectUrl=${encodeURIComponent(
+          redirectUrl,
+        )}`,
+      );
+    } else {
+      window.location.href = redirectUrl;
+    }
+  };
   return (
     <Layout>
       <div className={styles['cart-page']}>
@@ -46,7 +75,7 @@ function CartPage({}) {
                         className={styles['quantity-input']}
                         value={getQuantity(product)}
                         onChangeValue={(quantity: number) =>
-                          onChangeQuantity(product.id, quantity, product.price)
+                          onChangeQuantity(product.id, quantity)
                         }
                         min={1}
                         max={product.quantity - product.soldQuantity}
@@ -57,7 +86,12 @@ function CartPage({}) {
                     <div className={styles['price']}>
                       ${product.price * getQuantity(product)}
                     </div>
-                    <Button className={styles['remove']}>Remove Item</Button>
+                    <Button
+                      className={styles['remove']}
+                      onClick={() => handleRemoveItem(product.id)}
+                    >
+                      Remove Item
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -76,10 +110,17 @@ function CartPage({}) {
                 )}
             </span>
           </div>
-          <Button className={styles['checkout']}>Proceed to Checkout</Button>
-          <Button className={styles['chat']} theme="black">
-            Chat with us
+          <Button className={styles['checkout']} onClick={handleCheckout}>
+            Proceed to Checkout
           </Button>
+          <ButtonLink
+            className={styles['chat']}
+            theme="black"
+            to={`https://t.me/auctomarketplace`}
+            target="_blank"
+          >
+            Chat with us
+          </ButtonLink>
         </div>
       </div>
     </Layout>
