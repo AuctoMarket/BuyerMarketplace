@@ -14,8 +14,12 @@ function CartPage({}) {
   const { products } = useProductByIds(
     cartItems.map(({ productId }) => productId),
   );
-
-  const onChangeQuantity = (quantity: number) => {};
+  const onChangeQuantity = (id: string, quantity: number, price: number) => {
+    const index = cartItems.findIndex((item) => item.productId === id);
+    if (index !== -1) {
+      updateCartItem(index, quantity);
+    }
+  };
 
   const getQuantity = (product: Product) => {
     return cartItems.find((item) => item.productId === product.id)
@@ -41,7 +45,9 @@ function CartPage({}) {
                       <NumberInput
                         className={styles['quantity-input']}
                         value={getQuantity(product)}
-                        onChangeValue={onChangeQuantity}
+                        onChangeValue={(quantity: number) =>
+                          onChangeQuantity(product.id, quantity, product.price)
+                        }
                         min={1}
                         max={product.quantity - product.soldQuantity}
                       />
@@ -59,7 +65,16 @@ function CartPage({}) {
         </div>
         <div className={styles['footer']}>
           <div className={styles['subtotal']}>
-            Subtotal: <span>$1231123</span>
+            Subtotal:{' '}
+            <span>
+              $
+              {products &&
+                products.reduce(
+                  (total, product) =>
+                    total + product.price * getQuantity(product),
+                  0,
+                )}
+            </span>
           </div>
           <Button className={styles['checkout']}>Proceed to Checkout</Button>
           <Button className={styles['chat']} theme="black">
