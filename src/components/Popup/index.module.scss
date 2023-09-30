@@ -10,6 +10,16 @@
   @apply bg-white p-10 rounded-lg shadow-md max-w-xs sm:max-w-sm w-full relative flex flex-col items-center;
 
   .closeBtn {
-    @apply bg-transparent border-none text-3xl cursor-pointer absolute top-1 right-3;
+    @apply bg-transparent border-none text-3xl leading-none cursor-pointer absolute w-8 h-8 top-0 right-0;
+  }
+}
+
+@media (max-width: 768px) {
+  .popupContent {
+    @apply p-4;
+
+    .closeBtn {
+      @apply text-xl w-6 h-6;
+    }
   }
 }
