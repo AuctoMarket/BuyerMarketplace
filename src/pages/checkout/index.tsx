@@ -25,7 +25,7 @@ const isError = (error: any) => Object.values(error).some(Boolean);
 
 const CheckoutPage = () => {
   const { user } = useAuth();
-  const { cartItems } = useCart();
+  const { cartItems, removeAllCartItems } = useCart();
   const { products = [] } = useProductsByIds(
     cartItems.map((item) => item.productId),
   );
@@ -162,6 +162,7 @@ const CheckoutPage = () => {
     const resp = user?.buyer_id
       ? await ordersApi.createOrder(order)
       : await ordersApi.createGuestOrder(order);
+    removeAllCartItems();
 
     window.location.href = resp.redirect_url;
   };
