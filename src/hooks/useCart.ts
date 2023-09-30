@@ -59,11 +59,16 @@ function useCart() {
     setCartItems(newCartItems);
   };
 
+  const removeAllCartItems = () => {
+    setCartItems([]);
+  };
+
   return {
     cartItems,
     addCartItem,
-    removeCartItem,
     updateCartItem,
+    removeCartItem,
+    removeAllCartItems,
   };
 }
 

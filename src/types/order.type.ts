@@ -72,10 +72,10 @@ interface DeliveryAddress {
 
 interface Order {
   id: string; // order.order_id || order.guest_order_id
-  productId: string; // order.product_id
-  price: number; // order.fees.product_price
-  quantity: number; // order.order_quantity
-  subTotal: number;
+  products: {
+    id: string; // order.products.product_id
+    quantity: number; // order.products.order_quantity
+  }[];
   additionalFee: number; // order.fees.small_order_fee
   deliveryFee: number; // order.fees.delivery_fee
   paymentFee: number; // order.fees.payment_fee

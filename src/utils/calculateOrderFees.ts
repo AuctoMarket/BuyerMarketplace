@@ -1,12 +1,19 @@
 import { DeliveryMethod, Order, PaymentMethod } from '../types/order.type';
 
 const calculateOrderFees = ({
-  price,
-  quantity,
+  products,
   deliveryMethod,
   paymentMethod,
-}: Pick<Order, 'price' | 'quantity' | 'deliveryMethod' | 'paymentMethod'>) => {
-  const subTotal = price * quantity;
+}: Pick<Order, 'deliveryMethod' | 'paymentMethod'> & {
+  products: {
+    price: number;
+    quantity: number;
+  }[];
+}) => {
+  const subTotal = products.reduce(
+    (total, { price, quantity }) => total + price * quantity,
+    0,
+  );
   const additionalFee = subTotal < 2500 ? 100 : 0;
   const deliveryFee =
     deliveryMethod === DeliveryMethod.StandardDelivery ? 400 : 0;
@@ -17,7 +24,6 @@ const calculateOrderFees = ({
   const total = subTotal + additionalFee + deliveryFee + paymentFee;
 
   return {
-    subTotal,
     additionalFee,
     deliveryFee,
     paymentFee,

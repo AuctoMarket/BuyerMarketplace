@@ -4,10 +4,8 @@ describe('transformOrder', () => {
   const order = {
     order_id: 'test',
     guest_order_id: 'test',
-    product_id: 'test',
-    order_quantity: 1,
+    products: [{ product_id: 'test', order_quantity: 1 }],
     fees: {
-      product_price: 1,
       small_order_fee: 1,
       delivery_fee: 1,
       payment_fee: 1,
@@ -27,10 +25,10 @@ describe('transformOrder', () => {
   };
   const transformedOrder = {
     id: order.order_id || order.guest_order_id,
-    productId: order.product_id,
-    price: order.fees.product_price,
-    quantity: order.order_quantity,
-    subTotal: order.fees.product_price * order.order_quantity,
+    products: order.products.map((product: any) => ({
+      id: product.product_id,
+      quantity: product.order_quantity,
+    })),
     additionalFee: order.fees.small_order_fee,
     deliveryFee: order.fees.delivery_fee,
     paymentFee: order.fees.payment_fee,

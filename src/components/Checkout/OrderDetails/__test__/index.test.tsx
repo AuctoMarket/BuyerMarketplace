@@ -7,32 +7,39 @@ import { ProductType } from '../../../../types/product.type';
 
 describe('OrderDetails', () => {
   const data: any = {
-    product: {
-      id: '1',
-      type: ProductType.Bid,
-      title: 'test',
-      condition: 4,
-      description: 'test',
-      images: ['test'],
-      seller: {
-        id: '1',
-        name: 'test',
-        numFollowers: 1,
-      },
-      bidPrice: 1,
-      numBids: 1,
-      price: 1,
-      quantity: 1,
-      soldQuantity: 1,
-      postedDate: new Date(),
+    order: {
+      products: [
+        {
+          id: '1',
+          quantity: 1,
+        },
+      ],
+      additionalFee: 1,
+      deliveryFee: 1,
+      paymentFee: 1,
+      total: 1,
     },
-    price: 1,
-    quantity: 1,
-    subTotal: 1,
-    additionalFee: 1,
-    deliveryFee: 1,
-    paymentFee: 1,
-    total: 1,
+    products: [
+      {
+        id: '1',
+        type: ProductType.Bid,
+        title: 'test',
+        condition: 4,
+        description: 'test',
+        images: ['test'],
+        seller: {
+          id: '1',
+          name: 'test',
+          numFollowers: 1,
+        },
+        bidPrice: 1,
+        numBids: 1,
+        price: 1,
+        quantity: 1,
+        soldQuantity: 1,
+        postedDate: new Date(),
+      },
+    ],
   };
 
   test('renders OrderDetails', async () => {
@@ -52,9 +59,12 @@ describe('OrderDetails', () => {
         <OrderDetails
           data={{
             ...data,
-            additionalFee: 0,
-            deliveryFee: 0,
-            paymentFee: 0,
+            order: {
+              ...data.order,
+              additionalFee: 0,
+              deliveryFee: 0,
+              paymentFee: 0,
+            },
           }}
           role="orderdetails"
         />
