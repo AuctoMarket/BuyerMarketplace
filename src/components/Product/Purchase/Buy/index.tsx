@@ -2,7 +2,6 @@ import React, { ComponentProps } from 'react';
 
 import styles from './index.module.scss';
 import Button from '../../../Button';
-import ButtonLink from '../../../Button/Link';
 import ProductPrice from '../../Price';
 import NumberInput from '../../../NumberInput';
 
@@ -16,6 +15,7 @@ interface Props extends ComponentProps<'div'> {
   };
   onChangeQuantity: (quantity: number) => void;
   onBuy: () => void;
+  onAddToCart: () => void;
 }
 
 function ProductPurchaseBuy({
@@ -23,6 +23,7 @@ function ProductPurchaseBuy({
   data: { price, quantity, availableQuantity, type },
   onChangeQuantity,
   onBuy,
+  onAddToCart,
   ...rest
 }: Props) {
   return (
@@ -52,20 +53,25 @@ function ProductPurchaseBuy({
       </div>
 
       <div className={styles['btn-buy-container']}>
-        <Button className={styles['button']} theme="white" onClick={onBuy}>
+        <Button
+          className={styles['button']}
+          theme="white"
+          onClick={onBuy}
+          disabled={availableQuantity <= 0}
+        >
           {type === ProductType.BuyNow ? 'Buy' : 'Pre Order Now'}
         </Button>
       </div>
 
       <div className={styles['btn-chat-container']}>
-        <ButtonLink
+        <Button
           className={styles['button']}
           theme="black"
-          to={`https://t.me/auctomarketplace`}
-          target="_blank"
+          onClick={onAddToCart}
+          disabled={availableQuantity <= 0}
         >
-          Chat with us
-        </ButtonLink>
+          Add To Cart
+        </Button>
       </div>
     </div>
   );

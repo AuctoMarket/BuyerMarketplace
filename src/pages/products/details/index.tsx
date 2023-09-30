@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
@@ -12,12 +12,12 @@ import ProductPurchaseBuy from '../../../components/Product/Purchase/Buy';
 import ProductDetails from '../../../components/Product/Details';
 import ProductPostedDate from '../../../components/Product/PostedDate';
 import ProductEstimatedDeliveryDate from '../../../components/Product/EstimatedDeliveryDate';
-// import ProductMoreFromSeller from '../../components/Product/MoreFromSeller';
 import ProductPreOrder from '../../../components/Product/PreOrder';
 import ProductRecentlyAdded from '../../../components/Product/RecentlyAdded';
 import useProduct from '../../../hooks/useProduct';
 import useProductsList from '../../../hooks/useProductsList';
 import useAuth from '../../../hooks/useAuth';
+import useCart from '../../../hooks/useCart';
 import { Product, ProductType } from '../../../types/product.type';
 import responsive from '../../../utils/responsive';
 
@@ -26,21 +26,20 @@ function ProductDetailsPage() {
   const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const { product } = useProduct(id as string);
-  // const { productsList: moreFromSeller } = useProductsList(
-  //   { seller_id: product?.seller.id },
-  //   { sort_by: 'posted_date' },
-  // );
+  const { cartItems, addCartItem } = useCart();
+  const [quantity, setQuantity] = useState(1);
+  const availableQuantity = product
+    ? product.quantity -
+      product.soldQuantity -
+      (cartItems.find((item) => item.productId === product.id)?.quantity || 0)
+    : 0;
+
   const { data: { products: preOrder } = { products: [] } } = useProductsList(
     { product_types: [ProductType.PreOrder] },
     { anchor: 0, limit: 4 },
   );
   const { data: { products: recentlyAdded } = { products: [] } } =
     useProductsList({}, { sort_by: 'posted_date', anchor: 0, limit: 8 });
-
-  const [quantity, setQuantity] = useState(1);
-  // const [moreFromSellerProducts, setMoreFromSellerProducts] = useState<
-  //   Product[]
-  // >([]);
   const [preOrderProducts, setPreOrderProducts] = useState<Product[]>([]);
   const [recentlyAddedProducts, setRecentlyAddedProducts] = useState<Product[]>(
     [],
@@ -53,14 +52,6 @@ function ProductDetailsPage() {
 
     setQuantity(1);
   }, [id]);
-
-  // useEffect(() => {
-  //   if (!id || !moreFromSeller || moreFromSeller.length === 0) {
-  //     return;
-  //   }
-
-  //   setMoreFromSellerProducts(moreFromSeller.filter((p) => p.id !== id));
-  // }, [id, moreFromSeller]);
 
   useEffect(() => {
     if (!id || !preOrder || preOrder.length === 0) {
@@ -79,7 +70,13 @@ function ProductDetailsPage() {
   }, [id, recentlyAdded]);
 
   const handleBuy = () => {
-    const redirectUrl = `/checkout?productId=${id}&quantity=${quantity}`;
+    if (!product || quantity <= 0 || availableQuantity <= 0) {
+      return;
+    }
+
+    addCartItem(product.id, quantity, true);
+
+    const redirectUrl = '/checkout';
 
     if (!user) {
       navigate(
@@ -94,8 +91,17 @@ function ProductDetailsPage() {
         )}`,
       );
     } else {
-      window.location.href = redirectUrl;
+      navigate(redirectUrl);
     }
+  };
+
+  const handleAddToCart = () => {
+    if (!product || quantity <= 0 || availableQuantity <= 0) {
+      return;
+    }
+
+    addCartItem(product.id, quantity);
+    setQuantity(1);
   };
 
   return (
@@ -156,7 +162,7 @@ function ProductDetailsPage() {
               ) : (
                 <ProductPurchaseBuy
                   data={{
-                    availableQuantity: product.quantity - product.soldQuantity,
+                    availableQuantity,
                     price:
                       product.type === ProductType.BuyNow
                         ? product.price
@@ -166,6 +172,7 @@ function ProductDetailsPage() {
                   }}
                   onChangeQuantity={setQuantity}
                   onBuy={handleBuy}
+                  onAddToCart={handleAddToCart}
                 />
               )}
 
@@ -177,16 +184,6 @@ function ProductDetailsPage() {
               />
             </div>
           </div>
-
-          {/* {moreFromSellerProducts.length > 0 && (
-            <ProductMoreFromSeller
-              className={styles['product-more-from-seller']}
-              data={{
-                products: moreFromSellerProducts,
-                seller: product.seller,
-              }}
-            />
-          )} */}
 
           {preOrderProducts.length > 0 && (
             <ProductPreOrder
