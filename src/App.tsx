@@ -16,6 +16,7 @@ import ProductDetailsPage from './pages/products/details';
 import CheckoutPage from './pages/checkout';
 import OrderPaymentStatusPage from './pages/orders/payment-status';
 import AboutUsPage from './pages/about-us';
+import CartPage from './pages/cart';
 import Popup, { PopupContext } from './components/Popup';
 
 const createRouter = (routerObjects: RouteObject[]) => {
@@ -103,6 +104,14 @@ const App = () => {
             element: (
               <ScrollToTop>
                 <CheckoutPage />
+              </ScrollToTop>
+            ),
+          },
+          {
+            path: '/cart',
+            element: (
+              <ScrollToTop>
+                <CartPage />
               </ScrollToTop>
             ),
           },

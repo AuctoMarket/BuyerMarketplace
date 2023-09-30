@@ -22,6 +22,7 @@ describe('<Header />', () => {
       'userData',
       JSON.stringify({ email: 'test@test.com', buyer_id: 'test' }),
     );
+    localStorage.setItem('cartData', JSON.stringify([]));
     render(
       <BrowserRouter>
         <Header />
