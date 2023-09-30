@@ -27,7 +27,7 @@
     @apply flex gap-3;
 
     .product-image {
-      @apply w-32 pl-3;
+      @apply w-32 pl-3 flex-none;
 
       > img {
         @apply w-full;
@@ -105,7 +105,9 @@
     .label {
       @apply w-24;
     }
+  }
 
+  .section-0-1 {
     .section-0 {
       gap: 22px;
 
@@ -118,17 +120,13 @@
       }
     }
 
-    .product-title {
-      @apply text-2xl font-medium;
-    }
-  }
+    .section-1 {
+      @apply pt-0;
 
-  .section-1 {
-    @apply pt-0;
-
-    .unit-price,
-    .quantity {
-      gap: 22px;
+      .unit-price,
+      .quantity {
+        gap: 22px;
+      }
     }
   }
 
