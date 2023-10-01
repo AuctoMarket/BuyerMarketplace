@@ -34,104 +34,23 @@ export function SelfCollection({
       <p>Choose your collection point</p>
 
       <Form className={`${styles['delivery-method-choose-form']}`}>
-        <Form.Label
-          className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.BotanicGardensMRT}
-          data-testid={CollectionPoint.BotanicGardensMRT}
-        >
-          <Radio
-            className={`${styles['delivery-method-choose-radio']}`}
-            name="option"
-            value={CollectionPoint.BotanicGardensMRT}
-            checked={data === CollectionPoint.BotanicGardensMRT}
-            onChange={handleChangeCollectionPoint}
-            size="xs"
-          />
-        </Form.Label>
-        <Form.Label
-          className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.DhobyGhautMRT}
-          data-testid={CollectionPoint.DhobyGhautMRT}
-        >
-          <Radio
-            className={`${styles['delivery-method-choose-radio']}`}
-            name="option"
-            value={CollectionPoint.DhobyGhautMRT}
-            checked={data === CollectionPoint.DhobyGhautMRT}
-            onChange={handleChangeCollectionPoint}
-            size="xs"
-          />
-        </Form.Label>
-        <Form.Label
-          className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.AngMoKioMRT}
-          data-testid={CollectionPoint.AngMoKioMRT}
-        >
-          <Radio
-            className={`${styles['delivery-method-choose-radio']}`}
-            name="option"
-            value={CollectionPoint.AngMoKioMRT}
-            checked={data === CollectionPoint.AngMoKioMRT}
-            onChange={handleChangeCollectionPoint}
-            size="xs"
-          />
-        </Form.Label>
-        <Form.Label
-          className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.WoodlandsMRT}
-          data-testid={CollectionPoint.WoodlandsMRT}
-        >
-          <Radio
-            className={`${styles['delivery-method-choose-radio']}`}
-            name="option"
-            value={CollectionPoint.WoodlandsMRT}
-            checked={data === CollectionPoint.WoodlandsMRT}
-            onChange={handleChangeCollectionPoint}
-            size="xs"
-          />
-        </Form.Label>
-        <Form.Label
-          className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.BishanMRT}
-          data-testid={CollectionPoint.BishanMRT}
-        >
-          <Radio
-            className={`${styles['delivery-method-choose-radio']}`}
-            name="option"
-            value={CollectionPoint.BishanMRT}
-            checked={data === CollectionPoint.BishanMRT}
-            onChange={handleChangeCollectionPoint}
-            size="xs"
-          />
-        </Form.Label>
-        <Form.Label
-          className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.PayaLebarMRT}
-          data-testid={CollectionPoint.PayaLebarMRT}
-        >
-          <Radio
-            className={`${styles['delivery-method-choose-radio']}`}
-            name="option"
-            value={CollectionPoint.PayaLebarMRT}
-            checked={data === CollectionPoint.PayaLebarMRT}
-            onChange={handleChangeCollectionPoint}
-            size="xs"
-          />
-        </Form.Label>
-        <Form.Label
-          className={`${styles['delivery-method-choose-form-lable']}`}
-          title={CollectionPoint.EunosMRT}
-          data-testid={CollectionPoint.EunosMRT}
-        >
-          <Radio
-            className={`${styles['delivery-method-choose-radio']}`}
-            name="option"
-            value={CollectionPoint.EunosMRT}
-            checked={data === CollectionPoint.EunosMRT}
-            onChange={handleChangeCollectionPoint}
-            size="xs"
-          />
-        </Form.Label>
+        {Object.values(CollectionPoint).map((collectionPoint, index) => (
+          <Form.Label
+            key={index}
+            className={`${styles['delivery-method-choose-form-lable']}`}
+            title={collectionPoint}
+            data-testid={collectionPoint}
+          >
+            <Radio
+              className={`${styles['delivery-method-choose-radio']}`}
+              name="option"
+              value={collectionPoint}
+              checked={data === collectionPoint}
+              onChange={handleChangeCollectionPoint}
+              size="xs"
+            />
+          </Form.Label>
+        ))}
       </Form>
 
       <div className={`${styles['delivery-method-information']}`}>

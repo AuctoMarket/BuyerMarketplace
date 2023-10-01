@@ -80,7 +80,7 @@ const CheckoutPage = () => {
       },
       deliveryMethod,
       deliveryAddress:
-        CollectionPointAddress[CollectionPoint.BotanicGardensMRT],
+        CollectionPointAddress[Object.values(CollectionPoint)[0]],
       paymentMethod,
     });
   }, [user, products, cartItems]);
