@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 import Layout from '../../../components/Layout';
 import OrderDetails from '../../../components/Checkout/OrderDetails';
 import ButtonLink from '../../../components/Button/Link';
-import useProduct from '../../../hooks/useProduct';
+import useProductsByIds from '../../../hooks/useProductsByIds';
 import useOrder from '../../../hooks/useOrder';
 import { PaymentStatus } from '../../../types/order.type';
 import useAuth from '../../../hooks/useAuth';
@@ -19,7 +19,9 @@ const OrderPaymentStatusPage = () => {
   const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const { order } = useOrder(id as string, !user?.buyer_id, useOrderConfig);
-  const { product } = useProduct(order?.productId as string);
+  const { products = [] } = useProductsByIds(
+    order?.products.map((product) => product.id) || [],
+  );
 
   // stop refreshing order when payment is completed or failed
   useEffect(() => {
@@ -54,7 +56,7 @@ const OrderPaymentStatusPage = () => {
     setPaymentStatus(order.paymentStatus);
   }, [order]);
 
-  if (!order || !product) {
+  if (!order || products.length === 0) {
     return null;
   }
 
@@ -112,8 +114,8 @@ const OrderPaymentStatusPage = () => {
         <OrderDetails
           className={styles['order-details']}
           data={{
-            ...order,
-            product,
+            order,
+            products,
           }}
         />
       </div>

@@ -3,9 +3,7 @@ import transformBEOrder from '../transformBEOrder';
 
 describe('transformBEOrder', () => {
   const order = {
-    productId: 'test',
-    price: 1,
-    quantity: 1,
+    products: [{ id: 'test', quantity: 1 }],
     subTotal: 1,
     additionalFee: 1,
     deliveryFee: 1,
@@ -28,8 +26,10 @@ describe('transformBEOrder', () => {
   };
 
   const transformedOrder = {
-    product_id: order.productId,
-    order_quantity: order.quantity,
+    products: order.products.map((product: any) => ({
+      product_id: product.id,
+      order_quantity: product.quantity,
+    })),
     buyer_id: order.buyerId,
     email: order.contactDetails.email,
     phone_number: order.contactDetails.phoneNumber,
@@ -38,7 +38,6 @@ describe('transformBEOrder', () => {
     address_line_2: order.deliveryAddress.addressLine2,
     postal_code: order.deliveryAddress.postalCode,
     fees: {
-      product_price: order.price,
       small_order_fee: order.additionalFee,
       delivery_type: order.deliveryMethod,
       delivery_fee: order.deliveryFee,

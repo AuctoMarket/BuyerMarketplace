@@ -18,7 +18,23 @@
   @apply flex items-center font-medium text-lg gap-16;
 }
 
-.icon-user {
+.shopping-card {
+  @apply flex gap-16 relative;
+
+  .item-number {
+    right: -8px;
+    bottom: -8px;
+    background-color: #d90505;
+    font-size: 8px;
+    @apply absolute  rounded-full flex justify-center items-center w-3 h-3;
+    span {
+      @apply font-extrabold;
+    }
+  }
+}
+
+.icon-user,
+.icon-card {
   @apply h-7;
 }
 
@@ -36,8 +52,16 @@
   .navbar-right {
     @apply gap-4 text-sm;
   }
+  .shopping-card {
+    @apply gap-6;
 
-  .icon-user {
+    .item-number {
+      font-size: 6px;
+    }
+  }
+
+  .icon-user,
+  .icon-card {
     @apply h-5;
   }
 }

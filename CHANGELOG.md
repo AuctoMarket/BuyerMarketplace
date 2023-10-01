@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.2.0...1.3.0) (2023-09-30)
+
+### Features
+
+- **AUCTO-114:** add Cart icon to NavBar ([#106](https://github.com/AuctoMarket/BuyerMarketplace/issues/106)) ([6dd8816](https://github.com/AuctoMarket/BuyerMarketplace/commit/6dd881633f47db469d5f9a9b8727e1b901368520))
+- **AUCTO-119:** modify Product page ([#107](https://github.com/AuctoMarket/BuyerMarketplace/issues/107)) ([cc98316](https://github.com/AuctoMarket/BuyerMarketplace/commit/cc98316631566751719c18cb7de2e67a20116cd9))
+- **AUCTO-121:** create Cart page ([#109](https://github.com/AuctoMarket/BuyerMarketplace/issues/109)) ([10729ae](https://github.com/AuctoMarket/BuyerMarketplace/commit/10729ae7dae0070b47c7e5b340fa0907b4b24ec4))
+- **AUCTO-122, AUCTO-123:** modify Checkout & Payment Status pages ([#108](https://github.com/AuctoMarket/BuyerMarketplace/issues/108)) ([f98aad8](https://github.com/AuctoMarket/BuyerMarketplace/commit/f98aad8f43a29c19197a4e24ac7708022f482e0e))
+
 ## [1.2.0](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.1.3...1.2.0) (2023-09-22)
 
 ### Features

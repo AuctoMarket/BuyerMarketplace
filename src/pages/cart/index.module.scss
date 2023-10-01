@@ -1,0 +1,239 @@
+.popup {
+  .popup-heading {
+    @apply text-lg font-medium;
+  }
+
+  .popup-content {
+    @apply text-sm font-medium mt-5;
+    color: #858585;
+  }
+
+  .popup-footer {
+    @apply flex gap-5 mt-5;
+
+    button {
+      font-size: 16px;
+      @apply font-normal w-16 h-8 uppercase;
+    }
+  }
+}
+
+.cart-page {
+  @apply container mx-auto py-10;
+  padding-bottom: 110px; // pb-10 + 70px
+
+  .title {
+    font-size: 32px;
+    @apply font-thicboi font-semibold;
+  }
+
+  .list-container {
+    @apply mt-5;
+
+    .product {
+      @apply flex gap-10;
+
+      &:not(:first-child) {
+        @apply mt-10;
+      }
+
+      .image {
+        @apply flex-none;
+        width: 135px;
+
+        img {
+          @apply w-full;
+        }
+      }
+
+      .info {
+        @apply flex flex-col w-full;
+
+        .name {
+          @apply text-2xl font-normal;
+
+          a {
+            @apply hover:text-aucto-dark;
+          }
+        }
+
+        .quantity-container {
+          @apply flex items-center gap-2 mt-2;
+
+          .label {
+            color: #858585;
+            @apply text-lg;
+          }
+
+          .quantity {
+            .quantity-input {
+              > input,
+              > button {
+                height: 22px;
+                width: 22px;
+                @apply text-center text-sm font-bold;
+              }
+
+              > input {
+                @apply w-8;
+              }
+            }
+          }
+        }
+
+        .price-remove {
+          @apply grow flex justify-between items-end mt-2;
+
+          .price {
+            @apply text-2xl font-medium;
+          }
+
+          .remove {
+            color: #858585;
+            @apply text-lg font-medium border-0 h-auto hover:bg-transparent hover:text-aucto-dark;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    @apply border-t-2 pt-10 mt-10 flex flex-col;
+
+    .subtotal {
+      @apply flex items-center;
+
+      .label {
+        @apply text-2xl font-thicboi font-medium;
+        width: calc(135px + 2.5rem);
+      }
+
+      .price {
+        @apply text-4xl font-medium;
+      }
+    }
+
+    .checkout {
+      width: 330px;
+      @apply mt-10 font-bold text-2xl;
+    }
+
+    .chat {
+      width: 330px;
+      @apply mt-5 text-2xl font-bold;
+    }
+  }
+}
+
+.cart-page + :global(#footer) {
+  @apply absolute bottom-0 w-full;
+}
+
+@media (max-width: 768px) {
+  .popup {
+    .popup-heading {
+      @apply text-sm;
+    }
+
+    .popup-content {
+      @apply mt-2;
+      font-size: 10px;
+    }
+
+    .popup-footer {
+      @apply gap-2 mt-2;
+
+      button {
+        font-size: 10px;
+        @apply w-14 h-5 leading-3;
+      }
+    }
+  }
+
+  .cart-page {
+    @apply p-4;
+    padding-bottom: 116px; // mb-4 + 100px
+
+    .title {
+      @apply text-xl;
+    }
+
+    .list-container {
+      @apply mt-4;
+
+      .product {
+        @apply gap-4;
+
+        &:not(:first-child) {
+          @apply mt-4;
+        }
+
+        .image {
+          width: 60px;
+        }
+
+        .info {
+          .name {
+            @apply text-sm font-medium font-thicboi;
+          }
+
+          .quantity-container {
+            @apply mt-1;
+
+            .label {
+              @apply text-xs;
+            }
+
+            .quantity {
+              .quantity-input {
+                > input,
+                > button {
+                  @apply w-4 h-4 text-xs text-center font-semibold;
+                }
+
+                > input {
+                  @apply w-6;
+                }
+              }
+            }
+          }
+
+          .price-remove {
+            @apply mt-1;
+
+            .price {
+              @apply text-base;
+            }
+
+            .remove {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+
+    .footer {
+      @apply pt-4 mt-4;
+
+      .subtotal {
+        .label {
+          @apply text-base;
+          width: calc(60px + 1rem);
+        }
+
+        .price {
+          @apply text-2xl;
+        }
+      }
+
+      .checkout {
+        @apply w-full text-lg h-10 mt-4;
+      }
+
+      .chat {
+        @apply flex w-full mt-4 text-lg h-10;
+      }
+    }
+  }
+}

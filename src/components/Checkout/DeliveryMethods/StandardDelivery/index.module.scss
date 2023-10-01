@@ -3,11 +3,6 @@
   @apply font-thicboi;
 }
 
-.delivery-date {
-  @apply mb-2 text-base;
-  color: #858585;
-}
-
 .delivery-1-content-header {
   @apply text-lg font-normal;
 }
@@ -56,10 +51,6 @@
 }
 
 @media (max-width: 768px) {
-  .delivery-date {
-    @apply text-sm;
-  }
-
   .delivery-1-container {
     @apply pt-4 pr-0;
   }
