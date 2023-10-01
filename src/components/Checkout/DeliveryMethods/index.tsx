@@ -26,7 +26,7 @@ const isError = (error: any) => Object.values(error).some(Boolean);
 
 const DeliveryMethods = ({ className, data, onChangeData, ...rest }: Props) => {
   const [collectionPoint, setCollectionPoint] = React.useState<CollectionPoint>(
-    CollectionPoint.BotanicGardensMRT,
+    Object.values(CollectionPoint)[0],
   );
   const [standardDeliveryAddress, setStandardDeliveryAddress] =
     React.useState<DeliveryAddress>({

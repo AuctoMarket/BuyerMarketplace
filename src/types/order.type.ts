@@ -1,43 +1,18 @@
 enum CollectionPoint {
-  BotanicGardensMRT = 'Botanic Gardens MRT',
-  DhobyGhautMRT = 'Dhoby Ghaut MRT',
-  AngMoKioMRT = 'Ang Mo Kio MRT',
-  WoodlandsMRT = 'Woodlands MRT',
-  BishanMRT = 'Bishan MRT',
-  PayaLebarMRT = 'Paya Lebar MRT',
-  EunosMRT = 'Eunos MRT',
+  MayflowerMRT = 'Mayflower MRT',
+  NewtonMRT = 'Newton MRT',
 }
 
 const CollectionPointAddress: {
   [key in CollectionPoint]: DeliveryAddress;
 } = {
-  [CollectionPoint.BotanicGardensMRT]: {
-    addressLine1: 'Botanic Gardens MRT',
-    postalCode: '257494',
+  [CollectionPoint.MayflowerMRT]: {
+    addressLine1: 'Mayflower MRT',
+    postalCode: '568501',
   },
-  [CollectionPoint.DhobyGhautMRT]: {
-    addressLine1: 'Dhoby Ghaut MRT',
-    postalCode: '238826',
-  },
-  [CollectionPoint.AngMoKioMRT]: {
-    addressLine1: 'Ang Mo Kio MRT',
-    postalCode: '569812',
-  },
-  [CollectionPoint.WoodlandsMRT]: {
-    addressLine1: 'Woodlands MRT',
-    postalCode: '737736',
-  },
-  [CollectionPoint.BishanMRT]: {
-    addressLine1: 'Bishan MRT',
-    postalCode: '579827',
-  },
-  [CollectionPoint.PayaLebarMRT]: {
-    addressLine1: 'Paya Lebar MRT',
-    postalCode: '409006',
-  },
-  [CollectionPoint.EunosMRT]: {
-    addressLine1: 'Eunos MRT',
-    postalCode: '409423',
+  [CollectionPoint.NewtonMRT]: {
+    addressLine1: 'Newton MRT',
+    postalCode: '228234',
   },
 };
 

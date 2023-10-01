@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.3.0...1.3.1) (2023-10-01)
+
+### Features
+
+- **AUCTO-124:** update sefl-collection points & update UTs ([c39c190](https://github.com/AuctoMarket/BuyerMarketplace/commit/c39c190be7523cae9209d8d17304c94f3a313868))
+
 ## [1.3.0](https://github.com/AuctoMarket/BuyerMarketplace/compare/1.2.0...1.3.0) (2023-09-30)
 
 ### Features

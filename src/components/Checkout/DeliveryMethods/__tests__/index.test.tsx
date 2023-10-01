@@ -5,14 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import DeliveryMethods from '..';
 import { CollectionPoint, DeliveryMethod } from '../../../../types/order.type';
-import { ProductType } from '../../../../types/product.type';
 
 describe('DeliveryMethods', () => {
-  const product = {
-    type: ProductType.BuyNow,
-    releasedDate: new Date(),
-    orderedDate: new Date(),
-  };
   const data = {
     deliveryMethod: DeliveryMethod.SelfCollection,
     deliveryAddress: {
@@ -26,7 +20,6 @@ describe('DeliveryMethods', () => {
     render(
       <BrowserRouter>
         <DeliveryMethods
-          product={product}
           data={data}
           onChangeData={() => {}}
           role="DeliveryMethods"
@@ -40,17 +33,16 @@ describe('DeliveryMethods', () => {
     const btn2 = await screen.findByTestId('btn-2');
     userEvent.click(btn2);
 
-    const dhobyGhautMRT = await screen.findByTestId(
-      CollectionPoint.DhobyGhautMRT,
+    const collectionPoint1 = await screen.findByTestId(
+      Object.values(CollectionPoint)[0],
     );
-    userEvent.click(dhobyGhautMRT);
+    userEvent.click(collectionPoint1);
   });
 
   test('renders DeliveryMethods with normal delivery', async () => {
     render(
       <BrowserRouter>
         <DeliveryMethods
-          product={product}
           data={{ ...data, deliveryMethod: DeliveryMethod.StandardDelivery }}
           onChangeData={() => {}}
           role="DeliveryMethods"
